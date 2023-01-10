@@ -13,7 +13,6 @@ class Turma():
         self.grade_slots=grade_slots
 
 
-
 class Disciplina():
     def __init__(self):
         self.id_sistema=id_sistema
@@ -36,10 +35,9 @@ class Slot():
     def __init__(self):
         self.id_sistema=id_sistema
         self.dia_semana=dia_semana
+        self.turno=turno
         self.horario_inicio=horario_inicio
         self.horario_fim=horario_fim
-        self.turno=turno
-        self.conteudo=conteudo  # [[t1, d1, p1], [t2, d2, p2], ...]
 
 
 class Grade_horaria():
@@ -56,3 +54,6 @@ class Grupo_disciplinas():
         self.disciplinas=disciplinas
 
 
+class MatrizFinal():
+    def __init__(self):
+        self.resultado_final=[]
