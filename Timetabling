@@ -4,13 +4,13 @@ import numpy as np
 
 class Turma():
     def __init__(self):
-        self.id_sistema=id_sistema
+        self.id_sistema = id_sistema
         self.nome_turma=nome_turma
         self.grau=grau              # informativo
         self.serie=serie            # informativo
         self.disciplinas_turma=disciplinas_turma
-        self.grade_tipo=grade_tipo  # informativo
-        self.grade_slots=grade_slots
+        self.slots=slots
+        self.ponteiro_geral=ponteiro_geral
 
 
 class Disciplina():
@@ -21,6 +21,7 @@ class Disciplina():
         self.serie=serie
         self.creditos=creditos
         self.professores_habilitados=professores_habilitados
+        self.ponteiro_geral=ponteiro_geral
 
 
 class Professor():
@@ -28,7 +29,8 @@ class Professor():
         self.id_sistema=id_sistema
         self.nome_professor=nome_professor
         self.aulas_semanais=aulas_semanais
-        self.grade=grade
+        self.slots=slots
+        self.ponteiro_geral=ponteiro_geral
 
 
 class Slot():
@@ -38,13 +40,7 @@ class Slot():
         self.turno=turno
         self.horario_inicio=horario_inicio
         self.horario_fim=horario_fim
-
-
-class Grade_horaria():
-    def __init__(self):
-        self.id_sistema=id_sistema
-        self.tipo_grade=grade
-        self.slots=slots
+        self.ponteiro_geral=ponteiro_geral
 
 
 class Grupo_disciplinas():
@@ -54,6 +50,23 @@ class Grupo_disciplinas():
         self.disciplinas=disciplinas
 
 
+class Universo():
+    def __init__(self):
+        self.todas_turmas = todas_turmas
+        self.todas_disciplinas = todas_disciplinas
+        self.todos_professores = todos_professores
+        self.todos_slots = todos_slots
+
+
 class MatrizFinal():
     def __init__(self):
         self.resultado_final=[]
+
+
+'''
+class Grade_horaria():
+    def __init__(self):
+        self.id_sistema=id_sistema
+        self.tipo_grade=grade
+        self.slots=slots
+'''
