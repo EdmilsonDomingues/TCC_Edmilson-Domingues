@@ -3,51 +3,56 @@ import pandas as pd
 import numpy as np
 
 class Turma():
-    def __init__(self, identificador, grau, serie):
-        self.identificador=identificador
+    def __init__(self):
+        self.id_sistema=id_sistema
         self.nome_turma=nome_turma
-        self.grau=grau
-        self.serie=serie
-        self.grupo_disciplinas=grupo_disciplinas
-        self.grade_tipo=grade_tipo
-        self.grade=grade
+        self.grau=grau              # informativo
+        self.serie=serie            # informativo
+        self.disciplinas_turma=disciplinas_turma
+        self.grade_tipo=grade_tipo  # informativo
+        self.grade_slots=grade_slots
+
 
 
 class Disciplina():
     def __init__(self):
-        self.identificador=identificador
-        self.nome=nome
+        self.id_sistema=id_sistema
+        self.nome_disciplina=nome_disciplina
+        self.grau=grau
+        self.serie=serie
         self.creditos=creditos
         self.professores_habilitados=professores_habilitados
 
 
 class Professor():
     def __init__(self):
-        self.identificador=identificador
+        self.id_sistema=id_sistema
         self.nome_professor=nome_professor
         self.aulas_semanais=aulas_semanais
         self.grade=grade
 
 
-
 class Slot():
     def __init__(self):
-        self.identificador=identificador
+        self.id_sistema=id_sistema
         self.dia_semana=dia_semana
         self.horario_inicio=horario_inicio
         self.horario_fim=horario_fim
         self.turno=turno
-        self.conteudo=conteudo
+        self.conteudo=conteudo  # [[t1, d1, p1], [t2, d2, p2], ...]
 
 
-class Grade():
+class Grade_horaria():
     def __init__(self):
+        self.id_sistema=id_sistema
         self.tipo_grade=grade
         self.slots=slots
 
 
 class Grupo_disciplinas():
     def __init__(self):
+        self.id_sistema=id_sistema
+        self.tipo_grupo=tipo_grupo
         self.disciplinas=disciplinas
 
 
