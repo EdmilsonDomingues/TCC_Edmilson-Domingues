@@ -52,10 +52,10 @@ class Grupo_disciplinas():
 
 class Universo():
     def __init__(self):
-        self.todas_turmas = todas_turmas
-        self.todas_disciplinas = todas_disciplinas
-        self.todos_professores = todos_professores
-        self.todos_slots = todos_slots
+        self.todas_turmas = []
+        self.todas_disciplinas = []
+        self.todos_professores = []
+        self.todos_slots = []
 
 
 class MatrizFinal():
