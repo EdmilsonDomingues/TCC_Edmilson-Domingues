@@ -1,3 +1,53 @@
 import gurobipy as gp
 import pandas as pd
 import numpy as np
+
+class Turma():
+    def __init__(self, identificador, grau, serie):
+        self.identificador=identificador
+        self.nome_turma=nome_turma
+        self.grau=grau
+        self.serie=serie
+        self.grupo_disciplinas=grupo_disciplinas
+        self.grade_tipo=grade_tipo
+        self.grade=grade
+
+
+class Disciplina():
+    def __init__(self):
+        self.identificador=identificador
+        self.nome=nome
+        self.creditos=creditos
+        self.professores_habilitados=professores_habilitados
+
+
+class Professor():
+    def __init__(self):
+        self.identificador=identificador
+        self.nome_professor=nome_professor
+        self.aulas_semanais=aulas_semanais
+        self.grade=grade
+
+
+
+class Slot():
+    def __init__(self):
+        self.identificador=identificador
+        self.dia_semana=dia_semana
+        self.horario_inicio=horario_inicio
+        self.horario_fim=horario_fim
+        self.turno=turno
+        self.conteudo=conteudo
+
+
+class Grade():
+    def __init__(self):
+        self.tipo_grade=grade
+        self.slots=slots
+
+
+class Grupo_disciplinas():
+    def __init__(self):
+        self.disciplinas=disciplinas
+
+
