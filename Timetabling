@@ -41,7 +41,7 @@ class Disciplina():
 class Professor():
     def __init__(self):
         self.id_professor=id_professor
-        self.cpf_professor
+        self.cpf_professor  # PK
         self.nome_professor=nome_professor
 
         self.grade=grade
@@ -50,7 +50,7 @@ class Professor():
 
 class Grade_horaria():
     def __init__(self):
-        self.id_sistema=id_sistema
+        self.id_sistema=id_sistema  # PK
         self.tipo_grade=grade
         self.slots=slots
 
@@ -61,6 +61,7 @@ class Slot():
         self.turno=turno
         self.horario_inicio=horario_inicio
         self.horario_fim=horario_fim
+        self.identidade  # PK
 
         self.ponteiro_geral=ponteiro_geral
 
