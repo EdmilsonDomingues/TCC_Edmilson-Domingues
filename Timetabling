@@ -4,10 +4,8 @@ import numpy as np
 
 class Escola():
     def __init__(self):
-        self.codigo_escola
+        self.codigo_escola  # PK
         self.nome_escola
-
-        self.ponteiro_geral=ponteiro_geral
 
 
 class Turma():
@@ -16,7 +14,7 @@ class Turma():
         self.etapa_serie
         self.numero_turma
         self.tipo_turma
-        self.codigo_turno
+        self.codigo_turno  # PK
         self.turno
         self.codigo_area_ensino
         self.area_ensino
@@ -29,32 +27,41 @@ class Turma():
 class Disciplina():
     def __init__(self):
         self.matriz_curricular
+        self.numero_turma  # PK
         self.etapa_serie
-        self.codigo_disciplina
+        self.codigo_disciplina  # PK
         self.nome_disciplina
         self.quantidade_aulas_semanais
-        self.codigo_area_ensino
-        self.area_ensino
+        self.codigo_area_ensino  # PK
+
         self.professores_habilitados_cpf
         self.ponteiro_geral=ponteiro_geral
 
 
 class Professor():
     def __init__(self):
-        self.id_sistema=id_sistema
-        self.nome_professor=nome_professor
+        self.id_professor=id_professor
         self.cpf_professor
-        self.slots=slots
+        self.nome_professor=nome_professor
+
+        self.grade=grade
         self.ponteiro_geral=ponteiro_geral
+
+
+class Grade_horaria():
+    def __init__(self):
+        self.id_sistema=id_sistema
+        self.tipo_grade=grade
+        self.slots=slots
 
 
 class Slot():
     def __init__(self):
-        self.id_sistema=id_sistema
         self.dia_semana=dia_semana
         self.turno=turno
         self.horario_inicio=horario_inicio
         self.horario_fim=horario_fim
+
         self.ponteiro_geral=ponteiro_geral
 
 
@@ -67,7 +74,7 @@ class Grupo_disciplinas():
 
 class Universo():
     def __init__(self):
-        self.todasEscolas = []
+        self.todas_escolas = []
         self.todas_turmas = []
         self.todas_disciplinas = []
         self.todos_professores = []
@@ -79,11 +86,5 @@ class MatrizFinal():
         self.resultado_final=[]
 
 
-'''
-class Grade_horaria():
-    def __init__(self):
-        self.id_sistema=id_sistema
-        self.tipo_grade=grade
-        self.slots=slots
-'''
+
 
