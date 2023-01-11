@@ -1,13 +1,26 @@
-import gurobipy as gp
+#import gurobipy as gp
 import pandas as pd
 import numpy as np
 
+class Escola():
+    def __init__(self):
+        self.codigo_escola
+        self.nome_escola
+
+        self.ponteiro_geral=ponteiro_geral
+
+
 class Turma():
     def __init__(self):
-        self.id_sistema = id_sistema
-        self.nome_turma=nome_turma
-        self.grau=grau              # informativo
-        self.serie=serie            # informativo
+        self.matriz_curricular
+        self.etapa_serie
+        self.numero_turma
+        self.tipo_turma
+        self.codigo_turno
+        self.turno
+        self.codigo_area_ensino
+        self.area_ensino
+
         self.disciplinas_turma=disciplinas_turma
         self.slots=slots
         self.ponteiro_geral=ponteiro_geral
@@ -15,12 +28,14 @@ class Turma():
 
 class Disciplina():
     def __init__(self):
-        self.id_sistema=id_sistema
-        self.nome_disciplina=nome_disciplina
-        self.grau=grau
-        self.serie=serie
-        self.creditos=creditos
-        self.professores_habilitados=professores_habilitados
+        self.matriz_curricular
+        self.etapa_serie
+        self.codigo_disciplina
+        self.nome_disciplina
+        self.quantidade_aulas_semanais
+        self.codigo_area_ensino
+        self.area_ensino
+        self.professores_habilitados_cpf
         self.ponteiro_geral=ponteiro_geral
 
 
@@ -28,7 +43,7 @@ class Professor():
     def __init__(self):
         self.id_sistema=id_sistema
         self.nome_professor=nome_professor
-        self.aulas_semanais=aulas_semanais
+        self.cpf_professor
         self.slots=slots
         self.ponteiro_geral=ponteiro_geral
 
@@ -52,6 +67,7 @@ class Grupo_disciplinas():
 
 class Universo():
     def __init__(self):
+        self.todasEscolas = []
         self.todas_turmas = []
         self.todas_disciplinas = []
         self.todos_professores = []
@@ -70,3 +86,4 @@ class Grade_horaria():
         self.tipo_grade=grade
         self.slots=slots
 '''
+
