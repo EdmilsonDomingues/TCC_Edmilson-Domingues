@@ -12,30 +12,29 @@ class Turma():
     def __init__(self):
         self.matriz_curricular
         self.etapa_serie
-        self.numero_turma
+        self.numero_turma  # PK
         self.tipo_turma
-        self.codigo_turno  # PK
+        self.codigo_turno
         self.turno
         self.codigo_area_ensino
         self.area_ensino
+        self.tipo_grade
 
-        self.disciplinas_turma=disciplinas_turma
-        self.slots=slots
-        self.ponteiro_geral=ponteiro_geral
-
+    def numero_turma(self):
+        return self.numero_turma()
 
 class Disciplina():
     def __init__(self):
         self.matriz_curricular
-        self.numero_turma  # PK
         self.etapa_serie
+        self.numero_turma  # PK
         self.codigo_disciplina  # PK
         self.nome_disciplina
         self.quantidade_aulas_semanais
         self.codigo_area_ensino  # PK
+        self.area_ensino
 
         self.professores_habilitados_cpf
-        self.ponteiro_geral=ponteiro_geral
 
 
 class Professor():
@@ -45,25 +44,35 @@ class Professor():
         self.nome_professor=nome_professor
 
         self.grade=grade
-        self.ponteiro_geral=ponteiro_geral
 
 
-class Grade_horaria():
+class Grade():
     def __init__(self):
-        self.id_sistema=id_sistema  # PK
-        self.tipo_grade=grade
-        self.slots=slots
+        self.tipo_grade
+        self.turno=turno
+
+
+    def grade1_completa(self):
+        if self.tipo_grade == '1':
+            if self.turno=='todos':
+                return [1, ..., 51]
+            else:
+                if self.turno=='matutino':
+                    return [0, 1, 2, 3, 4, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 33, 34, 35, 36, 37, 44, 45, 46, 47, 48]
+                else:
+                    if self.turno == 'vespertino':
+                        return [5, 6, 7, 8, 9, 16, 17, 18, 19, 20, 27, 28, 29, 30, 31, 38, 39, 40, 41, 42, 49, 50, 51, 52, 53]
+                    else
+                        return [11, 21, 31, 41, 51]
+        else:
+            if self.tipo_grade == '2':
 
 
 class Slot():
     def __init__(self):
-        self.dia_semana=dia_semana
-        self.turno=turno
-        self.horario_inicio=horario_inicio
-        self.horario_fim=horario_fim
-        self.identidade  # PK
+        self.slot
 
-        self.ponteiro_geral=ponteiro_geral
+        self.ponteiro_geral = ponteiro_geral
 
 
 class Grupo_disciplinas():
@@ -87,5 +96,119 @@ class MatrizFinal():
         self.resultado_final=[]
 
 
+# leitura da tabela da escola e criação dos objetos correspondentes:
+turmas_objetos = []
+disciplinas_objetos = []
+professores_objetos = []
+slots_objs = [] # alterar
 
+turmas_ponteiro = 0
+disciplinas_ponteiro = 0
+professores_ponteiro = 0
+slots_ponteiro = 0
+estrela_chaves = []
 
+turma_prov = []
+disciplina_prov = []
+professor_prov = []
+slot_prov = []
+
+controle = []
+
+for linha in df.tabela_ponteiro:
+    turma_prov.clear()
+    disciplina_prov.clear()
+    professor_prov.clear()
+
+    turma_prov.append([df['Matriz curricular'][1],
+                       df['Etapa (séries)'][1],
+                       df['Número da turma'][1],
+                       df['Tipo de turma (prov. não usaremos)'][1],
+                       df['Cod. Turno'][1],
+                       df['Turno'][1],
+                       df['Código da área de ensino'][1],
+                       df['Área de ensino'][1],
+                       ])
+    disciplina_prov.append([df['Matriz curricular'][1],
+                       df['Etapa (séries)'][1],
+                       df['Número da turma'][1],
+                       df['Código da disc.'][1],
+                       df['Nome da disc.'][1],
+                       df['Qtd de aulas na semana'][1],
+                       df['Código da área de ensino'][1],
+                       df['Área de ensino'][1],
+                       ])
+    professor_prov.append([df['Identificador do prof.'][1],
+                       df['CPF'][1],
+                       df['Nome'][1],
+                       ])
+
+    grade = Grade('1', turma_prov[5])
+    slot_prov = grade.grade1_completa()
+
+in_turma = False
+indice = 0
+for objeto in turmas_objetos:
+    if turma_prov[2] == objeto.numero_turma():
+        in_turma = True
+        break
+    indice++
+if in_turma:
+    controle.append(indice)
+else
+    controle.append(turmas_ponteiro)
+    turmas_objetos.append(Turma(turma_prov[0], turma_prov[1], turma_prov[2],
+                                turma_prov[3], turma_prov[4], turma_prov[5],
+                                turma_prov[6]))
+    turmas_ponteiro++
+
+in_disciplina = False
+indice = 0
+for objeto in disciplinas_objetos:
+    if disciplina_prov[2] == objeto.numero_turma()\
+            && disciplina_prov[3] == objeto.codigo_disciplina()
+            && disciplina_prov[6] == objeto.codigo_area_ensino():
+        in_disciplina = True
+        break
+    indice++
+if in_disciplina:
+    controle.append(indice)
+else
+    controle.append(disciplinas_ponteiro)
+    turmas_objetos.append(Disciplina(disciplina_prov[0], disciplina_prov[1], disciplina_prov[2],
+                                disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
+                                disciplina_prov[6]))
+    disciplinas_ponteiro++
+
+in_professor = False
+indice = 0
+for objeto in professores_objetos:
+    if professor_prov[2] == objeto.cpf_professor():
+        in_professor = True
+        break
+    indice++
+if in_professor:
+    controle.append(indice)
+else
+    controle.append(professores_ponteiro)
+    turmas_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2],
+                                professor_prov[3], professor_prov[4], professor_prov[5],
+                                professor_prov[6]))
+    professores_ponteiro++
+
+for slots in slot_prov:
+    in_slot = False
+    indice = 0
+    for objeto in slots_objetos:
+        if slots_prov[slots] == objeto.slot():
+            in_slot = True
+            break
+        indice++
+    if in_slot:
+        #controle.append(indice)
+        estrela_chaves.append([controle[0], controle[1], controle[2], indice])
+    else
+        #controle.append(slots_ponteiro)
+        estrela_chaves.append([controle[0], controle[1], controle[2], slots_ponteiro])
+        slots_objetos.append(Slot(slot_prov[0]))
+        slots_ponteiro++
