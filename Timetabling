@@ -34,8 +34,14 @@ class Disciplina():
         self.codigo_area_ensino  # PK
         self.area_ensino
 
-        self.professores_habilitados_cpf
+    def numero_turma(self):
+        return self.numero_turma()
 
+    def codigo_disciplina(self):
+        return self.codigo_disciplina()
+
+    def codigo_area_ensino(self):
+        return self.codigo_area_ensino()
 
 class Professor():
     def __init__(self):
@@ -43,14 +49,14 @@ class Professor():
         self.cpf_professor  # PK
         self.nome_professor=nome_professor
 
-        self.grade=grade
+    def cpf_professor(self):
+        return self.cpf_professor()
 
 
 class Grade():
     def __init__(self):
         self.tipo_grade
         self.turno=turno
-
 
     def grade1_completa(self):
         if self.tipo_grade == '1':
@@ -72,7 +78,8 @@ class Slot():
     def __init__(self):
         self.slot
 
-        self.ponteiro_geral = ponteiro_geral
+    def slot(self):
+        return self.slot()
 
 
 class Grupo_disciplinas():
@@ -80,20 +87,6 @@ class Grupo_disciplinas():
         self.id_sistema=id_sistema
         self.tipo_grupo=tipo_grupo
         self.disciplinas=disciplinas
-
-
-class Universo():
-    def __init__(self):
-        self.todas_escolas = []
-        self.todas_turmas = []
-        self.todas_disciplinas = []
-        self.todos_professores = []
-        self.todos_slots = []
-
-
-class MatrizFinal():
-    def __init__(self):
-        self.resultado_final=[]
 
 
 # leitura da tabela da escola e criação dos objetos correspondentes:
