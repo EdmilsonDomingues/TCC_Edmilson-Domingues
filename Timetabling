@@ -1,38 +1,43 @@
-#import gurobipy as gp
 import pandas as pd
-import numpy as np
+import ezodf
 
-class Escola():
-    def __init__(self):
-        self.codigo_escola  # PK
-        self.nome_escola
+def read_ods(filename, sheet_no=0, header=0):
+    tab = ezodf.opendoc(filename=filename).sheets[sheet_no]
+    return pd.DataFrame({col[header].value:[x.value for x in col[header+1:]]
+                         for col in tab.columns()})
 
+print('Leitura completa.')
+
+# Leitura completa da tabela fornecida
+df = read_ods(filename='arquivo_ProjetoUFSC_v1')
 
 class Turma():
-    def __init__(self):
-        self.matriz_curricular
-        self.etapa_serie
-        self.numero_turma  # PK
-        self.tipo_turma
-        self.codigo_turno
-        self.turno
-        self.codigo_area_ensino
-        self.area_ensino
-        self.tipo_grade
+    def __init__(self, matriz_curricular, etapa_serie, numero_turma, tipo_turma,
+                 codigo_turno, turno, codigo_area_ensino, area_ensino, tipo_grade):
+        self.matriz_curricular = matriz_curricular
+        self.etapa_serie = matriz_curricular
+        self.numero_turma = numero_turma    # PK
+        self.tipo_turma = tipo_turma
+        self.codigo_turno = codigo_turno
+        self.turno = turno
+        self.codigo_area_ensino = codigo_area_ensino
+        self.area_ensino = area_ensino
+        self.tipo_grade = tipo_grade
 
     def numero_turma(self):
         return self.numero_turma()
 
 class Disciplina():
-    def __init__(self):
-        self.matriz_curricular
-        self.etapa_serie
-        self.numero_turma  # PK
-        self.codigo_disciplina  # PK
-        self.nome_disciplina
-        self.quantidade_aulas_semanais
-        self.codigo_area_ensino  # PK
-        self.area_ensino
+    def __init__(self, matriz_curricular, etapa_serie, numero_turma, codigo_disciplina,
+                 nome_disciplina, quantidade_aulas_semanais, codigo_area_ensino, area_ensino):
+        self.matriz_curricular = matriz_curricular
+        self.etapa_serie = etapa_serie
+        self.numero_turma = numero_turma    # PK
+        self.codigo_disciplina = codigo_disciplina  # PK
+        self.nome_disciplina = nome_disciplina
+        self.quantidade_aulas_semanais = quantidade_aulas_semanais
+        self.codigo_area_ensino = codigo_area_ensino    # PK
+        self.area_ensino = area_ensino
 
     def numero_turma(self):
         return self.numero_turma()
@@ -44,34 +49,37 @@ class Disciplina():
         return self.codigo_area_ensino()
 
 class Professor():
-    def __init__(self):
+    def __init__(self, id_professor, cpf_professor, nome_professor):
         self.id_professor=id_professor
-        self.cpf_professor  # PK
-        self.nome_professor=nome_professor
+        self.cpf_professor = cpf_professor  # PK
+        self.nome_professor = nome_professor
 
     def cpf_professor(self):
         return self.cpf_professor()
 
 
 class Grade():
-    def __init__(self):
-        self.tipo_grade
-        self.turno=turno
+    def __init__(self, tipo_grade, turno):
+        self.tipo_grade = tipo_grade
+        self.turno = turno
 
-    def grade1_completa(self):
+    def grade_elementos(self):
         if self.tipo_grade == '1':
             if self.turno=='todos':
                 return [1, ..., 51]
             else:
-                if self.turno=='matutino':
+                if self.turno =='matutino':
                     return [0, 1, 2, 3, 4, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 33, 34, 35, 36, 37, 44, 45, 46, 47, 48]
                 else:
                     if self.turno == 'vespertino':
                         return [5, 6, 7, 8, 9, 16, 17, 18, 19, 20, 27, 28, 29, 30, 31, 38, 39, 40, 41, 42, 49, 50, 51, 52, 53]
-                    else
+                    else:
                         return [11, 21, 31, 41, 51]
+        '''
         else:
             if self.tipo_grade == '2':
+        '''
+        return Null
 
 
 class Slot():
@@ -89,7 +97,7 @@ class Grupo_disciplinas():
         self.disciplinas=disciplinas
 
 
-# leitura da tabela da escola e criação dos objetos correspondentes:
+# leitura dataframe escola e criação dos objetos correspondentes:
 turmas_objetos = []
 disciplinas_objetos = []
 professores_objetos = []
@@ -107,8 +115,10 @@ professor_prov = []
 slot_prov = []
 
 controle = []
+estrela_chaves = []
 
 for linha in df.tabela_ponteiro:
+    controle.clear()
     turma_prov.clear()
     disciplina_prov.clear()
     professor_prov.clear()
@@ -137,71 +147,72 @@ for linha in df.tabela_ponteiro:
                        ])
 
     grade = Grade('1', turma_prov[5])
-    slot_prov = grade.grade1_completa()
+    slot_prov = grade.grade_elementos()
 
-in_turma = False
-indice = 0
-for objeto in turmas_objetos:
-    if turma_prov[2] == objeto.numero_turma():
-        in_turma = True
-        break
-    indice++
-if in_turma:
-    controle.append(indice)
-else
-    controle.append(turmas_ponteiro)
-    turmas_objetos.append(Turma(turma_prov[0], turma_prov[1], turma_prov[2],
-                                turma_prov[3], turma_prov[4], turma_prov[5],
-                                turma_prov[6]))
-    turmas_ponteiro++
-
-in_disciplina = False
-indice = 0
-for objeto in disciplinas_objetos:
-    if disciplina_prov[2] == objeto.numero_turma()\
-            && disciplina_prov[3] == objeto.codigo_disciplina()
-            && disciplina_prov[6] == objeto.codigo_area_ensino():
-        in_disciplina = True
-        break
-    indice++
-if in_disciplina:
-    controle.append(indice)
-else
-    controle.append(disciplinas_ponteiro)
-    turmas_objetos.append(Disciplina(disciplina_prov[0], disciplina_prov[1], disciplina_prov[2],
-                                disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
-                                disciplina_prov[6]))
-    disciplinas_ponteiro++
-
-in_professor = False
-indice = 0
-for objeto in professores_objetos:
-    if professor_prov[2] == objeto.cpf_professor():
-        in_professor = True
-        break
-    indice++
-if in_professor:
-    controle.append(indice)
-else
-    controle.append(professores_ponteiro)
-    turmas_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2],
-                                professor_prov[3], professor_prov[4], professor_prov[5],
-                                professor_prov[6]))
-    professores_ponteiro++
-
-for slots in slot_prov:
-    in_slot = False
+    in_turma = False
     indice = 0
-    for objeto in slots_objetos:
-        if slots_prov[slots] == objeto.slot():
-            in_slot = True
-            break
-        indice++
-    if in_slot:
-        #controle.append(indice)
-        estrela_chaves.append([controle[0], controle[1], controle[2], indice])
-    else
-        #controle.append(slots_ponteiro)
-        estrela_chaves.append([controle[0], controle[1], controle[2], slots_ponteiro])
-        slots_objetos.append(Slot(slot_prov[0]))
-        slots_ponteiro++
+    if len(turmas_objetos) > 0:
+        for objeto in turmas_objetos:
+            if turma_prov[2] == objeto.numero_turma():
+                in_turma = True
+                break
+            indice = indice +1
+    if in_turma:
+        controle.append(indice)
+    else:
+        controle.append(turmas_ponteiro)
+        turmas_objetos.append(Turma(turma_prov[0], turma_prov[1], turma_prov[2],
+                                    turma_prov[3], turma_prov[4], turma_prov[5],
+                                    turma_prov[6], turma_prov[7]))
+        turmas_ponteiro = turmas_ponteiro =1
+
+    in_disciplina = False
+    indice = 0
+    if len(disciplinas_objetos) > 0:
+        for objeto in disciplinas_objetos:
+            if disciplina_prov[2] == objeto.numero_turma()\
+                    and disciplina_prov[3] == objeto.codigo_disciplina() \
+                    and disciplina_prov[6] == objeto.codigo_area_ensino():
+                in_disciplina = True
+                break
+            indice = indice + 1
+    if in_disciplina:
+        controle.append(indice)
+    else:
+        controle.append(disciplinas_ponteiro)
+        turmas_objetos.append(Disciplina(disciplina_prov[0], disciplina_prov[1], disciplina_prov[2],
+                                    disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
+                                    disciplina_prov[6], turma_prov[7]))
+        disciplinas_ponteiro = disciplinas_ponteiro +1
+
+    in_professor = False
+    indice = 0
+    if len(professores_objetos) > 0:
+        for objeto in professores_objetos:
+            if professor_prov[1] == objeto.cpf_professor():
+                in_professor = True
+                break
+            indice = indice + 1
+    if in_professor:
+        controle.append(indice)
+    else:
+        controle.append(professores_ponteiro)
+        turmas_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2]))
+        professores_ponteiro = professores_ponteiro +1
+
+    for slots in slot_prov:
+        in_slot = False
+        indice = 0
+        for objeto in slots_objetos:
+            if slots_prov[slots] == objeto.slot():
+                in_slot = True
+                break
+            indice = indice +1
+        if in_slot:
+            #controle.append(indice)
+            estrela_chaves.append([controle[0], controle[1], controle[2], indice])
+        else:
+            #controle.append(slots_ponteiro)
+            estrela_chaves.append([controle[0], controle[1], controle[2], slots_ponteiro])
+            slots_objetos.append(Slot(slot_prov[0]))
+            slots_ponteiro = slots_ponteiro +1
