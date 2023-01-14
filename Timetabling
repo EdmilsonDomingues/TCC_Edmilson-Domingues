@@ -1,16 +1,14 @@
 import pandas as pd
-import ezodf
+import gurobipy as gp
 
-def read_ods(filename, sheet_no=0, header=0):
-    tab = ezodf.opendoc(filename=filename).sheets[sheet_no]
-    return pd.DataFrame({col[header].value:[x.value for x in col[header+1:]]
-                         for col in tab.columns()})
-
-print('Leitura completa.')
+START_POINT = 0
+END_POINT = None
 
 # Leitura completa da tabela fornecida
-df = read_ods(filename='arquivo_ProjetoUFSC_v1')
+print('Leitura completa.')
+df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
 
+print(df)
 class Turma():
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, tipo_turma,
                  codigo_turno, turno, codigo_area_ensino, area_ensino, tipo_grade):
@@ -117,7 +115,8 @@ slot_prov = []
 controle = []
 estrela_chaves = []
 
-for linha in df.tabela_ponteiro:
+for index, row in df.iterrows():
+    print(row)
     controle.clear()
     turma_prov.clear()
     disciplina_prov.clear()
