@@ -126,26 +126,27 @@ for index, row in df.iterrows():
     disciplina_prov.clear()
     professor_prov.clear()
 
-    turma_prov = [df['Matriz_curricular'][0],
-                       df['Etapa_series'][0],
-                       df['Numero_da_turma'][0],
-                       df['Tipo_de_turma'][0],
-                       df['Cod_Turno'][0],
-                       df['Turno'][0],
-                       df['Codigo_da_area_de_ensino'][0],
-                       df['Area_de_ensino'][0], '1'
+    turma_prov = [row['Matriz_curricular'],
+                  row['Etapa_series'],
+                  row['Numero_da_turma'],
+                  row['Tipo_de_turma'],
+                  row['Cod_Turno'],
+                  row['Turno'],
+                  row['Codigo_da_area_de_ensino'],
+                  row['Area_de_ensino'], '1'
                        ]
-    disciplina_prov = [df['Matriz_curricular'][0],
-                       df['Etapa_series'][0],
-                       df['Numero_da_turma'][0],
-                       df['Nome_da_disc'][0],
-                       df['Qtd_de_aulas_na_semana'][0],
-                       df['Codigo_da_area_de_ensino'][0],
-                       df['Area_de_ensino'][0],
+    disciplina_prov = [row['Matriz_curricular'],
+                       row['Etapa_series'],
+                       row['Numero_da_turma'],
+                       row['Codigo_da_disc'],
+                       row['Nome_da_disc'],
+                       row['Qtd_de_aulas_na_semana'],
+                       row['Codigo_da_area_de_ensino'],
+                       row['Area_de_ensino'],
                        ]
-    professor_prov = [df['Identificador_do_prof'][0],
-                       df['CPF'][0],
-                       df['Nome'][0]
+    professor_prov = [row['Identificador_do_prof'],
+                      row['CPF'],
+                      row['Nome']
                        ]
 
     grade = Grade('1', turma_prov[5])
@@ -236,3 +237,6 @@ print(disciplinas_objetos)
 print(professores_objetos)
 print(slots_objetos)
 print(estrela_chaves)
+
+for objeto in disciplinas_objetos:
+    print(objeto.codigo_disciplina)
