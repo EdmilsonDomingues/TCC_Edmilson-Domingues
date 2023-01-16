@@ -237,6 +237,7 @@ print(disciplinas_objetos)
 print(professores_objetos)
 print(slots_objetos)
 print(estrela_chaves)
+print(len(estrela_chaves))
 
 for objeto in disciplinas_objetos:
     print(objeto.codigo_disciplina)
