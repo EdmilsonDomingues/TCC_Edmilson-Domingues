@@ -66,7 +66,6 @@ class Grade():
 
     def grade_elementos(self):
         if self.tipo_grade == '1':
-            print('Self.turno: ', self.turno)
             if self.turno=='todos':
                 return ['1', ..., '51']
             else:
@@ -231,7 +230,6 @@ for index, row in df.iterrows():
             lista=[controle[0], controle[1], controle[2], slots_ponteiro]
             if lista not in estrela_chaves:
                 estrela_chaves.append(lista)
-                print('Slots_ponteiro: ', slots_ponteiro)
                 slots_objetos.append(Slot(slots))
                 slots_ponteiro = slots_ponteiro +1
     #print('finalizou slots')
@@ -243,9 +241,6 @@ print(professores_objetos)
 print(slots_objetos)
 print(estrela_chaves)
 print(len(estrela_chaves))
-
-for objeto in turmas_objetos:
-    print(objeto.codigo_turno)
 
 for i in range (1000):
     print(turmas_objetos[estrela_chaves[i][0]].numero_turma,\
