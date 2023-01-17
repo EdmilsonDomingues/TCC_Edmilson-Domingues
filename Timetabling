@@ -5,7 +5,7 @@ END_POINT = None
 
 # Leitura completa da tabela fornecida
 print('Leitura completa.')
-df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')[0:10]
+df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')
 print(df)
 
 
