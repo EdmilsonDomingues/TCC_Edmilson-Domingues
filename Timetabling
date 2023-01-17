@@ -1,14 +1,14 @@
 import pandas as pd
-import gurobipy as gp
 
 START_POINT = 0
 END_POINT = None
 
 # Leitura completa da tabela fornecida
 print('Leitura completa.')
-df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')
+df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')[0:10]
+print(df)
 
-#print(df)
+
 class Turma():
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, tipo_turma,
                  codigo_turno, turno, codigo_area_ensino, area_ensino, tipo_grade):
@@ -89,10 +89,15 @@ class Grade():
 
 class Slot():
     def __init__(self, slot):
-        self.slot = slot
+        self._slot = slot
 
-    def slot_vez(self):
-        return self.slot
+    @property
+    def slot(self):
+        return self._slot
+
+    @slot.setter
+    def slot(self, slot_novo):
+        self.slot = slot_novo
 
 
 class Grupo_disciplinas():
@@ -206,18 +211,16 @@ for index, row in df.iterrows():
         professores_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2]))
         professores_ponteiro = professores_ponteiro +1
 
-    #print('slot_prov: ', slot_prov)
-    #for obj in slots_objetos:
-        #print('obj: ', obj.slot_vez())
+    print('slot_prov: ', slot_prov)
     for slots in slot_prov:
         in_slot = False
         indice = 0
-        #if len(slots_objetos) > 0:
-        for objeto in slots_objetos:
-            if slots == objeto.slot_vez():
-                in_slot = True
-                break
-            indice = indice +1
+        if len(slots_objetos) > 0:
+            for objeto in slots_objetos:
+                if slots == objeto.slot:
+                    in_slot = True
+                    break
+                indice = indice +1
         if in_slot:
             #controle.append(indice)
             #print('indice: ', indice)
@@ -229,21 +232,18 @@ for index, row in df.iterrows():
             #print('slots_ponteiro: ', slots_ponteiro)
             lista=[controle[0], controle[1], controle[2], slots_ponteiro]
             if lista not in estrela_chaves:
+                print('Lista: ', lista)
                 estrela_chaves.append(lista)
                 slots_objetos.append(Slot(slots))
                 slots_ponteiro = slots_ponteiro +1
     #print('finalizou slots')
     #print()
 
-print(turmas_objetos)
-print(disciplinas_objetos)
-print(professores_objetos)
-print(slots_objetos)
 print(estrela_chaves)
 print(len(estrela_chaves))
 
-for i in range (1000):
+for i in range (len(estrela_chaves)):
     print(turmas_objetos[estrela_chaves[i][0]].numero_turma,\
           disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,\
           professores_objetos[estrela_chaves[i][2]].nome_professor,\
-          slots_objetos[estrela_chaves[i][3]].slot_vez)
+          slots_objetos[estrela_chaves[i][3]].slot)
