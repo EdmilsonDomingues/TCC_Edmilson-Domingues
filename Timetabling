@@ -6,7 +6,7 @@ END_POINT = None
 
 # Leitura completa da tabela fornecida
 print('Leitura completa.')
-df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', engine='odf')
+df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')
 
 #print(df)
 class Turma():
@@ -53,7 +53,10 @@ class Professor():
         self.nome_professor = nome_professor
 
     def cpf_professor(self):
-        return self.cpf_professor()
+        return self.cpf_professor
+
+    def nome_professor(self):
+        return self.nome_professor
 
 
 class Grade():
@@ -63,15 +66,16 @@ class Grade():
 
     def grade_elementos(self):
         if self.tipo_grade == '1':
+            print('Self.turno: ', self.turno)
             if self.turno=='todos':
                 return ['1', ..., '51']
             else:
-                if self.turno =='matutino':
+                if self.turno =='Matutino':
                     return ['0', '1', '2', '3', '4', '11', '12', '13', '14',
                             '15', '22', '23', '24', '25', '26', '33', '34',
                             '35', '36', '37', '44', '45', '46', '47', '48']
                 else:
-                    if self.turno == 'vespertino':
+                    if self.turno == 'Vespertino':
                         return ['5', '6' , '7', '8', '9', '16', '17', '18',
                                 '19', '20', '27', '28', '29', '30', '31', '38',
                                 '39', '40', '41', '42', '49', '50', '51', '52', '53']
@@ -138,7 +142,7 @@ for index, row in df.iterrows():
     disciplina_prov = [row['Matriz_curricular'],
                        row['Etapa_series'],
                        row['Numero_da_turma'],
-                       row['Codigo_da_disc'],
+                       row['Codigo_da_disc '],
                        row['Nome_da_disc'],
                        row['Qtd_de_aulas_na_semana'],
                        row['Codigo_da_area_de_ensino'],
@@ -227,8 +231,9 @@ for index, row in df.iterrows():
             lista=[controle[0], controle[1], controle[2], slots_ponteiro]
             if lista not in estrela_chaves:
                 estrela_chaves.append(lista)
-            slots_objetos.append(Slot(slot_prov[slots_ponteiro]))
-            slots_ponteiro = slots_ponteiro +1
+                print('Slots_ponteiro: ', slots_ponteiro)
+                slots_objetos.append(Slot(slots))
+                slots_ponteiro = slots_ponteiro +1
     #print('finalizou slots')
     #print()
 
@@ -239,5 +244,11 @@ print(slots_objetos)
 print(estrela_chaves)
 print(len(estrela_chaves))
 
-for objeto in disciplinas_objetos:
-    print(objeto.codigo_disciplina)
+for objeto in turmas_objetos:
+    print(objeto.codigo_turno)
+
+for i in range (1000):
+    print(turmas_objetos[estrela_chaves[i][0]].numero_turma,\
+          disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,\
+          professores_objetos[estrela_chaves[i][2]].nome_professor,\
+          slots_objetos[estrela_chaves[i][3]].slot_vez)
