@@ -5,8 +5,9 @@ END_POINT = None
 
 # Leitura completa da tabela fornecida
 print('Leitura completa.')
-df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')
-print(df.dtypes)
+#df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')
+df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', engine='odf')
+df['Codigo_da_disc '] = df['Codigo_da_disc '].astype(str)
 
 
 class Turma():
@@ -242,10 +243,9 @@ for index, row in df.iterrows():
 ##print(estrela_chaves)
 ##print(len(estrela_chaves))
 
-'''
+
 for i in range (len(estrela_chaves)):
     print(turmas_objetos[estrela_chaves[i][0]].numero_turma,\
           disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,\
           professores_objetos[estrela_chaves[i][2]].nome_professor,\
           slots_objetos[estrela_chaves[i][3]].slot)
-'''
