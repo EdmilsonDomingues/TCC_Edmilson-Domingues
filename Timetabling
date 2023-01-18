@@ -4,21 +4,19 @@ START_POINT = 0
 END_POINT = None
 
 # Leitura completa da tabela fornecida
-print('Leitura completa.')
-#df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')
+print('Realizando o processo de Leitura.')
 df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
-# df['Codigo_da_disc '] = df['Codigo_da_disc '].astype(str)
 df['Código da disc. '] = df['Código da disc. '].astype(str)
 print(df.dtypes)
 print()
 print(df.info())
 
 
-class Turma():
+class Turma:
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, tipo_turma,
                  codigo_turno, turno, codigo_area_ensino, area_ensino, tipo_grade):
         self.matriz_curricular = matriz_curricular
-        self.etapa_serie = matriz_curricular
+        self.etapa_serie = etapa_serie
         self.numero_turma = numero_turma    # PK
         self.tipo_turma = tipo_turma
         self.codigo_turno = codigo_turno
@@ -31,7 +29,7 @@ class Turma():
         return self.numero_turma
 
 
-class Disciplina():
+class Disciplina:
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, codigo_disciplina,
                  nome_disciplina, quantidade_aulas_semanais, codigo_area_ensino, area_ensino):
         self.matriz_curricular = matriz_curricular
@@ -52,9 +50,9 @@ class Disciplina():
     def codigo_area_ensino(self):
         return self.codigo_area_ensino
 
-class Professor():
+class Professor:
     def __init__(self, id_professor, cpf_professor, nome_professor):
-        self.id_professor=id_professor
+        self.id_professor = id_professor
         self.cpf_professor = cpf_professor  # PK
         self.nome_professor = nome_professor
 
@@ -65,7 +63,7 @@ class Professor():
         return self.nome_professor
 
 
-class Grade():
+class Grade:
     def __init__(self, tipo_grade, turno):
         self.tipo_grade = tipo_grade
         self.turno = turno
@@ -93,7 +91,7 @@ class Grade():
         return None
 
 
-class Slot():
+class Slot:
     def __init__(self, slot):
         self._slot = slot
 
@@ -106,18 +104,18 @@ class Slot():
         self.slot = slot_novo
 
 
-class Grupo_disciplinas():
+class Grupo_disciplinas:
     def __init__(self):
-        self.id_sistema=id_sistema
-        self.tipo_grupo=tipo_grupo
-        self.disciplinas=disciplinas
+        self.id_sistema = id_sistema
+        self.tipo_grupo = tipo_grupo
+        self.disciplinas = disciplinas
 
 
 # leitura dataframe escola e criação dos objetos correspondentes:
 turmas_objetos = []
 disciplinas_objetos = []
 professores_objetos = []
-slots_objetos = []  # alterar
+slots_objetos = []
 
 turmas_ponteiro = 0
 disciplinas_ponteiro = 0
@@ -139,30 +137,7 @@ for index, row in df.iterrows():
     turma_prov.clear()
     disciplina_prov.clear()
     professor_prov.clear()
-    '''
-    turma_prov = [row['Matriz_curricular'],
-                  row['Etapa_series'],
-                  row['Numero_da_turma'],
-                  row['Tipo_de_turma'],
-                  row['Cod_Turno'],
-                  row['Turno'],
-                  row['Codigo_da_area_de_ensino'],
-                  row['Area_de_ensino'], '1'
-                       ]
-    disciplina_prov = [row['Matriz_curricular'],
-                       row['Etapa_series'],
-                       row['Numero_da_turma'],
-                       row['Codigo_da_disc '],
-                       row['Nome_da_disc'],
-                       row['Qtd_de_aulas_na_semana'],
-                       row['Codigo_da_area_de_ensino'],
-                       row['Area_de_ensino']
-                       ]
-    professor_prov = [row['Identificador_do_prof'],
-                      row['CPF'],
-                      row['Nome']
-                       ]
-    '''
+
     turma_prov = [row['Matriz curricular'],
                   row['Etapa (séries)'],
                   row['Número da turma'],
@@ -217,8 +192,8 @@ for index, row in df.iterrows():
     else:
         controle.append(disciplinas_ponteiro)
         disciplinas_objetos.append(Disciplina(disciplina_prov[0], disciplina_prov[1], disciplina_prov[2],
-                                    disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
-                                    disciplina_prov[6], turma_prov[7]))
+            disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
+            disciplina_prov[6], turma_prov[7]))
         disciplinas_ponteiro = disciplinas_ponteiro + 1
 
     in_professor = False
@@ -236,7 +211,7 @@ for index, row in df.iterrows():
         professores_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2]))
         professores_ponteiro = professores_ponteiro + 1
 
-    ## print('slot_prov: ', slot_prov)
+    # # print('slot_prov: ', slot_prov)
     for slots in slot_prov:
         in_slot = False
         indice = 0
@@ -257,19 +232,14 @@ for index, row in df.iterrows():
             # print('slots_ponteiro: ', slots_ponteiro)
             lista=[controle[0], controle[1], controle[2], slots_ponteiro]
             if lista not in estrela_chaves:
-                ##print('Lista: ', lista)
+                # #print('Lista: ', lista)
                 estrela_chaves.append(lista)
                 slots_objetos.append(Slot(slots))
                 slots_ponteiro = slots_ponteiro + 1
-    # print('finalizou slots')
-    # print()
-
-##print(estrela_chaves)
-print(len(estrela_chaves))
-
-
-for i in range (len(estrela_chaves)):
-    print(turmas_objetos[estrela_chaves[i][0]].numero_turma,\
-          disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,\
-          professores_objetos[estrela_chaves[i][2]].nome_professor,\
+# #print(estrela_chaves)
+for i in range(len(estrela_chaves)):
+    print(turmas_objetos[estrela_chaves[i][0]].numero_turma,
+          disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,
+          professores_objetos[estrela_chaves[i][2]].nome_professor,
           slots_objetos[estrela_chaves[i][3]].slot)
+print(len(estrela_chaves))
