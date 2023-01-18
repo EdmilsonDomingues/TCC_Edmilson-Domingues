@@ -6,7 +6,7 @@ END_POINT = None
 # Leitura completa da tabela fornecida
 print('Leitura completa.')
 df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')
-print(df)
+print(df.dtypes)
 
 
 class Turma():
@@ -150,7 +150,7 @@ for index, row in df.iterrows():
                        row['Nome_da_disc'],
                        row['Qtd_de_aulas_na_semana'],
                        row['Codigo_da_area_de_ensino'],
-                       row['Area_de_ensino'],
+                       row['Area_de_ensino']
                        ]
     professor_prov = [row['Identificador_do_prof'],
                       row['CPF'],
@@ -211,7 +211,7 @@ for index, row in df.iterrows():
         professores_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2]))
         professores_ponteiro = professores_ponteiro +1
 
-    print('slot_prov: ', slot_prov)
+    ##print('slot_prov: ', slot_prov)
     for slots in slot_prov:
         in_slot = False
         indice = 0
@@ -232,18 +232,20 @@ for index, row in df.iterrows():
             #print('slots_ponteiro: ', slots_ponteiro)
             lista=[controle[0], controle[1], controle[2], slots_ponteiro]
             if lista not in estrela_chaves:
-                print('Lista: ', lista)
+                ##print('Lista: ', lista)
                 estrela_chaves.append(lista)
                 slots_objetos.append(Slot(slots))
                 slots_ponteiro = slots_ponteiro +1
     #print('finalizou slots')
     #print()
 
-print(estrela_chaves)
-print(len(estrela_chaves))
+##print(estrela_chaves)
+##print(len(estrela_chaves))
 
+'''
 for i in range (len(estrela_chaves)):
     print(turmas_objetos[estrela_chaves[i][0]].numero_turma,\
           disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,\
           professores_objetos[estrela_chaves[i][2]].nome_professor,\
           slots_objetos[estrela_chaves[i][3]].slot)
+'''
