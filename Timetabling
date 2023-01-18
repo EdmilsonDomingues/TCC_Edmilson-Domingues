@@ -6,8 +6,12 @@ END_POINT = None
 # Leitura completa da tabela fornecida
 print('Leitura completa.')
 #df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', dtype={'Codigo_da_disc ': str}, engine='odf')
-df = pd.read_excel('./arquivo_ProjetoUFSC_v2.ods', engine='odf')
-df['Codigo_da_disc '] = df['Codigo_da_disc '].astype(str)
+df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
+# df['Codigo_da_disc '] = df['Codigo_da_disc '].astype(str)
+df['Código da disc. '] = df['Código da disc. '].astype(str)
+print(df.dtypes)
+print()
+print(df.info())
 
 
 class Turma():
@@ -25,6 +29,7 @@ class Turma():
 
     def numero_turma(self):
         return self.numero_turma
+
 
 class Disciplina():
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, codigo_disciplina,
@@ -85,7 +90,7 @@ class Grade():
         else:
             if self.tipo_grade == '2':
         '''
-        return Null
+        return None
 
 
 class Slot():
@@ -112,7 +117,7 @@ class Grupo_disciplinas():
 turmas_objetos = []
 disciplinas_objetos = []
 professores_objetos = []
-slots_objetos = [] # alterar
+slots_objetos = []  # alterar
 
 turmas_ponteiro = 0
 disciplinas_ponteiro = 0
@@ -129,12 +134,12 @@ controle = []
 estrela_chaves = []
 
 for index, row in df.iterrows():
-    #print(row)
+    # print(row)
     controle.clear()
     turma_prov.clear()
     disciplina_prov.clear()
     professor_prov.clear()
-
+    '''
     turma_prov = [row['Matriz_curricular'],
                   row['Etapa_series'],
                   row['Numero_da_turma'],
@@ -157,7 +162,26 @@ for index, row in df.iterrows():
                       row['CPF'],
                       row['Nome']
                        ]
-
+    '''
+    turma_prov = [row['Matriz curricular'],
+                  row['Etapa (séries)'],
+                  row['Número da turma'],
+                  row['Tipo de turma (prov. não usaremos)'],
+                  row['Cod. Turno'],
+                  row['Turno'],
+                  row['Código da área de ensino'],
+                  row['Área de ensino'], '1']
+    disciplina_prov = [row['Matriz curricular'],
+                       row['Etapa (séries)'],
+                       row['Número da turma'],
+                       row['Código da disc. '],
+                       row['Nome da disc. '],
+                       row['Qtd de aulas na semana'],
+                       row['Código da área de ensino'],
+                       row['Área de ensino']]
+    professor_prov = [row['Identificador do prof. '],
+                      row['CPF'],
+                      row['Nome']]
     grade = Grade('1', turma_prov[5])
     slot_prov = grade.grade_elementos()
 
@@ -168,7 +192,7 @@ for index, row in df.iterrows():
             if turma_prov[2] == objeto.numero_turma:
                 in_turma = True
                 break
-            indice = indice +1
+            indice = indice + 1
     if in_turma:
         controle.append(indice)
     else:
@@ -176,7 +200,7 @@ for index, row in df.iterrows():
         turmas_objetos.append(Turma(turma_prov[0], turma_prov[1], turma_prov[2],
                                     turma_prov[3], turma_prov[4], turma_prov[5],
                                     turma_prov[6], turma_prov[7], turma_prov[8]))
-        turmas_ponteiro = turmas_ponteiro +1
+        turmas_ponteiro = turmas_ponteiro + 1
 
     in_disciplina = False
     indice = 0
@@ -195,7 +219,7 @@ for index, row in df.iterrows():
         disciplinas_objetos.append(Disciplina(disciplina_prov[0], disciplina_prov[1], disciplina_prov[2],
                                     disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
                                     disciplina_prov[6], turma_prov[7]))
-        disciplinas_ponteiro = disciplinas_ponteiro +1
+        disciplinas_ponteiro = disciplinas_ponteiro + 1
 
     in_professor = False
     indice = 0
@@ -210,9 +234,9 @@ for index, row in df.iterrows():
     else:
         controle.append(professores_ponteiro)
         professores_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2]))
-        professores_ponteiro = professores_ponteiro +1
+        professores_ponteiro = professores_ponteiro + 1
 
-    ##print('slot_prov: ', slot_prov)
+    ## print('slot_prov: ', slot_prov)
     for slots in slot_prov:
         in_slot = False
         indice = 0
@@ -221,27 +245,27 @@ for index, row in df.iterrows():
                 if slots == objeto.slot:
                     in_slot = True
                     break
-                indice = indice +1
+                indice = indice + 1
         if in_slot:
-            #controle.append(indice)
-            #print('indice: ', indice)
+            # controle.append(indice)
+            # print('indice: ', indice)
             lista=[controle[0], controle[1], controle[2], indice]
             if lista not in estrela_chaves:
                 estrela_chaves.append(lista)
         else:
-            #controle.append(slots_ponteiro)
-            #print('slots_ponteiro: ', slots_ponteiro)
+            # controle.append(slots_ponteiro)
+            # print('slots_ponteiro: ', slots_ponteiro)
             lista=[controle[0], controle[1], controle[2], slots_ponteiro]
             if lista not in estrela_chaves:
                 ##print('Lista: ', lista)
                 estrela_chaves.append(lista)
                 slots_objetos.append(Slot(slots))
-                slots_ponteiro = slots_ponteiro +1
-    #print('finalizou slots')
-    #print()
+                slots_ponteiro = slots_ponteiro + 1
+    # print('finalizou slots')
+    # print()
 
 ##print(estrela_chaves)
-##print(len(estrela_chaves))
+print(len(estrela_chaves))
 
 
 for i in range (len(estrela_chaves)):
