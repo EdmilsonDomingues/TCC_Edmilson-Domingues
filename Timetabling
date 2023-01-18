@@ -129,7 +129,6 @@ professor_prov = []
 slot_prov = []
 
 controle = []
-estrela_chaves = []
 
 for index, row in df.iterrows():
     # print(row)
@@ -243,3 +242,20 @@ for i in range(len(estrela_chaves)):
           professores_objetos[estrela_chaves[i][2]].nome_professor,
           slots_objetos[estrela_chaves[i][3]].slot)
 print(len(estrela_chaves))
+
+# [18/01/2023]
+# Nesta parte do programa serão introduzidas as regras referentes à pesquisa operacional.
+# 1) Variáveis do problema de Timetabling.
+#
+#      As listas "turmas_objetos", disciplinas_objetos", "professores_objetos" e "slots_objetos" são compostas
+#      por objetos exclusivos, o que significa que, por exemplo, "turmas_objetos" possui todas as turmas da escola
+#      que está sendo considerada.
+#      Já a lista "estrela_chaves" possui todas as combinações possíveis para os elementos das listas
+#      "turmas_objetos", disciplinas_objetos", "professores_objetos" e "slots_objetos". A estas combinações
+#      serão consideradas variáveis para a esolução do problema.
+#      Considerar X[t, d, p, s] como sendo a variável de interesse.
+
+print(len(turmas_objetos))
+print(len(disciplinas_objetos))
+print(len(professores_objetos))
+print(len(slots_objetos))
