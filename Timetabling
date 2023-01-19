@@ -236,11 +236,13 @@ for index, row in df.iterrows():
                 slots_objetos.append(Slot(slots))
                 slots_ponteiro = slots_ponteiro + 1
 # #print(estrela_chaves)
+'''
 for i in range(len(estrela_chaves)):
     print(turmas_objetos[estrela_chaves[i][0]].numero_turma,
           disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,
           professores_objetos[estrela_chaves[i][2]].nome_professor,
           slots_objetos[estrela_chaves[i][3]].slot)
+'''
 print(len(estrela_chaves))
 print(len(turmas_objetos))
 print(len(disciplinas_objetos))
@@ -260,13 +262,13 @@ print(len(slots_objetos))
 #      Considerar X[t, d, p, s] como sendo a variável de interesse.
 
 # Em uma avaliação preliminar do arquivo que temos em mãos, existem 7.525 combinações válidas t, d, p, s.
-# T: 41
-# D: 26
-# P: 52
-# S: 50
+# T: 41 turmas
+# D: 26 disciplinas
+# P: 52 professores
+# S: 50 slots
 
 model = gp.Model("Timetabling")
-x = model.addVars(variables, vtype = pg.GRB.Binary)
+#x = model.addVars(variables, vtype = pg.GRB.Binary)
 
 # RESTRIÇÃO 3:
 ps_lista = []
@@ -274,18 +276,23 @@ for cont in range(len(estrela_chaves)):
     if [estrela_chaves[cont][2], estrela_chaves[cont][3]] not in ps_lista:
         ps_lista.append([estrela_chaves[cont][2], estrela_chaves[cont][3]])
 for ps in ps_lista:
-    t_lista = []
-    d_lista = []
+    td_lista = []
     for cont in range(len(estrela_chaves)):
         if [estrela_chaves[cont][2], estrela_chaves[cont][3]] == ps:
-            t_lista.append(estrela_chaves[cont][0])
-            d_lista.append(estrela_chaves[cont][1])
-    p = ps_lista[0]
-    s = ps_lista[1]
+            if [estrela_chaves[cont][0], estrela_chaves[cont][1]] not in td_lista:
+                td_lista.append([estrela_chaves[cont][0], estrela_chaves[cont][1]])
+    t_lista = []
+    d_lista = []
+    for td in td_lista:
+        if td[0] not in t_lista:
+            t_lista.append(td[0])
+        if td[1] not in d_lista:
+            d_lista.append(td[1])
+    print(td_lista, '***', t_lista, d_lista, ps[0], ps[1])
+    '''
     model.addConstr(gp.quicksum(x[t,d,p,s] for t in t_lista for d in d_lista)) <= 1,
     "Restrição 3_Professor:" +p +" Slot: " +s
-
-
+    '''
 
 
 
