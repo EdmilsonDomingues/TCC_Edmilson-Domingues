@@ -1,4 +1,5 @@
 import pandas as pd
+import gurobipy as gp
 
 START_POINT = 0
 END_POINT = None
@@ -264,23 +265,26 @@ print(len(slots_objetos))
 # P: 52
 # S: 50
 
+model = gp.Model("Timetabling")
+x = model.addVars(variables, vtype = pg.GRB.Binary)
+
 # RESTRIÇÃO 3:
 ps_lista = []
-for cont in range(estrela_chaves):
+for cont in range(len(estrela_chaves)):
     if [estrela_chaves[cont][2], estrela_chaves[cont][3]] not in ps_lista:
         ps_lista.append([estrela_chaves[cont][2], estrela_chaves[cont][3]])
 for ps in ps_lista:
     t_lista = []
     d_lista = []
-    for cont in range(estrela_chaves):
+    for cont in range(len(estrela_chaves)):
         if [estrela_chaves[cont][2], estrela_chaves[cont][3]] == ps:
             t_lista.append(estrela_chaves[cont][0])
             d_lista.append(estrela_chaves[cont][1])
-for ps in ps_lista:
     p = ps_lista[0]
     s = ps_lista[1]
     model.addConstr(gp.quicksum(x[t,d,p,s] for t in t_lista for d in d_lista)) <= 1,
     "Restrição 3_Professor:" +p +" Slot: " +s
+
 
 
 
