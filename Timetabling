@@ -70,16 +70,16 @@ class Grade:
 
     def grade_elementos(self):
         if self.tipo_grade == '1':
-            if self.turno=='todos':
+            if self.turno == 'todos':
                 return ['1', ..., '51']
             else:
-                if self.turno =='Matutino':
+                if self.turno == 'Matutino':
                     return ['0', '1', '2', '3', '4', '11', '12', '13', '14',
                             '15', '22', '23', '24', '25', '26', '33', '34',
                             '35', '36', '37', '44', '45', '46', '47', '48']
                 else:
                     if self.turno == 'Vespertino':
-                        return ['5', '6' , '7', '8', '9', '16', '17', '18',
+                        return ['5', '6', '7', '8', '9', '16', '17', '18',
                                 '19', '20', '27', '28', '29', '30', '31', '38',
                                 '39', '40', '41', '42', '49', '50', '51', '52', '53']
                     else:
@@ -180,8 +180,7 @@ for index, row in df.iterrows():
     indice = 0
     if len(disciplinas_objetos) > 0:
         for objeto in disciplinas_objetos:
-            if disciplina_prov[2] == objeto.numero_turma\
-                    and disciplina_prov[3] == objeto.codigo_disciplina \
+            if disciplina_prov[3] == objeto.codigo_disciplina \
                     and disciplina_prov[6] == objeto.codigo_area_ensino:
                 in_disciplina = True
                 break
@@ -242,6 +241,10 @@ for i in range(len(estrela_chaves)):
           professores_objetos[estrela_chaves[i][2]].nome_professor,
           slots_objetos[estrela_chaves[i][3]].slot)
 print(len(estrela_chaves))
+print(len(turmas_objetos))
+print(len(disciplinas_objetos))
+print(len(professores_objetos))
+print(len(slots_objetos))
 
 # [18/01/2023]
 # Nesta parte do programa serão introduzidas as regras referentes à pesquisa operacional.
@@ -255,7 +258,30 @@ print(len(estrela_chaves))
 #      serão consideradas variáveis para a esolução do problema.
 #      Considerar X[t, d, p, s] como sendo a variável de interesse.
 
-print(len(turmas_objetos))
-print(len(disciplinas_objetos))
-print(len(professores_objetos))
-print(len(slots_objetos))
+# Em uma avaliação preliminar do arquivo que temos em mãos, existem 7.525 combinações válidas t, d, p, s.
+# T: 41
+# D: 26
+# P: 52
+# S: 50
+
+# RESTRIÇÃO 3:
+ps_lista = []
+for cont in range(estrela_chaves):
+    if [estrela_chaves[cont][2], estrela_chaves[cont][3]] not in ps_lista:
+        ps_lista.append([estrela_chaves[cont][2], estrela_chaves[cont][3]])
+for ps in ps_lista:
+    t_lista = []
+    d_lista = []
+    for cont in range(estrela_chaves):
+        if [estrela_chaves[cont][2], estrela_chaves[cont][3]] == ps:
+            t_lista.append(estrela_chaves[cont][0])
+            d_lista.append(estrela_chaves[cont][1])
+for ps in ps_lista:
+    p = ps_lista[0]
+    s = ps_lista[1]
+    model.addConstr(gp.quicksum(x[t,d,p,s] for t in t_lista for d in d_lista)) <= 1,
+    "Restrição 3_Professor:" +p +" Slot: " +s
+
+
+
+
