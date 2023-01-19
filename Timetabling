@@ -268,7 +268,7 @@ print(len(slots_objetos))
 # S: 50 slots
 
 model = gp.Model("Timetabling")
-#x = model.addVars(variables, vtype = pg.GRB.Binary)
+#x = model.addVars(name='x', vtype = pg.GRB.Binary)
 
 # RESTRIÇÃO 3:
 ps_lista = []
@@ -289,10 +289,7 @@ for ps in ps_lista:
         if td[1] not in d_lista:
             d_lista.append(td[1])
     print(td_lista, '***', t_lista, d_lista, ps[0], ps[1])
-    '''
-    model.addConstr(gp.quicksum(x[t,d,p,s] for t in t_lista for d in d_lista)) <= 1,
-    "Restrição 3_Professor:" +p +" Slot: " +s
-    '''
+
 
 
 
