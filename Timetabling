@@ -268,8 +268,10 @@ print(len(slots_objetos))
 # S: 50 slots
 
 model = gp.Model("Timetabling")
-#x = model.addVars(name='x', vtype = pg.GRB.Binary)
+x_tdps = [i for i in range (len(estrela_chaves))]
+x = model.addVars(x_tdps, vtype = gp.GRB.BINARY)
 
+'''
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -289,7 +291,19 @@ for ps in ps_lista:
         if td[1] not in d_lista:
             d_lista.append(td[1])
     print(td_lista, '***', t_lista, d_lista, ps[0], ps[1])
+'''
 
-
-
-
+# RESTRIÇÃO 3:
+ps_lista = []
+for cont in range(len(estrela_chaves)):
+    if [estrela_chaves[cont][2], estrela_chaves[cont][3]] not in ps_lista:
+        ps_lista.append([estrela_chaves[cont][2], estrela_chaves[cont][3]])
+tdps_lista = []
+for ps in ps_lista:
+    tdps_lista.clear()
+    for cont in range(len(estrela_chaves)):
+        if [estrela_chaves[cont][2], estrela_chaves[cont][3]] == ps:
+            tdps_lista.append(cont)
+    m.addConstrs(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 3: p_" +str(estrela_chaves[cont][2] +
+                                                                " s_" +str(estrela_chaves[cont][3]))
+pass
