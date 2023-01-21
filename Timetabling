@@ -51,6 +51,7 @@ class Disciplina:
     def codigo_area_ensino(self):
         return self.codigo_area_ensino
 
+
 class Professor:
     def __init__(self, id_professor, cpf_professor, nome_professor):
         self.id_professor = id_professor
@@ -106,10 +107,17 @@ class Slot:
 
 
 class Grupo_disciplinas:
-    def __init__(self):
-        self.id_sistema = id_sistema
+    def __init__(self, tipo_grupo, disciplinas):
         self.tipo_grupo = tipo_grupo
         self.disciplinas = disciplinas
+
+
+class Janela:
+    def __init__(self, slots):
+        self.slots = slots
+
+    def janelas(self):
+        pass    # retorna sequência tripla de possíveis janelas
 
 
 # leitura dataframe escola e criação dos objetos correspondentes:
@@ -223,13 +231,13 @@ for index, row in df.iterrows():
         if in_slot:
             # controle.append(indice)
             # print('indice: ', indice)
-            lista=[controle[0], controle[1], controle[2], indice]
+            lista = [controle[0], controle[1], controle[2], indice]
             if lista not in estrela_chaves:
                 estrela_chaves.append(lista)
         else:
             # controle.append(slots_ponteiro)
             # print('slots_ponteiro: ', slots_ponteiro)
-            lista=[controle[0], controle[1], controle[2], slots_ponteiro]
+            lista = [controle[0], controle[1], controle[2], slots_ponteiro]
             if lista not in estrela_chaves:
                 # #print('Lista: ', lista)
                 estrela_chaves.append(lista)
@@ -268,9 +276,15 @@ print(len(slots_objetos))
 # S: 50 slots
 
 m = gp.Model("Timetabling")
-x_tdps = [i for i in range (len(estrela_chaves))]
-x = m.addVars(x_tdps, vtype = gp.GRB.BINARY)
+# ... Variáveis da Pesquisa Operacional:
+x_tdps = [i for i in range(len(estrela_chaves))]
+x = m.addVars(x_tdps, vtype=gp.GRB.BINARY)
 
+# y = m.addVar(y_pj, vtype=gp.GRB.BINARY)
+
+# ... Função Objetivo da Pesquisa Operacional:
+
+# ... Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -284,6 +298,9 @@ for ps in ps_lista:
             tdps_lista.append(cont)
     m.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                  "RESTRIÇÃO 3: p_" +str(estrela_chaves[cont][2]) + " s_" +str(estrela_chaves[cont][3]))
+
+m.optimize()
+
 '''
 # RESTRIÇÃO 3:
 ps_lista = []
