@@ -364,7 +364,7 @@ for cont in range(len(y_pj)):
                 + 2 * gp.quicksum(x[somas[cont][2]]) for cont in range(len(somas[cont][2])) <= (9 * y[cont]))
 # ... Função Objetivo da Pesquisa Operacional:
 
-m.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE)
+m.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), GRB_MINIMIZE);
 
 # ... Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 3:
