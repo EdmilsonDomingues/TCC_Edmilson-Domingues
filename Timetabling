@@ -113,8 +113,8 @@ class Grupo_disciplinas:
 
 
 class Janela:
-    def __init__(self, slots):
-        self.slots = slots
+    def __init__(self):
+        self.slots
 
     def janelas(self):
         pass    # retorna sequência tripla de possíveis janelas
@@ -280,7 +280,47 @@ m = gp.Model("Timetabling")
 x_tdps = [i for i in range(len(estrela_chaves))]
 x = m.addVars(x_tdps, vtype=gp.GRB.BINARY)
 
-# y = m.addVar(y_pj, vtype=gp.GRB.BINARY)
+
+y_ps = []
+cont_yps = 0
+
+buffer_s = []
+for i in range(len(estrela_chaves)):
+    estrela_chaves[i].append(i)
+    buffer_s[estrela_chaves[3]].append(estrela_chaves[i])
+
+janela = Janela()
+janelas = janela.janelas()
+for professor in range(len(professores_ponteiro)):
+    for jan in janelas: # s0, s1, s2
+        s0 = []
+        s1 = []
+        s2 = []
+        s0_existe = False
+        s1_existe = False
+        s2_existe = False
+        if professor in buffer_s[jan[0]][2]:
+            s0.append(x_tdps[buffer_s[jan[0][4]]])
+            s0_existe = True
+        if professor in buffer_s[jan[1]][2]:
+            s1.append(x_tdps[buffer_s[jan[1][4]]])
+            s1_existe = True
+        if professor in buffer_s[jan[2]][2]:
+            s2.append(x_tdps[buffer_s[jan[2][4]]])
+            s2_existe = True
+        if s0_existe and s1_existe and s2_existe:
+            somas[cont_yps] = [s0.copy(), s1.copy(), s2.copy()]
+            yps[cont_yps] = [professor, jan]
+            cont_yps = cont_yps + 1
+
+
+
+
+
+            # y = m.addVar(y_pj, vtype=gp.GRB.BINARY)
+
+
+
 
 # ... Função Objetivo da Pesquisa Operacional:
 
@@ -301,24 +341,3 @@ for ps in ps_lista:
 
 m.optimize()
 
-'''
-# RESTRIÇÃO 3:
-ps_lista = []
-for cont in range(len(estrela_chaves)):
-    if [estrela_chaves[cont][2], estrela_chaves[cont][3]] not in ps_lista:
-        ps_lista.append([estrela_chaves[cont][2], estrela_chaves[cont][3]])
-for ps in ps_lista:
-    td_lista = []
-    for cont in range(len(estrela_chaves)):
-        if [estrela_chaves[cont][2], estrela_chaves[cont][3]] == ps:
-            if [estrela_chaves[cont][0], estrela_chaves[cont][1]] not in td_lista:
-                td_lista.append([estrela_chaves[cont][0], estrela_chaves[cont][1]])
-    t_lista = []
-    d_lista = []
-    for td in td_lista:
-        if td[0] not in t_lista:
-            t_lista.append(td[0])
-        if td[1] not in d_lista:
-            d_lista.append(td[1])
-    print(td_lista, '***', t_lista, d_lista, ps[0], ps[1])
-'''
