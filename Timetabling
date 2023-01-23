@@ -354,18 +354,15 @@ y_pj = [i for i in range(len(pj))]
 y = m.addVars(y_pj, vtype=gp.GRB.BINARY)
 
 for cont in range(len(y_pj)):
-    '''
-    m.addConstr(gp.quicksum(2 * (somas[cont][0]) for cont in len(somas[cont][0])\
-                                 - (somas[cont][1]) for cont in len(somas[cont][1])\
-                                    + 2 * (somas[cont][2]) for cont in len(somas[cont][2]) <= 9 * y[cont]),
-                 "RESTRIÇÃO janelas: p_" +str(pj[cont][0]) + " j_" +str(pj[cont][1]))
-    '''
-    m.addConstr(gp.quicksum(2 * (somas[cont][0]) for cont in len(somas[cont][0])\
-                                 - (somas[cont][1]) for cont in len(somas[cont][1])\
-                                    + 2 * (somas[cont][2]) for cont in len(somas[cont][2]) <= 9 * y[cont]),
-                 "RESTRIÇÃO janelas: p_" +str(pj[cont][0]) + " j_" +str(pj[cont][1]))
- # ... Função Objetivo da Pesquisa Operacional:
-m.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))),sense= gp.GRB.MINIMIZE)
+    print('somas: ', somas[cont][0])
+    print('somas: ', somas[cont][1])
+    print('somas: ', somas[cont][2])
+    m.addConstr((2 * gp.quicksum(x[somas[cont][0]] for cont in len(somas[cont][0]))\
+                - gp.quicksum(x[somas[cont][1]] for cont in len(somas[cont][1]))\
+                + 2 * gp.quicksum(x[somas[cont][2]]) for cont in len(somas[cont][2])) <= 9 * y[cont],
+    "RESTRIÇÃO janelas: p_" +str(pj[cont][0]) + " j_" +str(pj[cont][1]))
+# ... Função Objetivo da Pesquisa Operacional:
+m.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE)
 
 # ... Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 3:
