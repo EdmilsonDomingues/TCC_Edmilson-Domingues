@@ -281,17 +281,16 @@ x_tdps = [i for i in range(len(estrela_chaves))]
 x = m.addVars(x_tdps, vtype=gp.GRB.BINARY)
 
 
-y_ps = []
-cont_yps = 0
-
-buffer_s = []
+pj = []
+cont_pj = 0
+buffer_s = [len(slots_objetos)] # tdps + ordem(x)
 for i in range(len(estrela_chaves)):
     estrela_chaves[i].append(i)
-    buffer_s[estrela_chaves[3]].append(estrela_chaves[i])
+    buffer_s[estrela_chaves[i][3]].append(estrela_chaves[i])
 
 janela = Janela()
 janelas = janela.janelas()
-for professor in range(len(professores_ponteiro)):
+for professor in range(len(professores_objetos)):
     for jan in janelas: # s0, s1, s2
         s0 = []
         s1 = []
@@ -310,19 +309,20 @@ for professor in range(len(professores_ponteiro)):
             s2_existe = True
         if s0_existe and s1_existe and s2_existe:
             somas[cont_yps] = [s0.copy(), s1.copy(), s2.copy()]
-            yps[cont_yps] = [professor, jan]
-            cont_yps = cont_yps + 1
+            pj[cont_yps] = [professor, jan]
+            cont_pj = cont_pj + 1
 
+y_pj = [i for i in range(len(pj))]
+y = m.addVars(y_pj, vtype=gp.GRB.BINARY)
 
+for cont in range(len(y_pj)):
+    m.addConstr(gp.quicksum(2 * (somas[cont][0] for cont in len(somas[cont][0]))\
+                                 - (somas[cont][1] for cont in len(somas[cont][1]))\
+                                    + 2 * (somas[cont][2] for cont in len(somas[cont][2]))) <= 9 * y[cont],\
+                 "RESTRIÇÃO janelas: p_" +str(pj[cont][0]) + " s_" +str(pj[cont][1]))
 
-
-
-            # y = m.addVar(y_pj, vtype=gp.GRB.BINARY)
-
-
-
-
-# ... Função Objetivo da Pesquisa Operacional:
+ # ... Função Objetivo da Pesquisa Operacional:
+m.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))),sense= gp.GRB.MINIMIZE)
 
 # ... Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 3:
