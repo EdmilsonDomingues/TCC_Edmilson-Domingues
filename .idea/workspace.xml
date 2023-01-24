@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,12 +38,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="13525" />
+          <entry key="Timetabling" value="14316" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="13525" />
+          <entry key="Python" value="14316" />
         </counts>
       </usages-collector>
     </session>
@@ -54,16 +53,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="383" column="12" lean-forward="true" selection-start-line="383" selection-start-column="12" selection-end-line="383" selection-end-column="12" />
+            <state relative-caret-position="180">
+              <caret line="350" column="29" selection-start-line="350" selection-start-column="29" selection-end-line="350" selection-end-column="29" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
-                <marker date="1674512932049" expanded="true" signature="376:381" ph="..." />
-                <marker date="1674512932049" expanded="true" signature="996:1001" ph="..." />
-                <marker date="1674512932049" expanded="true" signature="1816:1821" ph="..." />
-                <marker date="1674512932049" expanded="true" signature="2165:2170" ph="..." />
-                <marker date="1674512932049" expanded="true" signature="4210:4336" ph="..." />
-                <marker date="1674512932049" expanded="true" signature="4337:4338" ph="..." />
+                <element signature="e#0#21#0" expanded="true" />
+                <marker date="1674568917712" expanded="true" signature="352:357" ph="..." />
+                <marker date="1674568917712" expanded="true" signature="970:975" ph="..." />
+                <marker date="1674568917712" expanded="true" signature="1786:1791" ph="..." />
+                <marker date="1674568917712" expanded="true" signature="2135:2140" ph="..." />
+                <marker date="1674568917712" expanded="true" signature="4180:4306" ph="..." />
+                <marker date="1674568917712" expanded="true" signature="4307:4308" ph="..." />
               </folding>
             </state>
           </provider>
@@ -80,6 +79,9 @@
       <find>##</find>
       <find>la_cha</find>
       <find>controle</find>
+      <find>model</find>
+      <find>m.</find>
+      <find>model.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -209,7 +211,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33934426" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31967214" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -250,16 +252,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="383" column="12" lean-forward="true" selection-start-line="383" selection-start-column="12" selection-end-line="383" selection-end-column="12" />
+        <state relative-caret-position="180">
+          <caret line="350" column="29" selection-start-line="350" selection-start-column="29" selection-end-line="350" selection-end-column="29" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <marker date="1674512932049" expanded="true" signature="376:381" ph="..." />
-            <marker date="1674512932049" expanded="true" signature="996:1001" ph="..." />
-            <marker date="1674512932049" expanded="true" signature="1816:1821" ph="..." />
-            <marker date="1674512932049" expanded="true" signature="2165:2170" ph="..." />
-            <marker date="1674512932049" expanded="true" signature="4210:4336" ph="..." />
-            <marker date="1674512932049" expanded="true" signature="4337:4338" ph="..." />
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1674568917712" expanded="true" signature="352:357" ph="..." />
+            <marker date="1674568917712" expanded="true" signature="970:975" ph="..." />
+            <marker date="1674568917712" expanded="true" signature="1786:1791" ph="..." />
+            <marker date="1674568917712" expanded="true" signature="2135:2140" ph="..." />
+            <marker date="1674568917712" expanded="true" signature="4180:4306" ph="..." />
+            <marker date="1674568917712" expanded="true" signature="4307:4308" ph="..." />
           </folding>
         </state>
       </provider>

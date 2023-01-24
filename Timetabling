@@ -1,6 +1,6 @@
-import pandas as pd
 import gurobipy as gp
-from gurobipy.gurobipy import Model
+import pandas as pd
+import copy
 
 START_POINT = 0
 END_POINT = None
@@ -9,9 +9,9 @@ END_POINT = None
 print('Realizando o processo de Leitura.')
 df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
 df['Código da disc. '] = df['Código da disc. '].astype(str)
-print(df.dtypes)
-print()
-print(df.info())
+# print(df.dtypes)
+# print()
+# print(df.info())
 
 
 class Turma:
@@ -19,7 +19,7 @@ class Turma:
                  codigo_turno, turno, codigo_area_ensino, area_ensino, tipo_grade):
         self.matriz_curricular = matriz_curricular
         self.etapa_serie = etapa_serie
-        self.numero_turma = numero_turma    # PK
+        self.numero_turma = numero_turma  # PK
         self.tipo_turma = tipo_turma
         self.codigo_turno = codigo_turno
         self.turno = turno
@@ -36,11 +36,11 @@ class Disciplina:
                  nome_disciplina, quantidade_aulas_semanais, codigo_area_ensino, area_ensino):
         self.matriz_curricular = matriz_curricular
         self.etapa_serie = etapa_serie
-        self.numero_turma = numero_turma    # PK
+        self.numero_turma = numero_turma  # PK
         self.codigo_disciplina = codigo_disciplina  # PK
         self.nome_disciplina = nome_disciplina
         self.quantidade_aulas_semanais = quantidade_aulas_semanais
-        self.codigo_area_ensino = codigo_area_ensino    # PK
+        self.codigo_area_ensino = codigo_area_ensino  # PK
         self.area_ensino = area_ensino
 
     def numero_turma(self):
@@ -204,8 +204,8 @@ for index, row in df.iterrows():
     else:
         controle.append(disciplinas_ponteiro)
         disciplinas_objetos.append(Disciplina(disciplina_prov[0], disciplina_prov[1], disciplina_prov[2],
-            disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
-            disciplina_prov[6], turma_prov[7]))
+                                              disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
+                                              disciplina_prov[6], turma_prov[7]))
         disciplinas_ponteiro = disciplinas_ponteiro + 1
 
     in_professor = False
@@ -280,13 +280,12 @@ print(len(slots_objetos))
 # P: 52 professores
 # S: 50 slots
 
-m = gp.Model("Timetabling")
-# ... Variáveis da Pesquisa Operacional:
+model = gp.Model("Timetabling")
+# Variáveis da Pesquisa Operacional:
 x_tdps = [i for i in range(len(estrela_chaves))]
-x = m.addVars(x_tdps, vtype=gp.GRB.BINARY)
-
-
-pj = []     # tuplas professor-janela [p, s]
+x = model.addVars(x_tdps, vtype=gp.GRB.BINARY)
+# Criação das variáveis Y:
+pj = []  # tuplas professor-janela [p, s]
 cont_pj = 0
 buffer_s = []  # tdps associado a cada slot
 s0 = []
@@ -295,16 +294,14 @@ s2 = []
 somas = []
 for i in range(len(slots_objetos)):
     buffer_s.append([])
-print(buffer_s)
 for i in range(len(estrela_chaves)):
     estrela_chaves[i].append(i)
     buffer_s[estrela_chaves[i][3]].append(estrela_chaves[i])
-
 grade = Grade('1', 'Matutino')
 janelas = grade.janelas()
 cont_ypj = 0
 for professor in range(len(professores_objetos)):
-    for jan in janelas:     # tuplas (s0, s1, s2)
+    for jan in janelas:  # tuplas (s0, s1, s2)
         obj_existe = False
         for indice in range(len(slots_objetos)):
             if jan[0] == slots_objetos[indice].slot:
@@ -329,43 +326,47 @@ for professor in range(len(professores_objetos)):
         if not obj_existe:
             break
 
-    s0.clear()
-    s1.clear()
-    s2.clear()
-    s0_existe = False
-    s1_existe = False
-    s2_existe = False
-    if professor in buffer_s[pos_s0][2]:
-        s0.append(buffer_s[pos_s0][4])
-        s0_existe = True
-    if professor in buffer_s[pos_s1][2]:
-        s1.append(buffer_s[pos_s1][4])
-        s1_existe = True
-    if professor in buffer_s[pos_s2][2]:
-        s2.append(buffer_s[pos_s2][4])
-        s2_existe = True
-    if s0_existe and s1_existe and s2_existe:
-        # somas[cont_ypj] = [s0.copy(), s1.copy(), s2.copy()]
-        # pj[cont_ypj] = [professor, jan]
-        somas.append([s0.copy(), s1.copy(), s2.copy()])
-        pj.append([professor, jan])
-        cont_pj = cont_pj + 1
+        s0.clear()
+        s1.clear()
+        s2.clear()
+        s0_existe = False
+        s1_existe = False
+        s2_existe = False
+        for i in range(len(buffer_s[pos_s0])):
+            if professor == buffer_s[pos_s0][i][2]:
+                s0.append(buffer_s[pos_s0][4])
+                s0_existe = True
+        for i in range(len(buffer_s[pos_s1])):
+            if professor == buffer_s[pos_s1][i][2]:
+                s1.append(buffer_s[pos_s1][4])
+                s1_existe = True
+        for i in range(len(buffer_s[pos_s2])):
+            if professor == buffer_s[pos_s2][i][2]:
+                s2.append(buffer_s[pos_s2][4])
+                s2_existe = True
+        if s0_existe and s1_existe and s2_existe:
+            somas.append([[copy.deepcopy(s0)], [copy.deepcopy(s1)], [copy.deepcopy(s2)]])
+            pj.append([professor, jan])
+            print('pj: ', pj)
+            print('s0: ', s0)
+            print('somas: ', somas)
+            cont_pj = cont_pj + 1
 
 y_pj = [i for i in range(len(pj))]
-y = m.addVars(y_pj, vtype=gp.GRB.BINARY)
+y = model.addVars(y_pj, vtype=gp.GRB.BINARY)
 
 for cont in range(len(y_pj)):
     print('somas: ', somas[cont][0])
     print('somas: ', somas[cont][1])
     print('somas: ', somas[cont][2])
-    m.addConstr("RESTRIÇÃO janelas: p_" +str(pj[cont][0]) + " j_" +str(pj[cont][1]),
-    (2 * gp.quicksum(x[somas[cont][0]] for cont in range(len(somas[cont][0])))\
-                - gp.quicksum(x[somas[cont][1]] for cont in range(len(somas[cont][1])))\
-                + 2 * gp.quicksum(x[somas[cont][2]]) for cont in range(len(somas[cont][2])) <= (9 * y[cont]))
+    model.addConstr(2 * gp.quicksum(x[somas[cont][0][4]] for cont in range(len(somas[cont][0])))
+                     - gp.quicksum(x[somas[cont][1][4]] for cont in range(len(somas[cont][1])))
+                     + 2 * gp.quicksum(x[somas[cont][2][4]] for cont in range(len(somas[cont][2]))) > 9 * y[cont],
+                        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
 # ... Função Objetivo da Pesquisa Operacional:
 
-m.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), GRB_MINIMIZE);
-
+model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE);
+# --------------------------------------------------------------------------------------------------------
 # ... Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 3:
 ps_lista = []
@@ -378,7 +379,7 @@ for ps in ps_lista:
     for cont in range(len(estrela_chaves)):
         if [estrela_chaves[cont][2], estrela_chaves[cont][3]] == ps:
             tdps_lista.append(cont)
-    m.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
-                 "RESTRIÇÃO 3: p_" +str(estrela_chaves[cont][2]) + " s_" +str(estrela_chaves[cont][3]))
+    model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
+                    "RESTRIÇÃO 3: p_" + str(estrela_chaves[cont][2]) + " s_" + str(estrela_chaves[cont][3]))
 
-m.optimize()
+model.optimize()
