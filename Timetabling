@@ -52,6 +52,9 @@ class Disciplina:
     def codigo_area_ensino(self):
         return self.codigo_area_ensino
 
+    def quantidade_aulas_semanais(self):
+        return self.quantidade_aulas_semanais
+
 
 class Professor:
     def __init__(self, id_professor, cpf_professor, nome_professor):
@@ -359,7 +362,7 @@ for professor in range(len(professores_objetos)):
 y_pj = [i for i in range(len(pj))]
 y = model.addVars(y_pj, vtype=gp.GRB.BINARY)
 tolerancia = 0.0001
-print(somas)
+# print(somas)
 for cont in range(len(somas)):
     # print('somas: ', somas[cont][0])
     # print('somas: ', somas[cont][1])
@@ -380,9 +383,24 @@ for cont in range(len(somas)):
 
 # ... Função Objetivo da Pesquisa Operacional:
 
-model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE);
+model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE)
 # --------------------------------------------------------------------------------------------------------
-# ... Restrições da Pesquisa Operacional:
+# Restrições da Pesquisa Operacional:
+# RESTRIÇÃO 2:
+
+ts_lista = []
+for cont in range(len(estrela_chaves)):
+    if [estrela_chaves[cont][0], estrela_chaves[cont][3]] not in ts_lista:
+        ts_lista.append([estrela_chaves[cont][0], estrela_chaves[cont][3]])
+tdps_lista = []
+for ts in ts_lista:
+    tdps_lista.clear()
+    for cont in range(len(estrela_chaves)):
+        if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
+            tdps_lista.append(cont)
+    model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
+                    "RESTRIÇÃO 2: t_" + str(estrela_chaves[cont][0]) + " s_" + str(estrela_chaves[cont][3]))
+
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -396,5 +414,40 @@ for ps in ps_lista:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                     "RESTRIÇÃO 3: p_" + str(estrela_chaves[cont][2]) + " s_" + str(estrela_chaves[cont][3]))
+
+# RESTRIÇÃO 6:
+for professor in professores_objetos:
+        lista_disc = []
+        for i in range(len(x_tdps)):
+            if professor == x_tdps[2]:
+                if x_tdps[1] not in lista_d:
+                    lista_disc.append(x_tdps[1])
+        soma = 0
+        for i in range(len(lista_disc)):
+            soma = soma + lista_disc[i].quantidade_aulas_semanais
+p_lista = []
+for cont in range(len(estrela_chaves)):
+    if [estrela_chaves[cont][0], estrela_chaves[cont][1], estrela_chaves[cont][3]] not in ps_lista:
+        p_lista.append([estrela_chaves[cont][0], estrela_chaves[cont][1], estrela_chaves[cont][3]])
+tdps_lista = []
+lista_disc = []
+for p in p_lista:
+    tdps_lista.clear()
+    for cont in range(len(estrela_chaves)):
+        if [estrela_chaves[cont][2]] == p:
+            tdps_lista.append(cont)
+    lista_disc.clear()
+    for i in range(len(tdps_lista)):
+        if p == tdps_lista[2]:
+            if tdps_lista[1] not in lista_disc:
+                lista_disc.append(tdps_lista[1])
+    soma = 0
+    for i in range(len(lista_disc)):
+        soma = soma + lista_disc[i].quantidade_aulas_semanais
+    model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= soma + tolerancia,
+                    "RESTRIÇÃO 6: t_" + str(estrela_chaves[cont][0]) + " d_" + str(estrela_chaves[cont][1])
+                    + " s_" + str(estrela_chaves[cont][3]))
+
+
 
 model.optimize()
