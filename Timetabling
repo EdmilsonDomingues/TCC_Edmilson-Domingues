@@ -393,6 +393,7 @@ for cont in range(len(estrela_chaves)):
     if [estrela_chaves[cont][0], estrela_chaves[cont][3]] not in ts_lista:
         ts_lista.append([estrela_chaves[cont][0], estrela_chaves[cont][3]])
 tdps_lista = []
+fase = 0
 for ts in ts_lista:
     tdps_lista.clear()
     for cont in range(len(estrela_chaves)):
@@ -400,7 +401,17 @@ for ts in ts_lista:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                     "RESTRIÇÃO 2: t_" + str(estrela_chaves[cont][0]) + " s_" + str(estrela_chaves[cont][3]))
-
+    for i in range(len(tdps_lista)):
+        print('t: ', estrela_chaves[tdps_lista[i]][0],
+              '   d: ', estrela_chaves[tdps_lista[i]][1],
+              '   p: ', estrela_chaves[tdps_lista[i]][2],
+              '   s: ', estrela_chaves[tdps_lista[i]][3])
+        print()
+    print('------------------------------------------------')
+    if fase == 526:
+        break
+    fase = fase + 1
+'''
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -447,7 +458,9 @@ for p in p_lista:
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= soma + tolerancia,
                     "RESTRIÇÃO 6: t_" + str(estrela_chaves[cont][0]) + " d_" + str(estrela_chaves[cont][1])
                     + " s_" + str(estrela_chaves[cont][3]))
-
-
+'''
 
 model.optimize()
+for i in range(len(x)):
+    print(x[i])
+# print(y)
