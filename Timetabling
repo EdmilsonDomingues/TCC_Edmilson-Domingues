@@ -397,20 +397,29 @@ fase = 0
 for ts in ts_lista:
     tdps_lista.clear()
     for cont in range(len(estrela_chaves)):
+
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
+    if fase == 527:
+        del tdps_lista[3]
+        del tdps_lista[7]
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                     "RESTRIÇÃO 2: t_" + str(estrela_chaves[cont][0]) + " s_" + str(estrela_chaves[cont][3]))
     for i in range(len(tdps_lista)):
+        print('fase: ', fase)
         print('t: ', estrela_chaves[tdps_lista[i]][0],
               '   d: ', estrela_chaves[tdps_lista[i]][1],
               '   p: ', estrela_chaves[tdps_lista[i]][2],
               '   s: ', estrela_chaves[tdps_lista[i]][3])
-        print()
+        if fase == 527:
+            print(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma,
+                  disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina,
+                  professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor,
+                  slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+    print()
     print('------------------------------------------------')
-    if fase == 526:
-        break
     fase = fase + 1
+
 '''
 # RESTRIÇÃO 3:
 ps_lista = []
@@ -461,6 +470,9 @@ for p in p_lista:
 '''
 
 model.optimize()
-for i in range(len(x)):
+'''
+for i in range(50):
     print(x[i])
 # print(y)
+'''
+
