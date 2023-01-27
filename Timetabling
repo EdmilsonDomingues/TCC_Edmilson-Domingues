@@ -370,7 +370,15 @@ for cont in range(len(somas)):
     # print(x)
     # print(y)
     # print('len(somas[cont][0])): ', len(somas[cont][0]))
+
     try:
+        model.addConstr(gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0]))) <= 1,
+        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s0")
+        model.addConstr(gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1]))) <= 1,
+        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s1")
+        model.addConstr(gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 1,
+        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s2")
+
         model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
                          - gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
                          + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) >= (9 * y[cont] +
@@ -395,11 +403,13 @@ for cont in range(len(estrela_chaves)):
 tdps_lista = []
 fase = 0
 for ts in ts_lista:
+    if fase == 2000:
+        break
     tdps_lista.clear()
     for cont in range(len(estrela_chaves)):
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
-    model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1 - tolerancia, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
+    model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
     for i in range(len(tdps_lista)):
         print('fase: ', fase)
         print('t: ', estrela_chaves[tdps_lista[i]][0],
@@ -413,7 +423,6 @@ for ts in ts_lista:
                   slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
     print('------------------------------------------------')
     fase = fase + 1
-
 '''
 # RESTRIÇÃO 3:
 ps_lista = []
