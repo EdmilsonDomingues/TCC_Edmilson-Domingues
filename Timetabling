@@ -424,7 +424,7 @@ for ts in ts_lista:
                   slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
     print('------------------------------------------------')
     fase = fase + 1
-'''
+    '''
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -442,34 +442,32 @@ for ps in ps_lista:
 # RESTRIÇÃO 6:
 p_lista = []
 for cont in range(len(estrela_chaves)):
-    if [estrela_chaves[cont][2]] not in p_lista:
-        p_lista.append([estrela_chaves[cont][2]])
+    if estrela_chaves[cont][2] not in p_lista:
+        p_lista.append(estrela_chaves[cont][2])
 tdps_lista = []
+lista_disc = []
 for p in p_lista:
+    print('p: ', p)
     tdps_lista.clear()
-    for cont in range(len(estrela_chaves)):
-        if [estrela_chaves[cont][2]] == p:
-            tdps_lista.append(cont)
-
-    lista_disc = []
-    for p in p_lista:
-        tdps_lista.clear()
-        for cont in range(len(estrela_chaves)):
-            if [estrela_chaves[cont][2]] == p:
-                tdps_lista.append(cont)
-        lista_disc.clear()
-        for i in range(len(tdps_lista)):
-            if p == tdps_lista[2]:
-                if tdps_lista[1] not in lista_disc:
-                    lista_disc.append(tdps_lista[1])
-        soma = 0
-        for i in range(len(lista_disc)):
-            soma = soma + lista_disc[i].quantidade_aulas_semanais
-    model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == soma,
-                        "RESTRIÇÃO 6: p_" + str(p))
+    for i in range(len(estrela_chaves)):
+        if estrela_chaves[i][2] == p:
+            tdps_lista.append(i)
+    print('tdps_lista: ', tdps_lista)
+    lista_disc.clear()
+    for i in range(len(tdps_lista)):
+        if [estrela_chaves[tdps_lista[i]][0], estrela_chaves[tdps_lista[i]][1]] not in lista_disc:
+            lista_disc.append([estrela_chaves[tdps_lista[i]][0], estrela_chaves[tdps_lista[i]][1]])
+    soma = 0
+    print('disc: ', lista_disc)
+    for i in range(len(lista_disc)):
+        soma = soma + disciplinas_objetos[lista_disc[i][1]].quantidade_aulas_semanais
+        print('parcela: ', disciplinas_objetos[lista_disc[i][1]].quantidade_aulas_semanais)
+        print(soma)
+    model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == soma, "RESTRIÇÃO 6: p_" + str(p))
+    print()
 
 model.optimize()
-print(model.display())
+# print(model.display())
 '''
 for i in range(50):
     print(x[i])
@@ -478,7 +476,7 @@ for i in range(50):
 
 # model.computeIIS()
 # model.write("model.ilp")
-
+'''
 # From "https://www.gurobi.com/documentation/10.0/examples/workforce2_py.html#subsubsection:workforce2.py":
 status = model.Status
 if status == gp.GRB.UNBOUNDED:
@@ -523,3 +521,4 @@ while True:
 
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
+'''
