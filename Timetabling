@@ -461,7 +461,7 @@ for p in p_lista:
     # print()
 
 model.optimize()
-# print(model.display())
+print(model.display())
 '''
 for i in range(50):
     print(x[i])
