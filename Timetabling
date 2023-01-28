@@ -383,7 +383,7 @@ for cont in range(len(somas)):
 
         model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
                          - gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
-                         + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) >= (9 * y[cont] +
+                         + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= (9 * y[cont] +
                                                                                                           tolerancia),
                             "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
     except gp.GurobiError as e:
@@ -397,7 +397,7 @@ model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MIN
 # --------------------------------------------------------------------------------------------------------
 # Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 2:
-
+'''
 ts_lista = []
 for cont in range(len(estrela_chaves)):
     if [estrela_chaves[cont][0], estrela_chaves[cont][3]] not in ts_lista:
@@ -412,6 +412,7 @@ for ts in ts_lista:
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
+
     for i in range(len(tdps_lista)):
         print('fase: ', fase)
         print('t: ', estrela_chaves[tdps_lista[i]][0],
@@ -424,8 +425,9 @@ for ts in ts_lista:
                   professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor,
                   slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
     print('------------------------------------------------')
-    fase = fase + 1
 
+    fase = fase + 1
+'''
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -447,25 +449,26 @@ for cont in range(len(estrela_chaves)):
         p_lista.append(estrela_chaves[cont][2])
 tdps_lista = []
 lista_disc = []
+teste = 0
 for p in p_lista:
     print('p: ', p)
     tdps_lista.clear()
     for i in range(len(estrela_chaves)):
         if estrela_chaves[i][2] == p:
             tdps_lista.append(i)
-    print('tdps_lista: ', tdps_lista)
+    # print('tdps_lista: ', tdps_lista)
     lista_disc.clear()
     for i in range(len(tdps_lista)):
         if [estrela_chaves[tdps_lista[i]][0], estrela_chaves[tdps_lista[i]][1]] not in lista_disc:
             lista_disc.append([estrela_chaves[tdps_lista[i]][0], estrela_chaves[tdps_lista[i]][1]])
     soma = 0
-    print('disc: ', lista_disc)
+    # print('disc: ', lista_disc)
     for i in range(len(lista_disc)):
         soma = soma + disciplinas_objetos[lista_disc[i][1]].quantidade_aulas_semanais
-        print('parcela: ', disciplinas_objetos[lista_disc[i][1]].quantidade_aulas_semanais)
-        print(soma)
+        # print('parcela: ', disciplinas_objetos[lista_disc[i][1]].quantidade_aulas_semanais)
+        # print(soma)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == soma, "RESTRIÇÃO 6: p_" + str(p))
-    print()
+    # print()
 
 model.optimize()
 print(model.display())
@@ -475,9 +478,8 @@ for i in range(50):
 # print(y)
 '''
 
-# model.computeIIS()
 # model.write("model.ilp")
-'''
+
 # From "https://www.gurobi.com/documentation/10.0/examples/workforce2_py.html#subsubsection:workforce2.py":
 status = model.Status
 if status == gp.GRB.UNBOUNDED:
@@ -522,4 +524,9 @@ while True:
 
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
-'''
+print()
+for i in range(len(x)):
+    print(x[i])
+print()
+for i in range(len(y)):
+    print(y[i])
