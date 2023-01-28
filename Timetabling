@@ -374,13 +374,14 @@ for cont in range(len(somas)):
     # print('len(somas[cont][0])): ', len(somas[cont][0]))
 
     try:
+        '''
         model.addConstr(gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0]))) <= 1,
         "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s0")
         model.addConstr(gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1]))) <= 1,
         "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s1")
         model.addConstr(gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 1,
         "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s2")
-
+        '''
         model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
                          - gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
                          + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= (9 * y[cont] +
@@ -397,37 +398,26 @@ model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MIN
 # --------------------------------------------------------------------------------------------------------
 # Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 2:
-'''
+
 ts_lista = []
 for cont in range(len(estrela_chaves)):
     if [estrela_chaves[cont][0], estrela_chaves[cont][3]] not in ts_lista:
         ts_lista.append([estrela_chaves[cont][0], estrela_chaves[cont][3]])
 tdps_lista = []
-fase = 0
 for ts in ts_lista:
-    if fase == 2000:
-        break
     tdps_lista.clear()
     for cont in range(len(estrela_chaves)):
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
-
     for i in range(len(tdps_lista)):
-        print('fase: ', fase)
-        print('t: ', estrela_chaves[tdps_lista[i]][0],
-              '   d: ', estrela_chaves[tdps_lista[i]][1],
-              '   p: ', estrela_chaves[tdps_lista[i]][2],
-              '   s: ', estrela_chaves[tdps_lista[i]][3])
-        if fase == 527:
-            print(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma,
-                  disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina,
-                  professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor,
-                  slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+        print('t: ', estrela_chaves[tdps_lista[i]][0], turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)
+        print('d: ', estrela_chaves[tdps_lista[i]][1], disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina)
+        print('p: ', estrela_chaves[tdps_lista[i]][2], professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor)
+        print('s: ', estrela_chaves[tdps_lista[i]][3], slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+        print()
     print('------------------------------------------------')
 
-    fase = fase + 1
-'''
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -471,7 +461,7 @@ for p in p_lista:
     # print()
 
 model.optimize()
-print(model.display())
+# print(model.display())
 '''
 for i in range(50):
     print(x[i])
