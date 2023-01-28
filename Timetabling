@@ -199,7 +199,8 @@ for index, row in df.iterrows():
     if len(disciplinas_objetos) > 0:
         for objeto in disciplinas_objetos:
             if disciplina_prov[3] == objeto.codigo_disciplina \
-                    and disciplina_prov[6] == objeto.codigo_area_ensino:
+                    and disciplina_prov[6] == objeto.codigo_area_ensino \
+                    and disciplina_prov[1] == objeto.etapa_serie:
                 in_disciplina = True
                 break
             indice = indice + 1
@@ -396,7 +397,7 @@ model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MIN
 # --------------------------------------------------------------------------------------------------------
 # Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 2:
-'''
+
 ts_lista = []
 for cont in range(len(estrela_chaves)):
     if [estrela_chaves[cont][0], estrela_chaves[cont][3]] not in ts_lista:
@@ -424,7 +425,7 @@ for ts in ts_lista:
                   slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
     print('------------------------------------------------')
     fase = fase + 1
-    '''
+
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -467,7 +468,7 @@ for p in p_lista:
     print()
 
 model.optimize()
-# print(model.display())
+print(model.display())
 '''
 for i in range(50):
     print(x[i])
