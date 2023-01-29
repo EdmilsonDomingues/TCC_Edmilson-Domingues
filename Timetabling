@@ -411,6 +411,7 @@ for ts in ts_lista:
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
+    '''
     for i in range(len(tdps_lista)):
         print('t: ', estrela_chaves[tdps_lista[i]][0], turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)
         print('d: ', estrela_chaves[tdps_lista[i]][1], disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina)
@@ -418,7 +419,7 @@ for ts in ts_lista:
         print('s: ', estrela_chaves[tdps_lista[i]][3], slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
         print()
     print('------------------------------------------------')
-
+    '''
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -459,15 +460,39 @@ for p in p_lista:
         # print('parcela: ', disciplinas_objetos[lista_disc[i][1]].quantidade_aulas_semanais)
         # print(soma)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == soma, "RESTRIÇÃO 6: p_" + str(p))
-    # print()
+'''
+# RESTRIÇÃO 7:
+
+td_lista = []
+for cont in range(len(estrela_chaves)):
+    if [estrela_chaves[cont][0], estrela_chaves[cont][1]] not in td_lista:
+        td_lista.append([estrela_chaves[cont][0], estrela_chaves[cont][1]])
+tdps_lista = []
+for td in ts_lista:
+    tdps_lista.clear()
+    for cont in range(len(estrela_chaves)):
+        if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
+            tdps_lista.append(cont)
+    # print('disc: ', lista_disc)
+    lista_disc.clear()
+    for i in range(len(tdps_lista)):
+        if [estrela_chaves[tdps_lista[i]][2], estrela_chaves[tdps_lista[i]][3]] not in lista_disc:
+            lista_disc.append([estrela_chaves[tdps_lista[i]][0], estrela_chaves[tdps_lista[i]][1]])
+    soma = 0
+    # print('disc: ', lista_disc)
+    for i in range(len(lista_disc)):
+        soma = soma + disciplinas_objetos[lista_disc[i][1]].quantidade_aulas_semanais
+    model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 7: t_" + str(td[0]) + " s_" + str(td[1]))
+'''
+
+
+
 
 model.optimize()
 print(model.display())
-'''
-for i in range(50):
-    print(x[i])
-# print(y)
-'''
+
+print(len(x))
+print(len(y))
 
 # model.write("model.ilp")
 
@@ -515,9 +540,3 @@ while True:
 
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
-print()
-for i in range(len(x)):
-    print(x[i])
-print()
-for i in range(len(y)):
-    print(y[i])
