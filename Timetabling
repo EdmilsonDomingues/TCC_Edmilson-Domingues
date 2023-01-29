@@ -10,7 +10,7 @@ END_POINT = None
 print('Realizando o processo de Leitura.')
 df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
 df['Código da disc. '] = df['Código da disc. '].astype(str)
-# print(df.dtypes)
+print(df.dtypes)
 # print()
 # print(df.info())
 
@@ -150,109 +150,110 @@ controle = []
 
 for index, row in df.iterrows():
     # print(row)
-    controle.clear()
-    turma_prov.clear()
-    disciplina_prov.clear()
-    professor_prov.clear()
+    if row['Código da disc. '] != '611' and row['Código da disc. '] != '1344':
+        controle.clear()
+        turma_prov.clear()
+        disciplina_prov.clear()
+        professor_prov.clear()
 
-    turma_prov = [row['Matriz curricular'],
-                  row['Etapa (séries)'],
-                  row['Número da turma'],
-                  row['Tipo de turma (prov. não usaremos)'],
-                  row['Cod. Turno'],
-                  row['Turno'],
-                  row['Código da área de ensino'],
-                  row['Área de ensino'], '1']
-    disciplina_prov = [row['Matriz curricular'],
-                       row['Etapa (séries)'],
-                       row['Número da turma'],
-                       row['Código da disc. '],
-                       row['Nome da disc. '],
-                       row['Qtd de aulas na semana'],
-                       row['Código da área de ensino'],
-                       row['Área de ensino']]
-    professor_prov = [row['Identificador do prof. '],
-                      row['CPF'],
-                      row['Nome']]
-    grade = Grade('1', turma_prov[5])
-    slot_prov = grade.grade_elementos()
+        turma_prov = [row['Matriz curricular'],
+                      row['Etapa (séries)'],
+                      row['Número da turma'],
+                      row['Tipo de turma (prov. não usaremos)'],
+                      row['Cod. Turno'],
+                      row['Turno'],
+                      row['Código da área de ensino'],
+                      row['Área de ensino'], '1']
+        disciplina_prov = [row['Matriz curricular'],
+                           row['Etapa (séries)'],
+                           row['Número da turma'],
+                           row['Código da disc. '],
+                           row['Nome da disc. '],
+                           row['Qtd de aulas na semana'],
+                           row['Código da área de ensino'],
+                           row['Área de ensino']]
+        professor_prov = [row['Identificador do prof. '],
+                          row['CPF'],
+                          row['Nome']]
+        grade = Grade('1', turma_prov[5])
+        slot_prov = grade.grade_elementos()
 
-    in_turma = False
-    indice = 0
-    if len(turmas_objetos) > 0:
-        for objeto in turmas_objetos:
-            if turma_prov[2] == objeto.numero_turma:
-                in_turma = True
-                break
-            indice = indice + 1
-    if in_turma:
-        controle.append(indice)
-    else:
-        controle.append(turmas_ponteiro)
-        turmas_objetos.append(Turma(turma_prov[0], turma_prov[1], turma_prov[2],
-                                    turma_prov[3], turma_prov[4], turma_prov[5],
-                                    turma_prov[6], turma_prov[7], turma_prov[8]))
-        turmas_ponteiro = turmas_ponteiro + 1
-
-    in_disciplina = False
-    indice = 0
-    if len(disciplinas_objetos) > 0:
-        for objeto in disciplinas_objetos:
-            if disciplina_prov[3] == objeto.codigo_disciplina \
-                    and disciplina_prov[6] == objeto.codigo_area_ensino \
-                    and disciplina_prov[1] == objeto.etapa_serie:
-                in_disciplina = True
-                break
-            indice = indice + 1
-    if in_disciplina:
-        controle.append(indice)
-    else:
-        controle.append(disciplinas_ponteiro)
-        disciplinas_objetos.append(Disciplina(disciplina_prov[0], disciplina_prov[1], disciplina_prov[2],
-                                              disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
-                                              disciplina_prov[6], turma_prov[7]))
-        disciplinas_ponteiro = disciplinas_ponteiro + 1
-
-    in_professor = False
-    indice = 0
-    if len(professores_objetos) > 0:
-        for objeto in professores_objetos:
-            if professor_prov[1] == objeto.cpf_professor:
-                in_professor = True
-                break
-            indice = indice + 1
-    if in_professor:
-        controle.append(indice)
-    else:
-        controle.append(professores_ponteiro)
-        professores_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2]))
-        professores_ponteiro = professores_ponteiro + 1
-
-    # # print('slot_prov: ', slot_prov)
-    for slots in slot_prov:
-        in_slot = False
+        in_turma = False
         indice = 0
-        if len(slots_objetos) > 0:
-            for objeto in slots_objetos:
-                if slots == objeto.slot:
-                    in_slot = True
+        if len(turmas_objetos) > 0:
+            for objeto in turmas_objetos:
+                if turma_prov[2] == objeto.numero_turma:
+                    in_turma = True
                     break
                 indice = indice + 1
-        if in_slot:
-            # controle.append(indice)
-            # print('indice: ', indice)
-            lista = [controle[0], controle[1], controle[2], indice]
-            if lista not in estrela_chaves:
-                estrela_chaves.append(lista)
+        if in_turma:
+            controle.append(indice)
         else:
-            # controle.append(slots_ponteiro)
-            # print('slots_ponteiro: ', slots_ponteiro)
-            lista = [controle[0], controle[1], controle[2], slots_ponteiro]
-            if lista not in estrela_chaves:
-                # #print('Lista: ', lista)
-                estrela_chaves.append(lista)
-                slots_objetos.append(Slot(slots))
-                slots_ponteiro = slots_ponteiro + 1
+            controle.append(turmas_ponteiro)
+            turmas_objetos.append(Turma(turma_prov[0], turma_prov[1], turma_prov[2],
+                                        turma_prov[3], turma_prov[4], turma_prov[5],
+                                        turma_prov[6], turma_prov[7], turma_prov[8]))
+            turmas_ponteiro = turmas_ponteiro + 1
+
+        in_disciplina = False
+        indice = 0
+        if len(disciplinas_objetos) > 0:
+            for objeto in disciplinas_objetos:
+                if disciplina_prov[3] == objeto.codigo_disciplina \
+                        and disciplina_prov[6] == objeto.codigo_area_ensino \
+                        and disciplina_prov[1] == objeto.etapa_serie:
+                    in_disciplina = True
+                    break
+                indice = indice + 1
+        if in_disciplina:
+            controle.append(indice)
+        else:
+            controle.append(disciplinas_ponteiro)
+            disciplinas_objetos.append(Disciplina(disciplina_prov[0], disciplina_prov[1], disciplina_prov[2],
+                                                  disciplina_prov[3], disciplina_prov[4], disciplina_prov[5],
+                                                  disciplina_prov[6], turma_prov[7]))
+            disciplinas_ponteiro = disciplinas_ponteiro + 1
+
+        in_professor = False
+        indice = 0
+        if len(professores_objetos) > 0:
+            for objeto in professores_objetos:
+                if professor_prov[1] == objeto.cpf_professor:
+                    in_professor = True
+                    break
+                indice = indice + 1
+        if in_professor:
+            controle.append(indice)
+        else:
+            controle.append(professores_ponteiro)
+            professores_objetos.append(Professor(professor_prov[0], professor_prov[1], professor_prov[2]))
+            professores_ponteiro = professores_ponteiro + 1
+
+        # # print('slot_prov: ', slot_prov)
+        for slots in slot_prov:
+            in_slot = False
+            indice = 0
+            if len(slots_objetos) > 0:
+                for objeto in slots_objetos:
+                    if slots == objeto.slot:
+                        in_slot = True
+                        break
+                    indice = indice + 1
+            if in_slot:
+                # controle.append(indice)
+                # print('indice: ', indice)
+                lista = [controle[0], controle[1], controle[2], indice]
+                if lista not in estrela_chaves:
+                    estrela_chaves.append(lista)
+            else:
+                # controle.append(slots_ponteiro)
+                # print('slots_ponteiro: ', slots_ponteiro)
+                lista = [controle[0], controle[1], controle[2], slots_ponteiro]
+                if lista not in estrela_chaves:
+                    # #print('Lista: ', lista)
+                    estrela_chaves.append(lista)
+                    slots_objetos.append(Slot(slots))
+                    slots_ponteiro = slots_ponteiro + 1
 # #print(estrela_chaves)
 '''
 for i in range(len(estrela_chaves)):
