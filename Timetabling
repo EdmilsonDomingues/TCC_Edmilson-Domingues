@@ -2,6 +2,7 @@ import gurobipy as gp
 import pandas as pd
 import copy
 import sys
+from prettytable import PrettyTable
 
 START_POINT = 0
 END_POINT = None
@@ -10,7 +11,7 @@ END_POINT = None
 print('Realizando o processo de Leitura.')
 df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
 df['Código da disc. '] = df['Código da disc. '].astype(str)
-print(df.dtypes)
+# print(df.dtypes)
 # print()
 # print(df.info())
 
@@ -443,7 +444,7 @@ tdps_lista = []
 lista_disc = []
 teste = 0
 for p in p_lista:
-    print('p: ', p)
+    # print('p: ', p)
     tdps_lista.clear()
     for i in range(len(estrela_chaves)):
         if estrela_chaves[i][2] == p:
@@ -477,10 +478,28 @@ for td in td_lista:
                     .quantidade_aulas_semanais, "RESTRIÇÃO 7: t_" + str(td[0]) + " d_" + str(td[1]))
 
 model.optimize()
-print(model.display())
+# print(model.display())
 
-print(len(x))
+# print(len(x))
 print(len(y))
+for i in range(len(x)):
+    print('x[', i,'] = ', x[i].X)
+for i in range(len(y)):
+    print('y[', i,'] = ', y[i].X)
+
+# Specify the Column Names while initializing the Table
+myTable = PrettyTable(["Student Name", "Class", "Section", "Percentage"])
+myTable.hrules = True
+
+# Add rows
+myTable.add_row(["Leanord\ne\nd\no", "X", "B", "91.2 %"])
+myTable.add_row(["Penny", "X", "C", "63.5 %"])
+myTable.add_row(["Howard", "X", "A", "90.23 %"])
+myTable.add_row(["Bernadette", "X", "D", "92.7 %"])
+myTable.add_row(["Sheldon", "X", "A", "98.2 %"])
+myTable.add_row(["Raj", "X", "B", "88.1 %"])
+myTable.add_row(["Amy", "X", "B", "95.0 %"])
+print(myTable)
 
 # model.write("model.ilp")
 
