@@ -543,19 +543,23 @@ for p in p_lista:
     linhas = grade.grade_vazia()
     nova_grade = copy.deepcopy(linhas)
     for i in range(len(tdps_lista)):
-        slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
-        l, c = grade.converte_slot_lc(slot_da_vez)
-        info = "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
-        + "\n" + "Disc.: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
-        + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
-        nova_grade[l][c] = info
+        if x[tdps_lista[i]].X == 1:
+            slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            l, c = grade.converte_slot_lc(slot_da_vez)
+            info = "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
+                + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
+                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            nova_grade[l][c] = info
     cabecalho = grade.cabecalho()
     apresentacao = PrettyTable(grade.cabecalho())
     apresentacao.hrules = True
-    for i in range(5):
-        apresentacao.align[cabecalho[i]] = "l"
+    apresentacao.left_padding_width = 1
+    apresentacao.right_padding_width = 1
+    apresentacao.align = 'l'
+    apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
     for i in range(len(nova_grade)):
         apresentacao.add_row(nova_grade[i])
+    print()
     print()
     print('Professor(a): ', professores_objetos[p].nome_professor)
     print(apresentacao)
