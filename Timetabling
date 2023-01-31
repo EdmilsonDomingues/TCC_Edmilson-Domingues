@@ -110,6 +110,31 @@ class Grade:
                 ['44', '45', '46'], ['45', '46', '47'], ['46', '47', '48'],
                 ['49', '50', '51'], ['50', '51', '52'], ['51', '52', '53']]
 
+    def grade_vazia(self):
+        lista = [['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', ''],
+                ['', '', '', '', '']]
+        return lista
+
+    def cabecalho(self):
+        return ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
+
+    def converte_slot_lc(self, slot):
+        lista_lc = [[0, 0], [1, 0], [2, 0], [3,0], [4, 0], [5, 0],[6, 0], [7, 0], [8, 0], [9,0], [10, 0],
+                    [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1],
+                    [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2], [9, 2], [10, 2],
+                    [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3],
+                    [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4]]
+        return int(lista_lc[slot][0]), int(lista_lc[slot][1])
+
 
 class Slot:
     def __init__(self, slot):
@@ -480,13 +505,15 @@ for td in td_lista:
 model.optimize()
 # print(model.display())
 
-# print(len(x))
+'''
+print(len(x))
 print(len(y))
 for i in range(len(x)):
     print('x[', i,'] = ', x[i].X)
 for i in range(len(y)):
     print('y[', i,'] = ', y[i].X)
-
+'''
+'''
 # Specify the Column Names while initializing the Table
 myTable = PrettyTable(["Student Name", "Class", "Section", "Percentage"])
 myTable.hrules = True
@@ -500,6 +527,41 @@ myTable.add_row(["Sheldon", "X", "A", "98.2 %"])
 myTable.add_row(["Raj", "X", "B", "88.1 %"])
 myTable.add_row(["Amy", "X", "B", "95.0 %"])
 print(myTable)
+'''
+
+p_lista = []
+for cont in range(len(estrela_chaves)):
+    if estrela_chaves[cont][2] not in p_lista:
+        p_lista.append(estrela_chaves[cont][2])
+tdps_lista = []
+for p in p_lista:
+    tdps_lista.clear()
+    for i in range(len(estrela_chaves)):
+        if estrela_chaves[i][2] == p:
+            tdps_lista.append(i)
+    grade = Grade('1', 'Matutino')
+    linhas = grade.grade_vazia()
+    nova_grade = copy.deepcopy(linhas)
+    for i in range(len(tdps_lista)):
+        slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+        l, c = grade.converte_slot_lc(slot_da_vez)
+        info = 'Turma: ', str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)
+        + \n + 'Disc.: ', disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina
+        + \n + 'Slot: ', str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+
+        model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == disciplinas_objetos[estrela_chaves[tdps_lista[0]][1]] \
+                        .quantidade_aulas_semanais, "RESTRIÇÃO 7: t_" + str(td[0]) + " d_" + str(td[1]))
+        nova_grade[l][c] = info
+    apresentacao = PrettyTable(grade.cabecalho())
+    apresentacao.hrules = True
+    for i in range(len(nova_grade)):
+        apresentacao.add_row(nova_grade[i])
+    print(professores_objetos[p].nome_professor)
+    print(apresentacao)
+
+
+
+
 
 # model.write("model.ilp")
 
