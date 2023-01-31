@@ -91,7 +91,7 @@ class Grade:
                                 '19', '20', '27', '28', '29', '30', '31', '38',
                                 '39', '40', '41', '42', '49', '50', '51', '52', '53']
                     else:
-                        return ['11', '21', '31', '41', '51']
+                        return ['10', '21', '32', '43', '54']
         '''
         else:
             if self.tipo_grade == '2':
@@ -557,6 +557,7 @@ for p in p_lista:
     apresentacao.right_padding_width = 1
     apresentacao.align = 'l'
     apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
+    # apresentacao._max_table_width = 150
     for i in range(len(nova_grade)):
         apresentacao.add_row(nova_grade[i])
     print()
