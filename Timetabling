@@ -409,11 +409,17 @@ for cont in range(len(somas)):
         model.addConstr(gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 1,
         "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s2")
         '''
+        '''
         model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
-                         - gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
-                         + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= (9 * y[cont] +
+                         -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
+                         + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= (9 * y[cont]==1 +
                                                                                                           tolerancia),
                             "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
+        '''
+        model.addConstr((2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
+                         -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
+                         + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= 9) >>
+                        y[cont]), "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1])
     except gp.GurobiError as e:
         print('Código de Erro: ' + str(e.errno) + ': ' + str(e))
     except AttributeError:
@@ -503,7 +509,7 @@ for td in td_lista:
                     .quantidade_aulas_semanais, "RESTRIÇÃO 7: t_" + str(td[0]) + " d_" + str(td[1]))
 
 model.optimize()
-# print(model.display())
+print(model.display())
 
 '''
 print(len(x))
@@ -528,7 +534,7 @@ myTable.add_row(["Raj", "X", "B", "88.1 %"])
 myTable.add_row(["Amy", "X", "B", "95.0 %"])
 print(myTable)
 '''
-
+'''
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -546,9 +552,11 @@ for p in p_lista:
         if x[tdps_lista[i]].X == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
-            info = "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
+            info = nova_grade[l][c]
+            info = info + "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
                 + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
-                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)\
+                + "\n" + "C: " + x[tdps_lista[i]].varName
             nova_grade[l][c] = info
     cabecalho = grade.cabecalho()
     apresentacao = PrettyTable(grade.cabecalho())
@@ -600,11 +608,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
-
-
-
-
+'''
 # model.write("model.ilp")
 
 # From "https://www.gurobi.com/documentation/10.0/examples/workforce2_py.html#subsubsection:workforce2.py":
