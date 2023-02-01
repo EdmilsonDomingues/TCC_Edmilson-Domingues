@@ -565,6 +565,42 @@ for p in p_lista:
     print('Professor(a): ', professores_objetos[p].nome_professor)
     print(apresentacao)
 
+t_lista = []
+for cont in range(len(estrela_chaves)):
+    if estrela_chaves[cont][0] not in t_lista:
+        t_lista.append(estrela_chaves[cont][0])
+tdps_lista = []
+for t in t_lista:
+    tdps_lista.clear()
+    for i in range(len(estrela_chaves)):
+        if estrela_chaves[i][0] == t:
+            tdps_lista.append(i)
+    grade = Grade('1', 'Matutino')
+    linhas = grade.grade_vazia()
+    nova_grade = copy.deepcopy(linhas)
+    for i in range(len(tdps_lista)):
+        if x[tdps_lista[i]].X == 1:
+            slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            l, c = grade.converte_slot_lc(slot_da_vez)
+            info = "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
+                + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
+                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            nova_grade[l][c] = info
+    cabecalho = grade.cabecalho()
+    apresentacao = PrettyTable(grade.cabecalho())
+    apresentacao.hrules = True
+    apresentacao.left_padding_width = 1
+    apresentacao.right_padding_width = 1
+    apresentacao.align = 'l'
+    apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
+    # apresentacao._max_table_width = 150
+    for i in range(len(nova_grade)):
+        apresentacao.add_row(nova_grade[i])
+    print()
+    print()
+    print('Turma: ', turmas_objetos[t].numero_turma)
+    print(apresentacao)
+
 
 
 
