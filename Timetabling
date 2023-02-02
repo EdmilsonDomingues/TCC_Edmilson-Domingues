@@ -124,6 +124,14 @@ class Grade:
                 ['', '', '', '', '']]
         return lista
 
+    def dias_semana(self):
+        lista_ds = [['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    ['11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'],
+                    ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
+                    ['33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43'],
+                    ['44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54']]
+        return lista_ds
+
     def cabecalho(self):
         return ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
 
@@ -399,28 +407,14 @@ for cont in range(len(somas)):
     # print(x)
     # print(y)
     # print('len(somas[cont][0])): ', len(somas[cont][0]))
-
-    '''
-    model.addConstr(gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0]))) <= 1,
-    "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s0")
-    model.addConstr(gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1]))) <= 1,
-    "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s1")
-    model.addConstr(gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 1,
-    "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s2")
-    '''
     '''
     model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
                      -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
                      + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= (9 * y[cont]==1 +
                                                                                                       tolerancia),
-                        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
-    model.addGenConstr((y[cont] == 1) >> (2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
-                     -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
-                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) >= 3),
-                    name="RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
     '''
     eps = 0.0001
-    M = 10 + eps # smallest possible given bounds on x and y
+    M = 10 + eps    # smallest possible given bounds on x and y
 
     # Model if x > y, then b = 1, otherwise b = 0
     # m.addConstr(x >= y + eps - M * (1 - b), name="bigM_constr1")
@@ -433,13 +427,12 @@ for cont in range(len(somas)):
                      -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
                      + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 3\
                     + M * y[cont], name="RESTRIÇÃO janelas <: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
-# ... Função Objetivo da Pesquisa Operacional:
-
+# --------------------------------------------------------------------------------------------------------
+# Função Objetivo da Pesquisa Operacional:
 model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE)
 # --------------------------------------------------------------------------------------------------------
 # Restrições da Pesquisa Operacional:
 # RESTRIÇÃO 2:
-
 ts_lista = []
 for cont in range(len(estrela_chaves)):
     if [estrela_chaves[cont][0], estrela_chaves[cont][3]] not in ts_lista:
@@ -451,15 +444,7 @@ for ts in ts_lista:
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
-    '''
-    for i in range(len(tdps_lista)):
-        print('t: ', estrela_chaves[tdps_lista[i]][0], turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)
-        print('d: ', estrela_chaves[tdps_lista[i]][1], disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina)
-        print('p: ', estrela_chaves[tdps_lista[i]][2], professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor)
-        print('s: ', estrela_chaves[tdps_lista[i]][3], slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
-        print()
-    print('------------------------------------------------')
-    '''
+
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
@@ -473,6 +458,27 @@ for ps in ps_lista:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                     "RESTRIÇÃO 3: p_" + str(ps[0]) + " s_" + str(ps[1]))
+
+# RESTRIÇÃO 4:
+td_lista = []
+for cont in range(len(estrela_chaves)):
+    if [estrela_chaves[cont][0], estrela_chaves[cont][1]] not in td_lista:
+        td_lista.append([estrela_chaves[cont][0], estrela_chaves[cont][1]])
+tdps_lista = []
+grade = Grade('1', 'Matutino')
+ds_lista = grade.dias_semana()
+dias = grade.cabecalho()
+for i in range(5):
+    lista_um_ds = ds_lista[i]
+    for ds in lista_um_ds:
+        for td in td_lista:
+            tdps_lista.clear()
+            for cont in range(len(estrela_chaves)):
+                if slots_objetos[estrela_chaves[cont][3]].slot == ds:
+                    if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
+                        tdps_lista.append(cont)
+            model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
+                            "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + "ds_" + ds)
 
 # RESTRIÇÃO 6:
 p_lista = []
@@ -502,7 +508,6 @@ for p in p_lista:
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == soma, "RESTRIÇÃO 6: p_" + str(p))
 
 # RESTRIÇÃO 7:
-
 td_lista = []
 for cont in range(len(estrela_chaves)):
     if [estrela_chaves[cont][0], estrela_chaves[cont][1]] not in td_lista:
@@ -516,6 +521,9 @@ for td in td_lista:
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == disciplinas_objetos[estrela_chaves[tdps_lista[0]][1]]\
                     .quantidade_aulas_semanais, "RESTRIÇÃO 7: t_" + str(td[0]) + " d_" + str(td[1]))
 
+# --------------------------------------------------------------------------------------------------------
+# Execução da modelagem:
+
 model.optimize()
 print(model.display())
 
@@ -527,21 +535,8 @@ for i in range(len(x)):
 for i in range(len(y)):
     print('y[', i,'] = ', y[i].X)
 '''
-'''
-# Specify the Column Names while initializing the Table
-myTable = PrettyTable(["Student Name", "Class", "Section", "Percentage"])
-myTable.hrules = True
-
-# Add rows
-myTable.add_row(["Leanord\ne\nd\no", "X", "B", "91.2 %"])
-myTable.add_row(["Penny", "X", "C", "63.5 %"])
-myTable.add_row(["Howard", "X", "A", "90.23 %"])
-myTable.add_row(["Bernadette", "X", "D", "92.7 %"])
-myTable.add_row(["Sheldon", "X", "A", "98.2 %"])
-myTable.add_row(["Raj", "X", "B", "88.1 %"])
-myTable.add_row(["Amy", "X", "B", "95.0 %"])
-print(myTable)
-'''
+# --------------------------------------------------------------------------------------------------------
+# Apresentação dos Relatórios (agendas):
 
 p_lista = []
 for cont in range(len(estrela_chaves)):
@@ -616,6 +611,9 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
+
+# --------------------------------------------------------------------------------------------------------
+# Recorrência se resultado for Unfeasible:
 
 # model.write("model.ilp")
 
