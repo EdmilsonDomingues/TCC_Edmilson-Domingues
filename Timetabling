@@ -400,31 +400,39 @@ for cont in range(len(somas)):
     # print(y)
     # print('len(somas[cont][0])): ', len(somas[cont][0]))
 
-    try:
-        '''
-        model.addConstr(gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0]))) <= 1,
-        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s0")
-        model.addConstr(gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1]))) <= 1,
-        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s1")
-        model.addConstr(gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 1,
-        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s2")
-        '''
-        '''
-        model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
-                         -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
-                         + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= (9 * y[cont]==1 +
-                                                                                                          tolerancia),
-                            "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
-        '''
-        model.addConstr((2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
-                         -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
-                         + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= 9) >>
-                        y[cont]), "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1])
-    except gp.GurobiError as e:
-        print('Código de Erro: ' + str(e.errno) + ': ' + str(e))
-    except AttributeError:
-        print('Foi encontrado um erro de atributo.')
+    '''
+    model.addConstr(gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0]))) <= 1,
+    "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s0")
+    model.addConstr(gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1]))) <= 1,
+    "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s1")
+    model.addConstr(gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 1,
+    "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]) + "s2")
+    '''
+    '''
+    model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
+                     -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
+                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= (9 * y[cont]==1 +
+                                                                                                      tolerancia),
+                        "RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
+    model.addGenConstr((y[cont] == 1) >> (2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
+                     -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
+                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) >= 3),
+                    name="RESTRIÇÃO janelas: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
+    '''
+    eps = 0.0001
+    M = 10 + eps # smallest possible given bounds on x and y
 
+    # Model if x > y, then b = 1, otherwise b = 0
+    # m.addConstr(x >= y + eps - M * (1 - b), name="bigM_constr1")
+    model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
+                     -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
+                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) >= 3 + eps\
+                    - M * (1 - y[cont]), name="RESTRIÇÃO janelas >: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
+    # m.addConstr(x <= y + M * b, name="bigM_constr2")
+    model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
+                     -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
+                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 3\
+                    + M * y[cont], name="RESTRIÇÃO janelas <: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
 # ... Função Objetivo da Pesquisa Operacional:
 
 model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE)
@@ -534,7 +542,7 @@ myTable.add_row(["Raj", "X", "B", "88.1 %"])
 myTable.add_row(["Amy", "X", "B", "95.0 %"])
 print(myTable)
 '''
-'''
+
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -608,7 +616,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-'''
+
 # model.write("model.ilp")
 
 # From "https://www.gurobi.com/documentation/10.0/examples/workforce2_py.html#subsubsection:workforce2.py":
