@@ -470,15 +470,14 @@ ds_lista = grade.dias_semana()
 dias = grade.cabecalho()
 for i in range(5):
     lista_um_ds = ds_lista[i]
-    for ds in lista_um_ds:
-        for td in td_lista:
-            tdps_lista.clear()
-            for cont in range(len(estrela_chaves)):
-                if slots_objetos[estrela_chaves[cont][3]].slot == ds:
-                    if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
-                        tdps_lista.append(cont)
-            model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
-                            "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + "ds_" + ds)
+    for td in td_lista:
+        tdps_lista.clear()
+        for cont in range(len(estrela_chaves)):
+            if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
+                if slots_objetos[estrela_chaves[cont][3]].slot in lista_um_ds:
+                    tdps_lista.append(cont)
+        model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
+                        "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
 
 # RESTRIÇÃO 6:
 p_lista = []
