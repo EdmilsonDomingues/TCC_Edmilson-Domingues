@@ -458,7 +458,7 @@ for ps in ps_lista:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                     "RESTRIÇÃO 3: p_" + str(ps[0]) + " s_" + str(ps[1]))
-
+'''
 # RESTRIÇÃO 4:
 td_lista = []
 for cont in range(len(estrela_chaves)):
@@ -478,7 +478,7 @@ for i in range(5):
                     tdps_lista.append(cont)
         model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
                         "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
-
+'''
 # RESTRIÇÃO 6:
 p_lista = []
 for cont in range(len(estrela_chaves)):
