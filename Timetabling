@@ -116,11 +116,13 @@ class Grade:
                 ['', '', '', '', ''],
                 ['', '', '', '', ''],
                 ['', '', '', '', ''],
+                ['*****', '*****', '*****', '*****', '*****'],
                 ['', '', '', '', ''],
                 ['', '', '', '', ''],
                 ['', '', '', '', ''],
                 ['', '', '', '', ''],
                 ['', '', '', '', ''],
+                ['*****', '*****', '*****', '*****', '*****'],
                 ['', '', '', '', '']]
         return lista
 
@@ -136,11 +138,11 @@ class Grade:
         return ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
 
     def converte_slot_lc(self, slot):
-        lista_lc = [[0, 0], [1, 0], [2, 0], [3,0], [4, 0], [5, 0],[6, 0], [7, 0], [8, 0], [9,0], [10, 0],
-                    [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1],
-                    [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2], [9, 2], [10, 2],
-                    [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3],
-                    [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4]]
+        lista_lc = [[0, 0], [1, 0], [2, 0], [3,0], [4, 0], [6, 0],[7, 0], [8, 0], [9, 0], [10,0], [12, 0],
+                    [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [12, 1],
+                    [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [6, 2], [7, 2], [8, 2], [9, 2], [10, 2], [12, 2],
+                    [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [12, 3],
+                    [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [12, 4]]
         return lista_lc[slot][0], lista_lc[slot][1]
 
 
@@ -458,7 +460,7 @@ for ps in ps_lista:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                     "RESTRIÇÃO 3: p_" + str(ps[0]) + " s_" + str(ps[1]))
-'''
+
 # RESTRIÇÃO 4:
 td_lista = []
 for cont in range(len(estrela_chaves)):
@@ -474,11 +476,12 @@ for i in range(5):
         tdps_lista.clear()
         for cont in range(len(estrela_chaves)):
             if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
-                if slots_objetos[estrela_chaves[cont][3]].slot in lista_um_ds:
-                    tdps_lista.append(cont)
+                if disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais <= 5:
+                    if slots_objetos[estrela_chaves[cont][3]].slot in lista_um_ds:
+                        tdps_lista.append(cont)
         model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
                         "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
-'''
+
 # RESTRIÇÃO 6:
 p_lista = []
 for cont in range(len(estrela_chaves)):
@@ -529,10 +532,9 @@ print(model.display())
 '''
 print(len(x))
 print(len(y))
+print(x)
 for i in range(len(x)):
-    print('x[', i,'] = ', x[i].X)
-for i in range(len(y)):
-    print('y[', i,'] = ', y[i].X)
+    print('x[', i, '] = ', x[i].X)
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
