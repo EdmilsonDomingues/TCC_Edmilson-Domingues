@@ -553,16 +553,34 @@ c = []
 lista_uns = []
 for i in range(len(x)):
     c.append(i)
+    print(i)
 while len(c) != 0:
     valor_da_vez = choice(c)
+    # print('valor_da_vez: ', valor_da_vez)
     lista_uns.append(valor_da_vez)
+    c.remove(valor_da_vez)
     for i in range(len(inequacoes)):
         if inequacoes[i][1] != 0:
-            
+            if valor_da_vez in inequacoes[i][0]:
+                inequacoes[i][1] = inequacoes[i][1] - 1
+                # print('inequacoes[i][0]: ', inequacoes[i][0])
+                if inequacoes[i][1] == 0:
+                    for indice in inequacoes[i][0]:
+                        if indice != valor_da_vez:
+                            try:
+                                c.remove(indice)
+                            except:
+                                pass
+xx = []
+for i in range(len(x)):
+    if i in lista_uns:
+        xx.append(1)
+    else:
+        xx.append(0)
 
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-'''
+
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -577,7 +595,8 @@ for p in p_lista:
     linhas = grade.grade_vazia()
     nova_grade = copy.deepcopy(linhas)
     for i in range(len(tdps_lista)):
-        if x[tdps_lista[i]].X == 1:
+        # if x[tdps_lista[i]].X == 1:
+        if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = nova_grade[l][c]
@@ -615,7 +634,8 @@ for t in t_lista:
     linhas = grade.grade_vazia()
     nova_grade = copy.deepcopy(linhas)
     for i in range(len(tdps_lista)):
-        if x[tdps_lista[i]].X == 1:
+        # if x[tdps_lista[i]].X == 1:
+        if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
@@ -636,7 +656,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-'''
+
 # --------------------------------------------------------------------------------------------------------
 # Recorrência se resultado for Unfeasible:
 
