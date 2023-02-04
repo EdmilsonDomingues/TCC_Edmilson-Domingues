@@ -3,6 +3,7 @@ import pandas as pd
 import copy
 import sys
 from prettytable import PrettyTable
+from random import choice
 
 START_POINT = 0
 END_POINT = None
@@ -434,6 +435,8 @@ for cont in range(len(somas)):
 model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE)
 # --------------------------------------------------------------------------------------------------------
 # Restrições da Pesquisa Operacional:
+inequacoes = []
+
 # RESTRIÇÃO 2:
 ts_lista = []
 for cont in range(len(estrela_chaves)):
@@ -446,6 +449,7 @@ for ts in ts_lista:
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
+    inequacoes.append([copy.deepcopy(tdps_lista), 1])
 
 # RESTRIÇÃO 3:
 ps_lista = []
@@ -460,6 +464,7 @@ for ps in ps_lista:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                     "RESTRIÇÃO 3: p_" + str(ps[0]) + " s_" + str(ps[1]))
+    inequacoes.append([copy.deepcopy(tdps_lista), 1])
 
 # RESTRIÇÃO 4:
 td_lista = []
@@ -481,6 +486,7 @@ for i in range(5):
                         tdps_lista.append(cont)
         model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
                         "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
+        inequacoes.append([copy.deepcopy(tdps_lista), 1])
 
 # RESTRIÇÃO 6:
 p_lista = []
@@ -508,6 +514,8 @@ for p in p_lista:
         # print('parcela: ', disciplinas_objetos[lista_disc[i][1]].quantidade_aulas_semanais)
         # print(soma)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == soma, "RESTRIÇÃO 6: p_" + str(p))
+    inequacoes.append([copy.deepcopy(tdps_lista), soma])
+
 
 # RESTRIÇÃO 7:
 td_lista = []
@@ -522,12 +530,14 @@ for td in td_lista:
             tdps_lista.append(cont)
     model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == disciplinas_objetos[estrela_chaves[tdps_lista[0]][1]]\
                     .quantidade_aulas_semanais, "RESTRIÇÃO 7: t_" + str(td[0]) + " d_" + str(td[1]))
+    inequacoes.append([copy.deepcopy(tdps_lista), disciplinas_objetos[estrela_chaves[tdps_lista[0]][1]]\
+                    .quantidade_aulas_semanais])
 
 # --------------------------------------------------------------------------------------------------------
 # Execução da modelagem:
 
 model.optimize()
-print(model.display())
+# print(model.display())
 
 '''
 print(len(x))
@@ -537,8 +547,22 @@ for i in range(len(x)):
     print('x[', i, '] = ', x[i].X)
 '''
 # --------------------------------------------------------------------------------------------------------
-# Apresentação dos Relatórios (agendas):
+# Testes de heurística:
 
+c = []
+lista_uns = []
+for i in range(len(x)):
+    c.append(i)
+while len(c) != 0:
+    valor_da_vez = choice(c)
+    lista_uns.append(valor_da_vez)
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] != 0:
+            
+
+# --------------------------------------------------------------------------------------------------------
+# Apresentação dos Relatórios (agendas):
+'''
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -612,7 +636,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
+'''
 # --------------------------------------------------------------------------------------------------------
 # Recorrência se resultado for Unfeasible:
 
