@@ -705,14 +705,23 @@ while len(c) != 0:
             if valor_da_vez in inequacoes[i][0]:
                 inequacoes[i][0].remove(valor_da_vez)   # Não necessário.
                 inequacoes[i][1] = inequacoes[i][1] - 1
+                '''
                 if inequacoes[i][1] == 0:
                     for valor in inequacoes[i][0]:
                         # if indice != valor_da_vez:
                         try:
                             c.remove(valor)
+                        except:
+                            pass
+                        try:
                             inequacoes[i][0].remove(valor)     # Não necessário.
                         except:
                             pass
+                '''
+                if inequacoes[i][1] == 0:
+                    for valor in inequacoes[i][0]:
+                        c.remove(valor)
+                        inequacoes[i][0].remove(valor)     # Não necessário.
 for i in range(len(inequacoes)):
     print(inequacoes[i])
 xx = []
