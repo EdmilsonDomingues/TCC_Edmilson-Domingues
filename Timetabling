@@ -489,7 +489,7 @@ for i in range(5):
         if len(tdps_lista) > 0:
             model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
                             "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
-            inequacoes.append([copy.deepcopy(tdps_lista), 1])
+            # inequacoes.append([copy.deepcopy(tdps_lista), 1])
 
 # RESTRIÇÃO 6:
 p_lista = []
@@ -693,40 +693,52 @@ while (lendo):
 # Testes de heurística:
 
 c = []
-lista_uns = []
+lista_sorteados = []
 for i in range(len(x)):
     c.append(i)
+for i in range(len(inequacoes)):
+    pode_haver_multiplo = True
+    while pode_haver_multiplo:
+        if inequacoes[i][1] > 1:
+            valor_da_vez = choice(inequacoes[i][0])
+            try:
+                c.remove(valor_da_vez)
+            except:
+                pass
+            lista_sorteados.append(valor_da_vez)
+            for j in range(len(inequacoes)):
+                if inequacoes[j][1] != 0:
+                    if valor_da_vez in inequacoes[j][0]:
+                        inequacoes[j][0].remove(valor_da_vez)
+                        inequacoes[j][1] = inequacoes[j][1] - 1
+                        if inequacoes[j][1] == 0:
+                            for valor in inequacoes[j][0]:
+                                try:
+                                    c.remove(valor)
+                                except:
+                                    pass
+        else:
+            pode_haver_multiplo = False
 while len(c) != 0:
     valor_da_vez = choice(c)
     c.remove(valor_da_vez)
-    lista_uns.append(valor_da_vez)
-    for i in range(len(inequacoes)):
-        if inequacoes[i][1] != 0:
-            if valor_da_vez in inequacoes[i][0]:
-                inequacoes[i][0].remove(valor_da_vez)   # Não necessário.
-                inequacoes[i][1] = inequacoes[i][1] - 1
-                '''
-                if inequacoes[i][1] == 0:
-                    for valor in inequacoes[i][0]:
-                        # if indice != valor_da_vez:
+    lista_sorteados.append(valor_da_vez)
+    for j in range(len(inequacoes)):
+        if inequacoes[j][1] != 0:
+            if valor_da_vez in inequacoes[j][0]:
+                inequacoes[j][0].remove(valor_da_vez)
+                inequacoes[j][1] = inequacoes[j][1] - 1
+                if inequacoes[j][1] == 0:
+                    for valor in inequacoes[j][0]:
                         try:
                             c.remove(valor)
                         except:
                             pass
-                        try:
-                            inequacoes[i][0].remove(valor)     # Não necessário.
-                        except:
-                            pass
-                '''
-                if inequacoes[i][1] == 0:
-                    for valor in inequacoes[i][0]:
-                        c.remove(valor)
-                        inequacoes[i][0].remove(valor)     # Não necessário.
 for i in range(len(inequacoes)):
     print(inequacoes[i])
 xx = []
 for i in range(len(x)):
-    if i in lista_uns:
+    if i in lista_sorteados:
         xx.append(1)
     else:
         xx.append(0)
