@@ -42,12 +42,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="25343" />
+          <entry key="Timetabling" value="26154" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="25343" />
+          <entry key="Python" value="26154" />
         </counts>
       </usages-collector>
     </session>
@@ -57,18 +57,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="702" column="51" lean-forward="true" selection-start-line="702" selection-start-column="51" selection-end-line="702" selection-end-column="51" />
+            <state relative-caret-position="51">
+              <caret line="760" selection-start-line="760" selection-end-line="760" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1675569034114" expanded="true" signature="431:436" ph="..." />
-                <marker date="1675569034114" expanded="true" signature="1049:1054" ph="..." />
-                <marker date="1675569034114" expanded="true" signature="1953:1958" ph="..." />
-                <marker date="1675569034114" expanded="true" signature="2302:2307" ph="..." />
-                <marker date="1675569034114" expanded="true" signature="4733:5193" ph="..." />
-                <marker date="1675569034114" expanded="true" signature="5213:5222" ph="..." />
-                <marker date="1675569034114" expanded="true" signature="6152:6278" ph="..." />
-                <marker date="1675569034114" expanded="true" signature="6279:6280" ph="..." />
               </folding>
             </state>
           </provider>
@@ -230,14 +222,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17377049" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.704918" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -292,18 +283,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="702" column="51" lean-forward="true" selection-start-line="702" selection-start-column="51" selection-end-line="702" selection-end-column="51" />
+        <state relative-caret-position="51">
+          <caret line="760" selection-start-line="760" selection-end-line="760" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1675569034114" expanded="true" signature="431:436" ph="..." />
-            <marker date="1675569034114" expanded="true" signature="1049:1054" ph="..." />
-            <marker date="1675569034114" expanded="true" signature="1953:1958" ph="..." />
-            <marker date="1675569034114" expanded="true" signature="2302:2307" ph="..." />
-            <marker date="1675569034114" expanded="true" signature="4733:5193" ph="..." />
-            <marker date="1675569034114" expanded="true" signature="5213:5222" ph="..." />
-            <marker date="1675569034114" expanded="true" signature="6152:6278" ph="..." />
-            <marker date="1675569034114" expanded="true" signature="6279:6280" ph="..." />
           </folding>
         </state>
       </provider>
