@@ -487,8 +487,10 @@ for i in range(5):
                     if slots_objetos[estrela_chaves[cont][3]].slot in lista_um_ds:
                         tdps_lista.append(cont)
         if len(tdps_lista) > 0:
-            model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
+            '''
+            # model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
                             "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
+            '''
             # inequacoes.append([copy.deepcopy(tdps_lista), 1, '4'])
 
 # RESTRIÇÃO 6:
@@ -682,13 +684,14 @@ print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
 '''
 # --------------------------------------------------------------------------------------------------------
+'''
 lendo = True
 print()
 while (lendo):
     entrada = input('Entre senha para continuar: ')
     if entrada == 'e':
         lendo = False
-
+'''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 
@@ -755,9 +758,9 @@ lista_sorteados = []
 # for i in range(len(x)):
     # c.append(i)
 
-for disc_ind in range(len(disciplinas_objetos)):
+for slot_ind in range(len(slots_objetos)):
     for todos_ind in range(len(estrela_chaves)):
-        if disc_ind == estrela_chaves[todos_ind][2]:
+        if slot_ind == estrela_chaves[todos_ind][3]:
             c.append(todos_ind)
 print('c: ', c)
 print('len(c): ', len(c))
