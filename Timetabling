@@ -487,10 +487,8 @@ for i in range(5):
                     if slots_objetos[estrela_chaves[cont][3]].slot in lista_um_ds:
                         tdps_lista.append(cont)
         if len(tdps_lista) > 0:
-            '''
-            # model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
+            model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
                             "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
-            '''
             # inequacoes.append([copy.deepcopy(tdps_lista), 1, '4'])
 
 # RESTRIÇÃO 6:
@@ -694,7 +692,8 @@ while (lendo):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-
+# Sequência aleatória
+'''
 c = []
 lista_sorteados = []
 for i in range(len(x)):
@@ -712,6 +711,7 @@ while existe_valor and len(c) != 0:
             if valor_da_vez in inequacoes[i][0]:
                 tem_2 = True
                 break
+
     for i in range(len(inequacoes)):
         if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
             if valor_da_vez in inequacoes[i][0]:
@@ -748,9 +748,10 @@ for i in range(len(x)):
         xx.append(1)
     else:
         xx.append(0)
-
+'''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
+# Sequência fixa
 '''
 c = []
 lista_sorteados = []
@@ -816,6 +817,83 @@ for i in range(len(x)):
     else:
         xx.append(0)
 '''
+# --------------------------------------------------------------------------------------------------------
+# Testes de heurística:
+# Não considera slots
+tdp_chaves = []
+tdp_cont = 0
+tabela_conversao = []
+for cont in range(len(estrela_chaves)):
+    tdp_da_vez = [estrela_chaves[cont][0], estrela_chaves[cont][1], estrela_chaves[cont][2]]
+    if tdp_da_vez not in tdp_chaves:
+        tdp_chaves.append(tdp_da_vez)
+        tdp_cont = tdp_cont + 1
+    tabela_conversao.append(tdp_cont)
+print('Tabela de conversão: ', tabela_conversao)
+print(len(tabela_conversao))
+for i in range(len(inequacoes)):
+    for j in range(len(inequacoes[i][0])):
+        valor_convertido = tabela_conversao[inequacoes[i][0][j]]
+        inequacoes[i][0].remove(inequacoes[i][0][j])
+        if valor_convertido not in inequacoes[i][0]:
+            inequacoes[i][0].append(valor_convertido)
+
+# Sequência aleatória
+c = []
+lista_sorteados = []
+for i in range(270):
+    c.append(i)
+existe_valor = True
+while existe_valor and len(c) != 0:
+    valor_da_vez = choice(c)
+    tem_7 = False
+    tem_6 = False
+    tem_4 = False
+    tem_3 = False
+    tem_2 = False
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
+            if valor_da_vez in inequacoes[i][0]:
+                tem_2 = True
+                break
+
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
+            if valor_da_vez in inequacoes[i][0]:
+                tem_3 = True
+                break
+
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
+            if valor_da_vez in inequacoes[i][0]:
+                tem_6 = True
+                break
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+            if valor_da_vez in inequacoes[i][0]:
+                tem_7 = True
+    if tem_2 and tem_3 and tem_6 and tem_7:
+        lista_sorteados.append(valor_da_vez)
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and valor_da_vez in inequacoes[i][0]:
+                inequacoes[i][0].remove(valor_da_vez)
+                inequacoes[i][1] = inequacoes[i][1] - 1
+    c.remove(valor_da_vez)
+    existe_valor = False
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+            existe_valor = True
+            break
+
+for i in range(len(inequacoes)):
+    print(inequacoes[i])
+xx = []
+for i in range(len(x)):
+    if i in lista_sorteados:
+        xx.append(1)
+    else:
+        xx.append(0)
+
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 
@@ -906,4 +984,37 @@ for i in range(len(xx)):
         cont = cont + 1
 print('Total de xx: ', cont)
 
-print(c)
+# --------------------------------------------------------------------------------------------------------
+
+last_t = -1
+last_d = -1
+last_p = -1
+contador = 0
+creditos = 0
+for cont in range(len(estrela_chaves)):
+    if estrela_chaves[cont][0] != last_t:
+        contador = contador + 1
+        print(contador, 't: ', estrela_chaves[cont][0], 'd: ', estrela_chaves[cont][1], 'p: ',
+              estrela_chaves[cont][2], turmas_objetos[estrela_chaves[cont][0]].turno,
+                disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais)
+        creditos = creditos + disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais
+    else:
+        if estrela_chaves[cont][1] != last_d:
+            contador = contador + 1
+            print(contador, 't: ', estrela_chaves[cont][0], 'd: ', estrela_chaves[cont][1], 'p: ',
+                  estrela_chaves[cont][2], turmas_objetos[estrela_chaves[cont][0]].turno,
+                  disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais)
+            creditos = creditos + disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais
+        else:
+            if estrela_chaves[cont][2] != last_p:
+                contador = contador + 1
+                print(contador, 't: ', estrela_chaves[cont][0], 'd: ', estrela_chaves[cont][1], 'p: ',
+                      estrela_chaves[cont][2], turmas_objetos[estrela_chaves[cont][0]].turno,
+                      disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais)
+                creditos = creditos + disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais
+    last_t = estrela_chaves[cont][0]
+    last_d = estrela_chaves[cont][1]
+    last_p = estrela_chaves[cont][2]
+print(creditos)
+
+
