@@ -611,9 +611,10 @@ for t in t_lista:
         # if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
-            info = "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
-                + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
-                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            info = nova_grade[l][c]
+            info = info + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
+                    + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
+                    + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             nova_grade[l][c] = info
     cabecalho = grade.cabecalho()
     apresentacao = PrettyTable(grade.cabecalho())
@@ -706,6 +707,7 @@ while existe_valor and len(c) != 0:
     tem_4 = False
     tem_3 = False
     tem_2 = False
+
     for i in range(len(inequacoes)):
         if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
             if valor_da_vez in inequacoes[i][0]:
@@ -731,7 +733,7 @@ while existe_valor and len(c) != 0:
         lista_sorteados.append(valor_da_vez)
         for i in range(len(inequacoes)):
             if inequacoes[i][1] > 0 and valor_da_vez in inequacoes[i][0]:
-                inequacoes[i][0].remove(valor_da_vez)
+                # inequacoes[i][0].remove(valor_da_vez)
                 inequacoes[i][1] = inequacoes[i][1] - 1
     c.remove(valor_da_vez)
     existe_valor = False
@@ -819,33 +821,42 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-# Não considera slots
-tdp_chaves = []
-tdp_cont = 0
-tabela_conversao = []
-for cont in range(len(estrela_chaves)):
-    tdp_da_vez = [estrela_chaves[cont][0], estrela_chaves[cont][1], estrela_chaves[cont][2]]
-    if tdp_da_vez not in tdp_chaves:
-        tdp_chaves.append(tdp_da_vez)
-        tdp_cont = tdp_cont + 1
-    tabela_conversao.append(tdp_cont)
-print('Tabela de conversão: ', tabela_conversao)
-print(len(tabela_conversao))
-for i in range(len(inequacoes)):
-    for j in range(len(inequacoes[i][0])):
-        valor_convertido = tabela_conversao[inequacoes[i][0][j]]
-        inequacoes[i][0].remove(inequacoes[i][0][j])
-        if valor_convertido not in inequacoes[i][0]:
-            inequacoes[i][0].append(valor_convertido)
+# Sequência fixa
 
-# Sequência aleatória
 c = []
 lista_sorteados = []
-for i in range(270):
-    c.append(i)
+
+# for i in range(len(x)):
+    # c.append(i)
+
+professores_e_suas_turmas = [] * len(professores_objetos)
+for todos in range(len(estrela_chaves)):
+    if estrela_chaves[0] not in professores_e_suas_turmas[estrela_chaves[todos][2]]:
+        professores_e_suas_turmas[estrela_chaves[todos][2]] = estrela_chaves[0]
+quantidade_turmas = []
+for i in range(len(professores_e_suas_turmas)):
+    quantidade_turmas[i] = len(professores_e_suas_turmas[i])
+ordem_prof = []
+for i in range(len(turmas_objetos)):
+    for j in range(len(quantidade_turmas)):
+        if quantidade_turmas[j] == i:
+            ordem_prof.append(i)
+ordem_prof.reverse()
+for i in range(len(ordem_prof)):
+    for j in range(len(estrela_chaves)):
+        if estrela_chaves[j][2] == ordem_prof[i]:
+            c.append(j)
+
+
+
+
+print('c: ', c)
+print('len(c): ', len(c))
 existe_valor = True
+indice = 0
 while existe_valor and len(c) != 0:
-    valor_da_vez = choice(c)
+    # valor_da_vez = choice(c)
+    valor_da_vez = c[indice]
     tem_7 = False
     tem_6 = False
     tem_4 = False
@@ -856,7 +867,6 @@ while existe_valor and len(c) != 0:
             if valor_da_vez in inequacoes[i][0]:
                 tem_2 = True
                 break
-
     for i in range(len(inequacoes)):
         if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
             if valor_da_vez in inequacoes[i][0]:
@@ -894,7 +904,6 @@ for i in range(len(x)):
     else:
         xx.append(0)
 
-# --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 
 p_lista = []
@@ -916,7 +925,7 @@ for p in p_lista:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = nova_grade[l][c]
-            info = info + "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
+            info = info + "\n\nTurma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
                 + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
                 + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             nova_grade[l][c] = info
@@ -953,7 +962,8 @@ for t in t_lista:
         if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
-            info = "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
+            info = nova_grade[l][c]
+            info = info + "\n\nDisciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
                 + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
                 + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             nova_grade[l][c] = info
@@ -986,35 +996,6 @@ print('Total de xx: ', cont)
 
 # --------------------------------------------------------------------------------------------------------
 
-last_t = -1
-last_d = -1
-last_p = -1
-contador = 0
-creditos = 0
-for cont in range(len(estrela_chaves)):
-    if estrela_chaves[cont][0] != last_t:
-        contador = contador + 1
-        print(contador, 't: ', estrela_chaves[cont][0], 'd: ', estrela_chaves[cont][1], 'p: ',
-              estrela_chaves[cont][2], turmas_objetos[estrela_chaves[cont][0]].turno,
-                disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais)
-        creditos = creditos + disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais
-    else:
-        if estrela_chaves[cont][1] != last_d:
-            contador = contador + 1
-            print(contador, 't: ', estrela_chaves[cont][0], 'd: ', estrela_chaves[cont][1], 'p: ',
-                  estrela_chaves[cont][2], turmas_objetos[estrela_chaves[cont][0]].turno,
-                  disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais)
-            creditos = creditos + disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais
-        else:
-            if estrela_chaves[cont][2] != last_p:
-                contador = contador + 1
-                print(contador, 't: ', estrela_chaves[cont][0], 'd: ', estrela_chaves[cont][1], 'p: ',
-                      estrela_chaves[cont][2], turmas_objetos[estrela_chaves[cont][0]].turno,
-                      disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais)
-                creditos = creditos + disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais
-    last_t = estrela_chaves[cont][0]
-    last_d = estrela_chaves[cont][1]
-    last_p = estrela_chaves[cont][2]
-print(creditos)
+
 
 
