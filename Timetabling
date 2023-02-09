@@ -821,7 +821,40 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-# Sequência fixa
+# Sequência
+
+
+lista_tps = []  # (turma, turno, professor, créditos)
+for i in range(len(estrela_chaves)):
+    t = estrela_chaves[0]
+    turno = turmas_objetos[t].turno
+    p = estrela_chaves[2]
+    cred = disciplinas_objetos[estrela_chaves[1]].quantidade_aulas_semanais
+    if [t, turno, p, cred] not in lista_tps:
+        for j in range(len(cred)):
+            lista_tps.append([t, turno, p, cred])
+print(len(lista_tps))
+ctr = []
+for i in range(50):
+    ctr.append([])
+matriz_ts = []
+for i in range(len(turmas_objetos)):
+    for k in range(len(slots_objetos)):
+        matriz_ts.append(10000)
+matriz_next = []
+for i in range(len(turmas_objetos)):
+    matriz_next.append(10000)
+for ind in range(len(lista_tps)):
+    turma = lista_tps[0]
+    turno = lista_tps[1]
+    prof = lista_tps[2]
+    cred = lista_tps[3]
+    if turno = 'Matutino':
+        if matriz_next[turma] == 10000:
+
+    else:
+
+
 
 c = []
 lista_sorteados = []
@@ -829,26 +862,29 @@ lista_sorteados = []
 # for i in range(len(x)):
     # c.append(i)
 
-professores_e_suas_turmas = [] * len(professores_objetos)
+professores_e_suas_turmas = []
+for i in range(len(professores_objetos)):
+    professores_e_suas_turmas.append([])
+print('professores_e_suas_turmas: ', professores_e_suas_turmas)
 for todos in range(len(estrela_chaves)):
-    if estrela_chaves[0] not in professores_e_suas_turmas[estrela_chaves[todos][2]]:
-        professores_e_suas_turmas[estrela_chaves[todos][2]] = estrela_chaves[0]
+    if estrela_chaves[todos][0] not in professores_e_suas_turmas[estrela_chaves[todos][2]]:
+        professores_e_suas_turmas[estrela_chaves[todos][2]].append(estrela_chaves[todos][0])
+print('professores_e_suas_turmas: ', professores_e_suas_turmas)
 quantidade_turmas = []
 for i in range(len(professores_e_suas_turmas)):
-    quantidade_turmas[i] = len(professores_e_suas_turmas[i])
+    quantidade_turmas.append(len(professores_e_suas_turmas[i]))
+print('quantidade_turmas: ', quantidade_turmas)
 ordem_prof = []
 for i in range(len(turmas_objetos)):
     for j in range(len(quantidade_turmas)):
         if quantidade_turmas[j] == i:
-            ordem_prof.append(i)
+            ordem_prof.append(j)
 ordem_prof.reverse()
+print('ordem_prof: ', ordem_prof)
 for i in range(len(ordem_prof)):
     for j in range(len(estrela_chaves)):
         if estrela_chaves[j][2] == ordem_prof[i]:
             c.append(j)
-
-
-
 
 print('c: ', c)
 print('len(c): ', len(c))
@@ -903,7 +939,7 @@ for i in range(len(x)):
         xx.append(1)
     else:
         xx.append(0)
-
+# --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 
 p_lista = []
