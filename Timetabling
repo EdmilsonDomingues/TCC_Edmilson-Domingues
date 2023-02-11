@@ -755,20 +755,14 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-# Sequência fixa
-
+# Sequência priorizada
+'''
 c = []
 lista_sorteados = []
 
 # for i in range(len(x)):
     # c.append(i)
-'''
-for prof_ind in range(len(professores_objetos)):
-    for turma_ind in range(len(turmas_objetos)):
-        for todos_ind in range(len(estrela_chaves)):
-            if turma_ind == estrela_chaves[todos_ind][0] and prof_ind == estrela_chaves[todos_ind][2]:
-                c.append(todos_ind)
-'''
+
 for slot_ind in range(len(slots_objetos)):
     for prof_ind in range(len(professores_objetos)):
         for todos_ind in range(len(estrela_chaves)):
@@ -848,19 +842,122 @@ while existe_valor and len(c) != 0:
         if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
             existe_valor = True
             break
-'''
-for i in range(len(inequacoes)):
-    print(inequacoes[i])
-'''
 xx = []
 for i in range(len(x)):
     if i in lista_sorteados:
         xx.append(1)
     else:
         xx.append(0)
+'''
+# --------------------------------------------------------------------------------------------------------
+# Testes de heurística:
+# Sequência priorizada
+
+c = []
+lista_sorteados = []
+heuristica = []
+for i in range(55):
+    heuristica.append(0)
+for i in range(len(x)):
+    c.append(i)
+print('c: ', c)
+print('len(c): ', len(c))
+base = 0
+existe_valor = True
+while existe_valor and len(c) != 0:
+    # valor_da_vez = choice(c)
+    valor_da_vez = c[0]
+    # print('Len(c): ', len(c))
+    for i in range(len(estrela_chaves)):
+        # print(i)
+        if estrela_chaves[valor_da_vez][0] == estrela_chaves[i][0] and\
+                estrela_chaves[valor_da_vez][1] == estrela_chaves[i][1] and\
+                estrela_chaves[valor_da_vez][2] == estrela_chaves[i][2]:
+            base = i
+            break
+    sec = []
+    existe_slot = True
+    while existe_slot and base <= len(estrela_chaves) - 1:
+        if estrela_chaves[valor_da_vez][0] == estrela_chaves[base][0] and estrela_chaves[valor_da_vez][1] == estrela_chaves[base][1] and estrela_chaves[valor_da_vez][2] == estrela_chaves[base][2]:
+            sec.append(base)   # para avaliar quais slots apresentam factibilidade.
+            base = base + 1
+            existe_slot = True
+        else:
+            existe_slot = False
+
+    slots_factiveis = []
+    # print('sec: ', sec)
+    for m in range(len(sec)):
+        tem_7 = False
+        tem_6 = False
+        tem_3 = False
+        tem_2 = False
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
+                if sec[m] in inequacoes[i][0]:
+                    tem_2 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
+                if sec[m] in inequacoes[i][0]:
+                    tem_3 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
+                if sec[m] in inequacoes[i][0]:
+                    tem_6 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+                if sec[m] in inequacoes[i][0]:
+                    tem_7 = True
+                    break
+
+        if tem_2 and tem_3 and tem_6 and tem_7:
+            slots_factiveis.append(sec[m])
+        else:
+            try:
+                c.remove(sec[m])
+            except:
+                pass
+    # print('Slots factíveis: ', slots_factiveis)
+    # Avaliar heurística:
+    if len(slots_factiveis) == 0:
+        # c.remove(valor_da_vez)
+        pass
+    else:
+        menor = 10000
+        posicao = 0
+        for j in range(len(slots_factiveis)):
+            if heuristica[estrela_chaves[slots_factiveis[j]][3]] <= menor:
+                posicao = j
+                menor = heuristica[estrela_chaves[slots_factiveis[j]][3]]
+        lista_sorteados.append(slots_factiveis[posicao])
+        # heuristica[posicao] = heuristica[posicao] + 1
+        heuristica[estrela_chaves[slots_factiveis[posicao]][3]] = heuristica[estrela_chaves[slots_factiveis[posicao]][3]] + 1
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and slots_factiveis[posicao] in inequacoes[i][0]:
+                inequacoes[i][1] = inequacoes[i][1] - 1
+        c.remove(slots_factiveis[posicao])
+
+    existe_valor = False
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+            existe_valor = True
+            break
+xx = []
+for i in range(len(x)):
+    if i in lista_sorteados:
+        xx.append(1)
+    else:
+        xx.append(0)
+print('Heurística: ', heuristica)
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+'''
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -936,7 +1033,7 @@ for t in t_lista:
     print()
     print('Turma - heurística: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
+'''
 cont = 0
 for i in range(len(x)):
     if x[i].X == 1:
