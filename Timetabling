@@ -1180,53 +1180,41 @@ while existe_valor and len(c) != 0:
     # Avaliar heurística:
     if len(slots_factiveis) == 0:
         # c.remove(valor_da_vez)
-        lista_desta_linha = []
+        lista_candidatos_linha = []
         for i in range(len(lista_sorteados)):
-            if valor_da_vez[0] = lista_sorteados[i][0]:
-                lista_desta_linha.append(lista_sorteados)   # resgata toda a linha.
-        for i in range(len(lista_desta_linha)):
-            for j in range(len(estrela_chaves)):
-                if estrela_chaves[0] == lista_desta_linha[i][0] and
-                    estrela_chaves[1] == lista_desta_linha[i][1] and
-                    estrela_chaves[2] == lista_desta_linha[i][2] and
-                    estrela_chaves[3] == valor_da_vez[3]:   # estrela_chaves[j] pode substituir valor_da_vez (testar)
-                    tem_7 = False
-                    tem_6 = False
-                    tem_3 = False
-                    tem_2 = False
-                    for i in range(len(inequacoes)):
-                        if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
-                            if sec[m] in inequacoes[i][0]:
-                                tem_2 = True
-                                break
+            if valor_da_vez[0] == lista_sorteados[i][0]:
+                lista_candidatos_linha.append(lista_sorteados[i])   # resgata toda a linha.
+            for j in range(len(lista_candidatos_linha)):
+                coluna_colisao = []
+                for k in range(len(lista_sorteados)):
+                        estrela_chaves[k][3] == estrela_chaves[valor_da_vez][3]:   # estrela_chaves[j] pode substituir valor_da_vez (testar)
+                        coluna_colisao.append(estrela[k][3])
+                coluna_corrente = []
+                for k in range(len(lista_sorteados)):
+                        estrela_chaves[k][3] == estrela_chaves[lista_candidatos_linha[j]][3]:   # estrela_chaves[j] pode substituir valor_da_vez (testar)
+                        coluna_corrente.append(estrela[k][3])
+                if estrela_chaves[valor_da_vez][3] in coluna_corrente or estrela_chaves[lista_sorteados[i][3]] in coluna_colisao:
+                    pass
+                else:
+                    for k in range(len(estrela_chaves)):
+                        if estrela_chaves[k][0] == lista_sorteados[i][0] and
+                            estrela_chaves[k][1] == lista_sorteados[i][1] and
+                            estrela_chaves[k][2] == lista_sorteados[i][2] and
+                            estrela_chaves[k][3] == valor_da_vez[3]:
+                            valor1 = k
+                    for k in range(len(estrela_chaves)):
+                        if estrela_chaves[k][0] == valor_da_vez[0] and
+                            estrela_chaves[k][1] == valor_da_vez[1] and
+                            estrela_chaves[k][2] == valor_da_vez[2] and
+                            estrela_chaves[k][3] == lista_sorteados[i][3]:
+                            valor2 = k
+                    indice1 = lista_sorteados.index(lista_candidatos_linha[j])
+                    lista_sorteados.remove(lista_candidatos_linha[j])
+                    lista_sorteados.insert(indice1, valor1)
 
-                    for i in range(len(inequacoes)):
-                        if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
-                            if sec[m] in inequacoes[i][0]:
-                                tem_3 = True
-                                break
-
-                    for i in range(len(inequacoes)):
-                        if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
-                            if sec[m] in inequacoes[i][0]:
-                                tem_6 = True
-                                break
-
-                    for i in range(len(inequacoes)):
-                        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
-                            if sec[m] in inequacoes[i][0]:
-                                tem_7 = True
-                                break
-
-                    if tem_2 and tem_3 and tem_6 and tem_7:
-                        slots_factiveis.append(sec[m])
-                    else:
-                        try:
-                            c.remove(sec[m])
-                        except:
-                            pass
-
-        pass
+                    indice2 = lista_sorteados.index(valor_da_vez)
+                    lista_sorteados.remove(valor_da_vez)
+                    lista_sorteados.insert(indice2, valor2)
     else:
         lista_sorteados.append(slots_factiveis[0])
         for i in range(len(inequacoes)):
