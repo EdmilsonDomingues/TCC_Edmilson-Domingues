@@ -763,12 +763,11 @@ lista_sorteados = []
 # for i in range(len(x)):
     # c.append(i)
 
-for slot_ind in range(len(slots_objetos)):
-    for prof_ind in range(len(professores_objetos)):
+for prof_ind in range(len(professores_objetos)):
+    for turma_ind in range(len(turmas_objetos)):
         for todos_ind in range(len(estrela_chaves)):
-            if slot_ind == estrela_chaves[todos_ind][3] and prof_ind == estrela_chaves[todos_ind][2]:
+            if prof_ind == estrela_chaves[todos_ind][2] and turma_ind == estrela_chaves[todos_ind][0]:
                 c.append(todos_ind)
-
 print('c: ', c)
 print('len(c): ', len(c))
 existe_valor = True
@@ -792,41 +791,29 @@ while existe_valor and len(c) != 0:
         if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
             if valor_da_vez in inequacoes[i][0]:
                 tem_2 = True
-                print(inequacoes[i])
+                # print(inequacoes[i])
                 break
-        if inequacoes[i][1] == 0 and inequacoes[i][2] == '2':
-            if valor_da_vez in inequacoes[i][0]:
-                print(inequacoes[i])
 
     for i in range(len(inequacoes)):
         if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
             if valor_da_vez in inequacoes[i][0]:
                 tem_3 = True
-                print(inequacoes[i])
+                # print(inequacoes[i])
                 break
-        if inequacoes[i][1] == 0 and inequacoes[i][2] == '3':
-            if valor_da_vez in inequacoes[i][0]:
-                print(inequacoes[i])
 
     for i in range(len(inequacoes)):
         if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
             if valor_da_vez in inequacoes[i][0]:
                 tem_6 = True
-                print(inequacoes[i])
+                # print(inequacoes[i])
                 break
-        if inequacoes[i][1] == 0 and inequacoes[i][2] == '6':
-            if valor_da_vez in inequacoes[i][0]:
-                print(inequacoes[i])
 
     for i in range(len(inequacoes)):
         if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
             if valor_da_vez in inequacoes[i][0]:
                 tem_7 = True
-                print(inequacoes[i])
+                # print(inequacoes[i])
                 break
-        if inequacoes[i][1] == 0 and inequacoes[i][2] == '7':
-            if valor_da_vez in inequacoes[i][0]:
-                print(inequacoes[i])
 
     if tem_2 and tem_3 and tem_6 and tem_7:
         lista_sorteados.append(valor_da_vez)
@@ -834,8 +821,8 @@ while existe_valor and len(c) != 0:
             if inequacoes[i][1] > 0 and valor_da_vez in inequacoes[i][0]:
                 # inequacoes[i][0].remove(valor_da_vez)
                 inequacoes[i][1] = inequacoes[i][1] - 1
-                print('depois: ', inequacoes[i])
-    print()
+                # print('depois: ', inequacoes[i])
+    # print()
     c.remove(valor_da_vez)
     existe_valor = False
     for i in range(len(inequacoes)):
@@ -851,8 +838,9 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-# Sequência priorizada
-
+# Esta heurística é global - avalia, para cada tupla (t, d, p) estabelecida, e para seus N filhos factíveis,
+# qual o que apresenta o menor número de utilização (distribuição equânime entre slots).
+'''
 c = []
 lista_sorteados = []
 heuristica = []
@@ -955,9 +943,312 @@ for i in range(len(x)):
     else:
         xx.append(0)
 print('Heurística: ', heuristica)
+'''
+# --------------------------------------------------------------------------------------------------------
+# Testes de heurística:
+# Esta heurística é global - avalia, para cada tupla (t, d, p) estabelecida, e para seus N filhos factíveis,
+# qual o que apresenta o menor número de utilização (distribuição equânime entre slots).
+'''
+conexoes_prof = []
+soma_conexoes = 0
+for i in range(len(professores_objetos)):
+    for j in range(len(estrela_chaves)):
+        if i == estrela_chaves[j][2]:
+            soma_conexoes = soma_conexoes + 1
+    conexoes_prof.append(soma_conexoes/25)
+    soma_conexoes = 0
+prof_obj = [7, 8, 22, 19, 37, 9, 0, 6, 21, 23, 24, 32, 35, 26, 31, 1, 4, 38, 15, 16, 17, 30, 36, 10, 28, 3, 18, 33, 5,
+        11, 13, 14, 20, 25, 27, 34, 39, 2, 12, 29]
+c = []
+lista_sorteados = []
+heuristica = []
+
+for i in range(55):
+    heuristica.append(0)
+
+for prof_ind in prof_obj:
+    for turma_ind in range(len(turmas_objetos)):
+        for todos_ind in range(len(estrela_chaves)):
+            if prof_ind == estrela_chaves[todos_ind][2] and turma_ind == estrela_chaves[todos_ind][0]:
+                c.append(todos_ind)
+
+
+# for i in range(len(x)):
+    # c.append(i)
+
+print('c: ', c)
+print('len(c): ', len(c))
+base = 0
+existe_valor = True
+while existe_valor and len(c) != 0:
+    # valor_da_vez = choice(c)
+    valor_da_vez = c[0]
+    # print('Len(c): ', len(c))
+    for i in range(len(estrela_chaves)):
+        # print(i)
+        if estrela_chaves[valor_da_vez][0] == estrela_chaves[i][0] and\
+                estrela_chaves[valor_da_vez][1] == estrela_chaves[i][1] and\
+                estrela_chaves[valor_da_vez][2] == estrela_chaves[i][2]:
+            base = i
+            break
+    sec = []
+    existe_slot = True
+    while existe_slot and base <= len(estrela_chaves) - 1:
+        if estrela_chaves[valor_da_vez][0] == estrela_chaves[base][0] and estrela_chaves[valor_da_vez][1] == estrela_chaves[base][1] and estrela_chaves[valor_da_vez][2] == estrela_chaves[base][2]:
+            sec.append(base)   # para avaliar quais slots apresentam factibilidade.
+            base = base + 1
+            existe_slot = True
+        else:
+            existe_slot = False
+
+    slots_factiveis = []
+    # print('sec: ', sec)
+    for m in range(len(sec)):
+        tem_7 = False
+        tem_6 = False
+        tem_3 = False
+        tem_2 = False
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
+                if sec[m] in inequacoes[i][0]:
+                    tem_2 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
+                if sec[m] in inequacoes[i][0]:
+                    tem_3 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
+                if sec[m] in inequacoes[i][0]:
+                    tem_6 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+                if sec[m] in inequacoes[i][0]:
+                    tem_7 = True
+                    break
+
+        if tem_2 and tem_3 and tem_6 and tem_7:
+            slots_factiveis.append(sec[m])
+        else:
+            try:
+                c.remove(sec[m])
+            except:
+                pass
+    # print('Slots factíveis: ', slots_factiveis)
+    # Avaliar heurística:
+    if len(slots_factiveis) == 0:
+        # c.remove(valor_da_vez)
+        pass
+    else:
+        maior = -1
+        posicao = 0
+        for j in range(len(slots_factiveis)):
+            if heuristica[estrela_chaves[slots_factiveis[j]][3]] > maior:
+                posicao = j
+                maior = heuristica[estrela_chaves[slots_factiveis[j]][3]]
+        lista_sorteados.append(slots_factiveis[posicao])
+        heuristica[estrela_chaves[slots_factiveis[posicao]][3]] = heuristica[estrela_chaves[slots_factiveis[posicao]][3]] + 1
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and slots_factiveis[posicao] in inequacoes[i][0]:
+                inequacoes[i][1] = inequacoes[i][1] - 1
+        c.remove(slots_factiveis[posicao])
+        
+        menor = 10000
+        posicao = 0
+        for j in range(len(slots_factiveis)):
+            if heuristica[estrela_chaves[slots_factiveis[j]][3]] < menor:
+                posicao = j
+                menor = heuristica[estrela_chaves[slots_factiveis[j]][3]]
+        lista_sorteados.append(slots_factiveis[posicao])
+        # heuristica[posicao] = heuristica[posicao] + 1
+        heuristica[estrela_chaves[slots_factiveis[posicao]][3]] = heuristica[estrela_chaves[slots_factiveis[posicao]][3]] + 1
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and slots_factiveis[posicao] in inequacoes[i][0]:
+                inequacoes[i][1] = inequacoes[i][1] - 1
+        c.remove(slots_factiveis[posicao])
+
+    existe_valor = False
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+            existe_valor = True
+            break
+xx = []
+for i in range(len(x)):
+    if i in lista_sorteados:
+        xx.append(1)
+    else:
+        xx.append(0)
+print('Heurística: ', heuristica)
+'''
+# --------------------------------------------------------------------------------------------------------
+# Testes de heurística:
+# Esta heurística é global - avalia, para cada tupla (t, d, p) estabelecida, e para seus N filhos factíveis,
+# qual o que apresenta o menor número de utilização (distribuição equânime entre slots).
+conexoes_prof = []
+soma_conexoes = 0
+for i in range(len(professores_objetos)):
+    for j in range(len(estrela_chaves)):
+        if i == estrela_chaves[j][2]:
+            soma_conexoes = soma_conexoes + 1
+    conexoes_prof.append(soma_conexoes / 25)
+    soma_conexoes = 0
+
+prof_obj = [7, 8, 22, 19, 37, 9, 0, 6, 21, 23, 24, 32, 35, 26, 31, 1, 4, 38, 15, 16, 17, 30, 36, 10, 28, 3, 18, 33, 5,
+            11, 13, 14, 20, 25, 27, 34, 39, 2, 12, 29]
+c = []
+lista_sorteados = []
+heuristica = []
+
+for i in range(55):
+    heuristica.append(0)
+
+for prof_ind in prof_obj:
+    for turma_ind in range(len(turmas_objetos)):
+        for todos_ind in range(len(estrela_chaves)):
+            if prof_ind == estrela_chaves[todos_ind][2] and turma_ind == estrela_chaves[todos_ind][0]:
+                c.append(todos_ind)
+print('c: ', c)
+print('len(c): ', len(c))
+base = 0
+existe_valor = True
+while existe_valor and len(c) != 0:
+    # valor_da_vez = choice(c)
+    valor_da_vez = c[0]
+    # print('Len(c): ', len(c))
+    for i in range(len(estrela_chaves)):
+        # print(i)
+        if estrela_chaves[valor_da_vez][0] == estrela_chaves[i][0] and \
+                estrela_chaves[valor_da_vez][1] == estrela_chaves[i][1] and \
+                estrela_chaves[valor_da_vez][2] == estrela_chaves[i][2]:
+            base = i
+            break
+    sec = []
+    existe_slot = True
+    while existe_slot and base <= len(estrela_chaves) - 1:
+        if estrela_chaves[valor_da_vez][0] == estrela_chaves[base][0] and estrela_chaves[valor_da_vez][1] == \
+                estrela_chaves[base][1] and estrela_chaves[valor_da_vez][2] == estrela_chaves[base][2]:
+            sec.append(base)  # para avaliar quais slots apresentam factibilidade.
+            base = base + 1
+            existe_slot = True
+        else:
+            existe_slot = False
+
+    slots_factiveis = []
+    # print('sec: ', sec)
+    for m in range(len(sec)):
+        tem_7 = False
+        tem_6 = False
+        tem_3 = False
+        tem_2 = False
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
+                if sec[m] in inequacoes[i][0]:
+                    tem_2 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
+                if sec[m] in inequacoes[i][0]:
+                    tem_3 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
+                if sec[m] in inequacoes[i][0]:
+                    tem_6 = True
+                    break
+
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+                if sec[m] in inequacoes[i][0]:
+                    tem_7 = True
+                    break
+
+        if tem_2 and tem_3 and tem_6 and tem_7:
+            slots_factiveis.append(sec[m])
+        else:
+            try:
+                c.remove(sec[m])
+            except:
+                pass
+    # print('Slots factíveis: ', slots_factiveis)
+    # Avaliar heurística:
+    if len(slots_factiveis) == 0:
+        # c.remove(valor_da_vez)
+        lista_desta_linha = []
+        for i in range(len(lista_sorteados)):
+            if valor_da_vez[0] = lista_sorteados[i][0]:
+                lista_desta_linha.append(lista_sorteados)   # resgata toda a linha.
+        for i in range(len(lista_desta_linha)):
+            for j in range(len(estrela_chaves)):
+                if estrela_chaves[0] == lista_desta_linha[i][0] and
+                    estrela_chaves[1] == lista_desta_linha[i][1] and
+                    estrela_chaves[2] == lista_desta_linha[i][2] and
+                    estrela_chaves[3] == valor_da_vez[3]:   # estrela_chaves[j] pode substituir valor_da_vez (testar)
+                    tem_7 = False
+                    tem_6 = False
+                    tem_3 = False
+                    tem_2 = False
+                    for i in range(len(inequacoes)):
+                        if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
+                            if sec[m] in inequacoes[i][0]:
+                                tem_2 = True
+                                break
+
+                    for i in range(len(inequacoes)):
+                        if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
+                            if sec[m] in inequacoes[i][0]:
+                                tem_3 = True
+                                break
+
+                    for i in range(len(inequacoes)):
+                        if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
+                            if sec[m] in inequacoes[i][0]:
+                                tem_6 = True
+                                break
+
+                    for i in range(len(inequacoes)):
+                        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+                            if sec[m] in inequacoes[i][0]:
+                                tem_7 = True
+                                break
+
+                    if tem_2 and tem_3 and tem_6 and tem_7:
+                        slots_factiveis.append(sec[m])
+                    else:
+                        try:
+                            c.remove(sec[m])
+                        except:
+                            pass
+
+        pass
+    else:
+        lista_sorteados.append(slots_factiveis[0])
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and slots_factiveis[0] in inequacoes[i][0]:
+                inequacoes[i][1] = inequacoes[i][1] - 1
+        c.remove(slots_factiveis[0])
+
+    existe_valor = False
+    for i in range(len(inequacoes)):
+        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+            existe_valor = True
+            break
+xx = []
+for i in range(len(x)):
+    if i in lista_sorteados:
+        xx.append(1)
+    else:
+        xx.append(0)
+
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-'''
+
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -1033,7 +1324,7 @@ for t in t_lista:
     print()
     print('Turma - heurística: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-'''
+
 cont = 0
 for i in range(len(x)):
     if x[i].X == 1:
@@ -1047,7 +1338,17 @@ for i in range(len(xx)):
 print('Total de xx: ', cont)
 
 # --------------------------------------------------------------------------------------------------------
-
-
-
-
+'''
+print(prof_obj)
+print(xx)
+tam = 0
+for prof_ind in prof_obj:
+    for turma_ind in range(len(turmas_objetos)):
+        for todos_ind in range(len(xx)):
+            if xx[todos_ind] == 1 and prof_ind == estrela_chaves[todos_ind][2] and turma_ind == estrela_chaves[todos_ind][0]:
+                tam = tam + 1
+                print(tam, ': ', 'prof: ', prof_ind, 'nome: ', professores_objetos[estrela_chaves[todos_ind][2]].nome_professor,
+                      'turma: ', turma_ind)
+    tam = 0
+    print()
+'''

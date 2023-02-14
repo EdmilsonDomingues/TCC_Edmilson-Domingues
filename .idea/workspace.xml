@@ -22,34 +22,35 @@
           <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.27" value="2" />
           <entry key="project.open.time.28" value="1" />
+          <entry key="project.open.time.31" value="1" />
           <entry key="project.open.time.32" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.51" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Fabricante_moveis" value="1" />
           <entry key="Timetabling" value="1" />
-          <entry key="py" value="4" />
+          <entry key="py" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="6" />
+          <entry key="Python" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="32162" />
+          <entry key="Timetabling" value="34176" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="32162" />
+          <entry key="Python" value="34176" />
         </counts>
       </usages-collector>
     </session>
@@ -59,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="938" column="55" lean-forward="true" selection-start-line="938" selection-start-column="55" selection-end-line="938" selection-end-column="55" />
+            <state relative-caret-position="178">
+              <caret line="1195" column="33" lean-forward="true" selection-start-line="1195" selection-start-column="33" selection-end-line="1195" selection-end-column="33" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -72,14 +73,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.slot</find>
-      <find>cop</find>
-      <find>.deep</find>
-      <find>janel</find>
-      <find>c520</find>
-      <find>izabel</find>
-      <find>leand</find>
-      <find>leandro</find>
       <find>ifran</find>
       <find>c946</find>
       <find>janela</find>
@@ -102,6 +95,14 @@
       <find>indice</find>
       <find>6744</find>
       <find>restriçã</find>
+      <find>lixo</find>
+      <find>ANA MARCIA BAMPI SZEPILOWSKI</find>
+      <find>Professor(a) - heurística:  ANA</find>
+      <find>Professor(a) - heurística:</find>
+      <find>ANA MARCIA BAM</find>
+      <find>TODOS_IND</find>
+      <find>Turma - heurística:  101</find>
+      <find>prof_obj</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -114,7 +115,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="159" />
     <option name="width" value="1338" />
@@ -223,7 +224,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
@@ -231,7 +232,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22786885" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38360655" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -279,15 +280,15 @@
     </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/171983451/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="3674" column="8" selection-start-line="3674" selection-start-column="8" selection-end-line="3674" selection-end-column="8" />
+        <state relative-caret-position="221">
+          <caret line="3678" column="31" selection-start-line="3678" selection-start-column="31" selection-end-line="3678" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="938" column="55" lean-forward="true" selection-start-line="938" selection-start-column="55" selection-end-line="938" selection-end-column="55" />
+        <state relative-caret-position="178">
+          <caret line="1195" column="33" lean-forward="true" selection-start-line="1195" selection-start-column="33" selection-end-line="1195" selection-end-column="33" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
