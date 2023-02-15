@@ -1143,50 +1143,51 @@ while existe_valor and len(c) != 0:
         # avalia colisão slot
         turma = estrela_chaves[valor_da_vez][0]
         slot = estrela_chaves[valor_da_vez][3]
-        
         if matriz_indices[turma][slot] > -1:
             # tem colisão
             lista_professores_turma = matriz_indices[turma]
-            for s in range(len(matriz_indices[turma])):
-                if matriz_indices[turma][s] > -1:
+            coluna_colisao = []
+            s = estrela_chaves[valor_da_vez][3]
+            for i in range(len(matriz_indices)):
+                if matriz_indices[i][s] > -1:
+                    coluna_colisao.append(matriz_indices[i][s])
+            for s in range(len(lista_professores_turma)):
+                if lista_professores_turma[s] > -1:
                     # coluna de interesse.
                     coluna_corrente = []
                     for i in range(len(turmas_objetos)):
                         coluna_corrente.append(matriz[i][s])
+                    if estrela_chaves[valor_da_vez][2] not in coluna_corrente and\
+                            estrela_chaves[lista_professores_turma][2] not in coluna_colisao:
+                        pass    # vai para próximo candidato
+                    else:
+                        # dá para trocar slots
 
-    else:
-        # c.remove(valor_da_vez)
-        lista_professores_turma = []
-        for i in range(len(lista_sorteados)):
-            if estrela_chaves[valor_da_vez][0] == estrela_chaves[lista_sorteados[i]][0]:
-                lista_professores_turma.append(lista_sorteados[i])
-            for candidato in range(len(lista_professores_turma)):
-                coluna_colisao = []
-                for k in range(len(lista_sorteados)):
-                        if estrela_chaves[k][3] == estrela_chaves[valor_da_vez][3]:
-                            coluna_colisao.append(estrela_chaves[k][3])
-                coluna_corrente = []
-                for k in range(len(lista_sorteados)):
-                        if estrela_chaves[k][3] == estrela_chaves[lista_professores_turma[candidato]][3]:
-                            coluna_corrente.append(estrela_chaves[k][3])
-                if estrela_chaves[valor_da_vez][3] in coluna_corrente or estrela_chaves[candidato][3] in coluna_colisao:
-                    pass    # vai para próximo candidato
-                else:
-                    for k in range(len(estrela_chaves)):
-                        if estrela_chaves[k][0] == estrela_chaves[lista_sorteados[candidato]][0] and\
-                            estrela_chaves[k][1] == estrela_chaves[lista_sorteados[candidato]][1] and\
-                            estrela_chaves[k][2] == estrela_chaves[lista_sorteados[candidato]][2] and\
-                            estrela_chaves[k][3] == estrela_chaves[valor_da_vez][3]:
-                            valor1 = k
-                    for k in range(len(estrela_chaves)):
-                        if estrela_chaves[k][0] == estrela_chaves[valor_da_vez][0] and\
-                            estrela_chaves[k][1] == estrela_chaves[valor_da_vez][1] and\
-                            estrela_chaves[k][2] == estrela_chaves[valor_da_vez][2] and\
-                            estrela_chaves[k][3] == estrela_chaves[lista_sorteados[candidato]][3]:
-                            valor2 = k
-                    indice1 = lista_sorteados.index(lista_professores_turma[candidato])
-                    lista_sorteados.remove(lista_professores_turma[candidato])
-                    lista_sorteados.insert(indice1, valor2)
+                        for k in range(len(estrela_chaves)):
+                            if estrela_chaves[k][0] == turma and\
+                                estrela_chaves[k][1] == lista_professores_turma[s][0] and\
+                                estrela_chaves[k][2] == lista_professores_turma[s][1] and\
+                                estrela_chaves[k][3] == s:
+                                valor_org = k
+                        for k in range(len(estrela_chaves)):
+                            if estrela_chaves[k][0] == turma and\
+                                estrela_chaves[k][1] == lista_professores_turma[s][0] and\
+                                estrela_chaves[k][2] == lista_professores_turma[s][1] and\
+                                estrela_chaves[k][3] == estrela_chaves[valor_da_vez][3]:
+                                valor_org_alt = k
+                        for k in range(len(estrela_chaves)):
+                            if estrela_chaves[k][0] == estrela_chaves[valor_da_vez][0] and\
+                                estrela_chaves[k][1] == estrela_chaves[valor_da_vez][1] and\
+                                estrela_chaves[k][2] == estrela_chaves[valor_da_vez][2] and\
+                                estrela_chaves[k][3] == s:
+                                valor_da_vez_alt = k
+                        indice1 = lista_sorteados.index(valor_org)
+                        lista_sorteados.remove(valor_org)
+                        c.append(valor_org)
+                        lista_sorteados.insert(indice1, valor_org_alt)
+
+                        lista_sorteados.append(valor_da_vez_alt)
+                        # c.remove(valor_da_vez)
 
                     lista_sorteados.append(valor1)
                     break
