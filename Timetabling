@@ -477,6 +477,7 @@ tdps_lista = []
 grade = Grade('1', 'Matutino')
 ds_lista = grade.dias_semana()
 dias = grade.cabecalho()
+'''
 for i in range(5):
     lista_um_ds = ds_lista[i]
     for td in td_lista:
@@ -489,7 +490,28 @@ for i in range(5):
         if len(tdps_lista) > 0:
             model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
                             "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
-            # inequacoes.append([copy.deepcopy(tdps_lista), 1, '4'])
+            inequacoes.append([copy.deepcopy(tdps_lista), 1, '4'])
+'''
+for i in range(5):
+    lista_um_ds = ds_lista[i]
+    for td in td_lista:
+        tdps_lista.clear()
+        for cont in range(len(estrela_chaves)):
+            if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
+                resto = disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais % 5
+                if resto == 0:
+                    razao = int(disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais / 5)
+                else:
+                    razao = int(disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais / 5) + 1
+                if slots_objetos[estrela_chaves[cont][3]].slot in lista_um_ds:
+                    tdps_lista.append(cont)
+        if len(tdps_lista) > 0:
+            model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= razao,
+                            "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
+            inequacoes.append([copy.deepcopy(tdps_lista), razao, '4'])
+for i in range(len(inequacoes)):
+    if inequacoes[i][2] == '4':
+        print(inequacoes[i])
 
 # RESTRIÇÃO 6:
 p_lista = []
@@ -704,7 +726,6 @@ while existe_valor and len(c) != 0:
     valor_da_vez = choice(c)
     tem_7 = False
     tem_6 = False
-    tem_4 = False
     tem_3 = False
     tem_2 = False
 
@@ -1089,135 +1110,175 @@ print('Heurística: ', heuristica)
 # Testes de heurística:
 # Esta heurística é global - avalia, para cada tupla (t, d, p) estabelecida, e para seus N filhos factíveis,
 # qual o que apresenta o menor número de utilização (distribuição equânime entre slots).
-prof_obj = [7, 8, 22, 19, 37, 9, 0, 6, 21, 23, 24, 32, 35, 26, 31, 1, 4, 38, 15, 16, 17, 30, 36, 10, 28, 3, 18, 33, 5,
-            11, 13, 14, 20, 25, 27, 34, 39, 2, 12, 29]
-c = []
-lista_sorteados = []
-matriz_indices = []
-for i in range(len(turmas_objetos)):
-    novo = []
-    for j in range(len(slots_objetos)):
-        novo.append([-1, -1])
-    matriz_indices.append(novo)
-'''
-for prof_ind in prof_obj:
-    for turma_ind in range(len(turmas_objetos)):
-        for todos_ind in range(len(estrela_chaves)):
-            if prof_ind == estrela_chaves[todos_ind][2] and turma_ind == estrela_chaves[todos_ind][0]:
-                c.append(todos_ind)
-'''
-'''
-for i in range(len(x)):
-    c.append(i)
-'''
-c = [1400, 1401, 1504, 1030, 1056, 1057, 1075, 1076, 1527, 1158, 1159, 1185, 1186, 1257, 1283, 1284, 1310, 1311, 1337, 1338, 1239, 1240, 1366, 1367, 1393, 1394, 1212, 1213, 1464, 1465, 1491, 1492, 1775, 1776, 1802, 1803, 1704, 1705, 1877, 1878, 1656, 1657, 1558, 1559, 1585, 1586, 1612, 1613, 1639, 1640, 1691, 1692, 1743, 1744, 1770, 1771, 1829, 1830, 1856, 1857, 1908, 1909, 1935, 1936, 1962, 1963, 1989, 1990, 2016, 2017, 3852, 3853, 3905, 3906, 3929, 3932, 3958, 3959, 3977, 3978, 4004, 4005, 4025, 4026, 4056, 4057, 4083, 4084, 3760, 3761, 3762, 3788, 3789, 3790, 4110, 4111, 4112, 4138, 4139, 4140, 3816, 3817, 3818, 3844, 3845, 3846, 3404, 3405, 3202, 3203, 3204, 3225, 3226, 3230, 3256, 3257, 3263, 3300, 3301, 3308, 3332, 3335, 3284, 3286, 3287, 3159, 3160, 3186, 3187, 3189, 3115, 3116, 3117, 3143, 3144, 3147, 3438, 3441, 3442, 3389, 3390, 3393, 6354, 6355, 6382, 6400, 6401, 6454, 6455, 6503, 6208, 6209, 6256, 6257, 6258, 6284, 6285, 6286, 6313, 6314, 6341, 6342, 6236, 6239, 2253, 2306, 2329, 2054, 2055, 2064, 2081, 2091, 2159, 2163, 2189, 2211, 2215, 2245, 2247, 2115, 6, 7, 58, 59, 85, 86, 131, 132, 159, 185, 186, 212, 952, 953, 981, 982, 781, 782, 783, 804, 809, 810, 811, 840, 841, 842, 6217, 862, 869, 870, 877, 878, 880, 911, 912, 916, 917, 925, 939, 940, 944, 2191, 1018, 1022, 1023, 3508, 3509, 3535, 3536, 3557, 2260, 3552, 3587, 3633, 3634, 2308, 3678, 3687, 3710, 3711, 985, 4160, 4211, 4212, 4234, 4238, 963, 4251, 4285, 4311, 4332, 4334, 4363, 4389, 4460, 4461, 4509, 4513, 4514, 4527, 4528, 4529, 4551, 2153, 4562, 4555, 1001, 4482, 4491, 4618, 4619, 4620, 2237, 4646, 4648, 4401, 4430, 5613, 5614, 5633, 3589, 5631, 5663, 5664, 5684, 5680, 5462, 4463, 5459, 789, 5455, 5476, 5477, 5478, 5518, 5507, 5540, 5541, 5542, 5554, 5570, 4590, 5575, 4592, 5581, 6036, 6037, 6059, 6387, 6056, 5965, 5966, 6440, 6441, 5978, 6010, 6014, 5836, 5837, 5860, 5863, 5890, 5891, 4365, 5908, 216, 5914, 240, 3741, 4792, 4793, 4794, 2292, 2293, 5994, 4838, 4839, 4840, 4862, 3664, 3665, 4857, 4892, 4893, 4894, 2342, 6493, 4900, 6494, 4901, 4475, 4760, 4753, 4754, 4755, 4703, 4704, 4705, 4706, 4732, 4733, 5395, 5396, 5397, 4820, 4821, 4822, 5402, 5445, 5446, 5447, 5301, 5302, 5306, 5308, 5325, 5337, 2202, 5335, 5328, 5365, 5354, 5355, 4631, 2100, 5283, 2101, 5284, 6227, 5285, 5278, 5236, 5237, 5238, 5256, 5265, 5268, 5269, 265, 266, 267, 268, 281, 282, 283, 287, 843, 300, 319, 320, 321, 328, 329, 330, 871, 368, 369, 370, 371, 2143, 375, 2144, 376, 3345, 381, 2146, 380, 5571, 402, 422, 423, 424, 5577, 428, 429, 2180, 432, 4599, 433, 563, 564, 565, 38, 39, 580, 4190, 583, 611, 115, 612, 616, 641, 642, 643, 4866, 656, 167, 658, 2043, 695, 696, 697, 711, 5942, 4393, 712, 6641, 6642, 3891, 3892, 3617, 6679, 6693, 6594, 6595, 6596, 6613, 6614, 6615, 4416, 6527, 5242, 6532, 3170, 6533, 6559, 6560, 6553, 2643, 2644, 1443, 1444, 4269, 2675, 2695, 2719, 2720, 669, 2045, 3744, 2763, 6520, 2752, 2795, 2796, 595, 2879, 2671, 2877, 2823, 2824, 5423, 2825, 5424, 2826, 3621, 2855, 2872, 2921, 2922, 2746, 2925, 2747, 2926, 2973, 2974, 4923, 2977, 1124, 2978, 1146, 3004, 1147, 3005, 5197, 5198, 5199, 6672, 5200, 6673, 5201, 2674, 5203, 5129, 5130, 5131, 5132, 5151, 5357, 5161, 5104, 5105, 5106, 5107, 6148, 6149, 3373, 6152, 3374, 6153, 5948, 6175, 724, 6176, 6122, 1273, 6106, 899, 6104, 6088, 6092, 6093, 2422, 2423, 2424, 2441, 2442, 2443, 4418, 2350, 2369, 2371, 2388, 2395, 4446, 2377, 4994, 4995, 4996, 5022, 5023, 5024, 5522, 5025, 348, 5026, 2099, 5027, 5066, 5067, 5068, 494, 495, 496, 508, 509, 6321, 501, 5158, 527, 5159, 528, 535, 3094, 3095, 3096, 3047, 3048, 3049, 4447, 3054, 4748, 3050, 4749, 3051, 5747, 5748, 5749, 5763, 5764, 6349, 5750, 5722, 5723, 5724, 725, 726, 729, 730, 731, 732, 733, 734, 735, 736, 737, 738, 739, 740, 741, 742, 743, 744, 745, 746, 750, 751, 752, 753, 754, 755, 758, 759, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 2450, 2451, 2452, 2453, 2454, 2455, 2456, 2457, 2458, 2459, 2462, 2463, 2464, 2465, 2466, 2467, 2468, 2469, 2470, 2471, 2475, 2476, 2477, 2478, 2479, 2480, 2483, 2484, 2485, 2486, 2487, 2488, 2489, 2490, 2491, 2492, 2493, 2494, 2495, 2496, 2525, 2526, 2527, 2528, 2529, 2530, 2531, 2532, 2533, 2534, 2535, 2536, 2537, 2538, 2539, 2540, 2543, 2544, 2545, 2546, 2550, 2551, 2552, 2553, 2554, 2555, 2556, 2557, 2558, 2559, 2560, 2561, 2564, 2565, 2566, 2567, 2568, 2569, 2570, 2571, 2575, 2576, 2577, 2578, 2579, 2580, 2581, 2582, 2583, 2584, 2585, 2586, 2587, 2588, 2589, 2590, 2591, 2592, 2598, 2599, 2600, 2601, 2602, 2603, 2604, 2605, 2606, 2607, 2608, 2609, 2610, 2611, 2612, 2613, 2619, 2620, 2621, 2622, 2623, 2624, 3450, 3451, 3452, 3453, 3454, 3455, 3456, 3457, 3460, 3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 3470, 3471, 3478, 3479, 3480, 3481, 3482, 3485, 3486, 3487, 3488, 3489, 3490, 3491, 3492, 3493, 3494, 3495, 3496, 4650, 4651, 4652, 4653, 4654, 4655, 4656, 4657, 4658, 4659, 4660, 4661, 4662, 4663, 4664, 4670, 4671, 4672, 4673, 4674, 4675, 4676, 4677, 4678, 4679, 4680, 4681, 4682, 4683, 4684, 4685, 4686, 4687, 4693, 4694, 4695, 4696, 4697, 4698, 4699, 4925, 4926, 4927, 4928, 4929, 4930, 4931, 4932, 4933, 4934, 4935, 4936, 4939, 4940, 4941, 4942, 4943, 4944, 4945, 4946, 4950, 4951, 4952, 4953, 4956, 4957, 4958, 4959, 4960, 4961, 4962, 4963, 4964, 4965, 4966, 4967, 4968, 4969, 4970, 4971, 5797, 5798, 5799, 3497, 5800, 3498, 5801, 3499, 5802, 6722, 6723, 6724, 6747, 6748, 6749, 450, 451, 452, 453, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 2523, 2524, 5097, 5098, 5099]
-
-existe_valor = True
-cont = 0
-while existe_valor and len(c) != 0:
-    # valor_da_vez = choice(c)
-    valor_da_vez = c[0]
-    cont = cont + 1
-    tem_7 = False
-    tem_6 = False
-    tem_3 = False
-    tem_2 = False
+vez = 0
+temp = []
+for i in range(len(inequacoes)):
+    temp.append(inequacoes[i][1])
+while vez < 50:
     for i in range(len(inequacoes)):
-        if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
-            if valor_da_vez in inequacoes[i][0]:
-                tem_2 = True
-                break
-    for i in range(len(inequacoes)):
-        if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
-            if valor_da_vez in inequacoes[i][0]:
-                tem_3 = True
-                break
-    for i in range(len(inequacoes)):
-        if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
-            if valor_da_vez in inequacoes[i][0]:
-                tem_6 = True
-                break
-    for i in range(len(inequacoes)):
-        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
-            if valor_da_vez in inequacoes[i][0]:
-                tem_7 = True
-                break
-    if tem_2 and tem_3 and tem_6 and tem_7:
-        lista_sorteados.append(valor_da_vez)
-        turma = estrela_chaves[valor_da_vez][0]
-        disc = estrela_chaves[valor_da_vez][1]
-        prof = estrela_chaves[valor_da_vez][2]
-        slot = estrela_chaves[valor_da_vez][3]
-        matriz_indices[turma][slot] = [disc, prof]
+        inequacoes[i][1] = temp[i]
+    prof_org = []
+    for i in range(len(professores_objetos)):
+        prof_org.append(i)
+    prof_obj = []
+    for i in range(len(prof_org)):
+        sorteio = choice(prof_org)
+        prof_obj.append(sorteio)  # professores embaralhados
+        prof_org.remove(sorteio)
+    c = []
+    lista_sorteados = []
+    matriz_indices = []
+    for i in range(len(turmas_objetos)):
+        novo = []
+        for j in range(len(slots_objetos)):
+            novo.append([-1, -1])
+        matriz_indices.append(novo)
+    for prof_ind in prof_obj:
+        for turma_ind in range(len(turmas_objetos)):
+            for todos_ind in range(len(estrela_chaves)):
+                if prof_ind == estrela_chaves[todos_ind][2] and turma_ind == estrela_chaves[todos_ind][0]:
+                    c.append(todos_ind)
+    '''
+    for i in range(len(x)):
+        c.append(i)
+    '''
+    vez = vez + 1
+    print('Rodada: ', vez, 'Professores: ', prof_obj)
+    existe_valor = True
+    cont = 0
+    while existe_valor and len(c) != 0:
+        # valor_da_vez = choice(c)
+        valor_da_vez = c[0]
+        cont = cont + 1
+        tem_7 = False
+        tem_6 = False
+        tem_4 = False
+        tem_3 = False
+        tem_2 = False
         for i in range(len(inequacoes)):
-            if inequacoes[i][1] > 0 and valor_da_vez in inequacoes[i][0]:
-                inequacoes[i][1] = inequacoes[i][1] - 1
-        # c.remove(valor_da_vez)
-    else:
-        # avalia colisão slot
-        if tem_2 and not tem_3 and tem_6 and tem_7:
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
+                if valor_da_vez in inequacoes[i][0]:
+                    tem_2 = True
+                    break
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
+                if valor_da_vez in inequacoes[i][0]:
+                    tem_3 = True
+                    break
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '4':
+                if valor_da_vez in inequacoes[i][0]:
+                    tem_4 = True
+                    break
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
+                if valor_da_vez in inequacoes[i][0]:
+                    tem_6 = True
+                    break
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+                if valor_da_vez in inequacoes[i][0]:
+                    tem_7 = True
+                    break
+        if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
+            lista_sorteados.append(valor_da_vez)
             turma = estrela_chaves[valor_da_vez][0]
+            disc = estrela_chaves[valor_da_vez][1]
+            prof = estrela_chaves[valor_da_vez][2]
             slot = estrela_chaves[valor_da_vez][3]
-            if matriz_indices[turma][slot][1] == -1:
-                # tem colisão
-                lista_professores_turma = matriz_indices[turma]
-                coluna_colisao = []
-                for i in range(len(matriz_indices)):
-                    if matriz_indices[i][slot][1] > -1:
-                        coluna_colisao.append(matriz_indices[i][slot][1])
-                for s in range(len(lista_professores_turma)):
-                    if lista_professores_turma[s][1] > -1:
-                        # coluna de interesse.
-                        coluna_corrente = []
-                        for i in range(len(turmas_objetos)):
-                            coluna_corrente.append(matriz_indices[i][s][1])
-                        if estrela_chaves[valor_da_vez][2] not in coluna_corrente and\
-                                lista_professores_turma[s][1] not in coluna_colisao:
-                            # dá para trocar elementos.
-                            for k in range(len(estrela_chaves)):
-                                if estrela_chaves[k][0] == turma and\
-                                    estrela_chaves[k][1] == lista_professores_turma[s][0] and\
-                                    estrela_chaves[k][2] == lista_professores_turma[s][1] and\
-                                    estrela_chaves[k][3] == s:
-                                    valor_org = k
-                            for k in range(len(estrela_chaves)):
-                                if estrela_chaves[k][0] == turma and\
-                                    estrela_chaves[k][1] == lista_professores_turma[s][0] and\
-                                    estrela_chaves[k][2] == lista_professores_turma[s][1] and\
-                                    estrela_chaves[k][3] == estrela_chaves[valor_da_vez][3]:
-                                    valor_org_alt = k
-                            for k in range(len(estrela_chaves)):
-                                if estrela_chaves[k][0] == estrela_chaves[valor_da_vez][0] and\
-                                    estrela_chaves[k][1] == estrela_chaves[valor_da_vez][1] and\
-                                    estrela_chaves[k][2] == estrela_chaves[valor_da_vez][2] and\
-                                    estrela_chaves[k][3] == s:
-                                    valor_da_vez_alt = k
-                            lista_sorteados.remove(valor_org)
-                            c.append(valor_org)
-                            c.insert(0, valor_da_vez_alt)
-                            matriz_indices[turma][s] = [-1, -1]
-                            for i in range(len(inequacoes)):
-                                if valor_org in inequacoes[i][0]:
-                                    inequacoes[i][1] = inequacoes[i][1] + 1
-                            c.insert(0, valor_org_alt)
-                            break
+            matriz_indices[turma][slot] = [disc, prof]
+            for i in range(len(inequacoes)):
+                if inequacoes[i][1] > 0 and valor_da_vez in inequacoes[i][0]:
+                    inequacoes[i][1] = inequacoes[i][1] - 1
+            # c.remove(valor_da_vez)
+        else:
+            # avalia colisão slot
+            if tem_2 and not tem_3 and tem_4 and tem_6 and tem_7:
+                turma = estrela_chaves[valor_da_vez][0]
+                slot = estrela_chaves[valor_da_vez][3]
+                if matriz_indices[turma][slot][1] == -1:
+                    # tem colisão
+                    lista_professores_turma = matriz_indices[turma]
+                    coluna_colisao = []
+                    for i in range(len(matriz_indices)):
+                        if matriz_indices[i][slot][1] > -1:
+                            coluna_colisao.append(matriz_indices[i][slot][1])
+                    for s in range(len(lista_professores_turma)):
+                        if lista_professores_turma[s][1] > -1:
+                            # coluna de interesse.
+                            coluna_corrente = []
+                            for i in range(len(turmas_objetos)):
+                                coluna_corrente.append(matriz_indices[i][s][1])
+                            if estrela_chaves[valor_da_vez][2] not in coluna_corrente and\
+                                    lista_professores_turma[s][1] not in coluna_colisao:
+                                # dá para trocar elementos.
+                                for k in range(len(estrela_chaves)):
+                                    if estrela_chaves[k][0] == turma and\
+                                        estrela_chaves[k][1] == lista_professores_turma[s][0] and\
+                                        estrela_chaves[k][2] == lista_professores_turma[s][1] and\
+                                        estrela_chaves[k][3] == s:
+                                        valor_org = k
+                                for k in range(len(estrela_chaves)):
+                                    if estrela_chaves[k][0] == turma and\
+                                        estrela_chaves[k][1] == lista_professores_turma[s][0] and\
+                                        estrela_chaves[k][2] == lista_professores_turma[s][1] and\
+                                        estrela_chaves[k][3] == estrela_chaves[valor_da_vez][3]:
+                                        valor_org_alt = k
+                                for k in range(len(estrela_chaves)):
+                                    if estrela_chaves[k][0] == estrela_chaves[valor_da_vez][0] and\
+                                        estrela_chaves[k][1] == estrela_chaves[valor_da_vez][1] and\
+                                        estrela_chaves[k][2] == estrela_chaves[valor_da_vez][2] and\
+                                        estrela_chaves[k][3] == s:
+                                        valor_da_vez_alt = k
+                                lista_sorteados.remove(valor_org)
+                                c.append(valor_org)
+                                c.insert(0, valor_da_vez_alt)
+                                matriz_indices[turma][s] = [-1, -1]
+                                for i in range(len(inequacoes)):
+                                    if valor_org in inequacoes[i][0]:
+                                        inequacoes[i][1] = inequacoes[i][1] + 1
+                                c.insert(0, valor_org_alt)
+                                break
+        c.remove(valor_da_vez)
+        existe_valor = False
+        for i in range(len(inequacoes)):
+            if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+                existe_valor = True
+                break
+    xx = []
+    for i in range(len(x)):
+        if i in lista_sorteados:
+            xx.append(1)
+        else:
+            xx.append(0)
 
-    c.remove(valor_da_vez)
-    existe_valor = False
-    for i in range(len(inequacoes)):
-        if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
-            existe_valor = True
-            break
-xx = []
-for i in range(len(x)):
-    if i in lista_sorteados:
-        xx.append(1)
-    else:
-        xx.append(0)
+    cont = 0
+    for i in range(len(x)):
+        if x[i].X == 1:
+            cont = cont + 1
+    print('Total de X: ', cont)
 
+    cont = 0
+    for i in range(len(xx)):
+        if xx[i] == 1:
+            cont = cont + 1
+    print('Total de xx: ', cont)
+    for i in range(len(turmas_objetos)):
+        for ww in range(len(slots_objetos)):
+            matriz = str(matriz_indices[i][ww][1]) + '\t'
+            print(matriz, end="")
+        print()
+    for i in range(len(professores_objetos)):
+        cont = 0
+        for ii in range(len(matriz_indices)):
+            for ww in range(len(matriz_indices[ii])):
+                if matriz_indices[ii][ww][1] == i:
+                    cont = cont + 1
+        print('Professor ', i, ': ', cont, '\t', end="")
+    print('\n---------------------------------------------------------------')
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+'''
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -1293,7 +1354,7 @@ for t in t_lista:
     print()
     print('Turma - heurística: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
+'''
 cont = 0
 for i in range(len(x)):
     if x[i].X == 1:
@@ -1306,6 +1367,7 @@ for i in range(len(xx)):
         cont = cont + 1
 print('Total de xx: ', cont)
 print(lista_sorteados)
+
 # --------------------------------------------------------------------------------------------------------
 '''
 print(prof_obj)
