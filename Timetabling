@@ -467,6 +467,9 @@ for ps in ps_lista:
         model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1,
                         "RESTRIÇÃO 3: p_" + str(ps[0]) + " s_" + str(ps[1]))
         inequacoes.append([copy.deepcopy(tdps_lista), 1, '3'])
+for i in range(len(inequacoes)):
+    if inequacoes[i][2] == '3':
+        print(inequacoes[i])
 
 # RESTRIÇÃO 4:
 td_lista = []
@@ -509,9 +512,6 @@ for i in range(5):
             model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= razao,
                             "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
             inequacoes.append([copy.deepcopy(tdps_lista), razao, '4'])
-for i in range(len(inequacoes)):
-    if inequacoes[i][2] == '4':
-        print(inequacoes[i])
 
 # RESTRIÇÃO 6:
 p_lista = []
@@ -703,15 +703,6 @@ while True:
 
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
-'''
-# --------------------------------------------------------------------------------------------------------
-'''
-lendo = True
-print()
-while (lendo):
-    entrada = input('Entre senha para continuar: ')
-    if entrada == 'e':
-        lendo = False
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
@@ -1108,8 +1099,7 @@ print('Heurística: ', heuristica)
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-# Esta heurística é global - avalia, para cada tupla (t, d, p) estabelecida, e para seus N filhos factíveis,
-# qual o que apresenta o menor número de utilização (distribuição equânime entre slots).
+
 vez = 0
 temp = []
 for i in range(len(inequacoes)):
@@ -1138,10 +1128,8 @@ while vez < 50:
             for todos_ind in range(len(estrela_chaves)):
                 if prof_ind == estrela_chaves[todos_ind][2] and turma_ind == estrela_chaves[todos_ind][0]:
                     c.append(todos_ind)
-    '''
     for i in range(len(x)):
         c.append(i)
-    '''
     vez = vez + 1
     print('Rodada: ', vez, 'Professores: ', prof_obj)
     existe_valor = True
@@ -1180,7 +1168,7 @@ while vez < 50:
                 if valor_da_vez in inequacoes[i][0]:
                     tem_7 = True
                     break
-        if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
+        if tem_2 and tem_3 and tem_6 and tem_7:
             lista_sorteados.append(valor_da_vez)
             turma = estrela_chaves[valor_da_vez][0]
             disc = estrela_chaves[valor_da_vez][1]
@@ -1193,7 +1181,8 @@ while vez < 50:
             # c.remove(valor_da_vez)
         else:
             # avalia colisão slot
-            if tem_2 and not tem_3 and tem_4 and tem_6 and tem_7:
+            pass
+            if tem_2 and not tem_3 and tem_6 and tem_7:
                 turma = estrela_chaves[valor_da_vez][0]
                 slot = estrela_chaves[valor_da_vez][3]
                 if matriz_indices[turma][slot][1] == -1:
@@ -1265,7 +1254,10 @@ while vez < 50:
     print('Total de xx: ', cont)
     for i in range(len(turmas_objetos)):
         for ww in range(len(slots_objetos)):
-            matriz = str(matriz_indices[i][ww][1]) + '\t'
+            if ww == 24:
+                matriz = str(matriz_indices[i][ww][1]) + '\t\t'
+            else:
+                matriz = str(matriz_indices[i][ww][1]) + '\t'
             print(matriz, end="")
         print()
     for i in range(len(professores_objetos)):
@@ -1276,6 +1268,7 @@ while vez < 50:
                     cont = cont + 1
         print('Professor ', i, ': ', cont, '\t', end="")
     print('\n---------------------------------------------------------------')
+
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 '''
