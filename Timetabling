@@ -1095,7 +1095,7 @@ print('Heurística: ', heuristica)
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-
+'''
 vez = 0
 temp = []
 for i in range(len(inequacoes)):
@@ -1267,10 +1267,10 @@ while vez < 50:
                     cont = cont + 1
         print('Professor ', i, ': ', cont, '\t', end="")
     print('\n---------------------------------------------------------------')
-
+'''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-'''
+
 print('Formando referências.')
 turmas_backup = []
 turmas_creditos = []
@@ -1290,8 +1290,8 @@ lista_sorteados = []
 print('Começando alocação.')
 for t in range(len(turmas_objetos)):
     print('\nTurma: ', t)
-    vez = 0
-    print('Vez: ', vez)
+    vez = 1
+    # print('Vez: ', vez)
     temp_sorteados = []
     temp_entradas = copy.deepcopy(turmas_backup[t])
     print('Tamanho entrada: ', turmas_creditos[t])
@@ -1344,9 +1344,9 @@ for t in range(len(turmas_objetos)):
                     lista_sorteados.append(temp_sorteados[i])
                 inequacoes = copy.deepcopy(temp_inequacoes)
                 nao_finalizado = False
+                print('Vezes: ', vez)
             else:
                 vez = vez + 1
-                # print('Vez: ', vez)
                 temp_sorteados = []
                 temp_entradas = copy.deepcopy(turmas_backup[t])
                 temp_inequacoes = copy.deepcopy(inequacoes)
@@ -1370,10 +1370,10 @@ for i in range(len(xx)):
     if xx[i] == 1:
         cont = cont + 1
 print('Total de xx: ', cont)
-'''
+
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-'''
+
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -1462,19 +1462,5 @@ for i in range(len(xx)):
         cont = cont + 1
 print('Total de xx: ', cont)
 print(lista_sorteados)
-
+'''
 # --------------------------------------------------------------------------------------------------------
-'''
-print(prof_obj)
-print(xx)
-tam = 0
-for prof_ind in prof_obj:
-    for turma_ind in range(len(turmas_objetos)):
-        for todos_ind in range(len(xx)):
-            if xx[todos_ind] == 1 and prof_ind == estrela_chaves[todos_ind][2] and turma_ind == estrela_chaves[todos_ind][0]:
-                tam = tam + 1
-                print(tam, ': ', 'prof: ', prof_ind, 'nome: ', professores_objetos[estrela_chaves[todos_ind][2]].nome_professor,
-                      'turma: ', turma_ind)
-    tam = 0
-    print()
-'''
