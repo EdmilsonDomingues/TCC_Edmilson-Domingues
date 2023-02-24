@@ -1500,11 +1500,14 @@ for t in range(len(turmas_objetos)):
     temp_sorteados = []
     temp_entradas = copy.deepcopy(turmas_backup[t])
     print('Tamanho entrada: ', turmas_creditos[t])
+    temp_inequacoes = copy.deepcopy(inequacoes)
+    '''
     temp_inequacoes = []
-    for slot in temp_entradas:
+    for indice in temp_entradas:
         for i in range(len(inequacoes)):
-            if slot in inequacoes[i][0]:
+            if indice in inequacoes[i][0]:
                 temp_inequacoes.append(inequacoes[i])
+    '''
     nao_finalizado = True
     while nao_finalizado:
         valor_da_vez = choice(temp_entradas)
@@ -1539,7 +1542,7 @@ for t in range(len(turmas_objetos)):
                     tem_7 = True
                     break
         if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
-            print('Valor da vez: ', valor_da_vez)
+            # print('Valor da vez: ', valor_da_vez)
             temp_sorteados.append(valor_da_vez)
             temp_entradas.remove(valor_da_vez)
             for i in range(len(temp_inequacoes)):
@@ -1547,14 +1550,17 @@ for t in range(len(turmas_objetos)):
                     temp_inequacoes[i][1] = temp_inequacoes[i][1] - 1
         else:
             temp_entradas.remove(valor_da_vez)
-        print('Temp_sorteados: ', temp_sorteados)
+        # print('Temp_sorteados: ', temp_sorteados)
         if len(temp_entradas) == 0:
             if len(temp_sorteados) == turmas_creditos[t]:
                 for i in range(len(temp_sorteados)):
                     lista_sorteados.append(temp_sorteados[i])
+                    inequacoes = copy.deepcopy(temp_inequacoes)
+                    '''
                     for j in range(len(inequacoes)):
                         if temp_sorteados[i] in inequacoes[j][0]:
                             inequacoes[j][1] = inequacoes[j][1] - 1
+                    '''
                 nao_finalizado = False
                 print('Vezes: -----------------------------', vez)
             else:
@@ -1562,13 +1568,15 @@ for t in range(len(turmas_objetos)):
                 print('Vez: ', vez)
                 temp_sorteados = []
                 temp_entradas = copy.deepcopy(turmas_backup[t])
+                temp_inequacoes = copy.deepcopy(inequacoes)
+                '''
                 temp_inequacoes = []
                 for slot in temp_entradas:
                     for i in range(len(inequacoes)):
                         if slot in inequacoes[i][0]:
                             temp_inequacoes.append(inequacoes[i])
+                '''
                 nao_finalizado = True
-
 xx = []
 for i in range(len(x)):
     if i in lista_sorteados:
