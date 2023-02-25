@@ -1,6 +1,7 @@
 import gurobipy as gp
 import pandas as pd
 import copy
+import time
 import sys
 from prettytable import PrettyTable
 from random import choice
@@ -1374,6 +1375,7 @@ print('Total de xx: ', cont)
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # Encaixando peças
+tempo_1 = time.time()
 print('Formando referências.')
 turmas_backup = []
 turmas_creditos = []
@@ -1471,7 +1473,9 @@ for i in range(len(xx)):
     if xx[i] == 1:
         cont = cont + 1
 print('Total de xx: ', cont)
-
+tempo_2 = time.time()
+intervalo = (tempo_2 - tempo_1)/60
+print(intervalo)
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 '''
