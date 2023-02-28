@@ -1375,7 +1375,7 @@ print('Total de xx: ', cont)
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # Encaixando peças
-'''
+
 iteracoes = 0
 tempo_1 = time.time()
 print('Formando referências.')
@@ -1482,12 +1482,12 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1)/60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
-'''
+
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # Esta heurística avalia qual o elemento (professor) mais crítico para encaixar na estrutura.
 # Encaixando peças
-
+'''
 iteracoes = 0
 tempo_1 = time.time()
 print('Formando referências.')
@@ -1523,10 +1523,16 @@ for t in range(len(turmas_objetos)):
 
     # ## mexida
     disciplinas_avaliadas = []
+    matutino = False
+    vespertino = False
     for i in range(len(temp_entradas)):
         disc = estrela_chaves[temp_entradas[i]][1]
         prof = estrela_chaves[temp_entradas[i]][2]
         turno = turmas_objetos[estrela_chaves[temp_entradas[i]][0]].turno
+        if turno == 'Matutino':
+            matutino = True
+        if turno == 'Vespertino':
+            vespertino = True
         if [disc, prof, turno] not in disciplinas_avaliadas:
             disciplinas_avaliadas.append([disc, prof, turno])
     creditos_por_professor_esta_turma_matutino = []
@@ -1553,58 +1559,61 @@ for t in range(len(turmas_objetos)):
             creditos_por_professor_esta_turma_matutino[i]
         creditos_por_professor_final_turma_vespertino[i] = creditos_por_professor_acumulado_matutino[i] +\
             creditos_por_professor_esta_turma_vespertino[i]
-    print(creditos_por_professor_acumulado_matutino)
-    print(creditos_por_professor_acumulado_vespertino)
-    print(creditos_por_professor_esta_turma_matutino)
-    print(creditos_por_professor_esta_turma_vespertino)
-    print(creditos_por_professor_final_turma_matutino)
-    print(creditos_por_professor_final_turma_vespertino)
+    # # # # print(creditos_por_professor_acumulado_matutino)
+    # # # # print(creditos_por_professor_acumulado_vespertino)
+    # # # # print(creditos_por_professor_esta_turma_matutino)
+    # # # # print(creditos_por_professor_esta_turma_vespertino)
+    # # # # print(creditos_por_professor_final_turma_matutino)
+    # # # # print(creditos_por_professor_final_turma_vespertino)
     sequencia_matutino = []
-    for i in range(26):
-        bloco_mesmo_tamanho = []
-        for j in range(len(creditos_por_professor_final_turma_matutino)):
-            if i == creditos_por_professor_final_turma_matutino[j]:
-                bloco_mesmo_tamanho.append(j)
-        if len(bloco_mesmo_tamanho) != 0:
-            bloco_embaralhado = []
-            for k in range(len(bloco_mesmo_tamanho)):
-                valor = choice(bloco_mesmo_tamanho)
-                bloco_mesmo_tamanho.remove(valor)
-                bloco_embaralhado.append(valor)
-            sequencia_matutino.append(bloco_embaralhado)
-            sequencia_matutino.reverse()
+    if matutino:
+        for i in range(1, 25):
+            bloco_mesmo_tamanho = []
+            for j in range(len(creditos_por_professor_final_turma_matutino)):
+                if i == creditos_por_professor_final_turma_matutino[j]:
+                    bloco_mesmo_tamanho.append(j)
+            if len(bloco_mesmo_tamanho) != 0:
+                bloco_embaralhado = []
+                for k in range(len(bloco_mesmo_tamanho)):
+                    valor = choice(bloco_mesmo_tamanho)
+                    bloco_mesmo_tamanho.remove(valor)
+                    bloco_embaralhado.append(valor)
+                sequencia_matutino.append(bloco_embaralhado)
+        sequencia_matutino.reverse()
+        # # # # print('sequencia_matutino: ', sequencia_matutino)
     sequencia_vespertino = []
-    for i in range(26):
-        bloco_mesmo_tamanho = []
-        for j in range(len(creditos_por_professor_final_turma_vespertino)):
-            if i == creditos_por_professor_final_turma_matutino[j]:
-                bloco_mesmo_tamanho.append(j)
-        if len(bloco_mesmo_tamanho) != 0:
-            bloco_embaralhado = []
-            for k in range(len(bloco_mesmo_tamanho)):
-                valor = choice(bloco_mesmo_tamanho)
-                bloco_mesmo_tamanho.remove(valor)
-                bloco_embaralhado.append(valor)
-            sequencia_vespertino.append(bloco_embaralhado)
-            sequencia_vespertino.reverse()
+    if vespertino:
+        for i in range(1, 25):
+            bloco_mesmo_tamanho = []
+            for j in range(len(creditos_por_professor_final_turma_vespertino)):
+                if i == creditos_por_professor_final_turma_vespertino[j]:
+                    bloco_mesmo_tamanho.append(j)
+            if len(bloco_mesmo_tamanho) != 0:
+                bloco_embaralhado = []
+                for k in range(len(bloco_mesmo_tamanho)):
+                    valor = choice(bloco_mesmo_tamanho)
+                    bloco_mesmo_tamanho.remove(valor)
+                    bloco_embaralhado.append(valor)
+                sequencia_vespertino.append(bloco_embaralhado)
+        sequencia_vespertino.reverse()
+        # # # # print('sequencia_vespertino: ', sequencia_vespertino)
     temp2_entradas = []
     for i in range(len(sequencia_matutino)):
         for j in range(len(sequencia_matutino[i])):
             for k in range(len(temp_entradas)):
-                if estrela_chaves[temp_entradas[k]][2] == j and\
+                if estrela_chaves[temp_entradas[k]][2] == sequencia_matutino[i][j] and\
                         turmas_objetos[estrela_chaves[temp_entradas[k]][0]].turno == 'Matutino':
                     temp2_entradas.append(temp_entradas[k])
+    # # # # print('temp2_entradas matutino: ', temp2_entradas)
     for i in range(len(sequencia_vespertino)):
         for j in range(len(sequencia_vespertino[i])):
             for k in range(len(temp_entradas)):
-                if estrela_chaves[temp_entradas[k]][2] == j and\
+                if estrela_chaves[temp_entradas[k]][2] == sequencia_vespertino[i][j] and\
                         turmas_objetos[estrela_chaves[temp_entradas[k]][0]].turno == 'Vespertino':
                     temp2_entradas.append(temp_entradas[k])
-    for i in range(len(temp2_entradas)):
-        if temp2_entradas[i] in temp_entradas:
-            print(temp2_entradas[i], ' em ambos.')
-        else:
-            print(temp2_entradas[i], ' somente no novo.')
+    # # # # print('temp2_entradas vespertino: ', temp2_entradas)
+
+
     temp_entradas = copy.deepcopy(temp2_entradas)
     # ## final da mexida
 
@@ -1663,9 +1672,9 @@ for t in range(len(turmas_objetos)):
                 iteracoes = iteracoes + vez
 
                 for i in range(len(creditos_por_professor_final_turma_matutino)):
-                    creditos_por_professor_acumulado_matutino = creditos_por_professor_esta_turma_matutino
+                    creditos_por_professor_acumulado_matutino[i] = creditos_por_professor_final_turma_matutino[i]
                 for i in range(len(creditos_por_professor_final_turma_vespertino)):
-                    creditos_por_professor_acumulado_matutino = creditos_por_professor_esta_turma_vespertino
+                    creditos_por_professor_acumulado_vespertino[i] = creditos_por_professor_final_turma_vespertino[i]
             else:
                 vez = vez + 1
                 temp_sorteados = []
@@ -1674,13 +1683,18 @@ for t in range(len(turmas_objetos)):
 
                 # ## mexida
                 disciplinas_avaliadas = []
+                matutino = False
+                vespertino = False
                 for i in range(len(temp_entradas)):
                     disc = estrela_chaves[temp_entradas[i]][1]
                     prof = estrela_chaves[temp_entradas[i]][2]
                     turno = turmas_objetos[estrela_chaves[temp_entradas[i]][0]].turno
+                    if turno == 'Matutino':
+                        matutino = True
+                    if turno == 'Vespertino':
+                        vespertino = True
                     if [disc, prof, turno] not in disciplinas_avaliadas:
                         disciplinas_avaliadas.append([disc, prof, turno])
-
                 creditos_por_professor_esta_turma_matutino = []
                 creditos_por_professor_esta_turma_vespertino = []
                 for i in range(len(professores_objetos)):
@@ -1705,54 +1719,62 @@ for t in range(len(turmas_objetos)):
                                                                      creditos_por_professor_esta_turma_matutino[i]
                     creditos_por_professor_final_turma_vespertino[i] = creditos_por_professor_acumulado_matutino[i] + \
                                                                        creditos_por_professor_esta_turma_vespertino[i]
-
+                # # # # print(creditos_por_professor_acumulado_matutino)
+                # # # # print(creditos_por_professor_acumulado_vespertino)
+                # # # # print(creditos_por_professor_esta_turma_matutino)
+                # # # # print(creditos_por_professor_esta_turma_vespertino)
+                # # # # print(creditos_por_professor_final_turma_matutino)
+                # # # # print(creditos_por_professor_final_turma_vespertino)
                 sequencia_matutino = []
-                for i in range(26):
-                    bloco_mesmo_tamanho = []
-                    for j in range(len(creditos_por_professor_final_turma_matutino)):
-                        if i == creditos_por_professor_final_turma_matutino[j]:
-                            bloco_mesmo_tamanho.append(j)
-                    if len(bloco_mesmo_tamanho) != 0:
-                        bloco_embaralhado = []
-                        for k in range(len(bloco_mesmo_tamanho)):
-                            valor = choice(bloco_mesmo_tamanho)
-                            bloco_mesmo_tamanho.remove(valor)
-                            bloco_embaralhado.append(valor)
-                        sequencia_matutino.append(bloco_embaralhado)
-                        sequencia_matutino.reverse()
+                if matutino:
+                    for i in range(1, 25):
+                        bloco_mesmo_tamanho = []
+                        for j in range(len(creditos_por_professor_final_turma_matutino)):
+                            if i == creditos_por_professor_final_turma_matutino[j]:
+                                bloco_mesmo_tamanho.append(j)
+                        if len(bloco_mesmo_tamanho) != 0:
+                            bloco_embaralhado = []
+                            for k in range(len(bloco_mesmo_tamanho)):
+                                valor = choice(bloco_mesmo_tamanho)
+                                bloco_mesmo_tamanho.remove(valor)
+                                bloco_embaralhado.append(valor)
+                            sequencia_matutino.append(bloco_embaralhado)
+                    sequencia_matutino.reverse()
+                    # # # # print('sequencia_matutino: ', sequencia_matutino)
                 sequencia_vespertino = []
-                for i in range(26):
-                    bloco_mesmo_tamanho = []
-                    for j in range(len(creditos_por_professor_final_turma_vespertino)):
-                        if i == creditos_por_professor_final_turma_matutino[j]:
-                            bloco_mesmo_tamanho.append(j)
-                    if len(bloco_mesmo_tamanho) != 0:
-                        bloco_embaralhado = []
-                        for k in range(len(bloco_mesmo_tamanho)):
-                            valor = choice(bloco_mesmo_tamanho)
-                            bloco_mesmo_tamanho.remove(valor)
-                            bloco_embaralhado.append(valor)
-                        sequencia_vespertino.append(bloco_embaralhado)
-                        sequencia_vespertino.reverse()
+                if vespertino:
+                    for i in range(1, 25):
+                        bloco_mesmo_tamanho = []
+                        for j in range(len(creditos_por_professor_final_turma_vespertino)):
+                            if i == creditos_por_professor_final_turma_vespertino[j]:
+                                bloco_mesmo_tamanho.append(j)
+                        if len(bloco_mesmo_tamanho) != 0:
+                            bloco_embaralhado = []
+                            for k in range(len(bloco_mesmo_tamanho)):
+                                valor = choice(bloco_mesmo_tamanho)
+                                bloco_mesmo_tamanho.remove(valor)
+                                bloco_embaralhado.append(valor)
+                            sequencia_vespertino.append(bloco_embaralhado)
+                    sequencia_vespertino.reverse()
+                    # # # # print('sequencia_vespertino: ', sequencia_vespertino)
                 temp2_entradas = []
                 for i in range(len(sequencia_matutino)):
                     for j in range(len(sequencia_matutino[i])):
                         for k in range(len(temp_entradas)):
-                            if estrela_chaves[temp_entradas[k]][2] == j and \
+                            if estrela_chaves[temp_entradas[k]][2] == sequencia_matutino[i][j] and \
                                     turmas_objetos[estrela_chaves[temp_entradas[k]][0]].turno == 'Matutino':
                                 temp2_entradas.append(temp_entradas[k])
+                # # # # print('temp2_entradas: ', temp2_entradas)
                 for i in range(len(sequencia_vespertino)):
                     for j in range(len(sequencia_vespertino[i])):
                         for k in range(len(temp_entradas)):
-                            if estrela_chaves[temp_entradas[k]][2] == j and \
+                            if estrela_chaves[temp_entradas[k]][2] == sequencia_vespertino[i][j] and \
                                     turmas_objetos[estrela_chaves[temp_entradas[k]][0]].turno == 'Vespertino':
                                 temp2_entradas.append(temp_entradas[k])
+                # # # # print('temp2_entradas: ', temp2_entradas)
+
                 temp_entradas = copy.deepcopy(temp2_entradas)
                 # ## final da mexida
-                for i in range(len(creditos_por_professor_acumulado_matutino)):
-                    creditos_por_professor_acumulado_matutino[i] = creditos_por_professor_final_turma_matutino[i]
-                for i in range(len(creditos_por_professor_acumulado_vespertino)):
-                    creditos_por_professor_acumulado_vespertino[i] = creditos_por_professor_final_turma_vespertino[i]
 
                 nao_finalizado = True
 xx = []
@@ -1777,7 +1799,7 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1)/60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
-
+'''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 '''
