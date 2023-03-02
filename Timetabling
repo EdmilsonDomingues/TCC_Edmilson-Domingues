@@ -1376,6 +1376,37 @@ print('Total de xx: ', cont)
 # Testes de heurística:
 # Encaixando peças
 
+for i in range(6750):
+    total = 0
+    for j in range(len(inequacoes)):
+        if i in inequacoes[j][0]:
+            total = total + 1
+            if i > 0 and i < 50:
+                print(inequacoes[j])
+    print('i: ', i, 'total: ', total)
+'''
+for i in range(6750):
+    total_2 = 0
+    total_3 = 0
+    total_4 = 0
+    total_6 = 0
+    total_7 = 0
+    min = 100
+    max = -100
+    for j in range(len(inequacoes)):
+        if i in inequacoes[j][0]:
+            if inequacoes[j][2] == '3':
+                total_3 = total_3 + 1
+    print('i: ', i, 'total_3: ', total_3)
+    if total_3 < min:
+        min = total_3
+    if total_3 > max:
+        max = total_3
+    # if total_3 != 1:
+    # print('99999999999999')
+print('min: ', min)
+print('max: ', max)
+'''
 iteracoes = 0
 tempo_1 = time.time()
 print('Formando referências.')
@@ -1800,6 +1831,138 @@ intervalo = (tempo_2 - tempo_1)/60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
 '''
+# --------------------------------------------------------------------------------------------------------
+class Individuo:
+    def __init__(self, id_professor, cpf_professor, nome_professor):
+        self.id_professor = id_professor
+        self.cpf_professor = cpf_professor  # PK
+        self.nome_professor = nome_professor
+
+    def cpf_professor(self):
+        return self.cpf_professor
+
+    def
+# --------------------------------------------------------------------------------------------------------
+# Testes de heurística:
+# Encaixando peças
+# Aqui neste bloco será aplicado um algoritmo genético.
+# N representa o número de indivíduos do algoritmo genético
+n = 20
+tupla_tdp = []
+
+
+
+
+
+
+
+iteracoes = 0
+tempo_1 = time.time()
+print('Formando referências.')
+turmas_backup = []
+turmas_creditos = []
+for i in range(len(turmas_objetos)):
+    cred = 0
+    turma_unica = []
+    tuplas_td = []
+    for j in range(len(estrela_chaves)):
+        if estrela_chaves[j][0] == i:
+            turma_unica.append(j)
+            if [i, estrela_chaves[j][1]] not in tuplas_td:
+                cred = cred + disciplinas_objetos[estrela_chaves[j][1]].quantidade_aulas_semanais
+                tuplas_td.append([i, estrela_chaves[j][1]])
+    turmas_backup.append(turma_unica)
+    turmas_creditos.append(cred)
+lista_sorteados = []
+print('Começando alocação.')
+for t in range(len(turmas_objetos)):
+    print('\nTurma: ', t)
+    vez = 1
+    # print('Vez: ', vez)
+    temp_sorteados = []
+    temp_entradas = copy.deepcopy(turmas_backup[t])
+    print('Tamanho entrada: ', turmas_creditos[t])
+    temp_inequacoes = copy.deepcopy(inequacoes)
+    nao_finalizado = True
+    while nao_finalizado:
+        valor_da_vez = choice(temp_entradas)
+        tem_7 = False
+        tem_6 = False
+        tem_4 = False
+        tem_3 = False
+        tem_2 = False
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '2':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_2 = True
+                    break
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '3':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_3 = True
+                    break
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '4':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_4 = True
+                    break
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '6':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_6 = True
+                    break
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '7':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_7 = True
+                    break
+        if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
+            temp_sorteados.append(valor_da_vez)
+            temp_entradas.remove(valor_da_vez)
+            for i in range(len(temp_inequacoes)):
+                if temp_inequacoes[i][1] > 0 and valor_da_vez in temp_inequacoes[i][0]:
+                    temp_inequacoes[i][1] = temp_inequacoes[i][1] - 1
+        else:
+            temp_entradas.remove(valor_da_vez)
+        if len(temp_sorteados) == turmas_creditos[t]:
+            temp_entradas = []
+        if len(temp_entradas) == 0:
+            if len(temp_sorteados) == turmas_creditos[t]:
+                for i in range(len(temp_sorteados)):
+                    lista_sorteados.append(temp_sorteados[i])
+                inequacoes = copy.deepcopy(temp_inequacoes)
+                nao_finalizado = False
+                print('Vezes: -----------------------------', vez)
+                iteracoes = iteracoes + vez
+            else:
+                vez = vez + 1
+                temp_sorteados = []
+                temp_entradas = copy.deepcopy(turmas_backup[t])
+                temp_inequacoes = copy.deepcopy(inequacoes)
+                nao_finalizado = True
+xx = []
+for i in range(len(x)):
+    if i in lista_sorteados:
+        xx.append(1)
+    else:
+        xx.append(0)
+
+cont = 0
+for i in range(len(x)):
+    if x[i].X == 1:
+        cont = cont + 1
+print('Total de X: ', cont)
+
+cont = 0
+for i in range(len(xx)):
+    if xx[i] == 1:
+        cont = cont + 1
+print('Total de xx: ', cont)
+tempo_2 = time.time()
+intervalo = (tempo_2 - tempo_1) / 60
+print(iteracoes, ' iterações.')
+print(intervalo, ' minutos.')
+
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 '''
