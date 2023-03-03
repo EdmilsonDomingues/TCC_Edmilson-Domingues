@@ -1862,8 +1862,6 @@ for i in range(len(turmas_objetos)):
     n_individuos = 20
     individuos = []  # n indivíduos (cada indivíduo, um frame)
     cred = 0
-    turma_unica = []
-    tuplas_td = []
     for j in range(len(estrela_chaves)):
         tu = estrela_chaves[j][0]
         di = estrela_chaves[j][1]
@@ -1873,7 +1871,7 @@ for i in range(len(turmas_objetos)):
             cred = cred + cr
             for w in range(len(cr)):
                 frame_tuplas_tdp.append([tu, di, pr])
-        if frame_tuplas_tdp < frame_tamanho + 1:
+        if len(frame_tuplas_tdp) < frame_tamanho:
             falta = frame_tamanho - len(frame_tuplas_tdp)
             for k in range(falta):
                 frame_tuplas_tdp.append(0)
@@ -1901,9 +1899,11 @@ for t in range(len(turmas_objetos)):
         individuo[i] = Individuo(individuo_temp)
         populacao_temp.app(individuo[i])
         shuffle(populacao_temp)
-    fitness = []
+    populacao_fitness = []
     for i in range(len(populacao_inicial)):
-        individuo_fitness = populacao_inicial[i].fitness(inequacoes)
+        individuo_fitness[i] = populacao_inicial[i].fitness(inequacoes)
+        populacao_fitness.append(individuo_fitness[i])
+    # Aqui começa a seleção
 
 
     nao_finalizado = True
