@@ -1838,12 +1838,41 @@ class Individuo:
         self.cpf_professor = cpf_professor  # PK
         self.nome_professor = nome_professor
 
-    def cpf_professor(self):
-        return self.cpf_professor
-
     def fitness(self, inequacoes):
         pass
         return 0
+
+    def testa_solucao(self, inequacoes):
+        tem_7 = False
+        tem_6 = False
+        tem_4 = False
+        tem_3 = False
+        tem_2 = False
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '2':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_2 = True
+                    break
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '3':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_3 = True
+                    break
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '4':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_4 = True
+                    break
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '6':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_6 = True
+                    break
+        for i in range(len(temp_inequacoes)):
+            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '7':
+                if valor_da_vez in temp_inequacoes[i][0]:
+                    tem_7 = True
+                    break
 
 
 # --------------------------------------------------------------------------------------------------------
@@ -1902,6 +1931,10 @@ for t in range(len(turmas_objetos)):
         populacao_inicial.app(individuo[i])
         populacao_atual = shuffle(populacao_inicial)
     # populações convergem aqui.
+    nao_finalizado = True
+    while nao_finalizado:
+
+
     populacao_fitness = []
     for i in range(len(populacao_inicial)):
         individuo_fitness[i] = populacao_atual[i].fitness(inequacoes)
@@ -1986,7 +2019,15 @@ for t in range(len(turmas_objetos)):
         populacao_atual.append(lista_crossover[i])
     for i in range(len(nao_lista_crossover)):
         populacao_atual.append(nao_lista_crossover[i])
-        
+    # Agora é testar se algum indivíduo é resultado válido.
+    finalizado = False
+    for i in range(len(populacao_atual)):
+        tem_solucao = populacao_atual[i].testa_solucao()
+        if tem_solucao:
+            finalizado = True
+            solucao = populacao_atual[i]
+            break
+    if tem_solucao:
 
 
 
@@ -1997,39 +2038,19 @@ for t in range(len(turmas_objetos)):
 
 
 
-    nao_finalizado = True
-    while nao_finalizado:
+
+
+
+
+
+
+
+
+
+
+
         valor_da_vez = choice(temp_entradas)
-        tem_7 = False
-        tem_6 = False
-        tem_4 = False
-        tem_3 = False
-        tem_2 = False
-        for i in range(len(temp_inequacoes)):
-            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '2':
-                if valor_da_vez in temp_inequacoes[i][0]:
-                    tem_2 = True
-                    break
-        for i in range(len(temp_inequacoes)):
-            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '3':
-                if valor_da_vez in temp_inequacoes[i][0]:
-                    tem_3 = True
-                    break
-        for i in range(len(temp_inequacoes)):
-            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '4':
-                if valor_da_vez in temp_inequacoes[i][0]:
-                    tem_4 = True
-                    break
-        for i in range(len(temp_inequacoes)):
-            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '6':
-                if valor_da_vez in temp_inequacoes[i][0]:
-                    tem_6 = True
-                    break
-        for i in range(len(temp_inequacoes)):
-            if temp_inequacoes[i][1] > 0 and temp_inequacoes[i][2] == '7':
-                if valor_da_vez in temp_inequacoes[i][0]:
-                    tem_7 = True
-                    break
+
         if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
             temp_sorteados.append(valor_da_vez)
             temp_entradas.remove(valor_da_vez)
