@@ -1854,6 +1854,9 @@ iteracoes = 0
 tempo_1 = time.time()
 turmas_backup = []
 turmas_creditos = []
+range_crossover = []
+for i in range(1, 100):
+    range_crossover.append(i)
 for i in range(len(turmas_objetos)):
     # N_ind representa o número de indivíduos do algoritmo genético
     frame_tamanho = 25
@@ -1889,21 +1892,62 @@ for t in range(len(turmas_objetos)):
     populacao_inicial = []
     for i in range(len(n_individuos)):
         individuo_temp = []
-        populacao_temp = []
         for j in range(frame_tamanho):
-            if turmas_backup[j] == 0:
+            if turmas_backup[t][j] == 0:
                 individuo_temp.append(0)
             else:
                 gene = [turmas_backup[t][j][0], turmas_backup[t][j][1], turmas_backup[t][j][2]]
                 individuo_temp.append(gene)
         individuo[i] = Individuo(individuo_temp)
-        populacao_temp.app(individuo[i])
-        shuffle(populacao_temp)
+        populacao_inicial.app(individuo[i])
+        populacao_atual = shuffle(populacao_inicial)
+    # populações convergem aqui.
     populacao_fitness = []
     for i in range(len(populacao_inicial)):
-        individuo_fitness[i] = populacao_inicial[i].fitness(inequacoes)
+        individuo_fitness[i] = populacao_atual[i].fitness(inequacoes)
         populacao_fitness.append(individuo_fitness[i])
     # Aqui começa a seleção
+    # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-1000.
+    total = 0
+    for i in range(n):
+        total = total + populacao_fitness[i]
+    roleta_range = []
+    for i in range(n):
+        if i == 0:
+            inicio = 0
+        else:
+            inicio = fim[i-1]
+        fim = inicio + 1000 / total * populacao_fitness[i]
+        roleta_range.append([inicio, fim])
+    selecionados = []
+    for i in range(n):
+        valor = random.randomint(0,1001)
+        if roleta_range[0] <= valor and valor <= roleta_range[1]:
+            selecionados.append(populacao_atual[i])
+    # Neste ponto temos os selecionados.
+    lista_crossover = []
+    nao_lista_crossover = []
+    pc = 70
+    for i in range(len(selecionados)):
+        valor = choice(range_crossover)
+        if valor <= pc:
+            lista_crossover.append(selecionados[i])
+        else:
+            nao_lista_crossover.append(selecionados[i])
+    # Verificar se número ímpar de selecionados:
+    if len(lista_crossover)%2 == 0:
+        pass
+    else:
+        tamanho_lista = len(lista_crossover)
+        indice = tamanho_lista - 1
+        valor = lista_crossover[indice]
+        nao_lista_crossover.append(valor)
+        lista_crossover.pop(indice)
+    # Realizar crossover
+    
+
+
+
 
 
     nao_finalizado = True
