@@ -1943,8 +1943,20 @@ for t in range(len(turmas_objetos)):
         valor = lista_crossover[indice]
         nao_lista_crossover.append(valor)
         lista_crossover.pop(indice)
-    # Realizar crossover
-    
+    # Realizar crossover (position-based crossover)
+    # Critério: trocar o conteúdo de 5 posições e manter as outras
+    # Então vamos sortear as 5 posições que serão alternadas
+    colunas = []
+    range_25 = []
+    range_5 = []
+    for i in range(frame_tamanho):
+        range_25.app(i)
+    while len(range_5) != 5:
+        sorte = random.randomint(0,frame_tamanho + 1)
+        if sorte not in range_5:
+            range_5.append(sorte)
+    #
+
 
 
 
