@@ -4,7 +4,7 @@ import copy
 import time
 import sys
 from prettytable import PrettyTable
-from random import choice
+from random import choice, shuffle
 
 START_POINT = 0
 END_POINT = None
@@ -1841,40 +1841,45 @@ class Individuo:
     def cpf_professor(self):
         return self.cpf_professor
 
-    def
+    def fitness(self, inequacoes):
+        pass
+        return 0
+
+
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético.
-# N representa o número de indivíduos do algoritmo genético
-n = 20
-tupla_tdp = []
-
-
-
-
-
-
-
 iteracoes = 0
 tempo_1 = time.time()
-print('Formando referências.')
 turmas_backup = []
 turmas_creditos = []
 for i in range(len(turmas_objetos)):
+    # N_ind representa o número de indivíduos do algoritmo genético
+    frame_tamanho = 25
+    frame_turno = ''
+    frame_tuplas_tdp = []
+    n_individuos = 20
+    individuos = []  # n indivíduos (cada indivíduo, um frame)
     cred = 0
     turma_unica = []
     tuplas_td = []
     for j in range(len(estrela_chaves)):
-        if estrela_chaves[j][0] == i:
-            turma_unica.append(j)
-            if [i, estrela_chaves[j][1]] not in tuplas_td:
-                cred = cred + disciplinas_objetos[estrela_chaves[j][1]].quantidade_aulas_semanais
-                tuplas_td.append([i, estrela_chaves[j][1]])
-    turmas_backup.append(turma_unica)
+        tu = estrela_chaves[j][0]
+        di = estrela_chaves[j][1]
+        pr = estrela_chaves[j][2]
+        if [tu, di, pr] not in frame_tuplas_tdp:
+            cr = disciplinas_objetos[di].quantidade_aulas_semanais
+            cred = cred + cr
+            for w in range(len(cr)):
+                frame_tuplas_tdp.append([tu, di, pr])
+        if frame_tuplas_tdp < frame_tamanho + 1:
+            falta = frame_tamanho - len(frame_tuplas_tdp)
+            for k in range(falta):
+                frame_tuplas_tdp.append(0)
+    turmas_backup.append(frame_tuplas_tdp)
     turmas_creditos.append(cred)
 lista_sorteados = []
-print('Começando alocação.')
 for t in range(len(turmas_objetos)):
     print('\nTurma: ', t)
     vez = 1
@@ -1883,6 +1888,24 @@ for t in range(len(turmas_objetos)):
     temp_entradas = copy.deepcopy(turmas_backup[t])
     print('Tamanho entrada: ', turmas_creditos[t])
     temp_inequacoes = copy.deepcopy(inequacoes)
+    populacao_inicial = []
+    for i in range(len(n_individuos)):
+        individuo_temp = []
+        populacao_temp = []
+        for j in range(frame_tamanho):
+            if turmas_backup[j] == 0:
+                individuo_temp.append(0)
+            else:
+                gene = [turmas_backup[t][j][0], turmas_backup[t][j][1], turmas_backup[t][j][2]]
+                individuo_temp.append(gene)
+        individuo[i] = Individuo(individuo_temp)
+        populacao_temp.app(individuo[i])
+        shuffle(populacao_temp)
+    fitness = []
+    for i in range(len(populacao_inicial)):
+        individuo_fitness = populacao_inicial[i].fitness(inequacoes)
+
+
     nao_finalizado = True
     while nao_finalizado:
         valor_da_vez = choice(temp_entradas)
