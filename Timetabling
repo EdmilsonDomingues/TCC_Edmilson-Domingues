@@ -1535,10 +1535,6 @@ class Individuo:
     def __init__(self, individuo):
         self.individuo = individuo
 
-    def fitness(self, inequacoes):
-        pass
-        return 0
-
     def testa_solucao(self, inequacoes, lista_tdps):
         for s in range(len(self.individuo)):
             t = self.individuo[l][0]
@@ -1580,6 +1576,9 @@ class Individuo:
                 return False
     return True
 
+    def solucao_frame(self):
+        return (0)
+
     def fitness(self, inequacoes, lista_tdps):
         fitness = 0
         for s in range(len(self.individuo)):
@@ -1593,7 +1592,6 @@ class Individuo:
                 if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
                     if valor_da_vez in inequacoes[i][0]:
                         fitness = fitness + 1
-
             for i in range(len(inequacoes)):
                 if inequacoes[i][1] > 0 and inequacoes[i][2] == '4':
                     if valor_da_vez in inequacoes[i][0]:
