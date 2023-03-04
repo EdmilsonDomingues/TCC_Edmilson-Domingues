@@ -1568,61 +1568,33 @@ class Individuo:
 # Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético.
 print('Teste')
-t = 0
-d = 0
-p = 0
-s = 0
-t_1 = 0
-d_1 = 0
-p_1 = 0
 lista_t = []
 lista_d = []
 lista_p = []
 lista_s = []
-'''
-while e < len(estrela_chaves):
-    while t < len(turmas_objetos):
-        while d < len(disciplinas_objetos):
-            while p < len(professores_objetos):
-                while s < len(slots_objetos):
-                    lista_s.append(e)
-                    e = e + 1
-                    s = s + 1
-                    print('tdps: ', t, d, p, s, '    e: ', e)
-                lista_p.append(lista_s)
-                lista_s =[]
-                s = 0
-                p = p + 1
-            lista_d.append(lista_p)
-            lista_p = []
-            p = 0
-            d = d + 1
-        lista_t.append(lista_d)
-        lista_d = []
-        d = 0
-        t = t + 1
-'''
-print('Lista_t:', lista_t)
+for t in range(len(turmas_objetos)):
+    for d in range(len(disciplinas_objetos)):
+        for p in range(len(professores_objetos)):
+            for s in range(len(slots_objetos)):
+                lista_s.append(99999)
+            lista_p.append(lista_s)
+            lista_s = []
+        lista_d.append(lista_p)
+        lista_p = []
+    lista_t.append(lista_d)
+    lista_d = []
 for i in range(len(estrela_chaves)):
-    t = estrela_chaves[i][0]
-    d = estrela_chaves[i][1]
-    p = estrela_chaves[i][2]
-    s = estrela_chaves[i][3]
-    if p > p_1:
-        lista_p.append(lista_s)
-        lista_s = []
-        if d > d_1:
-            lista_d.append(lista_p)
-            lista_p = []
-            if t > t_1:
-                lista_t.append(lista_d)
-                lista_d = []
+    lista_t[estrela_chaves[i][0]][estrela_chaves[i][1]][estrela_chaves[i][2]][estrela_chaves[i][3]] = i
+for i in range(len(estrela_chaves)):
+    x1 = estrela_chaves[i][0]
+    x2 = estrela_chaves[i][1]
+    x3 = estrela_chaves[i][2]
+    x4 = estrela_chaves[i][3]
+    valor = lista_t[x1][x2][x3][x4]
+    if valor == i:
+        print('i: ', i, ' ----')
     else:
-        lista_s.append(i)
-    t_1 = t
-    d_1 = d
-    p_1 = p
-    print('tdps: ', t, d, p, s, '    i: ', i)
+        print('i: ', i, ' *************************************************************')
 '''
 iteracoes = 0
 tempo_1 = time.time()
