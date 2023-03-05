@@ -1536,6 +1536,9 @@ class Individuo:
         self.individuo = individuo
         self.solucao = []
 
+    def individuo(self):
+        return self.individuo
+
     def testa_solucao(self, inequacoes, lista_tdps):
         for s in range(len(self.individuo)):
             if self.individuo[s] != 0:
@@ -1601,22 +1604,21 @@ class Individuo:
 
     def fitness(self, inequacoes, lista_tdps):
         fitness = 0
-        for s in range(len(self.individuo)):
-            t = self.individuo[l][0]
-            d = self.individuo[l][1]
-            p = self.individuo[l][2]
-            valor_da_vez = lista_tdps[t][d][p][s]
-            tem_4 = False
-            tem_3 = False
-            for i in range(len(inequacoes)):
-                if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
-                    if valor_da_vez in inequacoes[i][0]:
-                        fitness = fitness + 1
-            for i in range(len(inequacoes)):
-                if inequacoes[i][1] > 0 and inequacoes[i][2] == '4':
-                    if valor_da_vez in inequacoes[i][0]:
-                        fitness = fitness + 1
-        return fitness
+        for s in range(frame_tamanho):
+            if self.individuo[s] != 0:
+                t = self.individuo[s][0]
+                d = self.individuo[s][1]
+                p = self.individuo[s][2]
+                valor_da_vez = lista_tdps[t][d][p][s]
+                for i in range(len(inequacoes)):
+                    if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
+                        if valor_da_vez in inequacoes[i][0]:
+                            fitness = fitness + 1
+                for i in range(len(inequacoes)):
+                    if inequacoes[i][1] > 0 and inequacoes[i][2] == '4':
+                        if valor_da_vez in inequacoes[i][0]:
+                            fitness = fitness + 1
+            return fitness
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # Encaixando peças
@@ -1644,7 +1646,7 @@ for i in range(len(turmas_objetos)):
             pr = estrela_chaves[j][2]
             if [tu, di, pr] not in frame_tuplas_tdp:
                 cr = disciplinas_objetos[di].quantidade_aulas_semanais
-                for w in range(len(cr)):
+                for w in range(cr):
                     frame_tuplas_tdp.append([tu, di, pr])
                     cred = cred + cr
     if len(frame_tuplas_tdp) < frame_tamanho:
@@ -1665,16 +1667,17 @@ for t in range(len(turmas_objetos)):
     temp_inequacoes = copy.deepcopy(inequacoes)
     print('Tamanho entrada: ', turmas_creditos[t])
     populacao_atual = []
-    individuo_turma = Individuo(turmas_backup[t])
-    for i in range(len(n_individuos)):
-        individuos[i] = copy.deepcopy(shuffle(individuo_turma))
-        populacao_atual.append(individuo[i])
+    temp = copy.deepcopy(turmas_backup[t])
+    print('temp: ', temp)
+    for i in range(n_individuos):
+        shuffle(temp)
+        populacao_atual.append(Individuo(copy.deepcopy(temp)))
     # populações convergem aqui.
     finalizado = False
     while not finalizado:
         individuo_fitness = []
         for i in range(len(populacao_atual)):
-            individuo_fitness[i] = populacao_atual[i].fitness(temp_inequacoes)
+            individuo_fitness[i] = populacao_atual[i].fitness(temp_inequacoes, lista_tdps)
             individuo_fitness.append(individuo_fitness[i])
         # Aqui começa a seleção
         # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
@@ -1692,7 +1695,7 @@ for t in range(len(turmas_objetos)):
         selecionados = []
         for i in range(n_individuos):
             valor = random.randomint(0,10001)
-            for j in range(n_individuos)
+            for j in range(n_individuos):
                 if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
                     selecionados.append(populacao_atual[i])
         # Neste ponto temos os selecionados.
