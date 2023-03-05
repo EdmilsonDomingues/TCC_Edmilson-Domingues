@@ -1603,6 +1603,7 @@ class Individuo:
         return self.solucao
 
     def fitness(self, inequacoes, lista_tdps):
+        print(inequacoes)
         fitness = 0
         for s in range(frame_tamanho):
             if self.individuo[s] != 0:
@@ -1677,20 +1678,21 @@ for t in range(len(turmas_objetos)):
     while not finalizado:
         individuo_fitness = []
         for i in range(len(populacao_atual)):
-            individuo_fitness[i] = populacao_atual[i].fitness(temp_inequacoes, lista_tdps)
-            individuo_fitness.append(individuo_fitness[i])
+            individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
+        print('Individuo_fitness: ', individuo_fitness)
         # Aqui começa a seleção
         # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
         total = 0
-        for i in range(n):
+        for i in range(n_individuos):
             total = total + individuo_fitness[i]
+        print('total: ', total)
         roleta_range = []
-        for i in range(n):
+        for i in range(n_individuos):
             if i == 0:
                 inicio = 0
             else:
                 inicio = roleta_range[i-1][1]
-            fim = inicio + (populacao_fitness[i] * 10000 / total)
+            fim = inicio + (individuo_fitness[i] * 10000 / total)
             roleta_range.append([inicio, fim])
         selecionados = []
         for i in range(n_individuos):

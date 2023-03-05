@@ -46,12 +46,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="54293" />
+          <entry key="Timetabling" value="54406" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="54293" />
+          <entry key="Python" value="54406" />
         </counts>
       </usages-collector>
     </session>
@@ -61,12 +61,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-187">
-              <caret line="1631" column="13" selection-start-line="1631" selection-start-column="13" selection-end-line="1631" selection-end-column="13" />
+            <state relative-caret-position="63">
+              <caret line="1605" column="25" selection-start-line="1605" selection-start-column="25" selection-end-line="1605" selection-end-column="25" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1678051824413" expanded="true" signature="64889:64925" ph="..." />
-                <marker date="1678051824413" expanded="true" signature="67621:67655" ph="..." />
+                <marker date="1678057863066" expanded="true" signature="64889:64925" ph="..." />
+                <marker date="1678057863066" expanded="true" signature="67621:67655" ph="..." />
               </folding>
             </state>
           </provider>
@@ -228,14 +228,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.39344263" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.47704917" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -297,12 +296,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-187">
-          <caret line="1631" column="13" selection-start-line="1631" selection-start-column="13" selection-end-line="1631" selection-end-column="13" />
+        <state relative-caret-position="63">
+          <caret line="1605" column="25" selection-start-line="1605" selection-start-column="25" selection-end-line="1605" selection-end-column="25" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1678051824413" expanded="true" signature="64889:64925" ph="..." />
-            <marker date="1678051824413" expanded="true" signature="67621:67655" ph="..." />
+            <marker date="1678057863066" expanded="true" signature="64889:64925" ph="..." />
+            <marker date="1678057863066" expanded="true" signature="67621:67655" ph="..." />
           </folding>
         </state>
       </provider>
