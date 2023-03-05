@@ -1534,50 +1534,70 @@ for t in range(len(turmas_objetos)):
 class Individuo:
     def __init__(self, individuo):
         self.individuo = individuo
+        self.solucao = []
 
     def testa_solucao(self, inequacoes, lista_tdps):
         for s in range(len(self.individuo)):
-            t = self.individuo[l][0]
-            d = self.individuo[l][1]
-            p = self.individuo[l][2]
-            valor_da_vez = lista_tdps[t][d][p][s]
-            tem_7 = False
-            tem_6 = False
-            tem_4 = False
-            tem_3 = False
-            tem_2 = False
-            for i in range(len(inequacoes)):
-                if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
-                    if valor_da_vez in inequacoes[i][0]:
-                        tem_2 = True
-                        break
-            for i in range(len(inequacoes)):
-                if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
-                    if valor_da_vez in inequacoes[i][0]:
-                        tem_3 = True
-                        break
-            for i in range(len(inequacoes)):
-                if inequacoes[i][1] > 0 and inequacoes[i][2] == '4':
-                    if valor_da_vez in inequacoes[i][0]:
-                        tem_4 = True
-                        break
-            for i in range(len(inequacoes)):
-                if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
-                    if valor_da_vez in inequacoes[i][0]:
-                        tem_6 = True
-                        break
-            for i in range(len(inequacoes)):
-                if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
-                    if valor_da_vez in inequacoes[i][0]:
-                        tem_7 = True
-                        break
-            # limpar inequações
-            if tem_2 or tem_3 or tem_4 or tem_6 or tem_7:
-                return False
-    return True
+            if self.individuo[s] != 0:
+                t = self.individuo[s][0]
+                d = self.individuo[s][1]
+                p = self.individuo[s][2]
+                valor_da_vez = lista_tdps[t][d][p][s]
+                tem_7 = False
+                tem_6 = False
+                tem_4 = False
+                tem_3 = False
+                tem_2 = False
+                for i in range(len(inequacoes)):
+                    if inequacoes[i][1] > 0 and inequacoes[i][2] == '2':
+                        if valor_da_vez in inequacoes[i][0]:
+                            tem_2 = True
+                            break
+                        else:
+                            return False
+                for i in range(len(inequacoes)):
+                    if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
+                        if valor_da_vez in inequacoes[i][0]:
+                            tem_3 = True
+                            break
+                        else:
+                            return False
+                for i in range(len(inequacoes)):
+                    if inequacoes[i][1] > 0 and inequacoes[i][2] == '4':
+                        if valor_da_vez in inequacoes[i][0]:
+                            tem_4 = True
+                            break
+                        else:
+                            return False
+                for i in range(len(inequacoes)):
+                    if inequacoes[i][1] > 0 and inequacoes[i][2] == '6':
+                        if valor_da_vez in inequacoes[i][0]:
+                            tem_6 = True
+                            break
+                        else:
+                            return False
+                for i in range(len(inequacoes)):
+                    if inequacoes[i][1] > 0 and inequacoes[i][2] == '7':
+                        if valor_da_vez in inequacoes[i][0]:
+                            tem_7 = True
+                            break
+                        else:
+                            return False
+                # limpar inequações
+                for i in range(len(inequacoes)):
+                    if inequacoes[i][1] > 0 and valor_da_vez in inequacoes[i][0]:
+                        inequacoes[i][1] = inequacoes[i][1] - 1
+        for s in range(len(self.individuo)):
+            if self.individuo[s] != 0:
+                t = self.individuo[s][0]
+                d = self.individuo[s][1]
+                p = self.individuo[s][2]
+                valor_da_vez = lista_tdps[t][d][p][s]
+                self.solucao.append(valor_da_vez)
+        return True
 
     def solucao_frame(self):
-        return (0)
+        return self.solucao
 
     def fitness(self, inequacoes, lista_tdps):
         fitness = 0
@@ -1597,14 +1617,10 @@ class Individuo:
                     if valor_da_vez in inequacoes[i][0]:
                         fitness = fitness + 1
         return fitness
-
-
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético.
-
-'''
 iteracoes = 0
 tempo_1 = time.time()
 turmas_backup = []
@@ -1612,26 +1628,25 @@ turmas_creditos = []
 range_100 = []
 for i in range(1, 101):
     range_100.append(i)
+frame_tamanho = 25
 range_25 = []
 for i in range(frame_tamanho):
     range_25.append(i)
 for i in range(len(turmas_objetos)):
-    # N_individuos representa o número de indivíduos do algoritmo genético
-    frame_tamanho = 25
+    # N_individuos representa o número de indivíduos deste algoritmo genético
     frame_turno = ''
     frame_tuplas_tdp = []
-    n_individuos = 20
-    individuos = []  # n indivíduos (cada indivíduo, um frame)
     cred = 0
     for j in range(len(estrela_chaves)):
         tu = estrela_chaves[j][0]
-        di = estrela_chaves[j][1]
-        pr = estrela_chaves[j][2]
-        if [tu, di, pr] not in frame_tuplas_tdp:
-            cr = disciplinas_objetos[di].quantidade_aulas_semanais
-            cred = cred + cr
-            for w in range(len(cr)):
-                frame_tuplas_tdp.append([tu, di, pr])
+        if tu == i:
+            di = estrela_chaves[j][1]
+            pr = estrela_chaves[j][2]
+            if [tu, di, pr] not in frame_tuplas_tdp:
+                cr = disciplinas_objetos[di].quantidade_aulas_semanais
+                for w in range(len(cr)):
+                    frame_tuplas_tdp.append([tu, di, pr])
+                    cred = cred + cr
     if len(frame_tuplas_tdp) < frame_tamanho:
         falta = frame_tamanho - len(frame_tuplas_tdp)
         for k in range(falta):
@@ -1640,38 +1655,32 @@ for i in range(len(turmas_objetos)):
     turmas_creditos.append(cred)
 lista_sorteados = []
 for t in range(len(turmas_objetos)):
+    n_individuos = 20
+    individuos = []  # n indivíduos (cada indivíduo, um frame)
     print('\nTurma: ', t)
     vez = 1
     # print('Vez: ', vez)
     temp_sorteados = []
     temp_entradas = copy.deepcopy(turmas_backup[t])
-    print('Tamanho entrada: ', turmas_creditos[t])
     temp_inequacoes = copy.deepcopy(inequacoes)
-    populacao_inicial = []
+    print('Tamanho entrada: ', turmas_creditos[t])
+    populacao_atual = []
+    individuo_turma = Individuo(turmas_backup[t])
     for i in range(len(n_individuos)):
-        individuo_temp = []
-        for j in range(frame_tamanho):
-            if turmas_backup[t][j] == 0:
-                individuo_temp.append(0)
-            else:
-                gene = [turmas_backup[t][j][0], turmas_backup[t][j][1], turmas_backup[t][j][2]]
-                individuo_temp.append(gene)
-        individuo[i] = Individuo(individuo_temp)
-        populacao_inicial.app(individuo[i])
-        populacao_atual = shuffle(populacao_inicial)
-
+        individuos[i] = copy.deepcopy(shuffle(individuo_turma))
+        populacao_atual.append(individuo[i])
     # populações convergem aqui.
     finalizado = False
     while not finalizado:
-        populacao_fitness = []
-        for i in range(len(populacao_inicial)):
+        individuo_fitness = []
+        for i in range(len(populacao_atual)):
             individuo_fitness[i] = populacao_atual[i].fitness(temp_inequacoes)
-            populacao_fitness.append(individuo_fitness[i])
+            individuo_fitness.append(individuo_fitness[i])
         # Aqui começa a seleção
         # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
         total = 0
         for i in range(n):
-            total = total + populacao_fitness[i]
+            total = total + individuo_fitness[i]
         roleta_range = []
         for i in range(n):
             if i == 0:
@@ -1681,10 +1690,11 @@ for t in range(len(turmas_objetos)):
             fim = inicio + (populacao_fitness[i] * 10000 / total)
             roleta_range.append([inicio, fim])
         selecionados = []
-        for i in range(n):
+        for i in range(n_individuos):
             valor = random.randomint(0,10001)
-            if roleta_range[i][0] <= valor and valor <= roleta_range[i][1]:
-                selecionados.append(populacao_atual[i])
+            for j in range(n_individuos)
+                if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
+                    selecionados.append(populacao_atual[i])
         # Neste ponto temos os selecionados.
         lista_crossover = []
         nao_lista_crossover = []
@@ -1706,7 +1716,7 @@ for t in range(len(turmas_objetos)):
             lista_crossover.pop(indice)
         # Realizar crossover (position-based crossover)
         # Critério: trocar o conteúdo de 5 posições e manter as outras
-        # Então vamos sortear as 5 posições que serão alternadas
+        # Então vamos sortear as 5 posições que serão embaralhadas
         range_5 = []
         while len(range_5) != 5:
             sorte = random.randomint(0,frame_tamanho + 1)
@@ -1719,6 +1729,7 @@ for t in range(len(turmas_objetos)):
             posicao_nova = []
             for j in range(len(range_5)):
                 posicao_nova.append(lista_crossover[range_5[j]])
+            shuffle(posicao_nova)
             for j in range(frame_tamanho):
                 if j in range_5:
                     filho.append(posicao_nova[0])
@@ -1754,15 +1765,15 @@ for t in range(len(turmas_objetos)):
                 break
         if finalizado:
             for i in range(len(solucao)):
-                temp_sorteados.append(solucao[i])
-                temp_entradas.remove(solucao[i])
+                lista_sorteados.append(solucao[i])
                 for j in range(len(temp_inequacoes)):
                     if temp_inequacoes[j][1] > 0 and solucao[i] in temp_inequacoes[j][0]:
                         temp_inequacoes[j][1] = temp_inequacoes[j][1] - 1
                 inequacoes = copy.deepcopy(temp_inequacoes)
-                finalizado = True
-                print('Vezes: -----------------------------', vez)
-                iteracoes = iteracoes + vez
+            finalizado = True
+            print('Vezes: -----------------------------', vez)
+            iteracoes = iteracoes + vez
+
         else:
             vez = vez + 1
             temp_sorteados = []
@@ -1792,7 +1803,7 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
-'''
+
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 '''
