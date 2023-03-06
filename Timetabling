@@ -1542,12 +1542,17 @@ class Individuo:
         return self.individuo
 
     def testa_solucao(self, inequacoes, lista_tdps):
+        # print('\nTestando solução')
         inequacoes_copia = copy.deepcopy(inequacoes)
-        for s in range(len(self.individuo)):
-            if self.individuo[s] != 0:
-                t = self.individuo[s][0]
-                d = self.individuo[s][1]
-                p = self.individuo[s][2]
+        for f in range(frame_tamanho):
+            if self.individuo[f] != 0:
+                t = self.individuo[f][0]
+                d = self.individuo[f][1]
+                p = self.individuo[f][2]
+                if turmas_objetos[t].turno == 'Matutino':
+                    s = f
+                else:
+                    s = f + 25
                 valor_da_vez = lista_tdps[t][d][p][s]
                 print('valor da vez: ', valor_da_vez)
                 tem_7 = False
@@ -1591,15 +1596,19 @@ class Individuo:
                         if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
                             inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                 else:
+                    print()
                     return False
-        for s in range(len(self.individuo)):
-            if self.individuo[s] != 0:
-                t = self.individuo[s][0]
-                d = self.individuo[s][1]
-                p = self.individuo[s][2]
+        for f in range(frame_tamanho):
+            if self.individuo[f] != 0:
+                t = self.individuo[f][0]
+                d = self.individuo[f][1]
+                p = self.individuo[f][2]
+                if turmas_objetos[t].turno == 'Matutino':
+                    s = f
+                else:
+                    s = f + 25
                 valor_da_vez = lista_tdps[t][d][p][s]
                 self.solucao.append(valor_da_vez)
-        print()
         return True
 
     def solucao_frame(self):
@@ -1608,11 +1617,15 @@ class Individuo:
     def fitness(self, inequacoes, lista_tdps):
         inequacoes_copia = copy.deepcopy(inequacoes)
         fitness = 0
-        for s in range(frame_tamanho):
-            if self.individuo[s] != 0:
-                t = self.individuo[s][0]
-                d = self.individuo[s][1]
-                p = self.individuo[s][2]
+        for f in range(frame_tamanho):
+            if self.individuo[f] != 0:
+                t = self.individuo[f][0]
+                d = self.individuo[f][1]
+                p = self.individuo[f][2]
+                if turmas_objetos[t].turno == 'Matutino':
+                    s = f
+                else:
+                    s = f + 25
                 valor_da_vez = lista_tdps[t][d][p][s]
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
@@ -1626,7 +1639,7 @@ class Individuo:
             for i in range(len(inequacoes_copia)):
                 if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
                     inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-            return fitness
+        return fitness
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # Encaixando peças
@@ -1706,6 +1719,7 @@ for t in range(len(turmas_objetos)):
         total = 0
         for i in range(n_individuos):
             total = total + individuo_fitness[i]
+        print('individuo_fitness: ', individuo_fitness)
         roleta_range = []
         for i in range(n_individuos):
             if i == 0:
@@ -1802,6 +1816,7 @@ for t in range(len(turmas_objetos)):
 
         else:
             vez = vez + 1
+            print('Turma: ', t, 'vez: ', vez)
             temp_sorteados = []
             temp_entradas = copy.deepcopy(turmas_backup[t])
             temp_inequacoes = copy.deepcopy(inequacoes)
