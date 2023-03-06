@@ -1554,7 +1554,7 @@ class Individuo:
                 else:
                     s = f + 25
                 valor_da_vez = lista_tdps[t][d][p][s]
-                print('valor da vez: ', valor_da_vez)
+                # print('valor da vez: ', valor_da_vez)
                 tem_7 = False
                 tem_6 = False
                 tem_4 = False
@@ -1596,7 +1596,7 @@ class Individuo:
                         if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
                             inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                 else:
-                    print()
+                    # print()
                     return False
         for f in range(frame_tamanho):
             if self.individuo[f] != 0:
@@ -1719,7 +1719,7 @@ for t in range(len(turmas_objetos)):
         total = 0
         for i in range(n_individuos):
             total = total + individuo_fitness[i]
-        print('individuo_fitness: ', individuo_fitness)
+        # print('individuo_fitness: ', individuo_fitness)
         roleta_range = []
         for i in range(n_individuos):
             if i == 0:
@@ -1757,7 +1757,7 @@ for t in range(len(turmas_objetos)):
         # Critério: trocar o conteúdo de 5 posições e manter as outras
         # Então vamos sortear as 5 posições que serão embaralhadas
         range_5 = []
-        while len(range_5) != 5:
+        while len(range_5) != 4:
             sorte = choice(range_25)
             if sorte not in range_5:
                 range_5.append(sorte)
@@ -1816,7 +1816,7 @@ for t in range(len(turmas_objetos)):
 
         else:
             vez = vez + 1
-            print('Turma: ', t, 'vez: ', vez)
+            # print('Turma: ', t, 'vez: ', vez)
             temp_sorteados = []
             temp_entradas = copy.deepcopy(turmas_backup[t])
             temp_inequacoes = copy.deepcopy(inequacoes)
