@@ -4,7 +4,7 @@ import copy
 import time
 import sys
 from prettytable import PrettyTable
-from random import choice, shuffle
+from random import choice, shuffle, random
 
 START_POINT = 0
 END_POINT = None
@@ -1530,6 +1530,8 @@ for t in range(len(turmas_objetos)):
         lista_p = []
     lista_tdps.append(lista_d)
     lista_d = []
+for i in range(len(estrela_chaves)):
+    lista_tdps[estrela_chaves[i][0]][estrela_chaves[i][1]][estrela_chaves[i][2]][estrela_chaves[i][3]] = i
 # --------------------------------------------------------------------------------------------------------
 class Individuo:
     def __init__(self, individuo):
@@ -1546,6 +1548,8 @@ class Individuo:
                 d = self.individuo[s][1]
                 p = self.individuo[s][2]
                 valor_da_vez = lista_tdps[t][d][p][s]
+                for i in range(10):
+                    print('lista_tdps2: ', lista_tdps[i])
                 tem_7 = False
                 tem_6 = False
                 tem_4 = False
@@ -1603,14 +1607,15 @@ class Individuo:
         return self.solucao
 
     def fitness(self, inequacoes, lista_tdps):
-        print(inequacoes)
         fitness = 0
         for s in range(frame_tamanho):
+            print('self.individuo[s]', self.individuo[s])
             if self.individuo[s] != 0:
                 t = self.individuo[s][0]
                 d = self.individuo[s][1]
                 p = self.individuo[s][2]
                 valor_da_vez = lista_tdps[t][d][p][s]
+                print('valor_da_vez', valor_da_vez)
                 for i in range(len(inequacoes)):
                     if inequacoes[i][1] > 0 and inequacoes[i][2] == '3':
                         if valor_da_vez in inequacoes[i][0]:
@@ -1619,6 +1624,10 @@ class Individuo:
                     if inequacoes[i][1] > 0 and inequacoes[i][2] == '4':
                         if valor_da_vez in inequacoes[i][0]:
                             fitness = fitness + 1
+            # limpar inequações
+            for i in range(len(inequacoes)):
+                if inequacoes[i][1] > 0 and valor_da_vez in inequacoes[i][0]:
+                    inequacoes[i][1] = inequacoes[i][1] - 1
             return fitness
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
@@ -1628,13 +1637,30 @@ iteracoes = 0
 tempo_1 = time.time()
 turmas_backup = []
 turmas_creditos = []
+
+n_individuos = 20
+range_n = []
+for i in range(n_individuos):
+    range_n.append(i)
+
+range_25 = []
+frame_tamanho = 25
+for i in range(frame_tamanho):
+    range_25.append(i)
+
+range_0_25 = []
+frame_tamanho = 25
+for i in range(frame_tamanho + 1):
+    range_0_25.append(i)
+
 range_100 = []
 for i in range(1, 101):
     range_100.append(i)
-frame_tamanho = 25
-range_25 = []
-for i in range(frame_tamanho):
-    range_25.append(i)
+
+range_10000 = []
+for i in range(1, 10001):
+    range_10000.append(i)
+
 for i in range(len(turmas_objetos)):
     # N_individuos representa o número de indivíduos deste algoritmo genético
     frame_turno = ''
@@ -1658,7 +1684,6 @@ for i in range(len(turmas_objetos)):
     turmas_creditos.append(cred)
 lista_sorteados = []
 for t in range(len(turmas_objetos)):
-    n_individuos = 20
     individuos = []  # n indivíduos (cada indivíduo, um frame)
     print('\nTurma: ', t)
     vez = 1
@@ -1696,7 +1721,7 @@ for t in range(len(turmas_objetos)):
             roleta_range.append([inicio, fim])
         selecionados = []
         for i in range(n_individuos):
-            valor = random.randomint(0,10001)
+            valor = choice(range_10000)
             for j in range(n_individuos):
                 if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
                     selecionados.append(populacao_atual[i])
@@ -1724,29 +1749,32 @@ for t in range(len(turmas_objetos)):
         # Então vamos sortear as 5 posições que serão embaralhadas
         range_5 = []
         while len(range_5) != 5:
-            sorte = random.randomint(0,frame_tamanho + 1)
+            sorte = choice(range_0_25)
             if sorte not in range_5:
                 range_5.append(sorte)
         # Vamos gerar os filhos.
         filhos = []
-        for i in range(lista_crossover):
+        for i in range(len(lista_crossover)):
             filho = []
             posicao_nova = []
+            lista_individuo = lista_crossover[i].individuo
             for j in range(len(range_5)):
-                posicao_nova.append(lista_crossover[range_5[j]])
+                print('range_5[j]: ', range_5[j])
+                print('len(lista_individuo): ', len(lista_individuo))
+                posicao_nova.append(lista_individuo[range_5[j]])
             shuffle(posicao_nova)
             for j in range(frame_tamanho):
-                if j in range_5:
+                if k in range_5:
                     filho.append(posicao_nova[0])
                     posicao_nova.remove(0)
                 else:
-                    filho.append(lista_crossover[i][j])
+                    filho.append(lista_individuo[j])
             filhos.append(filho)
         # Realizar mutação (order-based mutation).
         # Varrer posições e aplicar Bernoulli (pm)
         # Se posição for sofrer mutação, sortear outra posição para realizar a troca
         for i in range(len(filhos)):
-            for j in range(len(frame_tamanho)):
+            for j in range(frame_tamanho):
                 pm = 1
                 valor = choice(range_100)
                 if valor <= pm:
