@@ -1702,6 +1702,7 @@ for t in range(len(turmas_objetos)):
     temp_sorteados = []
     temp_entradas = copy.deepcopy(turmas_backup[t])
     temp_inequacoes = copy.deepcopy(inequacoes)
+
     print('Tamanho entrada: ', turmas_creditos[t])
     populacao_atual = []
     temp = copy.deepcopy(turmas_backup[t])
@@ -1714,6 +1715,29 @@ for t in range(len(turmas_objetos)):
         individuo_fitness = []
         for i in range(len(populacao_atual)):
             individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
+        # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
+        print('indivíduo_fitness: ', individuo_fitness)
+        melhor_fitness = -100
+        posicao_fitness = 0
+        grupo_melhores = []
+        for i in range(len(populacao_atual)):
+            if individuo_fitness[i] > melhor_fitness:
+                melhor_fitness = individuo_fitness[i]
+                posicao_fitness = i
+                grupo_melhores.append(populacao_atual[i])
+        grupo_melhores.reverse()
+        top = []
+        top.append(grupo_melhores[0])
+        melhor_fitness = -100
+        grupo_melhores = []
+        for i in range(len(populacao_atual)):
+            if i != posicao_fitness:
+                if individuo_fitness[i] > melhor_fitness:
+                    melhor_fitness = individuo_fitness[i]
+                    posicao_fitness = i
+                    grupo_melhores.append(populacao_atual[i])
+        grupo_melhores.reverse()
+        top.append(grupo_melhores[0])
         # Aqui começa a seleção
         # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
         total = 0
@@ -1789,12 +1813,19 @@ for t in range(len(turmas_objetos)):
                     dest = choice(range_25)
                     filhos[i][j] = filhos[i][dest]
                     filhos[i][dest] = temp
-        # Agora junta filhos e não escolhidos
+        # Agora junta top, filhos e não escolhidos
         populacao_atual = []
+        populacao_atual.append(top[0])
+        populacao_atual.append(top[1])
         for i in range(len(filhos)):
             populacao_atual.append(Individuo(filhos[i]))
         for i in range(len(nao_lista_crossover)):
             populacao_atual.append(nao_lista_crossover[i])
+        populacao_atual.reverse()
+        while len(populacao_atual) > n_individuos:
+            populacao_atual.pop(0)
+        populacao_atual.reverse()
+
         # Agora é testar se algum indivíduo é resultado válido.
         finalizado = False
         for i in range(len(populacao_atual)):
@@ -1939,3 +1970,28 @@ print('Total de xx: ', cont)
 print(lista_sorteados)
 '''
 # --------------------------------------------------------------------------------------------------------
+'''
+    # melhorando performance
+    temp_index = []
+    for i in range(len(turmas_backup[t])):
+        if turmas_backup[t][i] != 0:
+            tt = turmas_backup[t][i][0]
+            dd = turmas_backup[t][i][1]
+            pp = turmas_backup[t][i][2]
+            for ss in range(25):
+                if turmas_objetos[tt].turno == 'Matutino':
+                    valor = lista_tdps[tt][dd][pp][ss]
+                    temp_index.append(valor)
+                else:
+                    zz = ss + 25
+                    valor = lista_tdps[tt][dd][pp][zz]
+                    temp_index.append(valor)
+    temp_inequacoes100 = []
+    for i in range(len(inequacoes)):
+        for j in temp_index:
+            if j in inequacoes[i][0]:
+                temp_inequacoes100.append(inequacoes[i])
+    # temp_inequacoes = copy.deepcopy(inequacoes)
+    temp_inequacoes = copy.deepcopy(temp_inequacoes100)
+    print('temp_inequações: ', temp_inequacoes)
+'''
