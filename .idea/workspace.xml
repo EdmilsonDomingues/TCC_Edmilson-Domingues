@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
-    </list>
+    <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="99">
-              <caret line="1629" column="54" lean-forward="true" selection-start-line="1629" selection-start-column="54" selection-end-line="1629" selection-end-column="54" />
+              <caret line="1629" column="54" selection-start-line="1629" selection-start-column="54" selection-end-line="1629" selection-end-column="54" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <marker date="1678302007620" expanded="true" signature="65041:65077" ph="..." />
@@ -228,7 +225,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -298,7 +295,7 @@
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
-          <caret line="1629" column="54" lean-forward="true" selection-start-line="1629" selection-start-column="54" selection-end-line="1629" selection-end-column="54" />
+          <caret line="1629" column="54" selection-start-line="1629" selection-start-column="54" selection-end-line="1629" selection-end-column="54" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <marker date="1678302007620" expanded="true" signature="65041:65077" ph="..." />
