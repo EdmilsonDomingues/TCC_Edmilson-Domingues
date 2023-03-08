@@ -1635,10 +1635,10 @@ class Individuo:
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
-            # limpar inequações
-            for i in range(len(inequacoes_copia)):
-                if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
-                    inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
+                # limpar inequações
+                for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
+                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
         return fitness
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
@@ -1734,18 +1734,25 @@ for t in range(len(turmas_objetos)):
             if i != posicao_fitness:
                 if individuo_fitness[i] > melhor_fitness:
                     melhor_fitness = individuo_fitness[i]
-                    posicao_fitness = i
                     grupo_melhores.append(populacao_atual[i])
         grupo_melhores.reverse()
         top.append(grupo_melhores[0])
+        # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
+        #       como referência o menor valor [normalização].
+        referencia = 500
+        for i in range(len(populacao_atual)):
+            if individuo_fitness[i] < referencia:
+                referencia = individuo_fitness[i]
+        for i in range(len(populacao_atual)):
+            individuo_fitness[i] = individuo_fitness[i] - referencia + 1
         # Aqui começa a seleção
         # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
         total = 0
-        for i in range(n_individuos):
+        for i in range(len(populacao_atual)):
             total = total + individuo_fitness[i]
         # print('individuo_fitness: ', individuo_fitness)
         roleta_range = []
-        for i in range(n_individuos):
+        for i in range(len(populacao_atual)):
             if i == 0:
                 inicio = 0
             else:
@@ -1753,9 +1760,9 @@ for t in range(len(turmas_objetos)):
             fim = inicio + (individuo_fitness[i] * 10000 / total)
             roleta_range.append([inicio, fim])
         selecionados = []
-        for i in range(n_individuos):
+        for i in range(len(populacao_atual)):
             valor = choice(range_10000)
-            for j in range(n_individuos):
+            for j in range(len(populacao_atual)):
                 if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
                     selecionados.append(populacao_atual[i])
         # Neste ponto temos os selecionados.
