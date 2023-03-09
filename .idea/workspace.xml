@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="" />
+    <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +46,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="57964" />
+          <entry key="Timetabling" value="58866" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="57964" />
+          <entry key="Python" value="58866" />
         </counts>
       </usages-collector>
     </session>
@@ -59,12 +61,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="1629" column="54" selection-start-line="1629" selection-start-column="54" selection-end-line="1629" selection-end-column="54" />
+            <state relative-caret-position="224">
+              <caret line="2082" column="14" selection-start-line="2082" selection-start-column="14" selection-end-line="2082" selection-end-column="14" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1678302007620" expanded="true" signature="65041:65077" ph="..." />
-                <marker date="1678302007620" expanded="true" signature="68394:68428" ph="..." />
+                <marker date="1678390418544" expanded="true" signature="65041:65077" ph="..." />
+                <marker date="1678390418544" expanded="true" signature="68455:68489" ph="..." />
               </folding>
             </state>
           </provider>
@@ -74,10 +76,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>[[50, 1500, 2250, 2800, 3550, 3900, 4200, 4775, 5375, 5600, 5950, 6400],</find>
-      <find>Outra Vez:</find>
-      <find>Inequações 3: [[0, 550, 1400, 2625, 2775, 3500, 3850, 4150, 5175, 6025, 6350, 6625], 1, '2']</find>
-      <find>Inequações 3: [[0, 550, 1400, 2625, 2775, 3500, 3850, 4150, 5175, 6025, 6350, 6625],</find>
       <find>Inequações 3: [[25, 575, 1425, 2650, 2875, 3525, 3875, 4175, 5200, 6050, 6375, 6650], 1, '2']</find>
       <find>[[32, 582, 1432, 2657, 2882, 3532, 3882, 4182, 5207, 6057, 6382, 6657], 1, '2']</find>
       <find>outra vez:</find>
@@ -95,7 +93,6 @@
       <find>pop(</find>
       <find>print(</find>
       <find>vez:</find>
-      <find>print()</find>
       <find>temp_inequacoes</find>
       <find>6649</find>
       <find>pop</find>
@@ -104,6 +101,11 @@
       <find>$</find>
       <find>lista_tdps</find>
       <find>valor_da_vez = lista_tdps</find>
+      <find>$$</find>
+      <find>temp_inequacoes = copy.deepcopy(temp_inequacoes100</find>
+      <find>print('i:</find>
+      <find>print('valor_da_</find>
+      <find>print()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -116,7 +118,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="159" />
     <option name="width" value="1338" />
@@ -226,13 +228,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5147541" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38032788" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -294,12 +297,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="1629" column="54" selection-start-line="1629" selection-start-column="54" selection-end-line="1629" selection-end-column="54" />
+        <state relative-caret-position="224">
+          <caret line="2082" column="14" selection-start-line="2082" selection-start-column="14" selection-end-line="2082" selection-end-column="14" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1678302007620" expanded="true" signature="65041:65077" ph="..." />
-            <marker date="1678302007620" expanded="true" signature="68394:68428" ph="..." />
+            <marker date="1678390418544" expanded="true" signature="65041:65077" ph="..." />
+            <marker date="1678390418544" expanded="true" signature="68455:68489" ph="..." />
           </folding>
         </state>
       </provider>

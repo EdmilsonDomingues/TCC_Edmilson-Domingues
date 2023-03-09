@@ -1590,13 +1590,13 @@ class Individuo:
                             tem_7 = True
                             # print('tem_7 True')
                             break
+                # print('valor_da_vez: ', valor_da_vez, tem_2, tem_3, tem_4, tem_6, tem_7)
                 if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
                     # limpar inequações
                     for i in range(len(inequacoes_copia)):
                         if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
                             inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                 else:
-                    # print()
                     return False
         for f in range(frame_tamanho):
             if self.individuo[f] != 0:
@@ -1631,10 +1631,22 @@ class Individuo:
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
+                            break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
+                            break
+                for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
+                        if valor_da_vez in inequacoes_copia[i][0]:
+                            fitness = fitness + 1
+                            break
+                for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
+                        if valor_da_vez in inequacoes_copia[i][0]:
+                            fitness = fitness + 1
+                            break
                 # limpar inequações
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
@@ -1644,6 +1656,7 @@ class Individuo:
 # Testes de heurística:
 # Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético.
+'''
 iteracoes = 0
 tempo_1 = time.time()
 turmas_backup = []
@@ -1882,7 +1895,7 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
-
+'''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 '''
@@ -1977,8 +1990,70 @@ print('Total de xx: ', cont)
 print(lista_sorteados)
 '''
 # --------------------------------------------------------------------------------------------------------
-'''
-    # melhorando performance
+# Testes de heurística:
+# Encaixando peças
+# Aqui neste bloco será aplicado um algoritmo genético.
+# Tentativa de melhorar a performance.
+iteracoes = 0
+tempo_1 = time.time()
+turmas_backup = []
+turmas_creditos = []
+
+n_individuos = 20
+range_n = []
+for i in range(n_individuos):
+    range_n.append(i)
+
+range_25 = []
+frame_tamanho = 25
+for i in range(frame_tamanho):
+    range_25.append(i)
+
+range_0_25 = []
+frame_tamanho = 25
+for i in range(frame_tamanho + 1):
+    range_0_25.append(i)
+
+range_100 = []
+for i in range(1, 101):
+    range_100.append(i)
+
+range_10000 = []
+for i in range(1, 10001):
+    range_10000.append(i)
+
+for i in range(len(turmas_objetos)):
+    # N_individuos representa o número de indivíduos deste algoritmo genético
+    frame_turno = ''
+    frame_tuplas_tdp = []
+    cred = 0
+    for j in range(len(estrela_chaves)):
+        tu = estrela_chaves[j][0]
+        if tu == i:
+            di = estrela_chaves[j][1]
+            pr = estrela_chaves[j][2]
+            if [tu, di, pr] not in frame_tuplas_tdp:
+                cr = disciplinas_objetos[di].quantidade_aulas_semanais
+                cred = cred + cr
+                for w in range(cr):
+                    frame_tuplas_tdp.append([tu, di, pr])
+    if len(frame_tuplas_tdp) < frame_tamanho:
+        falta = frame_tamanho - len(frame_tuplas_tdp)
+        for k in range(falta):
+            frame_tuplas_tdp.append(0)
+    turmas_backup.append(frame_tuplas_tdp)
+    turmas_creditos.append(cred)
+lista_sorteados = []
+for t in range(len(turmas_objetos)):
+    individuos = []  # n indivíduos (cada indivíduo, um frame)
+    print('\nTurma: ', t)
+    vez = 1
+    # print('Vez: ', vez)
+    temp_sorteados = []
+    temp_entradas = copy.deepcopy(turmas_backup[t])
+    # temp_inequacoes = copy.deepcopy(inequacoes)   $$
+
+    # melhorando performance    $$
     temp_index = []
     for i in range(len(turmas_backup[t])):
         if turmas_backup[t][i] != 0:
@@ -1988,17 +2063,211 @@ print(lista_sorteados)
             for ss in range(25):
                 if turmas_objetos[tt].turno == 'Matutino':
                     valor = lista_tdps[tt][dd][pp][ss]
-                    temp_index.append(valor)
+                    if valor not in temp_index:
+                        temp_index.append(valor)
                 else:
                     zz = ss + 25
                     valor = lista_tdps[tt][dd][pp][zz]
-                    temp_index.append(valor)
+                    if valor not in temp_valor:
+                        temp_index.append(valor)
+    print('temp_index: ', temp_index)
     temp_inequacoes100 = []
     for i in range(len(inequacoes)):
         for j in temp_index:
             if j in inequacoes[i][0]:
                 temp_inequacoes100.append(inequacoes[i])
-    # temp_inequacoes = copy.deepcopy(inequacoes)
     temp_inequacoes = copy.deepcopy(temp_inequacoes100)
-    print('temp_inequações: ', temp_inequacoes)
-'''
+    for i in range(len(temp_inequacoes)):
+        if temp_inequacoes[i][2] == '6':
+            print(temp_inequacoes[i])
+    sys.exit(0)
+    print('Tamanho entrada: ', turmas_creditos[t])
+    populacao_atual = []
+    temp = copy.deepcopy(turmas_backup[t])
+    for i in range(n_individuos):
+        shuffle(temp)
+        populacao_atual.append(Individuo(copy.deepcopy(temp)))
+    # populações convergem aqui.
+    finalizado = False
+    while not finalizado:
+        individuo_fitness = []
+        for i in range(len(populacao_atual)):
+            individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
+        # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
+        print('indivíduo_fitness: ', individuo_fitness)
+        melhor_fitness = -100
+        posicao_fitness = 0
+        grupo_melhores = []
+        for i in range(len(populacao_atual)):
+            if individuo_fitness[i] > melhor_fitness:
+                melhor_fitness = individuo_fitness[i]
+                posicao_fitness = i
+                grupo_melhores.append(populacao_atual[i])
+        grupo_melhores.reverse()
+        top = []
+        top.append(grupo_melhores[0])
+        melhor_fitness = -100
+        grupo_melhores = []
+        for i in range(len(populacao_atual)):
+            if i != posicao_fitness:
+                if individuo_fitness[i] > melhor_fitness:
+                    melhor_fitness = individuo_fitness[i]
+                    grupo_melhores.append(populacao_atual[i])
+        grupo_melhores.reverse()
+        top.append(grupo_melhores[0])
+        # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
+        #       como referência o menor valor [normalização].
+        referencia = 500
+        for i in range(len(populacao_atual)):
+            if individuo_fitness[i] < referencia:
+                referencia = individuo_fitness[i]
+        for i in range(len(populacao_atual)):
+            individuo_fitness[i] = individuo_fitness[i] - referencia + 1
+        # Aqui começa a seleção
+        # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
+        total = 0
+        for i in range(len(populacao_atual)):
+            total = total + individuo_fitness[i]
+        # print('individuo_fitness: ', individuo_fitness)
+        roleta_range = []
+        for i in range(len(populacao_atual)):
+            if i == 0:
+                inicio = 0
+            else:
+                inicio = roleta_range[i-1][1]
+            fim = inicio + (individuo_fitness[i] * 10000 / total)
+            roleta_range.append([inicio, fim])
+        selecionados = []
+        for i in range(len(populacao_atual)):
+            valor = choice(range_10000)
+            for j in range(len(populacao_atual)):
+                if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
+                    selecionados.append(populacao_atual[i])
+        # Neste ponto temos os selecionados.
+        lista_crossover = []
+        nao_lista_crossover = []
+        pc = 70
+        for i in range(len(selecionados)):
+            valor = choice(range_100)
+            if valor <= pc:
+                lista_crossover.append(selecionados[i])
+            else:
+                nao_lista_crossover.append(selecionados[i])
+        # Verificar se número ímpar de selecionados:
+        if len(lista_crossover)%2 == 0:
+            pass
+        else:
+            tamanho_lista = len(lista_crossover)
+            indice = tamanho_lista - 1
+            valor = lista_crossover[indice]
+            nao_lista_crossover.append(valor)
+            lista_crossover.pop(indice)
+        # Realizar crossover (position-based crossover)
+        # Critério: trocar o conteúdo de 5 posições e manter as outras
+        # Então vamos sortear as 5 posições que serão embaralhadas
+        range_5 = []
+        while len(range_5) != 4:
+            sorte = choice(range_25)
+            if sorte not in range_5:
+                range_5.append(sorte)
+        # Vamos gerar os filhos.
+        filhos = []
+        for i in range(len(lista_crossover)):
+            filho = []
+            posicao_nova = []
+            lista_individuo = lista_crossover[i].individuo
+            for j in range(len(range_5)):
+                posicao_nova.append(lista_individuo[range_5[j]])
+            shuffle(posicao_nova)
+            for j in range(frame_tamanho):
+                if j in range_5:
+                    filho.append(posicao_nova[0])
+                    posicao_nova.pop(0)
+                else:
+                    filho.append(lista_individuo[j])
+            filhos.append(filho)
+        # Realizar mutação (order-based mutation).
+        # Varrer posições e aplicar Bernoulli (pm)
+        # Se posição for sofrer mutação, sortear outra posição para realizar a troca
+        for i in range(len(filhos)):
+            for j in range(frame_tamanho):
+                pm = 1
+                valor = choice(range_100)
+                if valor <= pm:
+                    temp = filhos[i][j]
+                    dest = choice(range_25)
+                    filhos[i][j] = filhos[i][dest]
+                    filhos[i][dest] = temp
+        # Agora junta top, filhos e não escolhidos
+        populacao_atual = []
+        populacao_atual.append(top[0])
+        populacao_atual.append(top[1])
+        for i in range(len(filhos)):
+            populacao_atual.append(Individuo(filhos[i]))
+        for i in range(len(nao_lista_crossover)):
+            populacao_atual.append(nao_lista_crossover[i])
+        populacao_atual.reverse()
+        while len(populacao_atual) > n_individuos:
+            populacao_atual.pop(0)
+        populacao_atual.reverse()
+
+        # Agora é testar se algum indivíduo é resultado válido.
+        finalizado = False
+        for i in range(len(populacao_atual)):
+            tem_solucao = populacao_atual[i].testa_solucao(temp_inequacoes, lista_tdps)
+            if tem_solucao:
+                finalizado = True
+                solucao = populacao_atual[i].solucao_frame()
+                break
+        if finalizado:
+            for i in range(len(solucao)):
+                lista_sorteados.append(solucao[i])
+                # $$
+                for j in range(len(temp_inequacoes)):
+                    if temp_inequacoes[j][1] > 0 and solucao[i] in temp_inequacoes[j][0]:
+                        temp_inequacoes[j][1] = temp_inequacoes[j][1] - 1
+                inequacoes = copy.deepcopy(temp_inequacoes)
+                # $$
+                for j in range(len(inequacoes)):    # $$
+                    if inequacoes[j][1] > 0 and solucao[i] in inequacoes[j][0]:
+                        inequacoes[j][1] = inequacoes[j][1] - 1
+
+
+            finalizado = True
+            print('Vezes: -----------------------------', vez)
+            iteracoes = iteracoes + vez
+
+        else:
+            vez = vez + 1
+            # print('Turma: ', t, 'vez: ', vez)
+            temp_sorteados = []
+            temp_entradas = copy.deepcopy(turmas_backup[t])
+            # temp_inequacoes = copy.deepcopy(inequacoes)   $$
+            temp_inequacoes = copy.deepcopy(temp_inequacoes100)
+            finalizado = False
+
+xx = []
+for i in range(len(x)):
+    if i in lista_sorteados:
+        xx.append(1)
+    else:
+        xx.append(0)
+
+cont = 0
+for i in range(len(x)):
+    if x[i].X == 1:
+        cont = cont + 1
+print('Total de X: ', cont)
+
+cont = 0
+for i in range(len(xx)):
+    if xx[i] == 1:
+        cont = cont + 1
+print('Total de xx: ', cont)
+tempo_2 = time.time()
+intervalo = (tempo_2 - tempo_1) / 60
+print(iteracoes, ' iterações.')
+print(intervalo, ' minutos.')
+
+# --------------------------------------------------------------------------------------------------------
+
