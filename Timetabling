@@ -1628,6 +1628,11 @@ class Individuo:
                     s = f + 25
                 valor_da_vez = lista_tdps[t][d][p][s]
                 for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
+                        if valor_da_vez in inequacoes_copia[i][0]:
+                            fitness = fitness + 1
+                            break
+                for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
@@ -2072,15 +2077,33 @@ for t in range(len(turmas_objetos)):
                         temp_index.append(valor)
     print('temp_index: ', temp_index)
     temp_inequacoes100 = []
-    for i in range(len(inequacoes)):
-        for j in temp_index:
-            if j in inequacoes[i][0]:
-                temp_inequacoes100.append(inequacoes[i])
+    for i in range(len(temp_index)):
+        for j in range(len(inequacoes)):
+            if temp_index[i] in inequacoes[j][0]:
+                temp_inequacoes100.append(inequacoes[j])
     temp_inequacoes = copy.deepcopy(temp_inequacoes100)
-    for i in range(len(temp_inequacoes)):
-        if temp_inequacoes[i][2] == '6':
-            print(temp_inequacoes[i])
-    sys.exit(0)
+
+    for i in range(len(temp_index)):
+        cont1 = 0
+        for j in range(len(inequacoes)):
+            if temp_index[i] in inequacoes[j][0]:
+                cont1 = cont1 + 1
+        cont2 = 0
+        for j in range(len(temp_inequacoes)):
+            if temp_index[i] in temp_inequacoes[j][0]:
+                cont2 = cont2 + 1
+        print('index: ', temp_index[i], 'cont1: ', cont1, 'cont2: ', cont2)
+    for i in range(len(temp_index)):
+        if temp_index[i] == 0:
+            for j in range(len(inequacoes)):
+                if temp_index[i] in inequacoes[j][0]:
+                    print('inequações: ', inequacoes[j])
+            print()
+            for j in range(len(temp_inequacoes)):
+                if temp_index[i] in temp_inequacoes[j][0]:
+                    print('temp_inequações: ', temp_inequacoes[j])
+
+
     print('Tamanho entrada: ', turmas_creditos[t])
     populacao_atual = []
     temp = copy.deepcopy(turmas_backup[t])
