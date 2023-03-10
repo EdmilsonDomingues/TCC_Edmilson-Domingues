@@ -2079,7 +2079,7 @@ for t in range(len(turmas_objetos)):
                 else:
                     zz = ss + 25
                     valor = lista_tdps[tt][dd][pp][zz]
-                    if valor not in temp_valor:
+                    if valor not in temp_index:
                         temp_index.append(valor)
     print('temp_index: ', temp_index)
     temp_inequacoes100 = []
@@ -2122,7 +2122,7 @@ for t in range(len(turmas_objetos)):
         for i in range(len(populacao_atual)):
             individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
-        print('indivíduo_fitness: ', individuo_fitness)
+        # print('indivíduo_fitness: ', individuo_fitness)
         melhor_fitness = -100
         posicao_fitness = 0
         grupo_melhores = []
