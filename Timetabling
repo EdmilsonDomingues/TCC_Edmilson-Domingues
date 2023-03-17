@@ -1537,9 +1537,13 @@ class Individuo:
     def __init__(self, individuo):
         self.individuo = individuo
         self.solucao = []
+        self.slot_problema = 0
 
     def individuo(self):
         return self.individuo
+
+    def slot_problema(self):
+        return self.slot_problema
 
     def testa_solucao(self, inequacoes, lista_tdps):
         # print('\nTestando solução')
@@ -1627,36 +1631,44 @@ class Individuo:
                 else:
                     s = f + 25
                 valor_da_vez = lista_tdps[t][d][p][s]
+                delta = 0
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
+                            delta = delta + 1
                             # print('fitness2: ', fitness)
                             break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
+                            delta = delta + 1
                             # print('fitness3: ', fitness)
                             break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
+                            delta = delta + 1
                             # print('fitness4: ', fitness)
                             break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
+                            delta = delta + 1
                             # print('fitness6: ', fitness)
                             break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             fitness = fitness + 1
+                            delta = delta + 1
                             # print('fitness7: ', fitness)
                             break
+                if delta < 5:
+                    self.slot_problema = f # possível slot com problema
                 # print()
                 # limpar inequações
                 for i in range(len(inequacoes_copia)):
@@ -1785,6 +1797,35 @@ for t in range(len(turmas_objetos)):
             individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
         print('Turma: ', t, 'indivíduo_fitness: ', individuo_fitness, )
+
+        # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
+        # manipulação genética.
+        # Populações com fitness = máximo - 1 devem ser analisadas separadamente, no sentido de se
+        # finalizar a busca por solução.
+        '''
+        for i in range(len(populacao_atual)):
+            if individuo_fitness[i] == 124:
+                print('individuo com fitness 124: ', populacao_atual[i].individuo)
+        '''
+        max_fit = 125
+        for i in range(len(populacao_atual)):
+            if individuo_fitness[i] == max_fit - 1:
+                print('Achei um max_fit - 1')
+                temp_populacao = populacao_atual[i]
+                populacao_atual[i].fitness(temp_inequacoes, lista_tdps)    # para descobrir qual o slot com problema
+                slotcomproblema = populacao_atual[i].slot_problema
+                for j in range(25):
+                    if j != slotcomproblema:
+                        temp_list = populacao_atual[i].individuo
+                        temp_slot = temp_list[j]
+                        temp_list[j] = temp_list[slotcomproblema]
+                        temp_list[slotcomproblema] = temp_slot
+                        nova_populacao = Individuo(temp_list)
+                        if nova_populacao.fitness(temp_inequacoes, lista_tdps) == max_fit:
+                            populacao_atual[i] = nova_populacao
+                            individuo_fitness[i] = max_fit
+                            break
+
         top_quantidade = 4
         temp_top = []
         grupo_melhores_fitnesses = []
@@ -1887,10 +1928,6 @@ for t in range(len(turmas_objetos)):
                     filhos[i][dest] = temp
         # Agora junta top, filhos e não escolhidos
         populacao_atual = []
-        '''
-        populacao_atual.append(top[0])
-        populacao_atual.append(top[1])
-        '''
         for i in range(top_quantidade):
             populacao_atual.append(top[i])
         for i in range(len(filhos)):
@@ -1901,7 +1938,6 @@ for t in range(len(turmas_objetos)):
         while len(populacao_atual) > n_individuos:
             populacao_atual.pop(0)
         populacao_atual.reverse()
-
         # Agora é testar se algum indivíduo é resultado válido.
         finalizado = False
         for i in range(len(populacao_atual)):
@@ -1916,11 +1952,9 @@ for t in range(len(turmas_objetos)):
                 for j in range(len(inequacoes)):
                     if inequacoes[j][1] > 0 and solucao[i] in inequacoes[j][0]:
                         inequacoes[j][1] = inequacoes[j][1] - 1
-
             finalizado = True
             print('Vezes: -----------------------------', vez)
             iteracoes = iteracoes + vez
-
         else:
             vez = vez + 1
             # print('Turma: ', t, 'vez: ', vez)
