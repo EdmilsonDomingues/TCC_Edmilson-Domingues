@@ -1784,27 +1784,23 @@ for t in range(len(turmas_objetos)):
         for i in range(len(populacao_atual)):
             individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
-        # print('indivíduo_fitness: ', individuo_fitness)
-        melhor_fitness = -100
-        posicao_fitness = 0
-        grupo_melhores = []
-        for i in range(len(populacao_atual)):
-            if individuo_fitness[i] > melhor_fitness:
-                melhor_fitness = individuo_fitness[i]
-                posicao_fitness = i
-                grupo_melhores.append(populacao_atual[i])
-        grupo_melhores.reverse()
+        print('Turma: ', t, 'indivíduo_fitness: ', individuo_fitness, )
+        top_quantidade = 4
+        temp_top = []
+        grupo_melhores_fitnesses = []
         top = []
-        top.append(grupo_melhores[0])
-        melhor_fitness = -100
-        grupo_melhores = []
-        for i in range(len(populacao_atual)):
-            if i != posicao_fitness:
-                if individuo_fitness[i] > melhor_fitness:
-                    melhor_fitness = individuo_fitness[i]
-                    grupo_melhores.append(populacao_atual[i])
-        grupo_melhores.reverse()
-        top.append(grupo_melhores[0])
+        for i in range(len(individuo_fitness)):
+            if individuo_fitness[i] not in grupo_melhores_fitnesses:
+                grupo_melhores_fitnesses.append(individuo_fitness[i])
+        grupo_melhores_fitnesses.sort()
+        grupo_melhores_fitnesses.reverse()
+        for i in range(len(grupo_melhores_fitnesses)):
+            for j in range(len(individuo_fitness)):
+                if grupo_melhores_fitnesses[i] == individuo_fitness[j]:
+                    temp_top.append(populacao_atual[j])
+        for i in range(top_quantidade):
+            top.append(temp_top[0])
+            temp_top.pop(0)
         # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
         #       como referência o menor valor [normalização].
         referencia = 500
@@ -1853,24 +1849,25 @@ for t in range(len(turmas_objetos)):
             nao_lista_crossover.append(valor)
             lista_crossover.pop(indice)
         # Realizar crossover (position-based crossover)
-        # Critério: trocar o conteúdo de 5 posições e manter as outras
-        # Então vamos sortear as 5 posições que serão embaralhadas
-        range_5 = []
-        while len(range_5) != 4:
+        # Critério: trocar o conteúdo de posições e manter as outras
+        # Então vamos sortear as posições que serão embaralhadas
+        troca_n = 4
+        range_troca = []
+        while len(range_troca) != troca_n:
             sorte = choice(range_25)
-            if sorte not in range_5:
-                range_5.append(sorte)
+            if sorte not in range_troca:
+                range_troca.append(sorte)
         # Vamos gerar os filhos.
         filhos = []
         for i in range(len(lista_crossover)):
             filho = []
             posicao_nova = []
             lista_individuo = lista_crossover[i].individuo
-            for j in range(len(range_5)):
-                posicao_nova.append(lista_individuo[range_5[j]])
+            for j in range(len(range_troca)):
+                posicao_nova.append(lista_individuo[range_troca[j]])
             shuffle(posicao_nova)
             for j in range(frame_tamanho):
-                if j in range_5:
+                if j in range_troca:
                     filho.append(posicao_nova[0])
                     posicao_nova.pop(0)
                 else:
@@ -1890,8 +1887,12 @@ for t in range(len(turmas_objetos)):
                     filhos[i][dest] = temp
         # Agora junta top, filhos e não escolhidos
         populacao_atual = []
+        '''
         populacao_atual.append(top[0])
         populacao_atual.append(top[1])
+        '''
+        for i in range(top_quantidade):
+            populacao_atual.append(top[i])
         for i in range(len(filhos)):
             populacao_atual.append(Individuo(filhos[i]))
         for i in range(len(nao_lista_crossover)):
