@@ -1784,6 +1784,8 @@ for t in range(len(turmas_objetos)):
     '''
 
     print('Tamanho entrada: ', turmas_creditos[t])
+    max_fit = 5 * turmas_creditos[t]
+    print('max_fit: ', max_fit)
     populacao_atual = []
     temp = copy.deepcopy(turmas_backup[t])
     for i in range(n_individuos):
@@ -1796,37 +1798,33 @@ for t in range(len(turmas_objetos)):
         for i in range(len(populacao_atual)):
             individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
-        print('Turma: ', t, 'indivíduo_fitness: ', individuo_fitness, )
+        print('Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
 
         # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
         # manipulação genética.
         # Populações com fitness = máximo - 1 devem ser analisadas separadamente, no sentido de se
         # finalizar a busca por solução.
-        '''
-        for i in range(len(populacao_atual)):
-            if individuo_fitness[i] == 124:
-                print('individuo com fitness 124: ', populacao_atual[i].individuo)
-        '''
-        max_fit = 125
-        for i in range(len(populacao_atual)):
-            if individuo_fitness[i] == max_fit - 1:
-                print('Achei um max_fit - 1')
-                temp_populacao = populacao_atual[i]
-                populacao_atual[i].fitness(temp_inequacoes, lista_tdps)    # para descobrir qual o slot com problema
-                slotcomproblema = populacao_atual[i].slot_problema
-                for j in range(25):
-                    if j != slotcomproblema:
-                        temp_list = populacao_atual[i].individuo
-                        temp_slot = temp_list[j]
-                        temp_list[j] = temp_list[slotcomproblema]
-                        temp_list[slotcomproblema] = temp_slot
-                        nova_populacao = Individuo(temp_list)
-                        if nova_populacao.fitness(temp_inequacoes, lista_tdps) == max_fit:
-                            populacao_atual[i] = nova_populacao
-                            individuo_fitness[i] = max_fit
-                            break
-
         top_quantidade = 4
+        for i in range(len(populacao_atual)):
+            if i >= top_quantidade:
+                if individuo_fitness[i] == max_fit - 1:
+                    # print('Achei um max_fit - 1', 'i: ', i)
+                    temp_populacao = copy.deepcopy(populacao_atual[i])
+                    temp_populacao.fitness(temp_inequacoes, lista_tdps)    # para descobrir qual o slot com problema
+                    slotcomproblema = temp_populacao.slot_problema
+                    for j in range(25):
+                        if j != slotcomproblema:
+                            temp_list = temp_populacao.individuo
+                            temp_slot = temp_list[j]
+                            temp_list[j] = temp_list[slotcomproblema]
+                            temp_list[slotcomproblema] = temp_slot
+                            nova_populacao = Individuo(temp_list)
+                            if nova_populacao.fitness(temp_inequacoes, lista_tdps) == max_fit:
+                                print('Encontrei solução através de manipulação genética.')
+                                populacao_atual[i] = copy.deepcopy(nova_populacao)
+                                individuo_fitness[i] = max_fit
+                                break
+                    # print('Turma:_', t, 'indivíduo_fitness: ', individuo_fitness)
         temp_top = []
         grupo_melhores_fitnesses = []
         top = []
@@ -1835,6 +1833,7 @@ for t in range(len(turmas_objetos)):
                 grupo_melhores_fitnesses.append(individuo_fitness[i])
         grupo_melhores_fitnesses.sort()
         grupo_melhores_fitnesses.reverse()
+        # print('grupo_melhores_fitnesses: ', grupo_melhores_fitnesses)
         for i in range(len(grupo_melhores_fitnesses)):
             for j in range(len(individuo_fitness)):
                 if grupo_melhores_fitnesses[i] == individuo_fitness[j]:
@@ -1988,7 +1987,7 @@ print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+'''
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -2064,7 +2063,7 @@ for t in t_lista:
     print()
     print('Turma - heurística: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
+'''
 '''
 cont = 0
 for i in range(len(x)):
