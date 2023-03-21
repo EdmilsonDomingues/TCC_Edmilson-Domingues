@@ -1812,12 +1812,15 @@ for t in range(len(turmas_objetos)):
                     temp_populacao = copy.deepcopy(populacao_atual[i])
                     temp_populacao.fitness(temp_inequacoes, lista_tdps)    # para descobrir qual o slot com problema
                     slotcomproblema = temp_populacao.slot_problema
+                    # print('slotcomproblema: ', slotcomproblema)
+                    # print('populacao_atual[i]: ', temp_populacao.individuo)
                     for j in range(25):
                         if j != slotcomproblema:
-                            temp_list = temp_populacao.individuo
+                            temp_list = copy.deepcopy(temp_populacao.individuo)
                             temp_slot = temp_list[j]
                             temp_list[j] = temp_list[slotcomproblema]
                             temp_list[slotcomproblema] = temp_slot
+                            # print('        temp_list: ', temp_list)
                             nova_populacao = Individuo(temp_list)
                             if nova_populacao.fitness(temp_inequacoes, lista_tdps) == max_fit:
                                 print('Encontrei solução através de manipulação genética.')
@@ -1838,6 +1841,8 @@ for t in range(len(turmas_objetos)):
             for j in range(len(individuo_fitness)):
                 if grupo_melhores_fitnesses[i] == individuo_fitness[j]:
                     temp_top.append(populacao_atual[j])
+            if i == 0:
+                shuffle(temp_top)   # para possibilitar que novos melhores possam fazer parte do topo.
         for i in range(top_quantidade):
             top.append(temp_top[0])
             temp_top.pop(0)
@@ -1975,6 +1980,12 @@ for i in range(len(x)):
     if x[i].X == 1:
         cont = cont + 1
 print('Total de X: ', cont)
+
+cont = 0
+for i in range(len(y)):
+    if y[i].X == 1:
+        cont = cont + 1
+print('Total de Y: ', cont)
 
 cont = 0
 for i in range(len(xx)):
