@@ -1287,7 +1287,7 @@ for t in range(len(turmas_objetos)):
     '''
 
     print('Tamanho entrada: ', turmas_creditos[t])
-    max_fit = 5 * turmas_creditos[t]
+    max_fit = 6 * turmas_creditos[t]
     print('max_fit: ', max_fit)
     populacao_atual = []
     temp = copy.deepcopy(turmas_backup[t])
@@ -1300,7 +1300,43 @@ for t in range(len(turmas_objetos)):
         individuo_fitness = []
         for i in range(len(populacao_atual)):
             individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
-        # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
+
+        # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
+        windows2 = []
+        limite_fitness_janelas = t * 21 // len(turmas_objetos)
+        for i in range(len(populacao_atual)):
+            windows2 = copy.deepcopy(windows)
+            pontos_fitness = turmas_creditos[t]
+            for j in range(frame_tamanho):
+                numero_janelas = 0
+                lista = populacao_atual[i].individuo
+                if lista[j] != 0:
+                    tt = lista[j][0]
+                    p = lista[j][2]
+                    if turmas_objetos[tt].turno == 'Matutino':
+                        s = j
+                    else:
+                        s = j + 25
+                    ss = slots_objetos[s].slot
+                    if ss not in windows2[p]:
+                        windows2[p].append(ss)
+                        windows2[p].sort()
+                    grade = Grade('1', 'Matutino')
+                    janelas = grade.janelas()
+                    for m in range(len(janelas)):
+                        for n in range(len(windows2)):
+                            if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
+                                    in windows2[n]:
+                                numero_janelas = numero_janelas + 1
+            if numero_janelas <= limite_fitness_janelas:
+                individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
+
+
+
+
+
+
+        # Vamos isolar os melhores da população, mantendo-os na população nova.
         print('Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
 
         # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
@@ -1325,7 +1361,7 @@ for t in range(len(turmas_objetos)):
                             temp_list[slotcomproblema] = temp_slot
                             # print('        temp_list: ', temp_list)
                             nova_populacao = Individuo(temp_list)
-                            if nova_populacao.fitness(temp_inequacoes, lista_tdps) == max_fit:
+                            if nova_populacao.fitness(temp_inequacoes, lista_tdps) == max_fit - turmas_creditos[t]:
                                 print('Encontrei solução através de manipulação genética.')
                                 populacao_atual[i] = copy.deepcopy(nova_populacao)
                                 individuo_fitness[i] = max_fit
@@ -1448,7 +1484,37 @@ for t in range(len(turmas_objetos)):
         # Agora é testar se algum indivíduo é resultado válido.
         finalizado = False
         for i in range(len(populacao_atual)):
-            tem_solucao = populacao_atual[i].testa_solucao(temp_inequacoes, lista_tdps)
+
+            dentro_janelas = False
+            windows2 = copy.deepcopy(windows)
+            pontos_fitness = turmas_creditos[t]
+            for j in range(frame_tamanho):
+                numero_janelas = 0
+                lista = populacao_atual[i].individuo
+                if lista[j] != 0:
+                    tt = lista[j][0]
+                    p = lista[j][2]
+                    if turmas_objetos[tt].turno == 'Matutino':
+                        s = j
+                    else:
+                        s = j + 25
+                    ss = slots_objetos[s].slot
+                    if ss not in windows2[p]:
+                        windows2[p].append(ss)
+                        windows2[p].sort()
+                    grade = Grade('1', 'Matutino')
+                    janelas = grade.janelas()
+                    for m in range(len(janelas)):
+                        for n in range(len(windows2)):
+                            if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
+                                    in windows2[n]:
+                                numero_janelas = numero_janelas + 1
+            if numero_janelas <= limite_fitness_janelas:
+                dentro_janelas = True
+            tem_solucao = False
+            if dentro_janelas:
+                tem_solucao = populacao_atual[i].testa_solucao(temp_inequacoes, lista_tdps)
+
             if tem_solucao:
                 finalizado = True
                 solucao = populacao_atual[i].solucao_frame()
@@ -1457,7 +1523,7 @@ for t in range(len(turmas_objetos)):
             for i in range(len(solucao)):
                 lista_sorteados.append(solucao[i])
                 pp = estrela_chaves[solucao[i]][2]
-                ss = int(slots_objetos[estrela_chaves[solucao[i]][3]].slot)
+                ss = slots_objetos[estrela_chaves[solucao[i]][3]].slot
                 if ss not in windows[pp]:
                     windows[pp].append(ss)
                 for j in range(len(inequacoes)):
@@ -1466,6 +1532,16 @@ for t in range(len(turmas_objetos)):
             finalizado = True
             print('Vezes: -----------------------------', vez)
             iteracoes = iteracoes + vez
+
+            parcial_janelas = 0
+            grade_rodada = Grade('1', 'Matutino')
+            janelas1 = grade_rodada.janelas()
+            for m in range(len(janelas1)):
+                for n in range(len(windows)):
+                    if janelas1[m][0] in windows[n] and janelas1[m][1] not in windows[n] and janelas1[m][2] \
+                            in windows[n]:
+                        parcial_janelas = parcial_janelas + 1
+            print('Janelas até aqui: ', parcial_janelas)
         else:
             vez = vez + 1
             # print('Turma: ', t, 'vez: ', vez)
@@ -1508,7 +1584,7 @@ print(intervalo, ' minutos.')
 
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+'''
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -1584,7 +1660,7 @@ for t in t_lista:
     print()
     print('Turma - heurística: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
+'''
 '''
 cont = 0
 for i in range(len(x)):
