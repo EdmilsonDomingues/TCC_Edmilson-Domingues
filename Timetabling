@@ -864,8 +864,8 @@ class Individuo:
         return fitness
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-# Encaixando peças
-# Aqui neste bloco será aplicado um algoritmo genético.
+# #1: Estratégia = Encaixando peças
+# Aqui neste bloco será aplicado um algoritmo genético, mas sem a restrição de janelas.
 '''
 iteracoes = 0
 tempo_1 = time.time()
@@ -1174,8 +1174,8 @@ print(intervalo, ' minutos.')
 '''
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
-# Encaixando peças
-# Aqui neste bloco será aplicado um algoritmo genético.
+# #1: Estratégia = Encaixando peças
+# Aqui neste bloco será aplicado um algoritmo genético, com a restrição de janelas.
 
 iteracoes = 0
 tempo_1 = time.time()
@@ -1303,7 +1303,11 @@ for t in range(len(turmas_objetos)):
 
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
         windows2 = []
-        limite_fitness_janelas = (t + 1) * 21 // len(turmas_objetos)
+        # limite_fitness_janelas = (t + 1) * 21 // len(turmas_objetos)
+        if t < 11:
+            limite_fitness_janelas = 0
+        else:
+            limite_fitness_janelas = (t - 10) * 41 // (len(turmas_objetos) - 10)
         for i in range(len(populacao_atual)):
             windows2 = copy.deepcopy(windows)
             pontos_fitness = turmas_creditos[t]
@@ -1361,7 +1365,37 @@ for t in range(len(turmas_objetos)):
                             temp_list[slotcomproblema] = temp_slot
                             # print('        temp_list: ', temp_list)
                             nova_populacao = Individuo(temp_list)
-                            if nova_populacao.fitness(temp_inequacoes, lista_tdps) == max_fit - turmas_creditos[t]:
+
+                            dentro_janelas = False
+                            windows2 = copy.deepcopy(windows)
+                            pontos_fitness = turmas_creditos[t]
+                            for k in range(frame_tamanho):
+                                numero_janelas = 0
+                                if temp_list[k] != 0:
+                                    tt = temp_list[k][0]
+                                    p = temp_list[k][2]
+                                    if turmas_objetos[tt].turno == 'Matutino':
+                                        s = k
+                                    else:
+                                        s = k + 25
+                                    ss = slots_objetos[s].slot
+                                    if ss not in windows2[p]:
+                                        windows2[p].append(ss)
+                                        windows2[p].sort()
+                                    grade = Grade('1', 'Matutino')
+                                    janelas = grade.janelas()
+                                    for m in range(len(janelas)):
+                                        for n in range(len(windows2)):
+                                            if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and \
+                                                    janelas[m][2] \
+                                                    in windows2[n]:
+                                                numero_janelas = numero_janelas + 1
+                            if numero_janelas <= limite_fitness_janelas:
+                                dentro_janelas = True
+
+
+                            if dentro_janelas and nova_populacao.fitness(temp_inequacoes, lista_tdps) ==\
+                                    max_fit - turmas_creditos[t]:
                                 print('Encontrei solução através de manipulação genética.')
                                 populacao_atual[i] = copy.deepcopy(nova_populacao)
                                 individuo_fitness[i] = max_fit
