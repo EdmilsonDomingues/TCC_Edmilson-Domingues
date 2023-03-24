@@ -1303,7 +1303,7 @@ for t in range(len(turmas_objetos)):
 
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
         windows2 = []
-        limite_fitness_janelas = t * 21 // len(turmas_objetos)
+        limite_fitness_janelas = (t + 1) * 21 // len(turmas_objetos)
         for i in range(len(populacao_atual)):
             windows2 = copy.deepcopy(windows)
             pontos_fitness = turmas_creditos[t]
