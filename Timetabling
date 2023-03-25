@@ -560,7 +560,7 @@ for td in td_lista:
 
 # --------------------------------------------------------------------------------------------------------
 # Execução da modelagem:
-model.optimize()
+# model.optimize()
 # print(model.display())
 
 '''
@@ -572,7 +572,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+'''
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -649,7 +649,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
+'''
 # --------------------------------------------------------------------------------------------------------
 '''
 # Recorrência se resultado for Unfeasible:
@@ -1624,6 +1624,7 @@ print(intervalo, ' minutos.')
 # Aqui neste bloco será aplicado um algoritmo genético, com todas as restrições.
 iteracoes = 0
 tempo_1 = time.time()
+frame_tamanho = 25
 
 # Criação de todos os elementos que irão permutar.
 # Os elementos terão o formato [ [t, d, p], [t, d, p], ..., [t, d, p] ]
@@ -1637,7 +1638,14 @@ for i in range(len(estrela_chaves)):
         cr = disciplinas_objetos[di].quantidade_aulas_semanais
         for w in range(cr):
             frame_tuplas_tdp.append([tu, di, pr])
-print('len(frame_tuplas_tdp: ', len(frame_tuplas_tdp))
+for i in range(len(turmas_objetos)):
+    cont_aulas = 0
+    for j in range(len(frame_tuplas_tdp)):
+        if frame_tuplas_tdp[j][0] == i:
+            cont_aulas = cont_aulas + 1
+    while cont_aulas < frame_tamanho:
+        frame_tuplas_tdp.append([i, 999, 999])
+        cont_aulas = cont_aulas + 1
 
 # Neste ponto criaremos o buffer dos professores com os seus slots ocupados: [[0, 1, 25, 33], [2,4] ...]
 # No exemplo, professor 0 ocupa slots 0, 1, 25 e 33.
@@ -1652,7 +1660,6 @@ for i in range(n_individuos):
     range_n.append(i)
 
 range_25 = []
-frame_tamanho = 25
 for i in range(frame_tamanho):
     range_25.append(i)
 
@@ -1693,7 +1700,10 @@ while not finalizado:
         individuo_fitness.append(0)
     matriz_s = []
     for i in range(len(turmas_objetos)):
-        matriz_s.append(0)
+        if turmas_objetos[i].turno == 'Matutino':
+            matriz_s.append(0)
+        else:
+            matriz_s.append(frame_tamanho)
     for ii in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         inequacoes_copia = copy.deepcopy(inequacoes)
@@ -1705,66 +1715,75 @@ while not finalizado:
             p = obj_vez[j][2]
             s = matriz_s[t]
             matriz_s[t] = s + 1
-            windows[p].append(s)
-            if turmas_objetos[t].turno == 'Vespertino':
-                s = s + 25
-            valor_da_vez = lista_tdps[t][d][p][s]
-            for i in range(len(inequacoes_copia)):
-                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
-                    if valor_da_vez in inequacoes_copia[i][0]:
-                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                        fitness = fitness + 1
-                        break
-            for i in range(len(inequacoes_copia)):
-                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
-                    if valor_da_vez in inequacoes_copia[i][0]:
-                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                        fitness = fitness + 1
-                        break
-            for i in range(len(inequacoes_copia)):
-                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
-                    if valor_da_vez in inequacoes_copia[i][0]:
-                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                        fitness = fitness + 1
-                        break
-            for i in range(len(inequacoes_copia)):
-                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
-                    if valor_da_vez in inequacoes_copia[i][0]:
-                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                        fitness = fitness + 1
-                        break
-            for i in range(len(inequacoes_copia)):
-                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
-                    if valor_da_vez in inequacoes_copia[i][0]:
-                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                        fitness = fitness + 1
-                        break
+            if d != 999:
+                print('\nwindows[p]: ', windows[p])
+                if s not in windows[p]:
+                    windows[p].append(s)
+                print('t: ', t, 'd: ', d, 'p: ', p, 's: ', s)
+                print('windows[p]: ', windows[p])
+                valor_da_vez = lista_tdps[t][d][p][s]
+                for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
+                        if valor_da_vez in inequacoes_copia[i][0]:
+                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
+                            fitness = fitness + 1
+                            break
+                for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
+                        if valor_da_vez in inequacoes_copia[i][0]:
+                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
+                            fitness = fitness + 1
+                            break
+                for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
+                        if valor_da_vez in inequacoes_copia[i][0]:
+                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
+                            fitness = fitness + 1
+                            break
+                for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
+                        if valor_da_vez in inequacoes_copia[i][0]:
+                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
+                            fitness = fitness + 1
+                            break
+                for i in range(len(inequacoes_copia)):
+                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
+                        if valor_da_vez in inequacoes_copia[i][0]:
+                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
+                            fitness = fitness + 1
+                            break
         individuo_fitness[ii] = individuo_fitness[ii] + fitness
 
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
+        matriz_s = []
+        for i in range(len(turmas_objetos)):
+            if turmas_objetos[i].turno == 'Matutino':
+                matriz_s.append(0)
+            else:
+                matriz_s.append(frame_tamanho)
         windows2 = []
         limite_fitness_janelas = 100
         windows2 = copy.deepcopy(windows)
         pontos_fitness = len(frame_tuplas_tdp)
-        for j in range(frame_tuplas_tdp):
+        for j in range(len(frame_tuplas_tdp)):
             numero_janelas = 0
             lista = populacao_atual[ii].individuo
-            tt = lista[j][0]
+            t = lista[j][0]
+            d = lista[j][1]
             p = lista[j][2]
-            if turmas_objetos[tt].turno == 'Matutino':
-                s = j
-            else:
-                s = j + 25
-            ss = slots_objetos[s].slot
-            if ss not in windows2[p]:
-                windows2[p].append(ss)
-            grade = Grade('1', 'Matutino')
-            janelas = grade.janelas()
-            for m in range(len(janelas)):
-                for n in range(len(windows2)):
-                    if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
-                            in windows2[n]:
-                        numero_janelas = numero_janelas + 1
+            s = matriz_s[t]
+            matriz_s[t] = s + 1
+            if d != 999:
+                ss = slots_objetos[s].slot
+                if ss not in windows2[p]:
+                    windows2[p].append(ss)
+                grade = Grade('1', 'Matutino')
+                janelas = grade.janelas()
+                for m in range(len(janelas)):
+                    for n in range(len(windows2)):
+                        if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
+                                in windows2[n]:
+                            numero_janelas = numero_janelas + 1
         if numero_janelas <= limite_fitness_janelas:
             individuo_fitness[ii] = individuo_fitness[ii] + pontos_fitness
 
