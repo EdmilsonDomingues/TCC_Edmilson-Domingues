@@ -1638,6 +1638,8 @@ for i in range(len(estrela_chaves)):
         cr = disciplinas_objetos[di].quantidade_aulas_semanais
         for w in range(cr):
             frame_tuplas_tdp.append([tu, di, pr])
+pontos_fitness = len(frame_tuplas_tdp)
+max_fit = 6 * len(frame_tuplas_tdp)
 print('len(frame_tuplas_tdp):', len(frame_tuplas_tdp))
 for i in range(len(turmas_objetos)):
     cont_aulas = 0
@@ -1662,6 +1664,10 @@ range_25 = []
 for i in range(frame_tamanho):
     range_25.append(i)
 
+range_elementos = []
+for i in range(len(frame_tuplas_tdp)):
+    range_elementos.append(i)
+
 range_0_25 = []
 frame_tamanho = 25
 for i in range(frame_tamanho + 1):
@@ -1679,7 +1685,6 @@ for i in range(1, 10001):
 lista_sorteados = []
 
 # Fitness
-max_fit = 6 * len(frame_tuplas_tdp)
 print('max_fit: ', max_fit)
 
 # Criação da população
@@ -1690,7 +1695,7 @@ for i in range(n_individuos):
     populacao_atual.append(Individuo(copy.deepcopy(temp)))
 
 temp_inequacoes = copy.deepcopy(inequacoes)
-
+vez = 1
 # populações convergem aqui.
 finalizado = False
 while not finalizado:
@@ -1710,17 +1715,18 @@ while not finalizado:
         windows = []
         for i in range(len(professores_objetos)):
             windows.append([])
-        teste = 0
         for j in range(len(frame_tuplas_tdp)):
+            print('\nj: ', j, 'len(frame_tuplas_tdp: ', len(frame_tuplas_tdp), 'ii: ', ii)
             fitness = 0
             obj_vez = populacao_atual[ii].individuo
+            print('len(obj_vez: ', len(obj_vez))
+            print('obj_vez[j]: ', obj_vez[j])
             t = obj_vez[j][0]
             d = obj_vez[j][1]
             p = obj_vez[j][2]
             s = matriz_s[t]
             matriz_s[t] = s + 1
             if d != 999:
-                teste = teste + 1
                 # print('\nwindows[p]: ', windows[p])
                 if s not in windows[p]:
                     windows[p].append(s)
@@ -1776,7 +1782,6 @@ while not finalizado:
         windows2 = []
         limite_fitness_janelas = 100
         windows2 = copy.deepcopy(windows)
-        pontos_fitness = len(frame_tuplas_tdp)
         for j in range(len(frame_tuplas_tdp)):
             numero_janelas = 0
             lista = populacao_atual[ii].individuo
@@ -1835,10 +1840,7 @@ while not finalizado:
     else:
         vez = vez + 1
         # print('Turma: ', t, 'vez: ', vez)
-        temp_sorteados = []
-        temp_entradas = copy.deepcopy(turmas_backup[t])
-        # temp_inequacoes = copy.deepcopy(inequacoes)   $$
-        temp_inequacoes = copy.deepcopy(temp_inequacoes100)
+        temp_inequacoes = copy.deepcopy(inequacoes)
         finalizado = False
 
 
@@ -1869,7 +1871,7 @@ while not finalizado:
         temp_top.pop(0)
     # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
     #       como referência o menor valor [normalização].
-    referencia = 500
+    referencia = 50000
     for i in range(len(populacao_atual)):
         if individuo_fitness[i] < referencia:
             referencia = individuo_fitness[i]
@@ -1917,10 +1919,10 @@ while not finalizado:
     # Realizar crossover (position-based crossover)
     # Critério: trocar o conteúdo de posições e manter as outras
     # Então vamos sortear as posições que serão embaralhadas
-    troca_n = 4
+    troca_n = 40
     range_troca = []
     while len(range_troca) != troca_n:
-        sorte = choice(range_25)
+        sorte = choice(range_elementos)
         if sorte not in range_troca:
             range_troca.append(sorte)
     # Vamos gerar os filhos.
@@ -1932,7 +1934,7 @@ while not finalizado:
         for j in range(len(range_troca)):
             posicao_nova.append(lista_individuo[range_troca[j]])
         shuffle(posicao_nova)
-        for j in range(frame_tamanho):
+        for j in range(len(frame_tuplas_tdp)):
             if j in range_troca:
                 filho.append(posicao_nova[0])
                 posicao_nova.pop(0)
@@ -1943,12 +1945,12 @@ while not finalizado:
     # Varrer posições e aplicar Bernoulli (pm)
     # Se posição for sofrer mutação, sortear outra posição para realizar a troca
     for i in range(len(filhos)):
-        for j in range(frame_tamanho):
+        for j in range(len(frame_tuplas_tdp)):
             pm = 1
             valor = choice(range_100)
             if valor <= pm:
                 temp = filhos[i][j]
-                dest = choice(range_25)
+                dest = choice(range_elementos)
                 filhos[i][j] = filhos[i][dest]
                 filhos[i][dest] = temp
     # Agora junta top, filhos e não escolhidos
@@ -1963,7 +1965,10 @@ while not finalizado:
     while len(populacao_atual) > n_individuos:
         populacao_atual.pop(0)
     populacao_atual.reverse()
-
+    print(' ---------------------- tamanho população_nova: ', len(populacao_atual))
+    for i in range(len(populacao_atual)):
+        print('tamanho populacao[i]: ', len(populacao_atual[i].individuo))
+    sys.exit(0)
 
 
 
