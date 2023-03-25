@@ -1694,13 +1694,12 @@ while not finalizado:
     matriz_s = []
     for i in range(len(turmas_objetos)):
         matriz_s.append(0)
-    for i in range(len(populacao_atual)):
+    for ii in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         inequacoes_copia = copy.deepcopy(inequacoes)
-        print('len(populacao_atual[i].individuo): ', len(populacao_atual[i].individuo))
         for j in range(len(frame_tuplas_tdp)):
             fitness = 0
-            obj_vez = populacao_atual[i].individuo
+            obj_vez = populacao_atual[ii].individuo
             t = obj_vez[j][0]
             d = obj_vez[j][1]
             p = obj_vez[j][2]
@@ -1740,7 +1739,7 @@ while not finalizado:
                         inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                         fitness = fitness + 1
                         break
-        individuo_fitness[i] = individuo_fitness[i] + fitness
+        individuo_fitness[ii] = individuo_fitness[ii] + fitness
 
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
         windows2 = []
@@ -1749,7 +1748,7 @@ while not finalizado:
         pontos_fitness = len(frame_tuplas_tdp)
         for j in range(frame_tuplas_tdp):
             numero_janelas = 0
-            lista = populacao_atual[i].individuo
+            lista = populacao_atual[ii].individuo
             tt = lista[j][0]
             p = lista[j][2]
             if turmas_objetos[tt].turno == 'Matutino':
@@ -1767,7 +1766,7 @@ while not finalizado:
                             in windows2[n]:
                         numero_janelas = numero_janelas + 1
         if numero_janelas <= limite_fitness_janelas:
-            individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
+            individuo_fitness[ii] = individuo_fitness[ii] + pontos_fitness
 
     # Agora é testar se algum indivíduo é resultado válido.
     finalizado = False
