@@ -1689,8 +1689,60 @@ temp_inequacoes = copy.deepcopy(inequacoes)
 finalizado = False
 while not finalizado:
     individuo_fitness = []
+    matriz_s = []
+    for i in range(len(turmas_objetos)):
+        matriz_s[i] = 0
     for i in range(len(populacao_atual)):
-        individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
+        # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
+        inequacoes_copia = copy.deepcopy(inequacoes)
+        for j in range(len(populacao_atual[i])):
+            fitness = 0
+            obj_vez = populacao_atual[i].individuo()
+            t = obj_vez[0]
+            d = obj_vez[1]
+            p = obj_vez[2]
+            s = matriz[t]
+            matriz[t] = s + 1
+            if turmas_objetos[t].turno == 'Matutino':
+                pass
+            else:
+                s = s + 25
+            valor_da_vez = lista_tdps[t][d][p][s]
+            for i in range(len(inequacoes_copia)):
+                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
+                    if valor_da_vez in inequacoes_copia[i][0]:
+                        fitness = fitness + 1
+                        break
+            for i in range(len(inequacoes_copia)):
+                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
+                    if valor_da_vez in inequacoes_copia[i][0]:
+                        fitness = fitness + 1
+                        break
+            for i in range(len(inequacoes_copia)):
+                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
+                    if valor_da_vez in inequacoes_copia[i][0]:
+                        fitness = fitness + 1
+                        break
+            for i in range(len(inequacoes_copia)):
+                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
+                    if valor_da_vez in inequacoes_copia[i][0]:
+                        fitness = fitness + 1
+                        break
+            for i in range(len(inequacoes_copia)):
+                if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
+                    if valor_da_vez in inequacoes_copia[i][0]:
+                        fitness = fitness + 1
+                        break
+            for i in range(len(inequacoes_copia)):
+                if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
+                    inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
+        individuo_fitness[i] = individuo_fitness[i] + fitness
+
+
+
+
+
+
 
     # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
     windows2 = []
@@ -1730,7 +1782,7 @@ while not finalizado:
             solucao = populacao_atual[i].solucao_frame()
             break
 
-            
+
     if finalizado:
         for i in range(len(solucao)):
             lista_sorteados.append(solucao[i])
