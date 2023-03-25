@@ -1273,8 +1273,8 @@ for t in range(len(turmas_objetos)):
                 if diferentes:
                     temp_inequacoes100.append(inequacoes[j])
     temp_inequacoes = copy.deepcopy(temp_inequacoes100)
-    '''
-    '''
+'''
+'''
     for i in range(len(temp_index)):
         cont1 = 0
         for j in range(len(inequacoes)):
@@ -1285,8 +1285,8 @@ for t in range(len(turmas_objetos)):
             if temp_index[i] in temp_inequacoes[j][0]:
                 cont2 = cont2 + 1
         print('index: ', temp_index[i], 'cont1: ', cont1, 'cont2: ', cont2)
-    '''
-    '''
+'''
+'''
 
     print('Tamanho entrada: ', turmas_creditos[t])
     max_fit = 6 * turmas_creditos[t]
@@ -1689,66 +1689,62 @@ temp_inequacoes = copy.deepcopy(inequacoes)
 finalizado = False
 while not finalizado:
     individuo_fitness = []
+    for i in range(len(populacao_atual)):
+        individuo_fitness.append(0)
     matriz_s = []
     for i in range(len(turmas_objetos)):
-        matriz_s[i] = 0
+        matriz_s.append(0)
     for i in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         inequacoes_copia = copy.deepcopy(inequacoes)
-        for j in range(len(populacao_atual[i])):
+        print('len(populacao_atual[i].individuo): ', len(populacao_atual[i].individuo))
+        for j in range(len(frame_tuplas_tdp)):
             fitness = 0
-            obj_vez = populacao_atual[i].individuo()
-            t = obj_vez[0]
-            d = obj_vez[1]
-            p = obj_vez[2]
-            s = matriz[t]
-            matriz[t] = s + 1
-            if turmas_objetos[t].turno == 'Matutino':
-                pass
-            else:
+            obj_vez = populacao_atual[i].individuo
+            t = obj_vez[j][0]
+            d = obj_vez[j][1]
+            p = obj_vez[j][2]
+            s = matriz_s[t]
+            matriz_s[t] = s + 1
+            windows[p].append(s)
+            if turmas_objetos[t].turno == 'Vespertino':
                 s = s + 25
             valor_da_vez = lista_tdps[t][d][p][s]
             for i in range(len(inequacoes_copia)):
                 if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
                     if valor_da_vez in inequacoes_copia[i][0]:
+                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                         fitness = fitness + 1
                         break
             for i in range(len(inequacoes_copia)):
                 if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
                     if valor_da_vez in inequacoes_copia[i][0]:
+                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                         fitness = fitness + 1
                         break
             for i in range(len(inequacoes_copia)):
                 if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
                     if valor_da_vez in inequacoes_copia[i][0]:
+                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                         fitness = fitness + 1
                         break
             for i in range(len(inequacoes_copia)):
                 if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
                     if valor_da_vez in inequacoes_copia[i][0]:
+                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                         fitness = fitness + 1
                         break
             for i in range(len(inequacoes_copia)):
                 if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
                     if valor_da_vez in inequacoes_copia[i][0]:
+                        inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                         fitness = fitness + 1
                         break
-            for i in range(len(inequacoes_copia)):
-                if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
-                    inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
         individuo_fitness[i] = individuo_fitness[i] + fitness
 
-
-
-
-
-
-
-    # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
-    windows2 = []
-    limite_fitness_janelas = 100
-
-    for i in range(len(populacao_atual)):
+        # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
+        windows2 = []
+        limite_fitness_janelas = 100
         windows2 = copy.deepcopy(windows)
         pontos_fitness = len(frame_tuplas_tdp)
         for j in range(frame_tuplas_tdp):
@@ -1763,7 +1759,6 @@ while not finalizado:
             ss = slots_objetos[s].slot
             if ss not in windows2[p]:
                 windows2[p].append(ss)
-                windows2[p].sort()
             grade = Grade('1', 'Matutino')
             janelas = grade.janelas()
             for m in range(len(janelas)):
