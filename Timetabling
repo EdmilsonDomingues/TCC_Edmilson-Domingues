@@ -1638,6 +1638,7 @@ for i in range(len(estrela_chaves)):
         cr = disciplinas_objetos[di].quantidade_aulas_semanais
         for w in range(cr):
             frame_tuplas_tdp.append([tu, di, pr])
+print('len(frame_tuplas_tdp):', len(frame_tuplas_tdp))
 for i in range(len(turmas_objetos)):
     cont_aulas = 0
     for j in range(len(frame_tuplas_tdp)):
@@ -1646,12 +1647,10 @@ for i in range(len(turmas_objetos)):
     while cont_aulas < frame_tamanho:
         frame_tuplas_tdp.append([i, 999, 999])
         cont_aulas = cont_aulas + 1
+print('len(frame_tuplas_tdp):', len(frame_tuplas_tdp))
 
 # Neste ponto criaremos o buffer dos professores com os seus slots ocupados: [[0, 1, 25, 33], [2,4] ...]
 # No exemplo, professor 0 ocupa slots 0, 1, 25 e 33.
-windows = []
-for i in range(len(professores_objetos)):
-    windows.append([])
 
 # Criação de buffers de uso geral
 n_individuos = 20
@@ -1698,15 +1697,20 @@ while not finalizado:
     individuo_fitness = []
     for i in range(len(populacao_atual)):
         individuo_fitness.append(0)
-    matriz_s = []
-    for i in range(len(turmas_objetos)):
-        if turmas_objetos[i].turno == 'Matutino':
-            matriz_s.append(0)
-        else:
-            matriz_s.append(frame_tamanho)
+
     for ii in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         inequacoes_copia = copy.deepcopy(inequacoes)
+        matriz_s = []
+        for i in range(len(turmas_objetos)):
+            if turmas_objetos[i].turno == 'Matutino':
+                matriz_s.append(0)
+            else:
+                matriz_s.append(frame_tamanho)
+        windows = []
+        for i in range(len(professores_objetos)):
+            windows.append([])
+        teste = 0
         for j in range(len(frame_tuplas_tdp)):
             fitness = 0
             obj_vez = populacao_atual[ii].individuo
@@ -1716,43 +1720,51 @@ while not finalizado:
             s = matriz_s[t]
             matriz_s[t] = s + 1
             if d != 999:
-                print('\nwindows[p]: ', windows[p])
+                teste = teste + 1
+                # print('\nwindows[p]: ', windows[p])
                 if s not in windows[p]:
                     windows[p].append(s)
-                print('t: ', t, 'd: ', d, 'p: ', p, 's: ', s)
-                print('windows[p]: ', windows[p])
+                # print('t: ', t, 'd: ', d, 'p: ', p, 's: ', s)
+                # print('windows[p]: ', windows[p])
                 valor_da_vez = lista_tdps[t][d][p][s]
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                             fitness = fitness + 1
+                            # print('valor_da_vez: ', valor_da_vez, '2')
                             break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                             fitness = fitness + 1
+                            # print('valor_da_vez: ', valor_da_vez, '3')
                             break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                             fitness = fitness + 1
+                            # print('valor_da_vez: ', valor_da_vez, '4')
                             break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                             fitness = fitness + 1
+                            # print('valor_da_vez: ', valor_da_vez, '6')
                             break
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
                         if valor_da_vez in inequacoes_copia[i][0]:
                             inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
                             fitness = fitness + 1
+                            # print('valor_da_vez: ', valor_da_vez, '7\n')
                             break
-        individuo_fitness[ii] = individuo_fitness[ii] + fitness
+            # print('ii: ', ii, 'teste: ', teste)
+            individuo_fitness[ii] = individuo_fitness[ii] + fitness
+        # print('-----------------------------------------------------------------------')
 
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
         matriz_s = []
@@ -1787,9 +1799,10 @@ while not finalizado:
         if numero_janelas <= limite_fitness_janelas:
             individuo_fitness[ii] = individuo_fitness[ii] + pontos_fitness
 
+    print('individuo_fitness: ', individuo_fitness)
     # Agora é testar se algum indivíduo é resultado válido.
     finalizado = False
-    for i in range(len(individuo_fitness[i])):
+    for i in range(len(individuo_fitness)):
         if individuo_fitness[i] == 6 * len(frame_tuplas_tdp):
             finalizado = True
             solucao = populacao_atual[i].solucao_frame()
