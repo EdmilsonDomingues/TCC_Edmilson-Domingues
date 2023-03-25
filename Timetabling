@@ -1724,42 +1724,13 @@ while not finalizado:
 
     # Agora é testar se algum indivíduo é resultado válido.
     finalizado = False
-    for i in range(len(populacao_atual)):
-
-        dentro_janelas = False
-        windows2 = copy.deepcopy(windows)
-        pontos_fitness = turmas_creditos[t]
-        for j in range(frame_tamanho):
-            numero_janelas = 0
-            lista = populacao_atual[i].individuo
-            if lista[j] != 0:
-                tt = lista[j][0]
-                p = lista[j][2]
-                if turmas_objetos[tt].turno == 'Matutino':
-                    s = j
-                else:
-                    s = j + 25
-                ss = slots_objetos[s].slot
-                if ss not in windows2[p]:
-                    windows2[p].append(ss)
-                    windows2[p].sort()
-                grade = Grade('1', 'Matutino')
-                janelas = grade.janelas()
-                for m in range(len(janelas)):
-                    for n in range(len(windows2)):
-                        if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2] \
-                                in windows2[n]:
-                            numero_janelas = numero_janelas + 1
-        if numero_janelas <= limite_fitness_janelas:
-            dentro_janelas = True
-        tem_solucao = False
-        if dentro_janelas:
-            tem_solucao = populacao_atual[i].testa_solucao(temp_inequacoes, lista_tdps)
-
-        if tem_solucao:
+    for i in range(len(individuo_fitness[i])):
+        if individuo_fitness[i] == 6 * len(frame_tuplas_tdp):
             finalizado = True
             solucao = populacao_atual[i].solucao_frame()
             break
+
+            
     if finalizado:
         for i in range(len(solucao)):
             lista_sorteados.append(solucao[i])
