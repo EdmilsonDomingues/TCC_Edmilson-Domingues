@@ -1694,6 +1694,14 @@ for i in range(n_individuos):
     shuffle(temp)
     populacao_atual.append(Individuo(copy.deepcopy(temp)))
 
+inequacoes3 = []
+inequacoes4 = []
+for i in range(len(inequacoes)):
+    if inequacoes[i][2] == '3':
+        inequacoes3.append(inequacoes[i])
+    if inequacoes[i][2] == '4':
+        inequacoes4.append(inequacoes[i])
+
 # temp_inequacoes = copy.deepcopy(inequacoes)
 vez = 1
 # populações convergem aqui.
@@ -1705,16 +1713,10 @@ while not finalizado:
 
     for ii in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
-        inequacoes_copia = copy.deepcopy(inequacoes)
-        '''
-        inequacoes3_copia = []
-        inequacoes4_copia = []
-        for i in range(len(inequacoes)):
-            if inequacoes[i][2] == '3':
-                inequacoes3_copia.append(inequacoes[i])
-            if inequacoes[i][2] == '4':
-                inequacoes4_copia.append(inequacoes[i])
-        '''
+        # inequacoes_copia = copy.deepcopy(inequacoes)
+        inequacoes3_copia = copy.deepcopy(inequacoes3)
+        inequacoes4_copia = copy.deepcopy(inequacoes4)
+
         matriz_s = []
         for i in range(len(turmas_objetos)):
             if turmas_objetos[i].turno == 'Matutino':
@@ -1752,20 +1754,24 @@ while not finalizado:
                             break
                 '''
                 fitness = fitness + 1
-                '''
+
                 for i in range(len(inequacoes3_copia)):
-                    if inequacoes3_copia[i][1] > 0 and inequacoes3_copia[i][2] == '3':
+                    if inequacoes3_copia[i][1] > 0:
                         if valor_da_vez in inequacoes3_copia[i][0]:
                             inequacoes3_copia[i][1] = inequacoes3_copia[i][1] - 1
+                            if inequacoes3_copia[i][1] == 0:
+                                inequacoes3_copia.pop(i)
                             fitness = fitness + 1
-                            print('valor_da_vez: ', valor_da_vez, '3')
+                            # print('valor_da_vez: ', valor_da_vez, '3')
                             break
                 for i in range(len(inequacoes4_copia)):
-                    if inequacoes4_copia[i][1] > 0 and inequacoes4_copia[i][2] == '4':
+                    if inequacoes4_copia[i][1] > 0:
                         if valor_da_vez in inequacoes4_copia[i][0]:
                             inequacoes4_copia[i][1] = inequacoes4_copia[i][1] - 1
+                            if inequacoes4_copia[i][1] == 0:
+                                inequacoes4_copia.pop(i)
                             fitness = fitness + 1
-                            print('valor_da_vez: ', valor_da_vez, '4')
+                            # print('valor_da_vez: ', valor_da_vez, '4')
                             break
                 '''
                 for i in range(len(inequacoes_copia)):
@@ -1782,6 +1788,7 @@ while not finalizado:
                             fitness = fitness + 1
                             # print('valor_da_vez: ', valor_da_vez, '4')
                             break
+                '''
                 '''
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
@@ -1804,6 +1811,7 @@ while not finalizado:
                 fitness = fitness + 1
             # print('ii: ', ii, 'teste: ', teste)
             individuo_fitness[ii] = individuo_fitness[ii] + fitness
+
         # print('-----------------------------------------------------------------------')
 
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
@@ -1838,8 +1846,14 @@ while not finalizado:
         if numero_janelas <= limite_fitness_janelas:
             individuo_fitness[ii] = individuo_fitness[ii] + pontos_fitness
 
-    print('individuo_fitness: ', individuo_fitness)
+    percentual_fitness = []
+    for i in range(len(individuo_fitness)):
+        percentual_fitness.append(0)
+        percentual_fitness[i] = individuo_fitness[i] * 100 // max_fit
+    print('individuo_fitness: ', individuo_fitness, percentual_fitness)
+
     # Agora é testar se algum indivíduo é resultado válido.
+
     finalizado = False
     for i in range(len(individuo_fitness)):
         if individuo_fitness[i] == 6 * pontos_fitness:
