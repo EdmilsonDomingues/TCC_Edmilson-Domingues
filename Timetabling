@@ -892,7 +892,7 @@ for i in range(1, 101):
     range_100.append(i)
 
 range_10000 = []
-for i in range(1, 10001):
+for i in range(0, 10001):
     range_10000.append(i)
 
 for i in range(len(turmas_objetos)):
@@ -1208,7 +1208,7 @@ for i in range(1, 101):
     range_100.append(i)
 
 range_10000 = []
-for i in range(1, 10001):
+for i in range(0, 10001):
     range_10000.append(i)
 
 for i in range(len(turmas_objetos)):
@@ -1273,20 +1273,6 @@ for t in range(len(turmas_objetos)):
                 if diferentes:
                     temp_inequacoes100.append(inequacoes[j])
     temp_inequacoes = copy.deepcopy(temp_inequacoes100)
-'''
-'''
-    for i in range(len(temp_index)):
-        cont1 = 0
-        for j in range(len(inequacoes)):
-            if temp_index[i] in inequacoes[j][0]:
-                cont1 = cont1 + 1
-        cont2 = 0
-        for j in range(len(temp_inequacoes)):
-            if temp_index[i] in temp_inequacoes[j][0]:
-                cont2 = cont2 + 1
-        print('index: ', temp_index[i], 'cont1: ', cont1, 'cont2: ', cont2)
-'''
-'''
 
     print('Tamanho entrada: ', turmas_creditos[t])
     max_fit = 6 * turmas_creditos[t]
@@ -1448,7 +1434,7 @@ for t in range(len(turmas_objetos)):
             valor = choice(range_10000)
             for j in range(len(populacao_atual)):
                 if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
-                    selecionados.append(populacao_atual[i])
+                    selecionados.append(populacao_atual[j])
         # Neste ponto temos os selecionados.
         lista_crossover = []
         nao_lista_crossover = []
@@ -1678,7 +1664,7 @@ for i in range(1, 101):
     range_100.append(i)
 
 range_10000 = []
-for i in range(1, 10001):
+for i in range(0, 10001):
     range_10000.append(i)
 
 # Elementos que comporão o resultado
@@ -1919,7 +1905,7 @@ while not finalizado:
         top.append(temp_top[0])
         temp_top.pop(0)
     # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
-    #       como referência o menor valor [normalização].
+    #       como referência o menor valor + 1 [normalização].
     referencia = 50000
     for i in range(len(populacao_atual)):
         if individuo_fitness[i] < referencia:
@@ -1931,7 +1917,7 @@ while not finalizado:
     total = 0
     for i in range(len(populacao_atual)):
         total = total + individuo_fitness[i]
-    # print('individuo_fitness: ', individuo_fitness)
+    print('Total: ', total) # $$$
     roleta_range = []
     for i in range(len(populacao_atual)):
         if i == 0:
@@ -1940,16 +1926,21 @@ while not finalizado:
             inicio = roleta_range[i-1][1]
         fim = inicio + (individuo_fitness[i] * 10000 / total)
         roleta_range.append([inicio, fim])
+    for i in range(len(populacao_atual)):
+        print('individuo_fitness_normalizado: ', individuo_fitness[i], roleta_range[i])  # $$$
     selecionados = []
+    escolhidos_fitness_relativa = []
     for i in range(len(populacao_atual)):
         valor = choice(range_10000)
         for j in range(len(populacao_atual)):
             if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
-                selecionados.append(populacao_atual[i])
+                selecionados.append(populacao_atual[j])
+                escolhidos_fitness_relativa.append(individuo_fitness[j])
+    print('escolhidos_fitness: ', escolhidos_fitness_relativa) # $$$
     # Neste ponto temos os selecionados.
     lista_crossover = []
     nao_lista_crossover = []
-    pc = 70
+    pc = 90
     for i in range(len(selecionados)):
         valor = choice(range_100)
         if valor <= pc:
@@ -1995,7 +1986,7 @@ while not finalizado:
     # Se posição for sofrer mutação, sortear outra posição para realizar a troca
     for i in range(len(filhos)):
         for j in range(len(frame_tuplas_tdp)):
-            pm = 1
+            pm = 10
             valor = choice(range_100)
             if valor <= pm:
                 temp = filhos[i][j]
