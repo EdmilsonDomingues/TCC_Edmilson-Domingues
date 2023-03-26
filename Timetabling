@@ -1694,7 +1694,7 @@ for i in range(n_individuos):
     shuffle(temp)
     populacao_atual.append(Individuo(copy.deepcopy(temp)))
 
-temp_inequacoes = copy.deepcopy(inequacoes)
+# temp_inequacoes = copy.deepcopy(inequacoes)
 vez = 1
 # populações convergem aqui.
 finalizado = False
@@ -1706,6 +1706,15 @@ while not finalizado:
     for ii in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         inequacoes_copia = copy.deepcopy(inequacoes)
+        '''
+        inequacoes3_copia = []
+        inequacoes4_copia = []
+        for i in range(len(inequacoes)):
+            if inequacoes[i][2] == '3':
+                inequacoes3_copia.append(inequacoes[i])
+            if inequacoes[i][2] == '4':
+                inequacoes4_copia.append(inequacoes[i])
+        '''
         matriz_s = []
         for i in range(len(turmas_objetos)):
             if turmas_objetos[i].turno == 'Matutino':
@@ -1716,11 +1725,11 @@ while not finalizado:
         for i in range(len(professores_objetos)):
             windows.append([])
         for j in range(len(frame_tuplas_tdp)):
-            print('\nj: ', j, 'len(frame_tuplas_tdp: ', len(frame_tuplas_tdp), 'ii: ', ii)
+            # print('\nj: ', j, 'len(frame_tuplas_tdp: ', len(frame_tuplas_tdp), 'ii: ', ii)
             fitness = 0
             obj_vez = populacao_atual[ii].individuo
-            print('len(obj_vez: ', len(obj_vez))
-            print('obj_vez[j]: ', obj_vez[j])
+            # print('len(obj_vez: ', len(obj_vez))
+            # print('obj_vez[j]: ', obj_vez[j])
             t = obj_vez[j][0]
             d = obj_vez[j][1]
             p = obj_vez[j][2]
@@ -1733,6 +1742,7 @@ while not finalizado:
                 # print('t: ', t, 'd: ', d, 'p: ', p, 's: ', s)
                 # print('windows[p]: ', windows[p])
                 valor_da_vez = lista_tdps[t][d][p][s]
+                '''
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
                         if valor_da_vez in inequacoes_copia[i][0]:
@@ -1740,6 +1750,24 @@ while not finalizado:
                             fitness = fitness + 1
                             # print('valor_da_vez: ', valor_da_vez, '2')
                             break
+                '''
+                fitness = fitness + 1
+                '''
+                for i in range(len(inequacoes3_copia)):
+                    if inequacoes3_copia[i][1] > 0 and inequacoes3_copia[i][2] == '3':
+                        if valor_da_vez in inequacoes3_copia[i][0]:
+                            inequacoes3_copia[i][1] = inequacoes3_copia[i][1] - 1
+                            fitness = fitness + 1
+                            print('valor_da_vez: ', valor_da_vez, '3')
+                            break
+                for i in range(len(inequacoes4_copia)):
+                    if inequacoes4_copia[i][1] > 0 and inequacoes4_copia[i][2] == '4':
+                        if valor_da_vez in inequacoes4_copia[i][0]:
+                            inequacoes4_copia[i][1] = inequacoes4_copia[i][1] - 1
+                            fitness = fitness + 1
+                            print('valor_da_vez: ', valor_da_vez, '4')
+                            break
+                '''
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
                         if valor_da_vez in inequacoes_copia[i][0]:
@@ -1754,6 +1782,7 @@ while not finalizado:
                             fitness = fitness + 1
                             # print('valor_da_vez: ', valor_da_vez, '4')
                             break
+                '''
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
                         if valor_da_vez in inequacoes_copia[i][0]:
@@ -1761,6 +1790,9 @@ while not finalizado:
                             fitness = fitness + 1
                             # print('valor_da_vez: ', valor_da_vez, '6')
                             break
+                '''
+                fitness = fitness + 1
+                '''
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
                         if valor_da_vez in inequacoes_copia[i][0]:
@@ -1768,6 +1800,8 @@ while not finalizado:
                             fitness = fitness + 1
                             # print('valor_da_vez: ', valor_da_vez, '7\n')
                             break
+                '''
+                fitness = fitness + 1
             # print('ii: ', ii, 'teste: ', teste)
             individuo_fitness[ii] = individuo_fitness[ii] + fitness
         # print('-----------------------------------------------------------------------')
@@ -1808,13 +1842,14 @@ while not finalizado:
     # Agora é testar se algum indivíduo é resultado válido.
     finalizado = False
     for i in range(len(individuo_fitness)):
-        if individuo_fitness[i] == 6 * len(frame_tuplas_tdp):
+        if individuo_fitness[i] == 6 * pontos_fitness:
             finalizado = True
             solucao = populacao_atual[i].solucao_frame()
             break
 
 
     if finalizado:
+        print('finalizado.')
         for i in range(len(solucao)):
             lista_sorteados.append(solucao[i])
             pp = estrela_chaves[solucao[i]][2]
@@ -1840,7 +1875,7 @@ while not finalizado:
     else:
         vez = vez + 1
         # print('Turma: ', t, 'vez: ', vez)
-        temp_inequacoes = copy.deepcopy(inequacoes)
+        # temp_inequacoes = copy.deepcopy(inequacoes)
         finalizado = False
 
 
@@ -1965,10 +2000,7 @@ while not finalizado:
     while len(populacao_atual) > n_individuos:
         populacao_atual.pop(0)
     populacao_atual.reverse()
-    print(' ---------------------- tamanho população_nova: ', len(populacao_atual))
-    for i in range(len(populacao_atual)):
-        print('tamanho populacao[i]: ', len(populacao_atual[i].individuo))
-    sys.exit(0)
+
 
 
 
