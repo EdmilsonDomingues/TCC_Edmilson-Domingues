@@ -1924,7 +1924,10 @@ while not finalizado:
             inicio = 0
         else:
             inicio = roleta_range[i-1][1]
-        fim = inicio + (individuo_fitness[i] * 10000 / total)
+        if i == len(populacao_atual) - 1 :
+            fim = 10000
+        else:
+            fim = inicio + (individuo_fitness[i] * 10000 / total)
         roleta_range.append([inicio, fim])
     for i in range(len(populacao_atual)):
         print('individuo_fitness_normalizado: ', individuo_fitness[i], roleta_range[i])  # $$$
