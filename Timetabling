@@ -560,7 +560,7 @@ for td in td_lista:
 
 # --------------------------------------------------------------------------------------------------------
 # Execução da modelagem:
-model.optimize()
+# model.optimize()
 # print(model.display())
 
 '''
@@ -572,7 +572,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+'''
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -649,7 +649,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
+'''
 # --------------------------------------------------------------------------------------------------------
 '''
 # Recorrência se resultado for Unfeasible:
@@ -1687,16 +1687,10 @@ for i in range(len(inequacoes)):
     if inequacoes[i][2] == '4':
         inequacoes4.append(inequacoes[i])
 
-'''
+
 dict3 = {}
-for i in range(len(inequacoes3)):
-    for j in range(len(inequacoes3[i][0])):
-        dict3[inequacoes3[i][0][j]] = inequacoes3[i]
 dict4 = {}
-for i in range(len(inequacoes4)):
-    for j in range(len(inequacoes4[i][0])):
-        dict4[inequacoes4[i][0][j]] = inequacoes4[i]
-'''
+
 # temp_inequacoes = copy.deepcopy(inequacoes)
 vez = 1
 # populações convergem aqui.
@@ -1713,14 +1707,29 @@ while not finalizado:
         # inequacoes3_copia = copy.deepcopy(inequacoes3)
         # inequacoes4_copia = copy.deepcopy(inequacoes4)
 
-        dict3 = {}
+        dict3.clear()
         for i in range(len(inequacoes3)):
             for j in range(len(inequacoes3[i][0])):
-                dict3[inequacoes3[i][0][j]] = inequacoes3[i]
-        dict4 = {}
+                dict3[inequacoes3[i][0][j]] = copy.deepcopy(inequacoes3[i])
+        '''
+        cont = 0
+        cont1 = 0
+        for k, v in dict3.items():
+            cont = cont + 1
+            if v[1] > 0:
+                cont1 = cont1 + 1
+        cont2 = 0
+        cont3 = 0
+        for k in range(len(inequacoes3)):
+            cont2 = cont2 + 1
+            if inequacoes3[k][1] > 0:
+                cont3 = cont3 + 1
+        print('dict3- ii:' , ii, 'cont: ', cont, 'cont1: ', cont1, 'cont2: ', cont2, 'cont3: ', cont3)
+        '''
+        dict4.clear()
         for i in range(len(inequacoes4)):
             for j in range(len(inequacoes4[i][0])):
-                dict4[inequacoes4[i][0][j]] = inequacoes4[i]
+                dict4[inequacoes4[i][0][j]] = copy.deepcopy(inequacoes4[i])
 
         matriz_s = []
         for i in range(len(turmas_objetos)):
@@ -1788,16 +1797,15 @@ while not finalizado:
                             temp3[1] = temp3[1] - 1
                             dict3[i] = temp3
                 valor4= dict4[valor_da_vez]
-                print('\n', ii, 'valor4: ', valor4)
                 if valor4[1] > 0:
                     fitness = fitness + 1
                     for i in valor4[0]:
                         temp4 = dict4[i]
-                        print('temp4: ', temp4)
+                        # print('temp4: ', temp4)
                         if temp4[1] > 0:
                             temp4[1] = temp4[1] - 1
                             dict4[i] = temp4
-                            print('dict4[i]: ', dict4[i])
+                            # print('dict4[i]: ', dict4[i])
 
 
                 '''
@@ -1996,7 +2004,7 @@ while not finalizado:
     # Realizar crossover (position-based crossover)
     # Critério: trocar o conteúdo de posições e manter as outras
     # Então vamos sortear as posições que serão embaralhadas
-    troca_n = 40
+    troca_n = 300
     range_troca = []
     while len(range_troca) != troca_n:
         sorte = choice(range_elementos)
