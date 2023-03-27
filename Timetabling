@@ -560,7 +560,7 @@ for td in td_lista:
 
 # --------------------------------------------------------------------------------------------------------
 # Execução da modelagem:
-# model.optimize()
+model.optimize()
 # print(model.display())
 
 '''
@@ -572,7 +572,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-'''
+
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -649,7 +649,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-'''
+
 # --------------------------------------------------------------------------------------------------------
 '''
 # Recorrência se resultado for Unfeasible:
@@ -1608,7 +1608,6 @@ print(intervalo, ' minutos.')
 # Testes de heurística:
 # #2: Estratégia = Tratamento único (todos os elementos simultaneamente)
 # Aqui neste bloco será aplicado um algoritmo genético, com todas as restrições.
-iteracoes = 0
 tempo_1 = time.time()
 frame_tamanho = 25
 
@@ -1688,6 +1687,16 @@ for i in range(len(inequacoes)):
     if inequacoes[i][2] == '4':
         inequacoes4.append(inequacoes[i])
 
+'''
+dict3 = {}
+for i in range(len(inequacoes3)):
+    for j in range(len(inequacoes3[i][0])):
+        dict3[inequacoes3[i][0][j]] = inequacoes3[i]
+dict4 = {}
+for i in range(len(inequacoes4)):
+    for j in range(len(inequacoes4[i][0])):
+        dict4[inequacoes4[i][0][j]] = inequacoes4[i]
+'''
 # temp_inequacoes = copy.deepcopy(inequacoes)
 vez = 1
 # populações convergem aqui.
@@ -1700,8 +1709,18 @@ while not finalizado:
     for ii in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         # inequacoes_copia = copy.deepcopy(inequacoes)
-        inequacoes3_copia = copy.deepcopy(inequacoes3)
-        inequacoes4_copia = copy.deepcopy(inequacoes4)
+
+        # inequacoes3_copia = copy.deepcopy(inequacoes3)
+        # inequacoes4_copia = copy.deepcopy(inequacoes4)
+
+        dict3 = {}
+        for i in range(len(inequacoes3)):
+            for j in range(len(inequacoes3[i][0])):
+                dict3[inequacoes3[i][0][j]] = inequacoes3[i]
+        dict4 = {}
+        for i in range(len(inequacoes4)):
+            for j in range(len(inequacoes4[i][0])):
+                dict4[inequacoes4[i][0][j]] = inequacoes4[i]
 
         matriz_s = []
         for i in range(len(turmas_objetos)):
@@ -1740,7 +1759,7 @@ while not finalizado:
                             break
                 '''
                 fitness = fitness + 1
-
+                '''
                 for i in range(len(inequacoes3_copia)):
                     if inequacoes3_copia[i][1] > 0:
                         if valor_da_vez in inequacoes3_copia[i][0]:
@@ -1760,21 +1779,27 @@ while not finalizado:
                             # print('valor_da_vez: ', valor_da_vez, '4')
                             break
                 '''
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                            fitness = fitness + 1
-                            # print('valor_da_vez: ', valor_da_vez, '3')
-                            break
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                            fitness = fitness + 1
-                            # print('valor_da_vez: ', valor_da_vez, '4')
-                            break
-                '''
+                valor3 = dict3[valor_da_vez]
+                if valor3[1] > 0:
+                    fitness = fitness + 1
+                    for i in valor3[0]:
+                        temp3 = dict3[i]
+                        if temp3[1] > 0:
+                            temp3[1] = temp3[1] - 1
+                            dict3[i] = temp3
+                valor4= dict4[valor_da_vez]
+                print('\n', ii, 'valor4: ', valor4)
+                if valor4[1] > 0:
+                    fitness = fitness + 1
+                    for i in valor4[0]:
+                        temp4 = dict4[i]
+                        print('temp4: ', temp4)
+                        if temp4[1] > 0:
+                            temp4[1] = temp4[1] - 1
+                            dict4[i] = temp4
+                            print('dict4[i]: ', dict4[i])
+
+
                 '''
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
@@ -1808,7 +1833,7 @@ while not finalizado:
             else:
                 matriz_s.append(frame_tamanho)
         windows2 = []
-        limite_fitness_janelas = 100
+        limite_fitness_janelas = 70
         windows2 = copy.deepcopy(windows)
         for j in range(len(frame_tuplas_tdp)):
             numero_janelas = 0
@@ -1831,6 +1856,7 @@ while not finalizado:
                             numero_janelas = numero_janelas + 1
         if numero_janelas <= limite_fitness_janelas:
             individuo_fitness[ii] = individuo_fitness[ii] + pontos_fitness
+        # print('Janelas [', ii, ']: ', numero_janelas)
 
     percentual_fitness = []
     for i in range(len(individuo_fitness)):
@@ -1844,32 +1870,39 @@ while not finalizado:
     for i in range(len(individuo_fitness)):
         if individuo_fitness[i] == 6 * pontos_fitness:
             finalizado = True
-            solucao = populacao_atual[i].solucao_frame()
+            solucao = populacao_atual[i].individuo
             break
 
 
     if finalizado:
-        print('finalizado.')
+        matriz_s = []
+        for i in range(len(turmas_objetos)):
+            if turmas_objetos[i].turno == 'Matutino':
+                matriz_s.append(0)
+            else:
+                matriz_s.append(frame_tamanho)
         for i in range(len(solucao)):
-            lista_sorteados.append(solucao[i])
-            pp = estrela_chaves[solucao[i]][2]
-            ss = slots_objetos[estrela_chaves[solucao[i]][3]].slot
-            if ss not in windows[pp]:
-                windows[pp].append(ss)
-            for j in range(len(inequacoes)):
-                if inequacoes[j][1] > 0 and solucao[i] in inequacoes[j][0]:
-                    inequacoes[j][1] = inequacoes[j][1] - 1
+            t = solucao[i][0]
+            d = solucao[i][1]
+            p = solucao[i][2]
+            s = matriz_s[t]
+            matriz_s[t] = s + 1
+            if d != 999:
+                ss = slots_objetos[s].slot
+                if ss not in windows2[p]:
+                    windows2[p].append(ss)
+                valor_da_vez = lista_tdps[t][d][p][s]
+                lista_sorteados.append(valor_da_vez)
         finalizado = True
         print('Vezes: -----------------------------', vez)
-        iteracoes = iteracoes + vez
 
         parcial_janelas = 0
         grade_rodada = Grade('1', 'Matutino')
         janelas1 = grade_rodada.janelas()
         for m in range(len(janelas1)):
-            for n in range(len(windows)):
-                if janelas1[m][0] in windows[n] and janelas1[m][1] not in windows[n] and janelas1[m][2] \
-                        in windows[n]:
+            for n in range(len(windows2)):
+                if janelas1[m][0] in windows2[n] and janelas1[m][1] not in windows2[n] and janelas1[m][2] \
+                        in windows2[n]:
                     parcial_janelas = parcial_janelas + 1
         print('Janelas até aqui: ', parcial_janelas)
     else:
@@ -1917,7 +1950,7 @@ while not finalizado:
     total = 0
     for i in range(len(populacao_atual)):
         total = total + individuo_fitness[i]
-    print('Total: ', total) # $$$
+    # print('Total: ', total) # $$$
     roleta_range = []
     for i in range(len(populacao_atual)):
         if i == 0:
@@ -1930,7 +1963,8 @@ while not finalizado:
             fim = inicio + (individuo_fitness[i] * 10000 / total)
         roleta_range.append([inicio, fim])
     for i in range(len(populacao_atual)):
-        print('individuo_fitness_normalizado: ', individuo_fitness[i], roleta_range[i])  # $$$
+        pass
+        # print('individuo_fitness_normalizado: ', individuo_fitness[i], roleta_range[i])  # $$$
     selecionados = []
     escolhidos_fitness_relativa = []
     for i in range(len(populacao_atual)):
@@ -1939,7 +1973,7 @@ while not finalizado:
             if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
                 selecionados.append(populacao_atual[j])
                 escolhidos_fitness_relativa.append(individuo_fitness[j])
-    print('escolhidos_fitness: ', escolhidos_fitness_relativa) # $$$
+    # print('escolhidos_fitness: ', escolhidos_fitness_relativa) # $$$
     # Neste ponto temos os selecionados.
     lista_crossover = []
     nao_lista_crossover = []
@@ -2009,12 +2043,6 @@ while not finalizado:
         populacao_atual.pop(0)
     populacao_atual.reverse()
 
-
-
-
-for i in range(len(windows)):
-    windows[i].sort()
-    print('professor: ', i, 'slots: ', windows[i])
 xx = []
 for i in range(len(x)):
     if i in lista_sorteados:
@@ -2041,13 +2069,12 @@ for i in range(len(xx)):
 print('Total de xx: ', cont)
 tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
-print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
 
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 # Para o AG.
-'''
+
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -2137,6 +2164,6 @@ for i in range(len(xx)):
         cont = cont + 1
 print('Total de xx: ', cont)
 print(lista_sorteados)
-'''
+
 # --------------------------------------------------------------------------------------------------------
 
