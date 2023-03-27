@@ -1768,26 +1768,7 @@ while not finalizado:
                             break
                 '''
                 fitness = fitness + 1
-                '''
-                for i in range(len(inequacoes3_copia)):
-                    if inequacoes3_copia[i][1] > 0:
-                        if valor_da_vez in inequacoes3_copia[i][0]:
-                            inequacoes3_copia[i][1] = inequacoes3_copia[i][1] - 1
-                            if inequacoes3_copia[i][1] == 0:
-                                inequacoes3_copia.pop(i)
-                            fitness = fitness + 1
-                            # print('valor_da_vez: ', valor_da_vez, '3')
-                            break
-                for i in range(len(inequacoes4_copia)):
-                    if inequacoes4_copia[i][1] > 0:
-                        if valor_da_vez in inequacoes4_copia[i][0]:
-                            inequacoes4_copia[i][1] = inequacoes4_copia[i][1] - 1
-                            if inequacoes4_copia[i][1] == 0:
-                                inequacoes4_copia.pop(i)
-                            fitness = fitness + 1
-                            # print('valor_da_vez: ', valor_da_vez, '4')
-                            break
-                '''
+
                 valor3 = dict3[valor_da_vez]
                 if valor3[1] > 0:
                     fitness = fitness + 1
@@ -1974,24 +1955,28 @@ while not finalizado:
         pass
         # print('individuo_fitness_normalizado: ', individuo_fitness[i], roleta_range[i])  # $$$
     selecionados = []
-    escolhidos_fitness_relativa = []
+    escolhidos = []
     for i in range(len(populacao_atual)):
         valor = choice(range_10000)
         for j in range(len(populacao_atual)):
             if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
                 selecionados.append(populacao_atual[j])
-                escolhidos_fitness_relativa.append(individuo_fitness[j])
-    # print('escolhidos_fitness: ', escolhidos_fitness_relativa) # $$$
+                escolhidos.append(j)
+    # print('escolhidos_fitness: ', escolhidos) # $$$
     # Neste ponto temos os selecionados.
     lista_crossover = []
     nao_lista_crossover = []
     pc = 90
+    cross_indice = []
+    nao_cross_indice = []
     for i in range(len(selecionados)):
         valor = choice(range_100)
         if valor <= pc:
             lista_crossover.append(selecionados[i])
+            cross_indice.append(escolhidos[i])
         else:
             nao_lista_crossover.append(selecionados[i])
+            nao_cross_indice.append(escolhidos[i])
     # Verificar se número ímpar de selecionados:
     if len(lista_crossover)%2 == 0:
         pass
@@ -2001,6 +1986,8 @@ while not finalizado:
         valor = lista_crossover[indice]
         nao_lista_crossover.append(valor)
         lista_crossover.pop(indice)
+    # print('escolhidos para croo: ', cross_indice)
+    # print('não escolhidos para cross: ', nao_cross_indice)
     # Realizar crossover (position-based crossover)
     # Critério: trocar o conteúdo de posições e manter as outras
     # Então vamos sortear as posições que serão embaralhadas
@@ -2026,6 +2013,8 @@ while not finalizado:
             else:
                 filho.append(lista_individuo[j])
         filhos.append(filho)
+
+
     # Realizar mutação (order-based mutation).
     # Varrer posições e aplicar Bernoulli (pm)
     # Se posição for sofrer mutação, sortear outra posição para realizar a troca
