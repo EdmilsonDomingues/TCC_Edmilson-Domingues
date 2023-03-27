@@ -1700,6 +1700,10 @@ while not finalizado:
     for i in range(len(populacao_atual)):
         individuo_fitness.append(0)
 
+    posicao_erro = []
+    for i in range(len(n_individuos)):
+        posicao_erro[i].append([])
+
     for ii in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         # inequacoes_copia = copy.deepcopy(inequacoes)
@@ -1711,21 +1715,6 @@ while not finalizado:
         for i in range(len(inequacoes3)):
             for j in range(len(inequacoes3[i][0])):
                 dict3[inequacoes3[i][0][j]] = copy.deepcopy(inequacoes3[i])
-        '''
-        cont = 0
-        cont1 = 0
-        for k, v in dict3.items():
-            cont = cont + 1
-            if v[1] > 0:
-                cont1 = cont1 + 1
-        cont2 = 0
-        cont3 = 0
-        for k in range(len(inequacoes3)):
-            cont2 = cont2 + 1
-            if inequacoes3[k][1] > 0:
-                cont3 = cont3 + 1
-        print('dict3- ii:' , ii, 'cont: ', cont, 'cont1: ', cont1, 'cont2: ', cont2, 'cont3: ', cont3)
-        '''
         dict4.clear()
         for i in range(len(inequacoes4)):
             for j in range(len(inequacoes4[i][0])):
@@ -1777,6 +1766,10 @@ while not finalizado:
                         if temp3[1] > 0:
                             temp3[1] = temp3[1] - 1
                             dict3[i] = temp3
+                else:
+                    if j not in posicao_erro[ii]:
+                        posicao_erro[ii].append(j)  # posição sem pontuação
+
                 valor4= dict4[valor_da_vez]
                 if valor4[1] > 0:
                     fitness = fitness + 1
@@ -1787,6 +1780,9 @@ while not finalizado:
                             temp4[1] = temp4[1] - 1
                             dict4[i] = temp4
                             # print('dict4[i]: ', dict4[i])
+                else:
+                    if j not in posicao_erro[ii]:
+                        posicao_erro[ii].append(j)  # posição sem pontuação
 
 
                 '''
