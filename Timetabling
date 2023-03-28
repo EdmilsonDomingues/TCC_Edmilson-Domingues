@@ -1912,8 +1912,7 @@ while not finalizado:
 
 
 
-'''
-
+    '''
     # Vamos isolar os melhores da população, mantendo-os na população nova.
     top_quantidade = 4
 
@@ -2060,7 +2059,7 @@ while not finalizado:
     while len(populacao_atual) > n_individuos:
         populacao_atual.pop(0)
     populacao_atual.reverse()
-'''
+    '''
 
 
 
@@ -2085,9 +2084,8 @@ while not finalizado:
                 temp_top_indices.append(j)
         if i == 0:
             shuffle(temp_top_indices)   # para possibilitar que novos melhores possam fazer parte do topo.
-            for k in range(len(temp_top_indices)):
-                temp_top.append(populacao_atual[temp_top_indices[k]])
-            # shuffle(temp_top)
+    for i in range(len(temp_top_indices)):
+        temp_top.append(populacao_atual[temp_top_indices[i]])
     for i in range(top_quantidade):
         top.append(temp_top[0])
         temp_top.pop(0)
@@ -2158,14 +2156,14 @@ while not finalizado:
         valor = cross_indice[indice]
         nao_cross_indice.append(valor)
         cross_indice.pop(indice)
-    # print('escolhidos para croo: ', cross_indice)
+    # print('escolhidos para cross: ', cross_indice)
     # print('não escolhidos para cross: ', nao_cross_indice)
     # Realizar crossover (position-based crossover)
     # Critério: trocar o conteúdo de posições e manter as outras
 
     # Então vamos sortear as posições que serão embaralhadas
-    trocas_previstas = 10
-    usar_metodo_manipulacao_genetica = False
+    trocas_previstas = 20
+    usar_metodo_manipulacao_genetica = True
     troca_n = []
     for i in range(len(populacao_atual)):
         if usar_metodo_manipulacao_genetica:
@@ -2175,7 +2173,7 @@ while not finalizado:
 
     buffer_trocados = []
     i = 0
-    while i != len(trocas_previstas):
+    while i != trocas_previstas:
         sorte = choice(range_elementos)
         if sorte not in buffer_trocados:
             buffer_trocados.append(sorte)
@@ -2198,7 +2196,7 @@ while not finalizado:
             posicao_nova.append(lista_individuo[range_troca[i][j]])
         shuffle(posicao_nova)
         for j in range(len(frame_tuplas_tdp)):
-            if j in range_troca:
+            if j in range_troca[i]:
                 filho.append(posicao_nova[0])
                 posicao_nova.pop(0)
             else:
