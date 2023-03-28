@@ -1701,8 +1701,8 @@ while not finalizado:
         individuo_fitness.append(0)
 
     posicao_erro = []
-    for i in range(len(n_individuos)):
-        posicao_erro[i].append([])
+    for i in range(n_individuos):
+        posicao_erro.append([])
 
     for ii in range(len(populacao_atual)):
         # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
@@ -1986,13 +1986,25 @@ while not finalizado:
     # print('não escolhidos para cross: ', nao_cross_indice)
     # Realizar crossover (position-based crossover)
     # Critério: trocar o conteúdo de posições e manter as outras
+
     # Então vamos sortear as posições que serão embaralhadas
-    troca_n = 300
+    usar_metodo_manipulacao_genetica = False
+    if usar_metodo_manipulacao_genetica:
+        esfera_sorte = []
+        for i in range(n_individuos):
+            esfera_sorte.append(i)
+        ordem = choice(esfera_sorte)
+        troca_n = len(posicao_erro[ordem])
+    else:
+        troca_n = 300
     range_troca = []
     while len(range_troca) != troca_n:
-        sorte = choice(range_elementos)
-        if sorte not in range_troca:
-            range_troca.append(sorte)
+        if usar_metodo_manipulacao_genetica:
+            range_troca = copy.deepcopy(posicao_erro[ordem])
+        else:
+            sorte = choice(range_elementos)
+            if sorte not in range_troca:
+                range_troca.append(sorte)
     # Vamos gerar os filhos.
     filhos = []
     for i in range(len(lista_crossover)):
