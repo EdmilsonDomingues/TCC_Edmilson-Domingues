@@ -1851,6 +1851,20 @@ while not finalizado:
 
     # Agora é testar se algum indivíduo é resultado válido.
 
+    for i in range(n_individuos):
+        ref_i = []
+        ref_i = copy.deepcopy(populacao_atual[i].individuo)
+        ref_j = []
+        ref_j = copy.deepcopy(frame_tuplas_tdp)
+        while len(ref_i) != 0:
+            if ref_i[0] in ref_j:
+                ref_j.remove(ref_i[0])
+                ref_i.pop(0)
+            else:
+                print('Não são iguais.')
+                sys.exit(0)
+    print('Tudo igual.')
+
     finalizado = False
     for i in range(len(individuo_fitness)):
         if individuo_fitness[i] == 6 * pontos_fitness:
@@ -1996,7 +2010,7 @@ while not finalizado:
         ordem = choice(esfera_sorte)
         troca_n = len(posicao_erro[ordem])
     else:
-        troca_n = 300
+        troca_n = 10
     range_troca = []
     while len(range_troca) != troca_n:
         if usar_metodo_manipulacao_genetica:
