@@ -1176,7 +1176,7 @@ print(intervalo, ' minutos.')
 # Testes de heurística:
 # #1: Estratégia = Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético, com a restrição de janelas.
-'''
+
 iteracoes = 0
 tempo_1 = time.time()
 # Neste ponto criaremos o buffer dos professores com os seus slots ocupados: [[0, 1, 25, 33], [2,4] ...]
@@ -1603,7 +1603,7 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
-'''
+
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # #2: Estratégia = Tratamento único (todos os elementos simultaneamente)
@@ -2103,14 +2103,14 @@ while not finalizado:
 
     '''
     filhos = []
+    fixos = 20
+    moveis = frame_tamanho - fixos
+    range_0_frame = []
+    for k in range(frame_tamanho):
+        range_0_frame.append(k)
     for i in range(len(lista_crossover)):
-        fixos = 20
-        moveis = frame_tamanho - fixos
         lista_individuo = lista_crossover[i].individuo
         filho = []
-        range_0_frame =[]
-        for k in range(frame_tamanho):
-            range_0_frame.append(k)
         for j in range(len(turmas_objetos)):
             lista_moveis = []
             buffer_embaralhado = []
@@ -2118,17 +2118,17 @@ while not finalizado:
                 nro_sorte = choice(range_0_frame)
                 if nro_sorte not in lista_moveis:
                     lista_moveis.append(nro_sorte)
-                    buffer_embaralhado.append(lista_individuo[nro_sorte])
+                    buffer_embaralhado.append(lista_individuo[j * frame_tamanho + nro_sorte])
             shuffle(buffer_embaralhado)
-            inicio = k * frame_tamanho
-            fim = inicio + frame_tamanho - 1
+            inicio = j * frame_tamanho
+            fim = inicio + frame_tamanho
             for m in range(inicio, fim):
                 if m in lista_moveis:
                     filho.append(buffer_embaralhado[0])
                     buffer_embaralhado.pop(0)
                 else:
                     filho.append(lista_individuo[m])
-            filhos.append(filho)
+        filhos.append(filho)
 
 
 
