@@ -1687,7 +1687,6 @@ for i in range(len(inequacoes)):
     if inequacoes[i][2] == '4':
         inequacoes4.append(inequacoes[i])
 
-
 dict3 = {}
 dict4 = {}
 
@@ -1719,6 +1718,16 @@ while not finalizado:
         for i in range(len(inequacoes4)):
             for j in range(len(inequacoes4[i][0])):
                 dict4[inequacoes4[i][0][j]] = copy.deepcopy(inequacoes4[i])
+        '''
+        cont = 0
+        for i in range(6750):
+            valor = dict4[i]
+            if i in valor[0]:
+                print('i: ', i, 'inequacoes4: ', valor[0])
+                cont = cont + 1
+        print('cont: ', cont)
+        sys.exit(0)
+        '''
 
         matriz_s = []
         for i in range(len(turmas_objetos)):
@@ -1729,6 +1738,13 @@ while not finalizado:
         windows = []
         for i in range(len(professores_objetos)):
             windows.append([])
+        fitness2 = 0
+        fitness3a = 0
+        fitness3b = 0
+        fitness4a = 0
+        fitness4b = 0
+        fitness6 = 0
+        fitness7 = 0
         for j in range(len(frame_tuplas_tdp)):
             # print('\nj: ', j, 'len(frame_tuplas_tdp: ', len(frame_tuplas_tdp), 'ii: ', ii)
             fitness = 0
@@ -1757,22 +1773,26 @@ while not finalizado:
                             break
                 '''
                 fitness = fitness + 1
+                fitness2 = fitness2 + 1
 
                 valor3 = dict3[valor_da_vez]
                 if valor3[1] > 0:
                     fitness = fitness + 1
+                    fitness3a = fitness3a + 1
                     for i in valor3[0]:
                         temp3 = dict3[i]
                         if temp3[1] > 0:
                             temp3[1] = temp3[1] - 1
                             dict3[i] = temp3
                 else:
+                    fitness3b = fitness3b + 1
                     if j not in posicao_erro[ii]:
                         posicao_erro[ii].append(j)  # posição sem pontuação
 
-                valor4= dict4[valor_da_vez]
+                valor4 = dict4[valor_da_vez]
                 if valor4[1] > 0:
                     fitness = fitness + 1
+                    fitness4a = fitness4a + 1
                     for i in valor4[0]:
                         temp4 = dict4[i]
                         # print('temp4: ', temp4)
@@ -1781,9 +1801,9 @@ while not finalizado:
                             dict4[i] = temp4
                             # print('dict4[i]: ', dict4[i])
                 else:
+                    fitness4b = fitness4b + 1
                     if j not in posicao_erro[ii]:
                         posicao_erro[ii].append(j)  # posição sem pontuação
-
 
                 '''
                 for i in range(len(inequacoes_copia)):
@@ -1795,6 +1815,7 @@ while not finalizado:
                             break
                 '''
                 fitness = fitness + 1
+                fitness6 = fitness6 + 1
                 '''
                 for i in range(len(inequacoes_copia)):
                     if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
@@ -1805,6 +1826,7 @@ while not finalizado:
                             break
                 '''
                 fitness = fitness + 1
+                fitness7 = fitness7 + 1
             # print('ii: ', ii, 'teste: ', teste)
             individuo_fitness[ii] = individuo_fitness[ii] + fitness
 
@@ -1840,6 +1862,17 @@ while not finalizado:
                             numero_janelas = numero_janelas + 1
         if numero_janelas <= limite_fitness_janelas:
             individuo_fitness[ii] = individuo_fitness[ii] + pontos_fitness
+        print(ii, '\nTodas as fitnesses ')
+        print(fitness2)
+        print(fitness3a, fitness3b, fitness3a + fitness3b)
+        print(fitness4a, fitness4b, fitness4a + fitness4b)
+        print(fitness6)
+        print(fitness7)
+        if numero_janelas <= limite_fitness_janelas:
+            print(pontos_fitness)
+        else:
+            print('0')
+
         # print('Janelas [', ii, ']: ', numero_janelas)
 
     percentual_fitness = []
