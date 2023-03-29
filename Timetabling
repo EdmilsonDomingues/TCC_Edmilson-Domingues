@@ -1817,7 +1817,7 @@ while not finalizado:
             else:
                 matriz_s.append(frame_tamanho)
         windows2 = []
-        limite_fitness_janelas = 70
+        limite_fitness_janelas = 7000
         windows2 = copy.deepcopy(windows)
         for j in range(len(frame_tuplas_tdp)):
             numero_janelas = 0
@@ -2162,8 +2162,11 @@ while not finalizado:
     # Critério: trocar o conteúdo de posições e manter as outras
 
     # Então vamos sortear as posições que serão embaralhadas
-    trocas_previstas = 20
-    usar_metodo_manipulacao_genetica = True
+    trocas_previstas = 50
+    if vez % 5 == 0:
+        usar_metodo_manipulacao_genetica = False
+    else:
+        usar_metodo_manipulacao_genetica = True
     troca_n = []
     for i in range(len(populacao_atual)):
         if usar_metodo_manipulacao_genetica:
