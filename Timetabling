@@ -560,7 +560,7 @@ for td in td_lista:
 
 # --------------------------------------------------------------------------------------------------------
 # Execução da modelagem:
-# model.optimize()
+model.optimize()
 # print(model.display())
 
 '''
@@ -572,7 +572,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-'''
+
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -649,7 +649,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-'''
+
 # --------------------------------------------------------------------------------------------------------
 '''
 # Recorrência se resultado for Unfeasible:
@@ -1048,7 +1048,7 @@ for t in range(len(turmas_objetos)):
             valor = choice(range_10000)
             for j in range(len(populacao_atual)):
                 if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
-                    selecionados.append(populacao_atual[i])
+                    selecionados.append(populacao_atual[j])
         # Neste ponto temos os selecionados.
         lista_crossover = []
         nao_lista_crossover = []
@@ -1295,7 +1295,7 @@ for t in range(len(turmas_objetos)):
         if t < 11:
             limite_fitness_janelas = 0
         else:
-            limite_fitness_janelas = (t - 10) * 41 // (len(turmas_objetos) - 10)
+            limite_fitness_janelas = (t - 10) * 70 // (len(turmas_objetos) - 10)
         for i in range(len(populacao_atual)):
             windows2 = copy.deepcopy(windows)
             pontos_fitness = turmas_creditos[t]
@@ -1329,7 +1329,7 @@ for t in range(len(turmas_objetos)):
 
 
         # Vamos isolar os melhores da população, mantendo-os na população nova.
-        print('Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
+        print(vez, ' Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
 
         # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
         # manipulação genética.
@@ -1603,7 +1603,7 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
-
+sys.exit(0)
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # #2: Estratégia = Tratamento único (todos os elementos simultaneamente)
