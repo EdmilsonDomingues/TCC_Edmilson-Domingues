@@ -866,7 +866,7 @@ class Individuo:
 # Testes de heurística:
 # #1: Estratégia = Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético, mas sem a restrição de janelas.
-'''
+
 iteracoes = 0
 tempo_1 = time.time()
 turmas_backup = []
@@ -973,7 +973,7 @@ for t in range(len(turmas_objetos)):
         for i in range(len(populacao_atual)):
             individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
         # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
-        print('Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
+        print(vez, 'Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
 
         # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
         # manipulação genética.
@@ -1078,6 +1078,7 @@ for t in range(len(turmas_objetos)):
             if sorte not in range_troca:
                 range_troca.append(sorte)
         # Vamos gerar os filhos.
+        '''
         filhos = []
         for i in range(len(lista_crossover)):
             filho = []
@@ -1093,6 +1094,69 @@ for t in range(len(turmas_objetos)):
                 else:
                     filho.append(lista_individuo[j])
             filhos.append(filho)
+        '''
+        filhos = []
+        for i in range(int(len(lista_crossover) / 2)):
+            # corte1 = choice(range_25)
+            corte1 = 0
+            print('corte1: ', corte1)
+            # corte2 = choice(range_25)
+            corte2 = 2
+            print('corte1: ', corte2)
+            if corte2 < corte1:
+                temp = corte2
+                corte2 = corte1
+                corte1 = temp
+            filho1_copia = []
+            pai1_exclusivo = []
+            filho2_copia = []
+            pai2_exclusivo = []
+            if corte1 == corte2:
+                pass
+            else:
+                cross0 = lista_crossover[2 * i].individuo
+                print('cross0: ', cross0)
+                cross1 = lista_crossover[2 * i + 1].individuo
+                print('cross1: ', cross1)
+                for j in range(frame_tamanho):
+                    if j > corte1 and j <= corte2:
+                        filho1_copia.append(cross0[j])
+                        filho2_copia.append(cross1[j])
+                    else:
+                        pai1_exclusivo.append(cross0[j])
+                        pai2_exclusivo.append(cross1[j])
+                print('filho1_copia: ', filho1_copia)
+                print('filho2_copia: ', filho2_copia)
+                print('pai1_exclusivo: ', pai1_exclusivo)
+                print('pai2_exclusivo: ', pai2_exclusivo)
+            pai1_todo_sequencial = []
+            pai2_todo_sequencial = []
+            for j in range(corte2 + 1, corte2 + 1 + frame_tamanho):
+                pai1_todo_sequencial.append(cross0[j % frame_tamanho])
+                pai2_todo_sequencial.append(cross1[j % frame_tamanho])
+            pai2_resto = []
+            for j in range(frame_tamanho):
+                if pai2_todo_sequencial[j] in pai1_exclusivo:
+                    pai2_resto.append(pai2_todo_sequencial[j])
+            print('pai1_todo_sequencial: ', pai1_todo_sequencial)
+            print('pai2_todo_sequencial: ', pai2_todo_sequencial)
+            filho1_total = []
+            for j in range(frame_tamanho):
+                if corte1 != corte2:
+                    if len(filho1_total) >= corte1 + 1 and len(filho1_total) <= corte2:
+                        filho1_total.append(filho1_copia[0])
+                        filho1_copia.pop(0)
+                    else:
+                        filho1_total.append(pai2_resto[0])
+                        pai2_resto[0].pop(0)
+                else:
+                    filho1_total.append(cross0[j])
+            print('filho1_total: ', filho1_total)
+            filhos.append(filho1_total)
+            filhos.append(filho1_total)
+            print(i, 'len(filho[i]: ', len(filho1_total))
+            print(i, 'len(filho[i]: ', len(filho1_total))
+            sys.exit(0)
         # Realizar mutação (order-based mutation).
         # Varrer posições e aplicar Bernoulli (pm)
         # Se posição for sofrer mutação, sortear outra posição para realizar a troca
@@ -1171,7 +1235,7 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
-'''
+sys.exit(0)
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # #1: Estratégia = Encaixando peças
@@ -1292,10 +1356,10 @@ for t in range(len(turmas_objetos)):
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
         windows2 = []
         # limite_fitness_janelas = (t + 1) * 21 // len(turmas_objetos)
-        if t < 11:
+        if t <= 10:  # t começa em ZERO.
             limite_fitness_janelas = 0
         else:
-            limite_fitness_janelas = (t - 10) * 70 // (len(turmas_objetos) - 10)
+            limite_fitness_janelas = (t - 10) * 50 // ((len(turmas_objetos) - 1) - 10)
         for i in range(len(populacao_atual)):
             windows2 = copy.deepcopy(windows)
             pontos_fitness = turmas_creditos[t]
