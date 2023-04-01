@@ -872,7 +872,7 @@ tempo_1 = time.time()
 turmas_backup = []
 turmas_creditos = []
 
-n_individuos = 36
+n_individuos = 50
 range_n = []
 for i in range(n_individuos):
     range_n.append(i)
@@ -979,7 +979,7 @@ for t in range(len(turmas_objetos)):
         # manipulação genética.
         # Populações com fitness = máximo - 1 devem ser analisadas separadamente, no sentido de se
         # finalizar a busca por solução.
-        top_quantidade = 4
+        top_quantidade = 8
         for i in range(len(populacao_atual)):
             if i >= top_quantidade:
                 if individuo_fitness[i] == max_fit - 1:
@@ -1052,7 +1052,7 @@ for t in range(len(turmas_objetos)):
         # Neste ponto temos os selecionados.
         lista_crossover = []
         nao_lista_crossover = []
-        pc = 70
+        pc = 90
         for i in range(len(selecionados)):
             valor = choice(range_100)
             if valor <= pc:
@@ -1100,10 +1100,8 @@ for t in range(len(turmas_objetos)):
         for i in range(int(len(lista_crossover) / 2)):
             corte1 = choice(range_25)
             # corte1 = 0
-            # print('corte1: ', corte1)
             corte2 = choice(range_25)
             # corte2 = 2
-            # print('corte1: ', corte2)
             if corte2 < corte1:
                 temp = corte2
                 corte2 = corte1
@@ -1140,6 +1138,11 @@ for t in range(len(turmas_objetos)):
                 if pai2_todo_sequencial[j] in pai1_exclusivo:
                     pai2_resto.append(pai2_todo_sequencial[j])
                     pai1_exclusivo.remove(pai2_todo_sequencial[j])
+            pai1_resto = [] #
+            for j in range(len(pai1_todo_sequencial)):
+                if pai1_todo_sequencial[j] in pai2_exclusivo:
+                    pai1_resto.append(pai1_todo_sequencial[j])
+                    pai2_exclusivo.remove(pai1_todo_sequencial[j])
             # print('pai1_todo_sequencial: ', pai1_todo_sequencial)
             # print('pai2_todo_sequencial: ', pai2_todo_sequencial)
             # print('pai2_resto: ', pai2_resto)
@@ -1155,9 +1158,20 @@ for t in range(len(turmas_objetos)):
                         pai2_resto.pop(0)
                 else:
                     filho1_total.append(cross0[j])
+            filho2_total = []
+            for j in range(frame_tamanho):
+                if corte1 != corte2:
+                    if j > corte1 and j <= corte2:
+                        filho2_total.append(filho2_copia[0])
+                        filho2_copia.pop(0)
+                    else:
+                        filho2_total.append(pai1_resto[0])
+                        pai1_resto.pop(0)
+                else:
+                    filho2_total.append(cross0[j])
             # print('filho1_total: ', filho1_total)
             filhos.append(filho1_total)
-            filhos.append(filho1_total)
+            filhos.append(filho2_total)
             # print(i, 'len(filho[i]: ', len(filho1_total))
             # print(i, 'len(filho[i]: ', len(filho1_total))
 
@@ -1166,7 +1180,7 @@ for t in range(len(turmas_objetos)):
         # Se posição for sofrer mutação, sortear outra posição para realizar a troca
         for i in range(len(filhos)):
             for j in range(frame_tamanho):
-                pm = 1
+                pm = 15
                 valor = choice(range_100)
                 if valor <= pm:
                     temp = filhos[i][j]
@@ -1239,12 +1253,12 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
-sys.exit(0)
+
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # #1: Estratégia = Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético, com a restrição de janelas.
-
+'''
 iteracoes = 0
 tempo_1 = time.time()
 # Neste ponto criaremos o buffer dos professores com os seus slots ocupados: [[0, 1, 25, 33], [2,4] ...]
@@ -1671,6 +1685,99 @@ tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
 print(iteracoes, ' iterações.')
 print(intervalo, ' minutos.')
+'''
+# --------------------------------------------------------------------------------------------------------
+# Apresentação dos Relatórios (agendas):
+# Para o AG.
+
+p_lista = []
+for cont in range(len(estrela_chaves)):
+    if estrela_chaves[cont][2] not in p_lista:
+        p_lista.append(estrela_chaves[cont][2])
+tdps_lista = []
+for p in p_lista:
+    tdps_lista.clear()
+    for i in range(len(estrela_chaves)):
+        if estrela_chaves[i][2] == p:
+            tdps_lista.append(i)
+    grade = Grade('1', 'Matutino')
+    linhas = grade.grade_vazia()
+    nova_grade = copy.deepcopy(linhas)
+    for i in range(len(tdps_lista)):
+        # if x[tdps_lista[i]].X == 1:
+        if xx[tdps_lista[i]] == 1:
+            slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            l, c = grade.converte_slot_lc(slot_da_vez)
+            info = nova_grade[l][c]
+            info = info + "\n\nTurma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
+                + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
+                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            nova_grade[l][c] = info
+    cabecalho = grade.cabecalho()
+    apresentacao = PrettyTable(grade.cabecalho())
+    apresentacao.hrules = True
+    apresentacao.left_padding_width = 1
+    apresentacao.right_padding_width = 1
+    apresentacao.align = 'l'
+    apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
+    # apresentacao._max_table_width = 150
+    for i in range(len(nova_grade)):
+        apresentacao.add_row(nova_grade[i])
+    print()
+    print()
+    print('Professor(a) - heurística: ', professores_objetos[p].nome_professor)
+    print(apresentacao)
+
+t_lista = []
+for cont in range(len(estrela_chaves)):
+    if estrela_chaves[cont][0] not in t_lista:
+        t_lista.append(estrela_chaves[cont][0])
+tdps_lista = []
+for t in t_lista:
+    tdps_lista.clear()
+    for i in range(len(estrela_chaves)):
+        if estrela_chaves[i][0] == t:
+            tdps_lista.append(i)
+    grade = Grade('1', 'Matutino')
+    linhas = grade.grade_vazia()
+    nova_grade = copy.deepcopy(linhas)
+    for i in range(len(tdps_lista)):
+        # if x[tdps_lista[i]].X == 1:
+        if xx[tdps_lista[i]] == 1:
+            slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            l, c = grade.converte_slot_lc(slot_da_vez)
+            info = nova_grade[l][c]
+            info = info + "\n\nDisciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
+                + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
+                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            nova_grade[l][c] = info
+    cabecalho = grade.cabecalho()
+    apresentacao = PrettyTable(grade.cabecalho())
+    apresentacao.hrules = True
+    apresentacao.left_padding_width = 1
+    apresentacao.right_padding_width = 1
+    apresentacao.align = 'l'
+    apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
+    # apresentacao._max_table_width = 150
+    for i in range(len(nova_grade)):
+        apresentacao.add_row(nova_grade[i])
+    print()
+    print()
+    print('Turma - heurística: ', turmas_objetos[t].numero_turma)
+    print(apresentacao)
+
+cont = 0
+for i in range(len(x)):
+    if x[i].X == 1:
+        cont = cont + 1
+print('Total de X: ', cont)
+
+cont = 0
+for i in range(len(xx)):
+    if xx[i] == 1:
+        cont = cont + 1
+print('Total de xx: ', cont)
+print(lista_sorteados)
 sys.exit(0)
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
@@ -2241,100 +2348,6 @@ print('Total de xx: ', cont)
 tempo_2 = time.time()
 intervalo = (tempo_2 - tempo_1) / 60
 print(intervalo, ' minutos.')
-
 # --------------------------------------------------------------------------------------------------------
-# Apresentação dos Relatórios (agendas):
-# Para o AG.
 
-p_lista = []
-for cont in range(len(estrela_chaves)):
-    if estrela_chaves[cont][2] not in p_lista:
-        p_lista.append(estrela_chaves[cont][2])
-tdps_lista = []
-for p in p_lista:
-    tdps_lista.clear()
-    for i in range(len(estrela_chaves)):
-        if estrela_chaves[i][2] == p:
-            tdps_lista.append(i)
-    grade = Grade('1', 'Matutino')
-    linhas = grade.grade_vazia()
-    nova_grade = copy.deepcopy(linhas)
-    for i in range(len(tdps_lista)):
-        # if x[tdps_lista[i]].X == 1:
-        if xx[tdps_lista[i]] == 1:
-            slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
-            l, c = grade.converte_slot_lc(slot_da_vez)
-            info = nova_grade[l][c]
-            info = info + "\n\nTurma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
-                + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
-                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
-            nova_grade[l][c] = info
-    cabecalho = grade.cabecalho()
-    apresentacao = PrettyTable(grade.cabecalho())
-    apresentacao.hrules = True
-    apresentacao.left_padding_width = 1
-    apresentacao.right_padding_width = 1
-    apresentacao.align = 'l'
-    apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
-    # apresentacao._max_table_width = 150
-    for i in range(len(nova_grade)):
-        apresentacao.add_row(nova_grade[i])
-    print()
-    print()
-    print('Professor(a) - heurística: ', professores_objetos[p].nome_professor)
-    print(apresentacao)
-
-t_lista = []
-for cont in range(len(estrela_chaves)):
-    if estrela_chaves[cont][0] not in t_lista:
-        t_lista.append(estrela_chaves[cont][0])
-tdps_lista = []
-for t in t_lista:
-    tdps_lista.clear()
-    for i in range(len(estrela_chaves)):
-        if estrela_chaves[i][0] == t:
-            tdps_lista.append(i)
-    grade = Grade('1', 'Matutino')
-    linhas = grade.grade_vazia()
-    nova_grade = copy.deepcopy(linhas)
-    for i in range(len(tdps_lista)):
-        # if x[tdps_lista[i]].X == 1:
-        if xx[tdps_lista[i]] == 1:
-            slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
-            l, c = grade.converte_slot_lc(slot_da_vez)
-            info = nova_grade[l][c]
-            info = info + "\n\nDisciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
-                + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
-                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
-            nova_grade[l][c] = info
-    cabecalho = grade.cabecalho()
-    apresentacao = PrettyTable(grade.cabecalho())
-    apresentacao.hrules = True
-    apresentacao.left_padding_width = 1
-    apresentacao.right_padding_width = 1
-    apresentacao.align = 'l'
-    apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
-    # apresentacao._max_table_width = 150
-    for i in range(len(nova_grade)):
-        apresentacao.add_row(nova_grade[i])
-    print()
-    print()
-    print('Turma - heurística: ', turmas_objetos[t].numero_turma)
-    print(apresentacao)
-'''
-'''
-cont = 0
-for i in range(len(x)):
-    if x[i].X == 1:
-        cont = cont + 1
-print('Total de X: ', cont)
-
-cont = 0
-for i in range(len(xx)):
-    if xx[i] == 1:
-        cont = cont + 1
-print('Total de xx: ', cont)
-print(lista_sorteados)
-
-# --------------------------------------------------------------------------------------------------------
 
