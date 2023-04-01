@@ -54,23 +54,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="77766" />
+          <entry key="Timetabling" value="78018" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="77766" />
+          <entry key="Python" value="78018" />
         </counts>
       </usages-collector>
     </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="TCC_Edmilson-Domingues" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="1151" column="21" lean-forward="true" selection-start-line="1151" selection-start-column="21" selection-end-line="1151" selection-end-column="21" />
+            <state relative-caret-position="82">
+              <caret line="874" column="17" selection-start-line="874" selection-start-column="17" selection-end-line="874" selection-end-column="17" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -82,7 +85,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>range_troca</find>
       <find>range_10000 = []</find>
       <find>print(</find>
       <find>vez</find>
@@ -112,6 +114,7 @@
       <find>70</find>
       <find>limite_fitness_janelas =</find>
       <find>range_25</find>
+      <find>n_individuos =</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -124,7 +127,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-14" />
     <option name="y" value="34" />
     <option name="width" value="1338" />
@@ -241,7 +244,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38032788" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46557376" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -303,8 +306,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="1151" column="21" lean-forward="true" selection-start-line="1151" selection-start-column="21" selection-end-line="1151" selection-end-column="21" />
+        <state relative-caret-position="82">
+          <caret line="874" column="17" selection-start-line="874" selection-start-column="17" selection-end-line="874" selection-end-column="17" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

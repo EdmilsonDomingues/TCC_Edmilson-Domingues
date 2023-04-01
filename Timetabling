@@ -872,7 +872,7 @@ tempo_1 = time.time()
 turmas_backup = []
 turmas_creditos = []
 
-n_individuos = 20
+n_individuos = 36
 range_n = []
 for i in range(n_individuos):
     range_n.append(i)
@@ -1094,15 +1094,16 @@ for t in range(len(turmas_objetos)):
                 else:
                     filho.append(lista_individuo[j])
             filhos.append(filho)
+
         '''
         filhos = []
         for i in range(int(len(lista_crossover) / 2)):
-            # corte1 = choice(range_25)
-            corte1 = 0
-            print('corte1: ', corte1)
-            # corte2 = choice(range_25)
-            corte2 = 2
-            print('corte1: ', corte2)
+            corte1 = choice(range_25)
+            # corte1 = 0
+            # print('corte1: ', corte1)
+            corte2 = choice(range_25)
+            # corte2 = 2
+            # print('corte1: ', corte2)
             if corte2 < corte1:
                 temp = corte2
                 corte2 = corte1
@@ -1115,9 +1116,9 @@ for t in range(len(turmas_objetos)):
                 pass
             else:
                 cross0 = lista_crossover[2 * i].individuo
-                print('cross0: ', cross0)
+                # print('cross0: ', cross0)
                 cross1 = lista_crossover[2 * i + 1].individuo
-                print('cross1: ', cross1)
+                # print('cross1: ', cross1)
                 for j in range(frame_tamanho):
                     if j > corte1 and j <= corte2:
                         filho1_copia.append(cross0[j])
@@ -1125,38 +1126,41 @@ for t in range(len(turmas_objetos)):
                     else:
                         pai1_exclusivo.append(cross0[j])
                         pai2_exclusivo.append(cross1[j])
-                print('filho1_copia: ', filho1_copia)
-                print('filho2_copia: ', filho2_copia)
-                print('pai1_exclusivo: ', pai1_exclusivo)
-                print('pai2_exclusivo: ', pai2_exclusivo)
+                # print('filho1_copia: ', filho1_copia)
+                # print('filho2_copia: ', filho2_copia)
+                # print('pai1_exclusivo: ', pai1_exclusivo)
+                # print('pai2_exclusivo: ', pai2_exclusivo)
             pai1_todo_sequencial = []
             pai2_todo_sequencial = []
             for j in range(corte2 + 1, corte2 + 1 + frame_tamanho):
                 pai1_todo_sequencial.append(cross0[j % frame_tamanho])
                 pai2_todo_sequencial.append(cross1[j % frame_tamanho])
             pai2_resto = []
-            for j in range(frame_tamanho):
+            for j in range(len(pai2_todo_sequencial)):
                 if pai2_todo_sequencial[j] in pai1_exclusivo:
                     pai2_resto.append(pai2_todo_sequencial[j])
-            print('pai1_todo_sequencial: ', pai1_todo_sequencial)
-            print('pai2_todo_sequencial: ', pai2_todo_sequencial)
+                    pai1_exclusivo.remove(pai2_todo_sequencial[j])
+            # print('pai1_todo_sequencial: ', pai1_todo_sequencial)
+            # print('pai2_todo_sequencial: ', pai2_todo_sequencial)
+            # print('pai2_resto: ', pai2_resto)
+            # print('len(pai2_resto): ', len(pai2_resto))
             filho1_total = []
             for j in range(frame_tamanho):
                 if corte1 != corte2:
-                    if len(filho1_total) >= corte1 + 1 and len(filho1_total) <= corte2:
+                    if j > corte1 and j <= corte2:
                         filho1_total.append(filho1_copia[0])
                         filho1_copia.pop(0)
                     else:
                         filho1_total.append(pai2_resto[0])
-                        pai2_resto[0].pop(0)
+                        pai2_resto.pop(0)
                 else:
                     filho1_total.append(cross0[j])
-            print('filho1_total: ', filho1_total)
+            # print('filho1_total: ', filho1_total)
             filhos.append(filho1_total)
             filhos.append(filho1_total)
-            print(i, 'len(filho[i]: ', len(filho1_total))
-            print(i, 'len(filho[i]: ', len(filho1_total))
-            sys.exit(0)
+            # print(i, 'len(filho[i]: ', len(filho1_total))
+            # print(i, 'len(filho[i]: ', len(filho1_total))
+
         # Realizar mutação (order-based mutation).
         # Varrer posições e aplicar Bernoulli (pm)
         # Se posição for sofrer mutação, sortear outra posição para realizar a troca
