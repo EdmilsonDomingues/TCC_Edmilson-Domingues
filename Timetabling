@@ -1492,12 +1492,14 @@ if testa == 2:
                 temp_top.pop(0)
             # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
             #       como referência o menor valor [normalização].
+            '''
             referencia = 500
             for i in range(len(populacao_atual)):
                 if individuo_fitness[i] < referencia:
                     referencia = individuo_fitness[i]
             for i in range(len(populacao_atual)):
                 individuo_fitness[i] = individuo_fitness[i] - referencia + 1
+            '''
             # Aqui começa a seleção
             # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
             total = 0
@@ -2229,7 +2231,7 @@ while not finalizado:
 
     # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
     #       como referência o menor valor + 1 [normalização].
-    referencia = 50000
+    referencia = 500
     for i in range(len(populacao_atual)):
         if individuo_fitness[i] < referencia:
             referencia = individuo_fitness[i]

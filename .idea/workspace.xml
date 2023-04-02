@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,12 +55,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="78602" />
+          <entry key="Timetabling" value="78624" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="78602" />
+          <entry key="Python" value="78624" />
         </counts>
       </usages-collector>
     </session>
@@ -72,8 +73,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="2427" column="28" lean-forward="true" selection-start-line="2427" selection-start-column="28" selection-end-line="2427" selection-end-column="28" />
+            <state relative-caret-position="101">
+              <caret line="2233" column="20" selection-start-line="2233" selection-start-column="20" selection-end-line="2233" selection-end-column="20" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -85,7 +86,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>inequacoes</find>
       <find>inequacoes3</find>
       <find>valor4:</find>
       <find>dict</find>
@@ -115,6 +115,7 @@
       <find>'2'</find>
       <find>filhos = []</find>
       <find>n_individuos</find>
+      <find>referencia = 500</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -244,7 +245,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46393442" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3704918" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -306,8 +307,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="2427" column="28" lean-forward="true" selection-start-line="2427" selection-start-column="28" selection-end-line="2427" selection-end-column="28" />
+        <state relative-caret-position="101">
+          <caret line="2233" column="20" selection-start-line="2233" selection-start-column="20" selection-end-line="2233" selection-end-column="20" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
