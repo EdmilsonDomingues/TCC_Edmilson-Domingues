@@ -1368,6 +1368,38 @@ if testa == 2:
         # populações convergem aqui.
         finalizado = False
         while not finalizado:
+            # Aqui vamos checar se a população atual não tem gêmeos:
+            for i in range(len(populacao_atual)):
+                for j in range(len(populacao_atual)):
+                    if i != j:
+                        ind1 = populacao_atual[i].individuo
+                        ind2 = populacao_atual[j].individuo
+                        if ind1 != ind2:
+                            break
+                        else:   # tem gêmeos / substituir 'j'
+                            roda_a_roda = []
+                            for k in range(frame_tamanho):
+                                roda_a_roda.append(k)
+                            escolha = []
+                            while len(escolha) != 6:
+                                sorteio = choice(roda_a_roda)
+                                if sorteio not in escolha:
+                                    escolha.append(sorteio)
+                            for k in range(3):
+                                temp = ind1[escolha[0]]
+                                ind1[escolha[0]] = ind1[escolha[1]]
+                                ind1[escolha[1]] = temp
+                                escolha.pop(0)
+                                escolha.pop(0)
+                            populacao_atual[j] = Individuo(ind1)
+
+
+
+
+
+
+
+
             individuo_fitness = []
             for i in range(len(populacao_atual)):
                 individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
@@ -1378,7 +1410,7 @@ if testa == 2:
             if t <= 10:  # t começa em ZERO.
                 limite_fitness_janelas = 0
             else:
-                limite_fitness_janelas = (t - 10) * 80 // ((len(turmas_objetos) - 1) - 10)
+                limite_fitness_janelas = (t - 10) * 70 // ((len(turmas_objetos) - 1) - 10)
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
                 pontos_fitness = turmas_creditos[t]
@@ -1492,14 +1524,12 @@ if testa == 2:
                 temp_top.pop(0)
             # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
             #       como referência o menor valor [normalização].
-            '''
             referencia = 500
             for i in range(len(populacao_atual)):
                 if individuo_fitness[i] < referencia:
                     referencia = individuo_fitness[i]
             for i in range(len(populacao_atual)):
                 individuo_fitness[i] = individuo_fitness[i] - referencia + 1
-            '''
             # Aqui começa a seleção
             # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
             total = 0
@@ -1600,9 +1630,15 @@ if testa == 2:
                     # print('pai2_exclusivo: ', pai2_exclusivo)
                 pai1_todo_sequencial = []
                 pai2_todo_sequencial = []
+                '''
                 for j in range(corte2 + 1, corte2 + 1 + frame_tamanho):
                     pai1_todo_sequencial.append(cross0[j % frame_tamanho])
                     pai2_todo_sequencial.append(cross1[j % frame_tamanho])
+                '''
+                for j in range(frame_tamanho):
+                    pai1_todo_sequencial.append(cross0[j])
+                    pai2_todo_sequencial.append(cross1[j])
+
                 pai2_resto = []
                 for j in range(len(pai2_todo_sequencial)):
                     if pai2_todo_sequencial[j] in pai1_exclusivo:
@@ -1647,15 +1683,18 @@ if testa == 2:
             # Realizar mutação (order-based mutation).
             # Varrer posições e aplicar Bernoulli (pm)
             # Se posição for sofrer mutação, sortear outra posição para realizar a troca
+
             for i in range(len(filhos)):
                 for j in range(frame_tamanho):
-                    pm = 15
+                    pm = 1
                     valor = choice(range_100)
                     if valor <= pm:
+                        # print('Ocorreu uma mutação.   ----------------------------------   -----------------------', i)
                         temp = filhos[i][j]
                         dest = choice(range_25)
                         filhos[i][j] = filhos[i][dest]
                         filhos[i][dest] = temp
+
             # Agora junta top, filhos e não escolhidos
             populacao_atual = []
             for i in range(top_quantidade):
@@ -1668,6 +1707,24 @@ if testa == 2:
             while len(populacao_atual) > n_individuos:
                 populacao_atual.pop(0)
             populacao_atual.reverse()
+
+            '''
+            for i in range(n_individuos):
+                ref_i = []
+                ref_i = copy.deepcopy(populacao_atual[i].individuo)
+                ref_j = []
+                ref_j = copy.deepcopy(temp_entradas)
+                while len(ref_i) != 0:
+                    if ref_i[0] in ref_j:
+                        ref_j.remove(ref_i[0])
+                        ref_i.pop(0)
+                    else:
+                        print('Não são iguais.')
+                        sys.exit(0)
+            print('Tudo igual.')
+            '''
+
+
             # Agora é testar se algum indivíduo é resultado válido.
             finalizado = False
             for i in range(len(populacao_atual)):
@@ -1739,7 +1796,7 @@ if testa == 2:
                 finalizado = False
     for i in range(len(windows)):
         windows[i].sort()
-        print('professor: ', i, 'slots: ', windows[i])
+        # print('professor: ', i, 'slots: ', windows[i])
     xx = []
     for i in range(len(x)):
         if i in lista_sorteados:
