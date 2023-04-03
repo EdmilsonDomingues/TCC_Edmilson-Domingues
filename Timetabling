@@ -1374,7 +1374,7 @@ if testa == 2:
             for k in range(frame_tamanho):
                 roda_a_roda.append(k)
             for i in range(len(populacao_atual)):
-                for j in range(len(populacao_atual)):
+                for j in range(i+1, len(populacao_atual)):
                     if i != j:
                         ind1 = populacao_atual[i].individuo
                         ind2 = populacao_atual[j].individuo
@@ -1390,20 +1390,13 @@ if testa == 2:
                                 if sorteio not in escolha:
                                     escolha.append(sorteio)
                             for k in range(3):
-                                temp = ind2[escolha[0]]
+                                temp = copy.deepcopy(ind2[escolha[0]])
                                 ind2[escolha[0]] = ind2[escolha[1]]
                                 ind2[escolha[1]] = temp
                                 escolha.pop(0)
                                 escolha.pop(0)
                             # print('ind2: ', ind2)
                             populacao_atual[j] = Individuo(ind2)
-
-
-
-
-
-
-
 
             individuo_fitness = []
             for i in range(len(populacao_atual)):
@@ -1415,7 +1408,7 @@ if testa == 2:
             if t <= 10:  # t começa em ZERO.
                 limite_fitness_janelas = 0
             else:
-                limite_fitness_janelas = (t - 10) * 70 // ((len(turmas_objetos) - 1) - 10)
+                limite_fitness_janelas = (t - 10) * 50 // ((len(turmas_objetos) - 1) - 10)
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
                 pontos_fitness = turmas_creditos[t]
