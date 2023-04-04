@@ -1408,7 +1408,7 @@ if testa == 2:
             if t <= 10:  # t começa em ZERO.
                 limite_fitness_janelas = 0
             else:
-                limite_fitness_janelas = (t - 10) * 50 // ((len(turmas_objetos) - 1) - 10)
+                limite_fitness_janelas = (t - 10) * 500 // ((len(turmas_objetos) - 1) - 10)
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
                 pontos_fitness = turmas_creditos[t]
@@ -1528,6 +1528,7 @@ if testa == 2:
                     referencia = individuo_fitness[i]
             for i in range(len(populacao_atual)):
                 individuo_fitness[i] = individuo_fitness[i] - referencia + 1
+
             # Aqui começa a seleção
             # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
             total = 0
