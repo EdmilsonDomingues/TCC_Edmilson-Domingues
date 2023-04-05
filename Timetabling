@@ -1404,11 +1404,18 @@ if testa == 2:
 
             # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
             windows2 = []
-            # limite_fitness_janelas = (t + 1) * 21 // len(turmas_objetos)
+            # limite_fitness_janelas = (t + 1) * 90 // len(turmas_objetos)
+            '''
             if t <= 10:  # t começa em ZERO.
                 limite_fitness_janelas = 0
             else:
-                limite_fitness_janelas = (t - 10) * 500 // ((len(turmas_objetos) - 1) - 10)
+                limite_fitness_janelas = (t - 10) * 11 // ((len(turmas_objetos) - 1) - 10)
+            '''
+            if t <= 0:  # t começa em ZERO.
+                limite_fitness_janelas = 0
+            else:
+                limite_fitness_janelas = (t - 0) * 60 // ((len(turmas_objetos) - 1) - 0)
+
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
                 pontos_fitness = turmas_creditos[t]
@@ -1433,8 +1440,21 @@ if testa == 2:
                                 if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
                                         in windows2[n]:
                                     numero_janelas = numero_janelas + 1
+                pontos_inversos = 0
+                if i == 0:
+                    print('limite_fitness_janelas: ', limite_fitness_janelas)
+                    print('numero_janelas: ', numero_janelas)
                 if numero_janelas <= limite_fitness_janelas:
-                    individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
+                    if limite_fitness_janelas == 0:
+                        if i == 0:
+                            print('1')
+                        individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
+                    else:
+                        pontos_inversos = ((1 - pontos_fitness) * numero_janelas // limite_fitness_janelas) + pontos_fitness
+                        individuo_fitness[i] = individuo_fitness[i] + pontos_inversos
+                        if i == 0:
+                            print('2')
+                            print('pontos_inversos: ', pontos_inversos)
 
 
 
