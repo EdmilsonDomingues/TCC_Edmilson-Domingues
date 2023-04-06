@@ -1411,10 +1411,11 @@ if testa == 2:
             else:
                 limite_fitness_janelas = (t - 10) * 11 // ((len(turmas_objetos) - 1) - 10)
             '''
-            if t <= 0:  # t começa em ZERO.
+            comeco = 0
+            if t <= comeco:  # t começa em ZERO.
                 limite_fitness_janelas = 0
             else:
-                limite_fitness_janelas = (t - 0) * 60 // ((len(turmas_objetos) - 1) - 0)
+                limite_fitness_janelas = (t - comeco) * 90 // ((len(turmas_objetos) - 1) - comeco)
 
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
@@ -1440,6 +1441,9 @@ if testa == 2:
                                 if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
                                         in windows2[n]:
                                     numero_janelas = numero_janelas + 1
+                if numero_janelas <= limite_fitness_janelas:
+                    individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
+                '''
                 pontos_inversos = 0
                 if i == 0:
                     print('limite_fitness_janelas: ', limite_fitness_janelas)
@@ -1450,12 +1454,12 @@ if testa == 2:
                             print('1')
                         individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
                     else:
-                        pontos_inversos = ((1 - pontos_fitness) * numero_janelas // limite_fitness_janelas) + pontos_fitness
+                        pontos_inversos = - pontos_fitness * numero_janelas // limite_fitness_janelas + pontos_fitness
                         individuo_fitness[i] = individuo_fitness[i] + pontos_inversos
                         if i == 0:
                             print('2')
                             print('pontos_inversos: ', pontos_inversos)
-
+                '''
 
 
 
