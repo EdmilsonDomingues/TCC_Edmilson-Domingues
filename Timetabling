@@ -1271,7 +1271,7 @@ if testa == 2:
     turmas_backup = []
     turmas_creditos = []
 
-    n_individuos = 50
+    n_individuos = 100
     range_n = []
     for i in range(n_individuos):
         range_n.append(i)
@@ -1404,7 +1404,7 @@ if testa == 2:
 
             # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
             windows2 = []
-            # limite_fitness_janelas = (t + 1) * 90 // len(turmas_objetos)
+            # limite_fitness_janelas = (t + 1) * 80 // len(turmas_objetos)
             '''
             if t <= 10:  # t começa em ZERO.
                 limite_fitness_janelas = 0
@@ -1415,7 +1415,7 @@ if testa == 2:
             if t <= comeco:  # t começa em ZERO.
                 limite_fitness_janelas = 0
             else:
-                limite_fitness_janelas = (t - comeco) * 90 // ((len(turmas_objetos) - 1) - comeco)
+                limite_fitness_janelas = (t - comeco) * 70 // ((len(turmas_objetos) - 1) - comeco)
 
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
@@ -1576,7 +1576,7 @@ if testa == 2:
             # Neste ponto temos os selecionados.
             lista_crossover = []
             nao_lista_crossover = []
-            pc = 90
+            pc = 70
             for i in range(len(selecionados)):
                 valor = choice(range_100)
                 if valor <= pc:
@@ -1978,7 +1978,7 @@ print('len(frame_tuplas_tdp):', len(frame_tuplas_tdp))
 # No exemplo, professor 0 ocupa slots 0, 1, 25 e 33.
 
 # Criação de buffers de uso geral
-n_individuos = 50
+n_individuos = 100
 range_n = []
 for i in range(n_individuos):
     range_n.append(i)
