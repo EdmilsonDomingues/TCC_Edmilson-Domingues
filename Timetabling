@@ -560,7 +560,7 @@ for td in td_lista:
 
 # --------------------------------------------------------------------------------------------------------
 # Execução da modelagem:
-# model.optimize()
+model.optimize()
 # print(model.display())
 
 '''
@@ -572,7 +572,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-'''
+
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -649,7 +649,7 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-'''
+
 # --------------------------------------------------------------------------------------------------------
 '''
 # Recorrência se resultado for Unfeasible:
@@ -1274,7 +1274,7 @@ if testa == 2:
     turmas_backup = []
     turmas_creditos = []
 
-    n_individuos = 100
+    n_individuos = 50
     range_n = []
     for i in range(n_individuos):
         range_n.append(i)
@@ -1366,7 +1366,8 @@ if testa == 2:
         populacao_atual = []
         temp = copy.deepcopy(turmas_backup[t])
         for i in range(n_individuos):
-            shuffle(temp)
+            for j in range(i + 2):
+                shuffle(temp)
             populacao_atual.append(Individuo(copy.deepcopy(temp)))
         # populações convergem aqui.
         finalizado = False
@@ -1385,7 +1386,7 @@ if testa == 2:
                         if ind1 != ind2:
                             pass
                         else:   # tem gêmeos / substituir 'j'
-                            print('i: ', i, 'j: ', j)
+                            # print('i: ', i, 'j: ', j)
                             # print('ind1: ', ind1)
                             # print('ind2: ', ind2)
                             escolha = []
@@ -1419,7 +1420,7 @@ if testa == 2:
             if t <= comeco:  # t começa em ZERO.
                 limite_fitness_janelas = 0
             else:
-                limite_fitness_janelas = (t - comeco) * 70 // ((len(turmas_objetos) - 1) - comeco)
+                limite_fitness_janelas = (t - comeco) * 7000 // ((len(turmas_objetos) - 1) - comeco)
 
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
@@ -1779,7 +1780,7 @@ if testa == 2:
                     else:
                         print('Não são iguais.')
                         sys.exit(0)
-            print('Tudo igual.')
+            # print('Tudo igual.')
 
             # Agora é testar se algum indivíduo é resultado válido.
             finalizado = False
