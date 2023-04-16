@@ -572,7 +572,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+arquivo = open("grade completa da escola.txt", "w+")
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -609,9 +609,21 @@ for p in p_lista:
         apresentacao.add_row(nova_grade[i])
     print()
     print()
-    print('Professor(a): ', professores_objetos[p].nome_professor)
-    print(apresentacao)
-
+    print('', file = arquivo)
+    print('', file = arquivo)
+    mostrar_nome_completo = False
+    if mostrar_nome_completo:
+        print('Professor(a): ', professores_objetos[p].nome_professor)
+        print('Professor(a): ', professores_objetos[p].nome_professor, file = arquivo)
+    else:
+        nome_completo = professores_objetos[p].nome_professor.split()
+        abreviacao = ''
+        for i in range(len(nome_completo)):
+            abreviacao = abreviacao + nome_completo[i][0]
+        print('Professor(a): ', abreviacao)
+        print(apresentacao)
+        print('Professor(a): ', abreviacao, file = arquivo)
+        print(apresentacao, file = arquivo)
 t_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][0] not in t_lista:
@@ -631,9 +643,18 @@ for t in t_lista:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = nova_grade[l][c]
-            info = info + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
-                    + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
-                    + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            if mostrar_nome_completo:
+                info = info + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
+                        + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
+                        + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            else:
+                nome_completo = professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor.split()
+                abreviacao = ''
+                for j in range(len(nome_completo)):
+                    abreviacao = abreviacao + nome_completo[j][0]
+                info = info + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina \
+                       + "\n" + "Professor(a): " + abreviacao\
+                       + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             nova_grade[l][c] = info
     cabecalho = grade.cabecalho()
     apresentacao = PrettyTable(grade.cabecalho())
@@ -649,7 +670,10 @@ for t in t_lista:
     print()
     print('Turma: ', turmas_objetos[t].numero_turma)
     print(apresentacao)
-
+    print('', file = arquivo)
+    print('', file = arquivo)
+    print('Turma: ', turmas_objetos[t].numero_turma, file = arquivo)
+    print(apresentacao, file = arquivo)
 # --------------------------------------------------------------------------------------------------------
 '''
 # Recorrência se resultado for Unfeasible:
