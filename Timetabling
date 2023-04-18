@@ -1866,6 +1866,7 @@ if testa == 2:
                         if janelas1[m][0] in windows[n] and janelas1[m][1] not in windows[n] and janelas1[m][2] \
                                 in windows[n]:
                             parcial_janelas = parcial_janelas + 1
+                            print("janelas_referência: ", janelas1[m], "professor?: ", n, "janelas_realizadas: ", windows[n])
                 print('Janelas até aqui: ', parcial_janelas)
             else:
                 vez = vez + 1
