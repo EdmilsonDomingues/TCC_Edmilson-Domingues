@@ -892,6 +892,7 @@ class Individuo:
                     if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
                         inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
         return fitness
+
 # --------------------------------------------------------------------------------------------------------
 testa = 2
 # Testes de heurística:
