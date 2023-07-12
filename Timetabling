@@ -422,15 +422,19 @@ for cont in range(len(somas)):
 
     # Model if x > y, then b = 1, otherwise b = 0
     # m.addConstr(x >= y + eps - M * (1 - b), name="bigM_constr1")
+
     model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
                      -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
                      + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) >= 3 + eps\
                     - M * (1 - y[cont]), name="RESTRIÇÃO janelas >: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
     # m.addConstr(x <= y + M * b, name="bigM_constr2")
+
     model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
                      -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
-                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 3\
+                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 3 + eps\
                     + M * y[cont], name="RESTRIÇÃO janelas <: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
+
+
 # --------------------------------------------------------------------------------------------------------
 # Função Objetivo da Pesquisa Operacional:
 model.setObjective(gp.quicksum(y[i] for i in range(len(y_pj))), sense=gp.GRB.MINIMIZE)
@@ -564,8 +568,9 @@ model.optimize()
 # print(model.display())
 
 '''
-print(len(x))
-print(len(y))
+print('x: ', len(x))
+print('y: ', len(y))
+
 print(x)
 for i in range(len(x)):
     print('x[', i, '] = ', x[i].X)
@@ -725,6 +730,7 @@ while True:
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
 '''
+
 # --------------------------------------------------------------------------------------------------------
 lista_tdps = []
 lista_d = []
@@ -1866,7 +1872,7 @@ if testa == 2:
                         if janelas1[m][0] in windows[n] and janelas1[m][1] not in windows[n] and janelas1[m][2] \
                                 in windows[n]:
                             parcial_janelas = parcial_janelas + 1
-                            print("janelas_referência: ", janelas1[m], "professor?: ", n, "janelas_realizadas: ", windows[n])
+                            # print("janelas_referência: ", janelas1[m], "professor?: ", n, "janelas_realizadas: ", windows[n])
                 print('Janelas até aqui: ', parcial_janelas)
             else:
                 vez = vez + 1
