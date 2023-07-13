@@ -730,6 +730,28 @@ while True:
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
 '''
+# --------------------------------------------------------------------------------------------------------
+# Neste ponto a estrutura de dados referente às inequações será transformada de lista para dicionário:
+
+dict = {}
+for i in range(len(inequacoes)):
+    for j in range(len(inequacoes[i][0])):
+        # print("inequação: ", inequacoes[i])
+        if inequacoes[i][0][j] not in dict:
+            dict[inequacoes[i][0][j]] = [i]
+            # print("dict: ", "[", inequacoes[i][0][j], "]", dict[inequacoes[i][0][j]])
+        else:
+            dado = dict[inequacoes[i][0][j]]
+            dado.append(i)
+            dict[inequacoes[i][0][j]] = dado
+            # print("dict: ", "[", inequacoes[i][0][j], "]", dict[inequacoes[i][0][j]])
+valor = 1000
+for i in range(len(inequacoes)):
+    if valor in inequacoes[i][0]:
+        print("ordem: ", i)
+        print("inequação: ", inequacoes[i])
+        print("valor: ", dict[valor])
+sys.exit(0)
 
 # --------------------------------------------------------------------------------------------------------
 lista_tdps = []
