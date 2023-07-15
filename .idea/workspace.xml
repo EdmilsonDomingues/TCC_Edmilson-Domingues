@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/Timetabling" description="                for j in range(corte2 + 1, corte2 ..." line="1720" />
-    <bookmark url="file://$PROJECT_DIR$/Timetabling" description="if filho1_total == cross0:" line="1785" />
+    <bookmark url="file://$PROJECT_DIR$/Timetabling" description="                for j in range(corte2 + 1, corte2 ..." line="1879" />
+    <bookmark url="file://$PROJECT_DIR$/Timetabling" description="if filho1_total == cross0:" line="1944" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grade completa da escola.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grade completa da escola.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,30 +72,32 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
+          <entry key="project.closed" value="18" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.20" value="3" />
+          <entry key="project.open.time.20" value="4" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.25" value="1" />
+          <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.8" value="3" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="1715" />
+          <entry key="Timetabling" value="3390" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1715" />
+          <entry key="Python" value="3390" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -122,8 +123,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="752" column="37" lean-forward="true" selection-start-line="752" selection-start-column="37" selection-end-line="752" selection-end-column="37" />
+            <state relative-caret-position="-4935">
+              <caret line="1466" column="13" selection-start-line="1466" selection-start-column="3" selection-end-line="1466" selection-end-column="13" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -142,20 +143,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>80</find>
-      <find>= 70</find>
-      <find>i+1</find>
-      <find>Tudo igual.</find>
-      <find>Tudo</find>
-      <find>relativo</find>
-      <find>= 90</find>
-      <find>pc =</find>
-      <find>print('i:</find>
-      <find>nome_professor</find>
-      <find>slot: 31</find>
-      <find>mostrar_nome_completo</find>
-      <find>Professor(a): DIEGO</find>
-      <find>Professor(a): LETICIA VIEIRA</find>
       <find>Professor(a): DJDSG</find>
       <find>janela</find>
       <find>janelas</find>
@@ -164,14 +151,28 @@
       <find>testa_solu</find>
       <find>inequacoes_copi</find>
       <find>inequacoes_copia</find>
-      <find>temp_inequacoes</find>
       <find>aqui</find>
       <find>testa_solucao</find>
-      <find>fitness(</find>
-      <find>testa_solucao(</find>
-      <find>inequacoes</find>
-      <find>dict</find>
       <find>dict3</find>
+      <find>temp_inequacoes</find>
+      <find>clear</find>
+      <find>inequacoes</find>
+      <find>temp_inequac</find>
+      <find>.fitness</find>
+      <find>.testa_solucao</find>
+      <find>dict)</find>
+      <find>dict = {}</find>
+      <find>fitness(t</find>
+      <find>dict =</find>
+      <find>dict</find>
+      <find>'3'</find>
+      <find>fitness:</find>
+      <find>'7'] fitness:</find>
+      <find>'7'] fitness:  4</find>
+      <find>valor_da_vez:</find>
+      <find>fitness(</find>
+      <find>time.time</find>
+      <find>testa_solucao(</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -186,7 +187,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="292" />
     <option name="y" value="57" />
     <option name="width" value="699" />
@@ -295,14 +296,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.44590163" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.30819672" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -362,8 +364,8 @@
     <entry file="file://$PROJECT_DIR$/copia_timetabling.py" />
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="752" column="37" lean-forward="true" selection-start-line="752" selection-start-column="37" selection-end-line="752" selection-end-column="37" />
+        <state relative-caret-position="-4935">
+          <caret line="1466" column="13" selection-start-line="1466" selection-start-column="3" selection-end-line="1466" selection-end-column="13" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
