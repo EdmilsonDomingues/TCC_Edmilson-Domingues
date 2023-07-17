@@ -564,7 +564,7 @@ for td in td_lista:
 
 # --------------------------------------------------------------------------------------------------------
 # Execução da modelagem:
-# model.optimize()
+model.optimize()
 # print(model.display())
 
 '''
@@ -577,7 +577,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-'''
+
 arquivo = open("grade completa da escola.txt", "w+")
 p_lista = []
 for cont in range(len(estrela_chaves)):
@@ -680,7 +680,7 @@ for t in t_lista:
     print('', file = arquivo)
     print('Turma: ', turmas_objetos[t].numero_turma, file = arquivo)
     print(apresentacao, file = arquivo)
-    '''
+
 # --------------------------------------------------------------------------------------------------------
 '''
 # Recorrência se resultado for Unfeasible:
@@ -772,6 +772,9 @@ class Individuo:
         self.individuo = individuo
         self.solucao = []
         self.slot_problema = 0
+        self.inequacoes = []
+        self.lista_tdps = []
+        self.dict = {}
 
     def individuo(self):
         return self.individuo
@@ -850,9 +853,8 @@ class Individuo:
                 self.solucao.append(valor_da_vez)
         return True
         '''
-
+    '''
     def testa_solucao(self, inequacoes, lista_tdps, dict):
-        # print('\nTestando solução')
         inequacoes_copia = copy.deepcopy(inequacoes)
         for f in range(frame_tamanho):
             if self.individuo[f] != 0:
@@ -908,7 +910,6 @@ class Individuo:
                         if inequacoes_copia[ponteiro][1] > 0 and valor_da_vez in inequacoes_copia[ponteiro][0]:
                             inequacoes_copia[ponteiro][1] = inequacoes_copia[ponteiro][1] - 1
                 else:
-                    del inequacoes_copia
                     return False
         for f in range(frame_tamanho):
             if self.individuo[f] != 0:
@@ -921,7 +922,87 @@ class Individuo:
                     s = f + 25
                 valor_da_vez = lista_tdps[t][d][p][s]
                 self.solucao.append(valor_da_vez)
-        del inequacoes_copia
+        return True
+        '''
+
+    def testa_solucao(self, inequacoes, lista_tdps, dict_ponteiros):
+        t70 = time.time()
+        # inequacoes_copia = copy.deepcopy(inequacoes)
+        dict_inequacoes = {}    # valor [1] associado à inequação apontada pelo ponteiro da vez
+        for i in range(len(inequacoes)):
+            dict_inequacoes[i] = inequacoes[i][1]
+        for f in range(frame_tamanho):
+            if self.individuo[f] != 0:
+                t = self.individuo[f][0]
+                d = self.individuo[f][1]
+                p = self.individuo[f][2]
+                if turmas_objetos[t].turno == 'Matutino':
+                    s = f
+                else:
+                    s = f + 25
+                valor_da_vez = lista_tdps[t][d][p][s]
+                lista_ponteiros = dict_ponteiros[valor_da_vez]
+                # print('valor da vez: ', valor_da_vez)
+                tem_7 = False
+                tem_6 = False
+                tem_4 = False
+                tem_3 = False
+                tem_2 = False
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '2':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            tem_2 = True
+                            # print('tem_2 True')
+                            break
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '3':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            tem_3 = True
+                            # print('tem_3 True')
+                            break
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '4':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            tem_4 = True
+                            # print('tem_4 True')
+                            break
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '6':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            tem_6 = True
+                            # print('tem_6 True')
+                            break
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '7':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            tem_7 = True
+                            # print('tem_7 True')
+                            break
+                # print('valor_da_vez: ', valor_da_vez, tem_2, tem_3, tem_4, tem_6, tem_7)
+                if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
+                    # limpar inequações
+                    for ponteiro in lista_ponteiros:
+                        if dict_inequacoes[ponteiro] > 0 and valor_da_vez in inequacoes[ponteiro][0]:
+                            dict_inequacoes[ponteiro] = dict_inequacoes[ponteiro] - 1
+                else:
+                    t71 = time.time()
+                    # print("t_dentro_solucao_False: ", t71 - t70)
+                    dict_inequacoes.clear()
+                    return False
+        for f in range(frame_tamanho):
+            if self.individuo[f] != 0:
+                t = self.individuo[f][0]
+                d = self.individuo[f][1]
+                p = self.individuo[f][2]
+                if turmas_objetos[t].turno == 'Matutino':
+                    s = f
+                else:
+                    s = f + 25
+                valor_da_vez = lista_tdps[t][d][p][s]
+                self.solucao.append(valor_da_vez)
+        t71 = time.time()
+        # print("t_dentro_solucao_True: ", t71 - t70)
+        dict_inequacoes.clear()
         return True
 
     def solucao_frame(self):
@@ -986,6 +1067,7 @@ class Individuo:
                         inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
         return fitness
     '''
+    '''
     def fitness(self, inequacoes, lista_tdps, dict):
         inequacoes_copia = copy.deepcopy(inequacoes)
         fitness = 0
@@ -1001,18 +1083,6 @@ class Individuo:
                 valor_da_vez = lista_tdps[t][d][p][s]
                 lista_ponteiros = dict[valor_da_vez]
                 # print("lista_indices: ", lista_indices)
-                if len(lista_ponteiros) != 5:
-                    print("Deu ruim.")
-                    sys.exit(0)
-                restricoes = []
-                for ponteiro in lista_ponteiros:
-                    restricoes.append(inequacoes_copia[ponteiro][2])
-                    if valor_da_vez not in inequacoes_copia[ponteiro][0]:
-                        print("Deu ruim.")
-                        sys.exit(0)
-                if '2' not in restricoes or '3' not in restricoes or '4' not in restricoes or '6' not in restricoes or '7' not in restricoes:
-                    print("Deu ruim.")
-                    sys.exit(0)
                 delta = 0
                 for ponteiro in lista_ponteiros:
                     if inequacoes_copia[ponteiro][1] > 0 and inequacoes_copia[ponteiro][2] == '2':
@@ -1061,9 +1131,80 @@ class Individuo:
                 for ponteiro in lista_ponteiros:
                     if inequacoes_copia[ponteiro][1] > 0 and valor_da_vez in inequacoes_copia[ponteiro][0]:
                         inequacoes_copia[ponteiro][1] = inequacoes_copia[ponteiro][1] - 1
-        del inequacoes_copia
         return fitness
+        '''
 
+    def fitness(self, inequacoes, lista_tdps, dict_ponteiros):
+        t70 = time.time()
+        # inequacoes_copia = copy.deepcopy(inequacoes)
+        fitness = 0
+        dict_inequacoes = {}    # valor [1] associado à inequação apontada pelo ponteiro da vez
+        for i in range(len(inequacoes)):
+            dict_inequacoes[i] = inequacoes[i][1]
+        for f in range(frame_tamanho):
+            if self.individuo[f] != 0:
+                t = self.individuo[f][0]
+                d = self.individuo[f][1]
+                p = self.individuo[f][2]
+                if turmas_objetos[t].turno == 'Matutino':
+                    s = f
+                else:
+                    s = f + 25
+                valor_da_vez = lista_tdps[t][d][p][s]
+                lista_ponteiros = dict_ponteiros[valor_da_vez]
+                # print("lista_indices: ", lista_indices)
+                delta = 0
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '2':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            fitness = fitness + 1
+                            delta = delta + 1
+                            # print('fitness2: ', fitness)
+                            # print("valor_da_vez: ", valor_da_vez, "lista_indices: ", lista_indices, "inequacoes: ", inequacoes[i], "fitness: ",fitness)
+                            break
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '3':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            fitness = fitness + 1
+                            delta = delta + 1
+                            # print("valor_da_vez: ", valor_da_vez, "lista_indices: ", lista_indices, "inequacoes: ", inequacoes[i], "fitness: ",fitness)
+                            # print('fitness3: ', fitness)
+                            break
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '4':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            fitness = fitness + 1
+                            delta = delta + 1
+                            # print("valor_da_vez: ", valor_da_vez, "lista_indices: ", lista_indices, "inequacoes: ", inequacoes[i], "fitness: ",fitness)
+                            # print('fitness4: ', fitness)
+                            break
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '6':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            fitness = fitness + 1
+                            delta = delta + 1
+                            # print("valor_da_vez: ", valor_da_vez, "lista_indices: ", lista_indices, "inequacoes: ", inequacoes[i], "fitness: ",fitness)
+                            # print('fitness6: ', fitness)
+                            break
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and inequacoes[ponteiro][2] == '7':
+                        if valor_da_vez in inequacoes[ponteiro][0]:
+                            fitness = fitness + 1
+                            delta = delta + 1
+                            # print("valor_da_vez: ", valor_da_vez, "lista_indices: ", lista_indices, "inequacoes: ", inequacoes[i], "fitness: ",fitness)
+                            # print('fitness7: ', fitness)
+                            break
+                if delta < 5:
+                    self.slot_problema = f # possível slot com problema
+                # print()
+                # limpar inequações
+                for ponteiro in lista_ponteiros:
+                    if dict_inequacoes[ponteiro] > 0 and valor_da_vez in inequacoes[ponteiro][0]:
+                        dict_inequacoes[ponteiro] = dict_inequacoes[ponteiro] - 1
+        t71 = time.time()
+        # print("t_dentro_fitness_unico: ", t71 - t70)
+        dict_inequacoes.clear()
+        return fitness
 # --------------------------------------------------------------------------------------------------------
 testa = 2
 # Testes de heurística:
@@ -1562,15 +1703,15 @@ if testa == 2:
                         temp_inequacoes100.append(inequacoes[j])
         temp_inequacoes = copy.deepcopy(temp_inequacoes100)
 
-        dict = {}   # dict_temp_inequacoes
+        dict_ponteiros = {}   # ponteiros
         for i in range(len(temp_inequacoes)):
             for j in range(len(temp_inequacoes[i][0])):
-                if temp_inequacoes[i][0][j] not in dict:
-                    dict[temp_inequacoes[i][0][j]] = [i]
+                if temp_inequacoes[i][0][j] not in dict_ponteiros:
+                    dict_ponteiros[temp_inequacoes[i][0][j]] = [i]
                 else:
-                    dado = dict[temp_inequacoes[i][0][j]]
+                    dado = dict_ponteiros[temp_inequacoes[i][0][j]]
                     dado.append(i)
-                    dict[temp_inequacoes[i][0][j]] = dado
+                    dict_ponteiros[temp_inequacoes[i][0][j]] = dado
 
         print('Tamanho entrada: ', turmas_creditos[t])
         max_fit = 6 * turmas_creditos[t]
@@ -1584,7 +1725,7 @@ if testa == 2:
         # populações convergem aqui.
         finalizado = False
         while not finalizado:
-
+            check1 = time.time()
             # Aqui vamos checar se a população atual não tem gêmeos:
             roda_a_roda = []
             for k in range(frame_tamanho):
@@ -1614,11 +1755,12 @@ if testa == 2:
                                 escolha.pop(0)
                             # print('ind2: ', ind2)
                             populacao_atual[j] = Individuo(copy.deepcopy(ind2))
-
+            check2 = time.time()
+            lapso_de_tempo = check2 - check1
+            print('check2: ', lapso_de_tempo)
             individuo_fitness = []
             for i in range(len(populacao_atual)):
-                individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps, dict))
-
+                individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps, dict_ponteiros))
             # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
             windows2 = []
             # limite_fitness_janelas = (t + 1) * 80 // len(turmas_objetos)
@@ -1634,9 +1776,24 @@ if testa == 2:
             else:
                 limite_fitness_janelas = (t - comeco) * 7000 // ((len(turmas_objetos) - 1) - comeco)
 
+            check4 = time.time()
             for i in range(len(populacao_atual)):
+                check7 = time.time()
                 windows2 = copy.deepcopy(windows)
                 pontos_fitness = turmas_creditos[t]
+                print('check7: ', check7 - check1)
+                for m in range(1000000000):
+                    check1000 = time.time()
+                    pass
+                    pass
+                    pass
+                    pass
+                    pass
+                    check1001 = time.time()
+                    if (check1001 - check1000) > 0.01:
+                        # print('check1001 - check1000: ', check1001 - check1000, "   ", time.time(), "m: ", m)
+                        print(check1001 - check1000, " ", time.time())
+
                 for j in range(frame_tamanho):
                     numero_janelas = 0
                     lista = populacao_atual[i].individuo
@@ -1653,11 +1810,16 @@ if testa == 2:
                             windows2[p].sort()
                         grade = Grade('1', 'Matutino')
                         janelas = grade.janelas()
+                        check9 = time.time()
                         for m in range(len(janelas)):
                             for n in range(len(windows2)):
                                 if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
                                         in windows2[n]:
                                     numero_janelas = numero_janelas + 1
+                        check10 = time.time()
+                        print('check10 - check9: ', check10 - check9)
+                check8 = time.time()
+                print('check8- check7: ', check8 - check7)
                 if numero_janelas <= limite_fitness_janelas:
                     individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
                 '''
@@ -1677,10 +1839,14 @@ if testa == 2:
                             print('2')
                             print('pontos_inversos: ', pontos_inversos)
                 '''
+            check5 = time.time()
+            lapso_de_tempo = check5 - check4
+            print('check5 - check4: ', lapso_de_tempo)
 
 
-
-
+            check3 = time.time()
+            lapso_de_tempo = check3 - check1
+            print('check3: ', lapso_de_tempo)
 
             # Vamos isolar os melhores da população, mantendo-os na população nova.
             print(vez, ' Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
@@ -1695,7 +1861,7 @@ if testa == 2:
                     if individuo_fitness[i] == max_fit - 1:
                         # print('Achei um max_fit - 1', 'i: ', i)
                         temp_populacao = copy.deepcopy(populacao_atual[i])
-                        temp_populacao.fitness(temp_inequacoes, lista_tdps, dict)    # para descobrir qual o slot com problema
+                        temp_populacao.fitness(temp_inequacoes, lista_tdps, dict_ponteiros)    # para descobrir qual o slot com problema
                         slotcomproblema = temp_populacao.slot_problema
                         # print('slotcomproblema: ', slotcomproblema)
                         # print('populacao_atual[i]: ', temp_populacao.individuo)
@@ -1735,8 +1901,7 @@ if testa == 2:
                                 if numero_janelas <= limite_fitness_janelas:
                                     dentro_janelas = True
 
-
-                                if dentro_janelas and nova_populacao.fitness(temp_inequacoes, lista_tdps, dict) ==\
+                                if dentro_janelas and nova_populacao.fitness(temp_inequacoes, lista_tdps, dict_ponteiros) ==\
                                         max_fit - turmas_creditos[t]:
                                     print('Encontrei solução através de manipulação genética.')
                                     populacao_atual[i] = copy.deepcopy(nova_populacao)
@@ -2026,8 +2191,7 @@ if testa == 2:
                     dentro_janelas = True
                 tem_solucao = False
                 if dentro_janelas:
-                    tem_solucao = populacao_atual[i].testa_solucao(temp_inequacoes, lista_tdps, dict)
-
+                    tem_solucao = populacao_atual[i].testa_solucao(temp_inequacoes, lista_tdps, dict_ponteiros)
                 if tem_solucao:
                     finalizado = True
                     solucao = populacao_atual[i].solucao_frame()
