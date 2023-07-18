@@ -8,7 +8,6 @@
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grade completa da escola.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grade completa da escola.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +72,7 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="21" />
+          <entry key="project.closed" value="23" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -83,24 +82,25 @@
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.25" value="2" />
-          <entry key="project.open.time.26" value="1" />
+          <entry key="project.open.time.26" value="2" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="3" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="22" />
+          <entry key="project.opened" value="24" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="5541" />
+          <entry key="Timetabling" value="5871" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="5541" />
+          <entry key="Python" value="5871" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -126,8 +126,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-65">
-              <caret line="1784" column="39" selection-start-line="1784" selection-start-column="39" selection-end-line="1784" selection-end-column="39" />
+            <state relative-caret-position="4046">
+              <caret line="2016" column="37" selection-start-line="2016" selection-start-column="37" selection-end-line="2016" selection-end-column="37" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -146,15 +146,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dict =</find>
-      <find>dict</find>
-      <find>'3'</find>
-      <find>'7'] fitness:</find>
-      <find>'7'] fitness:  4</find>
-      <find>valor_da_vez:</find>
-      <find>time.time</find>
-      <find>dict)</find>
-      <find>6:</find>
       <find>'6: '</find>
       <find>check7</find>
       <find>fitness:</find>
@@ -170,12 +161,21 @@
       <find>t_dentro_solucao</find>
       <find>t_dentro_</find>
       <find>geração:</find>
-      <find>geração:</find>
       <find>check1</find>
-      <find>check</find>
       <find>check7:</find>
       <find>check1001 - check1000:  0.01</find>
       <find>check1001 - check1000:  0.0</find>
+      <find>check5</find>
+      <find>check10</find>
+      <find>check</find>
+      <find>print('chec</find>
+      <find>check21 - check20:</find>
+      <find>check24</find>
+      <find>n_individuos</find>
+      <find>= 50</find>
+      <find>Turma:  3</find>
+      <find>= 25</find>
+      <find>Turma:  9</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -201,6 +201,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -212,7 +213,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -306,7 +306,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.6295082" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.5491803" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -366,8 +366,8 @@
     <entry file="file://$PROJECT_DIR$/copia_timetabling.py" />
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-65">
-          <caret line="1784" column="39" selection-start-line="1784" selection-start-column="39" selection-end-line="1784" selection-end-column="39" />
+        <state relative-caret-position="4046">
+          <caret line="2016" column="37" selection-start-line="2016" selection-start-column="37" selection-end-line="2016" selection-end-column="37" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
