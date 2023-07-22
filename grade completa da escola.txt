@@ -140,7 +140,7 @@ Professor(a):  GC
 | Slot: 1                        | Slot: 12                       | Slot: 23                       | Slot: 34                       | Slot: 45                       |
 | C: C451                        | C: C456                        | C: C461                        | C: C466                        | C: C471                        |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-|                                | Turma: 30                      | Turma: 30                      | Turma: 30                      | Turma: 30                      |
+| ** JANELA **                   | Turma: 30                      | Turma: 30                      | Turma: 30                      | Turma: 30                      |
 |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
 |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
 |                                | Slot: 13                       | Slot: 24                       | Slot: 35                       | Slot: 46                       |
@@ -339,7 +339,7 @@ Professor(a):  MLDSDS
 | Slot: 6                        | Slot: 17                       | Slot: 28                       | Slot: 39                       | Slot: 50                       |
 | C: C726                        | C: C731                        | C: C736                        | C: C741                        | C: C746                        |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 32                      | Turma: 32                      | Turma: 32                      | Turma: 32                      |                                |
+| Turma: 32                      | Turma: 32                      | Turma: 32                      | Turma: 32                      | ** JANELA **                   |
 | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
 | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
 | Slot: 7                        | Slot: 18                       | Slot: 29                       | Slot: 40                       |                                |
@@ -790,7 +790,7 @@ Professor(a):  SF
 | Slot: 1                        | Slot: 12                       | Slot: 23                       | Slot: 34                       | Slot: 45                       |
 | C: C2526                       | C: C2531                       | C: C2536                       | C: C2541                       | C: C2546                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 40                      |                                | Turma: 40                      | Turma: 40                      | Turma: 40                      |
+| Turma: 40                      | ** JANELA **                   | Turma: 40                      | Turma: 40                      | Turma: 40                      |
 | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
 | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
 | Slot: 2                        |                                | Slot: 24                       | Slot: 35                       | Slot: 46                       |
@@ -816,7 +816,7 @@ Professor(a):  SF
 | Slot: 5                        |                                | Slot: 27                       |                                | Slot: 49                       |
 | C: C2550                       |                                | C: C2560                       |                                | C: C2570                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 42                      | Turma: 42                      | Turma: 42                      | Turma: 42                      |                                |
+| Turma: 42                      | Turma: 42                      | Turma: 42                      | Turma: 42                      | ** JANELA **                   |
 | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
 | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
 | Slot: 6                        | Slot: 17                       | Slot: 28                       | Slot: 39                       |                                |
@@ -1193,7 +1193,7 @@ Professor(a):  ALDC
 | Slot: 2                        | Slot: 13                       | Slot: 24                       | Slot: 35                       | Slot: 46                       |
 | C: C3452                       | C: C3457                       | C: C3462                       | C: C3467                       | C: C3472                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 21                      |                                | Turma: 21                      | Turma: 21                      | Turma: 21                      |
+| Turma: 21                      | ** JANELA **                   | Turma: 21                      | Turma: 21                      | Turma: 21                      |
 | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
 | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
 | Slot: 3                        |                                | Slot: 25                       | Slot: 36                       | Slot: 47                       |
@@ -1213,7 +1213,7 @@ Professor(a):  ALDC
 |                                | Slot: 16                       | Slot: 27                       |                                | Slot: 49                       |
 |                                | C: C3480                       | C: C3485                       |                                | C: C3495                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 33                      | Turma: 33                      |                                | Turma: 33                      | Turma: 33                      |
+| Turma: 33                      | Turma: 33                      | ** JANELA **                   | Turma: 33                      | Turma: 33                      |
 | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
 | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
 | Slot: 6                        | Slot: 17                       |                                | Slot: 39                       | Slot: 50                       |
@@ -1504,7 +1504,7 @@ Professor(a):  MDOC
 | Slot: 2                        | Slot: 13                       | Slot: 24                       | Slot: 35                       | Slot: 46                       |
 | C: C4652                       | C: C4657                       | C: C4662                       | C: C4667                       | C: C4672                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-|                                | Turma: 50                      | Turma: 50                      | Turma: 50                      | Turma: 50                      |
+| ** JANELA **                   | Turma: 50                      | Turma: 50                      | Turma: 50                      | Turma: 50                      |
 |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
 |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
 |                                | Slot: 14                       | Slot: 25                       | Slot: 36                       | Slot: 47                       |
@@ -1626,7 +1626,7 @@ Professor(a):  PDOE
 | Slot: 0                        | Slot: 11                       | Slot: 22                       | Slot: 33                       | Slot: 44                       |
 | C: C4925                       | C: C4930                       | C: C4935                       | C: C4940                       | C: C4945                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 10                      |                                |                                | Turma: 10                      | Turma: 10                      |
+| Turma: 10                      | ** JANELA **                   | ** JANELA **                   | Turma: 10                      | Turma: 10                      |
 | Disciplina: LETRAS - ENS.      |                                |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
 | FUND.- ANOS INICIAIS           |                                |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
 | Slot: 1                        |                                |                                | Slot: 34                       | Slot: 45                       |
@@ -1664,7 +1664,7 @@ Professor(a):  PDOE
 | Slot: 6                        | Slot: 17                       | Slot: 28                       | Slot: 39                       | Slot: 50                       |
 | C: C4951                       | C: C4956                       | C: C4961                       | C: C4966                       | C: C4971                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 12                      |                                | Turma: 12                      | Turma: 12                      | Turma: 12                      |
+| Turma: 12                      | ** JANELA **                   | Turma: 12                      | Turma: 12                      | Turma: 12                      |
 | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
 | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
 | Slot: 7                        |                                | Slot: 29                       | Slot: 40                       | Slot: 51                       |

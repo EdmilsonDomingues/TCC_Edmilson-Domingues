@@ -592,10 +592,12 @@ for p in p_lista:
     grade = Grade('1', 'Matutino')
     linhas = grade.grade_vazia()
     nova_grade = copy.deepcopy(linhas)
+    lista_vizinhos = [] # Testes escrita "JANELA"
     for i in range(len(tdps_lista)):
         if x[tdps_lista[i]].X == 1:
         # if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            lista_vizinhos.append(slot_da_vez)  # Testes escrita "JANELA"
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = nova_grade[l][c]
             info = info + "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
@@ -603,6 +605,24 @@ for p in p_lista:
                 + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)\
                 + "\n" + "C: " + x[tdps_lista[i]].varName
             nova_grade[l][c] = info
+
+    janelas_ref = grade.janelas()    # Testes escrita "JANELA"
+    for i in range(len(slots_objetos)):
+        slot_da_vez = int(slots_objetos[i].slot)
+        for j in range(len(janelas_ref)):
+            if slot_da_vez not in lista_vizinhos and int(janelas_ref[j][1]) == slot_da_vez:
+                vizinho1 = int(janelas_ref[j][0])
+                vizinho2 = int(janelas_ref[j][2])
+                if vizinho1 in lista_vizinhos and vizinho2 in lista_vizinhos:
+                    l, c = grade.converte_slot_lc(slot_da_vez)
+                    info = nova_grade[l][c]
+                    if info != "":
+                        print("Algo errado.")
+                        sys.exit(0)
+                    else:
+                        info = info + "** JANELA **"
+                        nova_grade[l][c] = info
+
     cabecalho = grade.cabecalho()
     apresentacao = PrettyTable(grade.cabecalho())
     apresentacao.hrules = True
@@ -1385,7 +1405,7 @@ if testa == 1:
                     inicio = 0
                 else:
                     inicio = roleta_range[i-1][1]
-                fim = inicio + (individuo_fitness[i] * 10000 / total)
+                fim = inicio + (individuo_fitness[i] * 80 / total)
                 roleta_range.append([inicio, fim])
             selecionados = []
             for i in range(len(populacao_atual)):
@@ -1725,7 +1745,6 @@ if testa == 2:
         # populações convergem aqui.
         finalizado = False
         while not finalizado:
-            check1 = time.time()
             # Aqui vamos checar se a população atual não tem gêmeos:
             roda_a_roda = []
             for k in range(frame_tamanho):
@@ -1755,9 +1774,6 @@ if testa == 2:
                                 escolha.pop(0)
                             # print('ind2: ', ind2)
                             populacao_atual[j] = Individuo(copy.deepcopy(ind2))
-            check2 = time.time()
-            lapso_de_tempo = check2 - check1
-            # print('check2: ', lapso_de_tempo)
             individuo_fitness = []
             for i in range(len(populacao_atual)):
                 individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps, dict_ponteiros))
@@ -1774,22 +1790,11 @@ if testa == 2:
             if t <= comeco:  # t começa em ZERO.
                 limite_fitness_janelas = 0
             else:
-                limite_fitness_janelas = (t - comeco) * 7000 // ((len(turmas_objetos) - 1) - comeco)
+                limite_fitness_janelas = (t - comeco) * 80 // ((len(turmas_objetos) - 1) - comeco)
 
-            check4 = time.time()
-            contador_check = 0
             for i in range(len(populacao_atual)):
-                check7 = time.time()
                 windows2 = copy.deepcopy(windows)
                 pontos_fitness = turmas_creditos[t]
-                # print('check7: ', check7 - check1)
-                for m in range(1000000000):
-                    check1000 = time.time()
-                    pass
-                    pass
-                    check1001 = time.time()
-                    if (check1001 - check1000) > 0.01:
-                        print('check1001 - check1000: ', check1001 - check1000, "   ", time.time(), "m: ", m)
                 for j in range(frame_tamanho):
                     numero_janelas = 0
                     lista = populacao_atual[i].individuo
@@ -1806,18 +1811,11 @@ if testa == 2:
                             windows2[p].sort()
                         grade = Grade('1', 'Matutino')
                         janelas = grade.janelas()
-                        check9 = time.time()
                         for m in range(len(janelas)):
                             for n in range(len(windows2)):
                                 if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
                                         in windows2[n]:
                                     numero_janelas = numero_janelas + 1
-                        check10 = time.time()
-                        # print('check10 - check9: ', check10 - check9)
-                check8 = time.time()
-                # print('check8- check7: ', check8 - check7)
-                if (check8-check7) > 0.01:
-                    contador_check = contador_check + 1
 
                 if numero_janelas <= limite_fitness_janelas:
                     individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
@@ -1838,14 +1836,6 @@ if testa == 2:
                             print('2')
                             print('pontos_inversos: ', pontos_inversos)
                 '''
-            check5 = time.time()
-            lapso_de_tempo = check5 - check4
-            # print('check5 - check4: ', lapso_de_tempo)
-            # print("contador_check: ", contador_check)
-
-            check3 = time.time()
-            lapso_de_tempo = check3 - check1
-            # print('check3: ', lapso_de_tempo)
 
             # Vamos isolar os melhores da população, mantendo-os na população nova.
             print(vez, ' Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
@@ -1854,7 +1844,6 @@ if testa == 2:
             # manipulação genética.
             # Populações com fitness = máximo - 1 devem ser analisadas separadamente, no sentido de se
             # finalizar a busca por solução.
-            check20 = time.time()
             top_quantidade = 8
             for i in range(len(populacao_atual)):
                 if i >= top_quantidade:
@@ -2160,11 +2149,8 @@ if testa == 2:
             # print('Tudo igual.')
 
             # Agora é testar se algum indivíduo é resultado válido.
-            check22 = time.time()
-            print("check22 - check20: ", check22 - check20)
             finalizado = False
             for i in range(len(populacao_atual)):
-                check23 = time.time()
                 dentro_janelas = False
                 windows2 = copy.deepcopy(windows)
                 pontos_fitness = turmas_creditos[t]
@@ -2198,10 +2184,6 @@ if testa == 2:
                     finalizado = True
                     solucao = populacao_atual[i].solucao_frame()
                     break
-                check24 = time.time()
-                # print("check24 - check23: ", check24 - check23)
-            check21 = time.time()
-            print("check21 - check20: ", check21 - check20)
             if finalizado:
                 for i in range(len(solucao)):
                     lista_sorteados.append(solucao[i])
@@ -2298,16 +2280,36 @@ for p in p_lista:
     grade = Grade('1', 'Matutino')
     linhas = grade.grade_vazia()
     nova_grade = copy.deepcopy(linhas)
+    lista_vizinhos = [] # Testes escrita "JANELA"
     for i in range(len(tdps_lista)):
         # if x[tdps_lista[i]].X == 1:
         if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+            lista_vizinhos.append(slot_da_vez)  # Testes escrita "JANELA"
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = nova_grade[l][c]
             info = info + "\n\nTurma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
                 + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
                 + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             nova_grade[l][c] = info
+
+    janelas_ref = grade.janelas()    # Testes escrita "JANELA"
+    for i in range(len(slots_objetos)):
+        slot_da_vez = int(slots_objetos[i].slot)
+        for j in range(len(janelas_ref)):
+            if slot_da_vez not in lista_vizinhos and int(janelas_ref[j][1]) == slot_da_vez:
+                vizinho1 = int(janelas_ref[j][0])
+                vizinho2 = int(janelas_ref[j][2])
+                if vizinho1 in lista_vizinhos and vizinho2 in lista_vizinhos:
+                    l, c = grade.converte_slot_lc(slot_da_vez)
+                    info = nova_grade[l][c]
+                    if info != "":
+                        print("Algo errado.")
+                        sys.exit(0)
+                    else:
+                        info = info + "*** JANELA ***"
+                        nova_grade[l][c] = info
+
     cabecalho = grade.cabecalho()
     apresentacao = PrettyTable(grade.cabecalho())
     apresentacao.hrules = True
