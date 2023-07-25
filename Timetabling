@@ -21,24 +21,35 @@ print(df)
 '''
 # Leitura completa da tabela fornecida
 print('Realizando o processo de Leitura.')
-df = pd.read_csv('./arquivoProjetoUFSC_regionalFlorianopolis_modificado.csv', sep = ';')
-df['Código da disc. '] = df['Código da disc. '].astype(str)
+dataframe = pd.read_csv('./arquivoProjetoUFSC_regionalFlorianopolis_modificado.csv', sep = ';')
+dataframe['Código da disc. '] = dataframe['Código da disc. '].astype(str)
 lista_escolas = []
+pares = []
 '''
 for indice, valor in df.iterrows():
     print(valor)
     print(valor[2])
     break
 '''
-for indice, valor in df.iterrows():
+for indice, valor in dataframe.iterrows():
     if valor[1] not in lista_escolas:
         lista_escolas.append(valor[1])
+        pares.append([valor[1], valor[2]])
 lista_escolas.sort()
 for i in range(len(lista_escolas)):
-    print(lista_escolas[i])
-print("len(lista_escolas)): ", len(lista_escolas))
+    for j in range(len(pares)):
+        if pares[j][0] == lista_escolas[i]:
+            print(i, '- Código escola: ', pares[j][0], '- Nome escola: ', pares[j][1])
+print()
+ordem = int(input("Entre com o número mais à esquerda para a escola de interesse: "))
+if ordem >= len(pares):
+    print("ERRO: Valor fora do range.")
+else:
+    for j in range(len(pares)):
+        if pares[j][0] == lista_escolas[ordem]:
+            print(ordem, '- Código escola: ', pares[j][0], '- Nome escola: ', pares[j][1])
+            break
 sys.exit(0)
-
 class Turma:
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, tipo_turma,
                  codigo_turno, turno, codigo_area_ensino, area_ensino, tipo_grade):
