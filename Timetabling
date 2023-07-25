@@ -8,15 +8,36 @@ from random import choice, shuffle, random
 
 START_POINT = 0
 END_POINT = None
-
+'''
 # Leitura completa da tabela fornecida
 print('Realizando o processo de Leitura.')
 df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
 df['Código da disc. '] = df['Código da disc. '].astype(str)
 # print(df.dtypes)
 # print()
-# print(df.info())
-
+df.head()
+print(df.info())
+print(df)
+'''
+# Leitura completa da tabela fornecida
+print('Realizando o processo de Leitura.')
+df = pd.read_csv('./arquivoProjetoUFSC_regionalFlorianopolis_modificado.csv', sep = ';')
+df['Código da disc. '] = df['Código da disc. '].astype(str)
+lista_escolas = []
+'''
+for indice, valor in df.iterrows():
+    print(valor)
+    print(valor[2])
+    break
+'''
+for indice, valor in df.iterrows():
+    if valor[1] not in lista_escolas:
+        lista_escolas.append(valor[1])
+lista_escolas.sort()
+for i in range(len(lista_escolas)):
+    print(lista_escolas[i])
+print("len(lista_escolas)): ", len(lista_escolas))
+sys.exit(0)
 
 class Turma:
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, tipo_turma,
@@ -1626,6 +1647,17 @@ if testa == 1:
 # #1: Estratégia = Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético, com a restrição de janelas.
 if testa == 2:
+    # Hiperparâmetros:
+    n_individuos = 50
+    top_quantidade = 8
+    pc = 70
+    pm = 1
+    troca_n = 4
+    max_janelas_professor = 2
+    primeira_janela = 0
+    total_janelas = max_janelas_professor * len(professores_objetos)
+    print("Total_janelas: ", total_janelas)
+    #-----------------#
     iteracoes = 0
     tempo_1 = time.time()
     # Neste ponto criaremos o buffer dos professores com os seus slots ocupados: [[0, 1, 25, 33], [2,4] ...]
@@ -1637,7 +1669,7 @@ if testa == 2:
     turmas_backup = []
     turmas_creditos = []
 
-    n_individuos = 50
+    # n_individuos = 50
     range_n = []
     for i in range(n_individuos):
         range_n.append(i)
@@ -1786,11 +1818,11 @@ if testa == 2:
             else:
                 limite_fitness_janelas = (t - 10) * 11 // ((len(turmas_objetos) - 1) - 10)
             '''
-            comeco = 0
-            if t <= comeco:  # t começa em ZERO.
-                limite_fitness_janelas = 0
+            # comeco = 0
+            if t <= primeira_janela:  # t começa em ZERO.
+                limite_fitness_janelas = primeira_janela
             else:
-                limite_fitness_janelas = (t - comeco) * 80 // ((len(turmas_objetos) - 1) - comeco)
+                limite_fitness_janelas = (t - primeira_janela) * total_janelas // ((len(turmas_objetos) - 1) - primeira_janela)
 
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
@@ -1844,7 +1876,7 @@ if testa == 2:
             # manipulação genética.
             # Populações com fitness = máximo - 1 devem ser analisadas separadamente, no sentido de se
             # finalizar a busca por solução.
-            top_quantidade = 8
+            # top_quantidade = 8
             for i in range(len(populacao_atual)):
                 if i >= top_quantidade:
                     if individuo_fitness[i] == max_fit - 1:
@@ -1949,7 +1981,7 @@ if testa == 2:
             # Neste ponto temos os selecionados.
             lista_crossover = []
             nao_lista_crossover = []
-            pc = 70
+            # pc = 70
             for i in range(len(selecionados)):
                 valor = choice(range_100)
                 if valor <= pc:
@@ -2195,7 +2227,7 @@ if testa == 2:
                         if inequacoes[j][1] > 0 and solucao[i] in inequacoes[j][0]:
                             inequacoes[j][1] = inequacoes[j][1] - 1
                 finalizado = True
-                print('Vezes: -----------------------------', vez)
+                print('Gerações nesta turma: -----------------------------', vez)
                 iteracoes = iteracoes + vez
 
                 parcial_janelas = 0
@@ -2207,10 +2239,10 @@ if testa == 2:
                                 in windows[n]:
                             parcial_janelas = parcial_janelas + 1
                             # print("janelas_referência: ", janelas1[m], "professor?: ", n, "janelas_realizadas: ", windows[n])
-                print('Janelas até aqui: ', parcial_janelas)
+                print('Janelas totais: ', parcial_janelas)
                 tempo_2 = time.time()
                 intervalo = (tempo_2 - tempo_1) / 60
-                print(iteracoes, ' gerações até aqui.')
+                print(iteracoes, ' gerações totais.')
                 print(intervalo, ' minutos até aqui.')
             else:
                 vez = vez + 1
@@ -2260,7 +2292,7 @@ if testa == 2:
     print('Total de xx: ', cont)
     tempo_2 = time.time()
     intervalo = (tempo_2 - tempo_1) / 60
-    print(iteracoes, ' iterações.')
+    print(iteracoes, ' gerações finais.')
     print(intervalo, ' minutos.')
 
 # --------------------------------------------------------------------------------------------------------
