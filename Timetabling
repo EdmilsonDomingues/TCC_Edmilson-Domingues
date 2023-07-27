@@ -19,6 +19,7 @@ df.head()
 print(df.info())
 print(df)
 '''
+
 # Leitura completa da tabela fornecida
 print('Realizando o processo de Leitura.')
 df = pd.read_csv('./arquivoProjetoUFSC_regionalFlorianopolis_modificado.csv', sep = ';')
@@ -57,7 +58,7 @@ df_remove = df.loc[(df['Código da disc. '] == '1344') | \
                     (df['Código da disc. '] == '4329') | \
                     (df['Código da disc. '] == '4492') | \
                     (df['Código da disc. '] == '611') | \
-                    (df['Código da disc. '] == '5011')]
+                   (df['Código da disc. '] == '5011')]
 df = df.drop(df_remove.index)
 print("Quantidade de registros após retirar segundo professor: ", len(df.index))
 print(df.head())
@@ -128,12 +129,12 @@ class Grade:
             if self.turno == 'todos':
                 return ['1', ..., '51']
             else:
-                if self.turno == 'Matutino':
+                if self.turno.upper() == 'MATUTINO': # if self.turno == 'Matutino':
                     return ['0', '1', '2', '3', '4', '11', '12', '13', '14',
                             '15', '22', '23', '24', '25', '26', '33', '34',
                             '35', '36', '37', '44', '45', '46', '47', '48']
                 else:
-                    if self.turno == 'Vespertino':
+                    if self.turno.upper() == 'VESPERTINO':  #if self.turno == 'Vespertino':
                         return ['5', '6', '7', '8', '9', '16', '17', '18',
                                 '19', '20', '27', '28', '29', '30', '31', '38',
                                 '39', '40', '41', '42', '49', '50', '51', '52', '53']
@@ -345,11 +346,11 @@ for i in range(len(estrela_chaves)):
           professores_objetos[estrela_chaves[i][2]].nome_professor,
           slots_objetos[estrela_chaves[i][3]].slot)
 '''
-print(len(estrela_chaves))
-print(len(turmas_objetos))
-print(len(disciplinas_objetos))
-print(len(professores_objetos))
-print(len(slots_objetos))
+print("Len_estrelas: ", len(estrela_chaves))
+print("Turmas_objetos: ", len(turmas_objetos))
+print("Disciplinas_objetos: ", len(disciplinas_objetos))
+print("Professores_objetos: ", len(professores_objetos))
+print("Slots_objetos: ", len(slots_objetos))
 
 # [18/01/2023]
 # Nesta parte do programa serão introduzidas as regras referentes à pesquisa operacional.
@@ -1001,7 +1002,7 @@ class Individuo:
                 t = self.individuo[f][0]
                 d = self.individuo[f][1]
                 p = self.individuo[f][2]
-                if turmas_objetos[t].turno == 'Matutino':
+                if turmas_objetos[t].turno.upper() == 'MATUTINO':   #if turmas_objetos[t].turno == 'Matutino':
                     s = f
                 else:
                     s = f + 25
@@ -1059,7 +1060,7 @@ class Individuo:
                 t = self.individuo[f][0]
                 d = self.individuo[f][1]
                 p = self.individuo[f][2]
-                if turmas_objetos[t].turno == 'Matutino':
+                if turmas_objetos[t].turno.upper() == 'MATUTINO':   #if turmas_objetos[t].turno == 'Matutino':
                     s = f
                 else:
                     s = f + 25
@@ -1211,7 +1212,7 @@ class Individuo:
                 t = self.individuo[f][0]
                 d = self.individuo[f][1]
                 p = self.individuo[f][2]
-                if turmas_objetos[t].turno == 'Matutino':
+                if turmas_objetos[t].turno.upper() == 'MATUTINO':   #if turmas_objetos[t].turno == 'Matutino':
                     s = f
                 else:
                     s = f + 25
@@ -1343,7 +1344,7 @@ if testa == 1:
                 dd = turmas_backup[t][i][1]
                 pp = turmas_backup[t][i][2]
                 for ss in range(25):
-                    if turmas_objetos[tt].turno == 'Matutino':
+                    if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
                         valor = lista_tdps[tt][dd][pp][ss]
                         if valor not in temp_index:
                             temp_index.append(valor)
@@ -1755,7 +1756,7 @@ if testa == 2:
                 dd = turmas_backup[t][i][1]
                 pp = turmas_backup[t][i][2]
                 for ss in range(25):
-                    if turmas_objetos[tt].turno == 'Matutino':
+                    if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
                         valor = lista_tdps[tt][dd][pp][ss]
                         if valor not in temp_index:
                             temp_index.append(valor)
@@ -1857,7 +1858,7 @@ if testa == 2:
                     if lista[j] != 0:
                         tt = lista[j][0]
                         p = lista[j][2]
-                        if turmas_objetos[tt].turno == 'Matutino':
+                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
                             s = j
                         else:
                             s = j + 25
@@ -1927,7 +1928,7 @@ if testa == 2:
                                     if temp_list[k] != 0:
                                         tt = temp_list[k][0]
                                         p = temp_list[k][2]
-                                        if turmas_objetos[tt].turno == 'Matutino':
+                                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
                                             s = k
                                         else:
                                             s = k + 25
@@ -2216,7 +2217,7 @@ if testa == 2:
                     if lista[j] != 0:
                         tt = lista[j][0]
                         p = lista[j][2]
-                        if turmas_objetos[tt].turno == 'Matutino':
+                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
                             s = j
                         else:
                             s = j + 25
@@ -2559,7 +2560,7 @@ while not finalizado:
 
         matriz_s = []
         for i in range(len(turmas_objetos)):
-            if turmas_objetos[i].turno == 'Matutino':
+            if turmas_objetos[i].turno.upper() == 'MATUTINO':   #if turmas_objetos[i].turno == 'Matutino':
                 matriz_s.append(0)
             else:
                 matriz_s.append(frame_tamanho)
@@ -2664,7 +2665,7 @@ while not finalizado:
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
         matriz_s = []
         for i in range(len(turmas_objetos)):
-            if turmas_objetos[i].turno == 'Matutino':
+            if turmas_objetos[i].turno.upper() == 'MATUTINO':   #if turmas_objetos[i].turno == 'Matutino':
                 matriz_s.append(0)
             else:
                 matriz_s.append(frame_tamanho)
@@ -2739,7 +2740,7 @@ while not finalizado:
     if finalizado:
         matriz_s = []
         for i in range(len(turmas_objetos)):
-            if turmas_objetos[i].turno == 'Matutino':
+            if turmas_objetos[i].turno.upper() == 'MATUTINO':   #if turmas_objetos[i].turno == 'Matutino':
                 matriz_s.append(0)
             else:
                 matriz_s.append(frame_tamanho)
