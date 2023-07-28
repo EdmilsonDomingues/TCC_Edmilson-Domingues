@@ -8,7 +8,7 @@ from random import choice, shuffle, random
 
 START_POINT = 0
 END_POINT = None
-'''
+
 # Leitura completa da tabela fornecida
 print('Realizando o processo de Leitura.')
 df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
@@ -65,7 +65,7 @@ print("Quantidade de registros após retirar segundo professor: ", len(df.index)
 print(df.head())
 print(df['Número da turma'])
 # sys.exit(0)
-
+'''
 class Turma:
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, tipo_turma,
                  codigo_turno, turno, codigo_area_ensino, area_ensino, tipo_grade):
@@ -826,6 +826,17 @@ for t in t_lista:
     print('', file = arquivo)
     print('Turma: ', turmas_objetos[t].numero_turma, file = arquivo)
     print(apresentacao, file = arquivo)
+    cont = 0
+    for i in range(len(x)):
+        if x[i].X == 1:
+            cont = cont + 1
+    print('Total de X: ', cont)
+
+    cont = 0
+    for i in range(len(y)):
+        if y[i].X == 1:
+            cont = cont + 1
+    print('Total de Y: ', cont)
 
 # --------------------------------------------------------------------------------------------------------
 '''
