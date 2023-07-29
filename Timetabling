@@ -471,7 +471,9 @@ grade = Grade('1', 'Matutino')
 janelas = grade.janelas()
 cont_ypj = 0
 for professor in range(len(professores_objetos)):
+    print("Teste - janelas: ", janelas)
     for jan in janelas:  # tuplas (s0, s1, s2)
+        print("Teste - jan in janelas: ", jan)
         obj_existe = False
         for indice in range(len(slots_objetos)):
             if jan[0] == slots_objetos[indice].slot:
@@ -479,7 +481,8 @@ for professor in range(len(professores_objetos)):
                 obj_existe = True
                 break
         if not obj_existe:
-            break
+            pass
+            # break
 
         obj_existe = False
         for indice in range(len(slots_objetos)):
@@ -488,7 +491,8 @@ for professor in range(len(professores_objetos)):
                 obj_existe = True
                 break
         if not obj_existe:
-            break
+            pass
+            # break
 
         obj_existe = False
         for indice in range(len(slots_objetos)):
@@ -497,7 +501,8 @@ for professor in range(len(professores_objetos)):
                 obj_existe = True
                 break
         if not obj_existe:
-            break
+            pass
+            # break
 
         s0.clear()
         s1.clear()
@@ -548,7 +553,7 @@ for cont in range(len(somas)):
 
     # Model if x > y, then b = 1, otherwise b = 0
     # m.addConstr(x >= y + eps - M * (1 - b), name="bigM_constr1")
-
+    print("Teste - RESTRIÇÃO janelas >: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
     model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
                      -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
                      + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) >= 3 + eps\
@@ -827,11 +832,12 @@ for t in t_lista:
     print('Turma: ', turmas_objetos[t].numero_turma, file = arquivo)
     print(apresentacao, file = arquivo)
     cont = 0
+    print('len(x): ', len(x))
     for i in range(len(x)):
         if x[i].X == 1:
             cont = cont + 1
     print('Total de X: ', cont)
-
+    print('len(y): ', len(y))
     cont = 0
     for i in range(len(y)):
         if y[i].X == 1:
