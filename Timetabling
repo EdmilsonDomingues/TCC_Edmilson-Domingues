@@ -474,62 +474,60 @@ for professor in range(len(professores_objetos)):
     print("Teste - janelas: ", janelas)
     for jan in janelas:  # tuplas (s0, s1, s2)
         print("Teste - jan in janelas: ", jan)
-        obj_existe = False
-        for indice in range(len(slots_objetos)):
-            if jan[0] == slots_objetos[indice].slot:
-                pos_s0 = indice
-                obj_existe = True
+        for fake in range(1):
+            obj_existe = False
+            for indice in range(len(slots_objetos)):
+                if jan[0] == slots_objetos[indice].slot:
+                    pos_s0 = indice
+                    obj_existe = True
+                    break
+            if not obj_existe:
                 break
-        if not obj_existe:
-            pass
-            # break
 
-        obj_existe = False
-        for indice in range(len(slots_objetos)):
-            if jan[1] == slots_objetos[indice].slot:
-                pos_s1 = indice
-                obj_existe = True
+            obj_existe = False
+            for indice in range(len(slots_objetos)):
+                if jan[1] == slots_objetos[indice].slot:
+                    pos_s1 = indice
+                    obj_existe = True
+                    break
+            if not obj_existe:
                 break
-        if not obj_existe:
-            pass
-            # break
 
-        obj_existe = False
-        for indice in range(len(slots_objetos)):
-            if jan[2] == slots_objetos[indice].slot:
-                pos_s2 = indice
-                obj_existe = True
+            obj_existe = False
+            for indice in range(len(slots_objetos)):
+                if jan[2] == slots_objetos[indice].slot:
+                    pos_s2 = indice
+                    obj_existe = True
+                    break
+            if not obj_existe:
                 break
-        if not obj_existe:
-            pass
-            # break
 
-        s0.clear()
-        s1.clear()
-        s2.clear()
-        s0_existe = False
-        s1_existe = False
-        s2_existe = False
-        # print('buffer_s[0]: ', buffer_s[0])
-        for i in range(len(buffer_s[pos_s0])):
-            if professor == buffer_s[pos_s0][i][2]:
-                s0.append(buffer_s[pos_s0][i][4])
-                s0_existe = True
-        for i in range(len(buffer_s[pos_s1])):
-            if professor == buffer_s[pos_s1][i][2]:
-                s1.append(buffer_s[pos_s1][i][4])
-                s1_existe = True
-        for i in range(len(buffer_s[pos_s2])):
-            if professor == buffer_s[pos_s2][i][2]:
-                s2.append(buffer_s[pos_s2][i][4])
-                s2_existe = True
-        if s0_existe and s1_existe and s2_existe:
-            somas.append([copy.deepcopy(s0), copy.deepcopy(s1), copy.deepcopy(s2)])
-            pj.append([professor, jan])
-            # print('pj: ', pj)
-            # print('somas: ', somas)
-            # print()
-            cont_pj = cont_pj + 1
+            s0.clear()
+            s1.clear()
+            s2.clear()
+            s0_existe = False
+            s1_existe = False
+            s2_existe = False
+            # print('buffer_s[0]: ', buffer_s[0])
+            for i in range(len(buffer_s[pos_s0])):
+                if professor == buffer_s[pos_s0][i][2]:
+                    s0.append(buffer_s[pos_s0][i][4])
+                    s0_existe = True
+            for i in range(len(buffer_s[pos_s1])):
+                if professor == buffer_s[pos_s1][i][2]:
+                    s1.append(buffer_s[pos_s1][i][4])
+                    s1_existe = True
+            for i in range(len(buffer_s[pos_s2])):
+                if professor == buffer_s[pos_s2][i][2]:
+                    s2.append(buffer_s[pos_s2][i][4])
+                    s2_existe = True
+            if s0_existe and s1_existe and s2_existe:
+                somas.append([copy.deepcopy(s0), copy.deepcopy(s1), copy.deepcopy(s2)])
+                pj.append([professor, jan])
+                # print('pj: ', pj)
+                # print('somas: ', somas)
+                # print()
+                cont_pj = cont_pj + 1
 
 y_pj = [i for i in range(len(pj))]
 y = model.addVars(y_pj, vtype=gp.GRB.BINARY)
