@@ -32,8 +32,8 @@ for i in range(len(lista_turnos_por_escola)):
 sys.exit(0)
 '''
 
-instancia = int(input("Você quer trabalhar com 1 instância ou 129?"))
-if instancia == 1:
+instancia = input("Você quer trabalhar com 1 instância ou 129?")
+if instancia == "1":
     # Leitura completa da tabela fornecida
     print('Realizando o processo de Leitura.')
     df = pd.read_excel('./arquivo_ProjetoUFSC_v1.ods', engine='odf')
@@ -44,7 +44,7 @@ if instancia == 1:
     print(df.info())
     print(df)
 else:
-    if instancia == 129:
+    if instancia == "129" or instancia == "":
         # Leitura completa da tabela fornecida
         print('Realizando o processo de Leitura.')
         df = pd.read_csv('./arquivoProjetoUFSC_regionalFlorianopolis_modificado.csv', sep = ';')
@@ -74,6 +74,10 @@ else:
                     break
         df = df[df["Cod. Esc."] == escola]
         print("Quantidade de registros da escola de interesse: ", len(df.index))
+        # Observou-se que para a mesma turma-disciplina existiam horários de início-fim diferentes. Por isso
+        # serão todos zerados, antes de verificar a duplicação.
+        df["Início das aulas"] = "00:00"
+        df["Fim das aulas"] = "00:00"
         df = df.drop_duplicates()
         print("Quantidade de registros após retirar duplicados: ", len(df.index))
         df_remove = df.loc[(df['Código da disc. '] == '1344') | \
