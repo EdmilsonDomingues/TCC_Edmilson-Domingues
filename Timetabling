@@ -91,9 +91,9 @@ else:
         df = df.drop(df_remove.index)
         df['Número da turma'] = df['Número da turma'].astype(str) + '-' + df['Etapa (séries)'].astype(str)
         print("Quantidade de registros após retirar segundo professor: ", len(df.index))
-        print(df.head())
+        for indice, valor in df.iterrows():
+            print(valor)
         print(df['Número da turma'])
-        # sys.exit(0)
     else:
         print("Você não digitou uma informação válida.")
         sys.exit(0)
@@ -197,8 +197,14 @@ class Grade:
                             return ['10', '11', '12', '13', '14', '25', '26', '27', '28', '29', '40', '41',
                                     '42', '43', '44', '55', '56', '57', '58', '59', '70', '71', '72', '73', '74']
                         else:
-                            print("Deu outro turno.")
-                            sys.exit(0)
+                            if self.turno.upper() == "INTEGRAL":
+                                return ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '15', '16', '17', '18',
+                                        '19', '20', '21', '22', '23', '24', '30', '31', '32', '33', '34', '35',
+                                        '36', '37', '38', '39', '45', '46', '47', '48', '49', '50', '51', '52',
+                                        '53', '54', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69']
+                            else:
+                                print("Deu outro turno.")
+                                sys.exit(0)
         '''
         else:
             if self.tipo_grade == '2':
@@ -470,7 +476,11 @@ print("Turmas_objetos: ", len(turmas_objetos))
 print("Disciplinas_objetos: ", len(disciplinas_objetos))
 print("Professores_objetos: ", len(professores_objetos))
 print("Slots_objetos: ", len(slots_objetos))
-
+for i in range(len(estrela_chaves)):
+    if turmas_objetos[estrela_chaves[i][0]].numero_turma == '15-1':
+        print(disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,
+              disciplinas_objetos[estrela_chaves[i][1]].nome_disciplina,
+              disciplinas_objetos[estrela_chaves[i][1]].quantidade_aulas_semanais)
 # [18/01/2023]
 # Nesta parte do programa serão introduzidas as regras referentes à pesquisa operacional.
 # 1) Variáveis do problema de Timetabling.
@@ -622,8 +632,12 @@ for ts in ts_lista:
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
     if len(tdps_lista) > 0:
-        model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
-        inequacoes.append([copy.deepcopy(tdps_lista), 1, '2'])
+        print("RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]), turmas_objetos[ts[0]].numero_turma, slots_objetos[ts[1]].slot)
+        if ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_31 s_50" or ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_32 s_50":
+            pass
+        else:
+            model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
+            inequacoes.append([copy.deepcopy(tdps_lista), 1, '2'])
 
 # RESTRIÇÃO 3:
 ps_lista = []
@@ -862,11 +876,11 @@ for t in t_lista:
         apresentacao.add_row(nova_grade[i])
     print()
     print()
-    print('Turma: ', turmas_objetos[t].numero_turma)
+    print('Turma:  ', turmas_objetos[t].numero_turma)
     print(apresentacao)
     print('', file = arquivo)
     print('', file = arquivo)
-    print('Turma: ', turmas_objetos[t].numero_turma, file = arquivo)
+    print('Turma:  ', turmas_objetos[t].numero_turma, file = arquivo)
     print(apresentacao, file = arquivo)
     cont = 0
     print('len(x): ', len(x))
@@ -882,7 +896,7 @@ for t in t_lista:
     print('Total de Y: ', cont)
 
 # --------------------------------------------------------------------------------------------------------
-'''
+
 # Recorrência se resultado for Unfeasible:
 
 # model.write("model.ilp")
@@ -931,7 +945,7 @@ while True:
 
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
-'''
+sys.exit(0)
 # --------------------------------------------------------------------------------------------------------
 # Neste ponto a estrutura de dados referente às inequações será transformada de lista para dicionário:
 '''
