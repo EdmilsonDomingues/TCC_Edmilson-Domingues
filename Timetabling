@@ -87,7 +87,10 @@ else:
                             (df['Código da disc. '] == '4329') | \
                             (df['Código da disc. '] == '4492') | \
                             (df['Código da disc. '] == '611') | \
-                           (df['Código da disc. '] == '5011')]
+                            (df['Código da disc. '] == '5011') | \
+                            (df['Código da disc. '] == '2473') | \
+                            (df['Código da disc. '] == '4330') | \
+                            (df['Código da disc. '] == '3790')]
         df = df.drop(df_remove.index)
         df['Número da turma'] = df['Número da turma'].astype(str) + '-' + df['Etapa (séries)'].astype(str)
         print("Quantidade de registros após retirar segundo professor: ", len(df.index))
@@ -124,9 +127,9 @@ class Turma:
 class Disciplina:
     def __init__(self, matriz_curricular, etapa_serie, numero_turma, codigo_disciplina,
                  nome_disciplina, quantidade_aulas_semanais, codigo_area_ensino, area_ensino):
-        self.matriz_curricular = matriz_curricular
-        self.etapa_serie = etapa_serie
-        self.numero_turma = numero_turma  # PK
+        self.matriz_curricular = matriz_curricular  # PK
+        self.etapa_serie = etapa_serie  # PK
+        self.numero_turma = numero_turma
         self.codigo_disciplina = codigo_disciplina  # PK
         self.nome_disciplina = nome_disciplina
         self.quantidade_aulas_semanais = quantidade_aulas_semanais
@@ -391,9 +394,12 @@ for index, row in df.iterrows():
         indice = 0
         if len(turmas_objetos) > 0:
             for objeto in turmas_objetos:
-                if turma_prov[2] == objeto.numero_turma:
-                    in_turma = True
-                    break
+                if turma_prov[2] == objeto.numero_turma and\
+                    turma_prov[1] == objeto.etapa_serie and\
+                    turma_prov[4] == objeto.codigo_turno and\
+                    turma_prov[6] == objeto.codigo_area_ensino:
+                        in_turma = True
+                        break
                 indice = indice + 1
         if in_turma:
             controle.append(indice)
@@ -410,7 +416,8 @@ for index, row in df.iterrows():
             for objeto in disciplinas_objetos:
                 if disciplina_prov[3] == objeto.codigo_disciplina \
                         and disciplina_prov[6] == objeto.codigo_area_ensino \
-                        and disciplina_prov[1] == objeto.etapa_serie:
+                        and disciplina_prov[1] == objeto.etapa_serie \
+                        and disciplina_prov[0] == objeto.matriz_curricular:
                     in_disciplina = True
                     break
                 indice = indice + 1
@@ -632,12 +639,38 @@ for ts in ts_lista:
         if [estrela_chaves[cont][0], estrela_chaves[cont][3]] == ts:
             tdps_lista.append(cont)
     if len(tdps_lista) > 0:
+        pass
         print("RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]), turmas_objetos[ts[0]].numero_turma, slots_objetos[ts[1]].slot)
-        if ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_31 s_50" or ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_32 s_50":
+        '''
+        if ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_25" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_26" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_32" or \
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_33" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_31" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_28" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_29" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_30" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_34" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_35" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_27" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_36" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_37" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_38" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_42" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_40" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_39" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_41" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_43" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_45" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_46" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_47":
             pass
         else:
             model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
             inequacoes.append([copy.deepcopy(tdps_lista), 1, '2'])
+        '''
+        model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
+        inequacoes.append([copy.deepcopy(tdps_lista), 1, '2'])
 
 # RESTRIÇÃO 3:
 ps_lista = []
@@ -876,11 +909,11 @@ for t in t_lista:
         apresentacao.add_row(nova_grade[i])
     print()
     print()
-    print('Turma:  ', turmas_objetos[t].numero_turma)
+    print('Turma:  ', turmas_objetos[t].numero_turma, "Área de Ensino: ", turmas_objetos[t].area_ensino)
     print(apresentacao)
     print('', file = arquivo)
     print('', file = arquivo)
-    print('Turma:  ', turmas_objetos[t].numero_turma, file = arquivo)
+    print('Turma:  ', turmas_objetos[t].numero_turma, "Área de Ensino: ", turmas_objetos[t].area_ensino, file = arquivo)
     print(apresentacao, file = arquivo)
     cont = 0
     print('len(x): ', len(x))
@@ -946,6 +979,7 @@ while True:
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
 sys.exit(0)
+
 # --------------------------------------------------------------------------------------------------------
 # Neste ponto a estrutura de dados referente às inequações será transformada de lista para dicionário:
 '''
