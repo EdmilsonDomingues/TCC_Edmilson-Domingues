@@ -90,7 +90,9 @@ else:
                             (df['Código da disc. '] == '5011') | \
                             (df['Código da disc. '] == '2473') | \
                             (df['Código da disc. '] == '4330') | \
-                            (df['Código da disc. '] == '3790')]
+                            (df['Código da disc. '] == '3790') | \
+                            (df['Código da disc. '] == '1155') | \
+                            (df['Código da disc. '] == '3318')]
         df = df.drop(df_remove.index)
         df['Número da turma'] = df['Número da turma'].astype(str) + '-' + df['Etapa (séries)'].astype(str)
         print("Quantidade de registros após retirar segundo professor: ", len(df.index))
@@ -641,29 +643,12 @@ for ts in ts_lista:
     if len(tdps_lista) > 0:
         pass
         print("RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]), turmas_objetos[ts[0]].numero_turma, slots_objetos[ts[1]].slot)
-        '''
-        if ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_25" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_26" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_32" or \
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_33" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_31" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_28" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_29" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_30" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_34" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_35" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_27" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_36" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_37" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_38" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_42" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_40" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_39" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_41" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_43" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_45" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_46" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_3 s_47":
+        if ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_0" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_5" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_15" or\
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_6" or \
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_10" or \
+            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_20":
             pass
         else:
             model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
@@ -671,7 +656,7 @@ for ts in ts_lista:
         '''
         model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
         inequacoes.append([copy.deepcopy(tdps_lista), 1, '2'])
-
+        '''
 # RESTRIÇÃO 3:
 ps_lista = []
 for cont in range(len(estrela_chaves)):
