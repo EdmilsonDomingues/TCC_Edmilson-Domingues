@@ -150,14 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>print(</find>
-      <find>turma:   14-1</find>
-      <find>disciplina</find>
-      <find>Turma:</find>
-      <find>Turma:   2-1</find>
-      <find>turma:   2-1</find>
-      <find>1325</find>
-      <find>turma:   41</find>
       <find>turma:   41-4</find>
       <find>1783</find>
       <find>2062</find>
@@ -173,13 +165,21 @@
       <find>1442</find>
       <find>turma:   1-4</find>
       <find>restrição 2</find>
-      <find>janela **</find>
       <find>janela  **</find>
       <find>1406</find>
-      <find>janela</find>
-      <find>janela</find>
-      <find>jane</find>
       <find>2461</find>
+      <find>2860</find>
+      <find>3514</find>
+      <find>3549</find>
+      <find>3727</find>
+      <find>3832</find>
+      <find>janela **</find>
+      <find>3816</find>
+      <find>janela</find>
+      <find>3883</find>
+      <find>jane</find>
+      <find>janela</find>
+      <find>janel</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -310,7 +310,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.46393442" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.5491803" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
