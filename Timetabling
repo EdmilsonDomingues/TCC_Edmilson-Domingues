@@ -118,8 +118,21 @@ else:
                            (df['Código da disc. '] == '4247') | \
                            (df['Código da disc. '] == '3318')]
         df = df.drop(df_remove.index)
+        print("Quantidade de registros após retirar disciplinas FAKE: ", len(df.index))
+        # Remover disciplinas excludentes:
+        tem_lingua_estrangeira_ingles = False
+        for indice, valor in df.iterrows():
+            if valor[17] == '319':
+                tem_lingua_estrangeira_ingles = True
+                break
+        if tem_lingua_estrangeira_ingles:
+            df_remove = df.loc[(df['Código da disc. '] == '320') | \
+                               (df['Código da disc. '] == '321') | \
+                               (df['Código da disc. '] == '322') | \
+                               (df['Código da disc. '] == '323')]
+            df = df.drop(df_remove.index)
+        print("Quantidade de registros após retirar disciplinas excludentes: ", len(df.index))
         df['Número da turma'] = df['Número da turma'].astype(str) + '-' + df['Etapa (séries)'].astype(str)
-        print("Quantidade de registros após retirar segundo professor: ", len(df.index))
         for indice, valor in df.iterrows():
             print(valor)
         print(df['Número da turma'])
@@ -802,7 +815,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+'''
 arquivo = open("grade completa da escola.txt", "w+")
 p_lista = []
 for cont in range(len(estrela_chaves)):
@@ -937,7 +950,7 @@ for t in t_lista:
         if y[i].X == 1:
             cont = cont + 1
     print('Total de Y: ', cont)
-
+'''
 # --------------------------------------------------------------------------------------------------------
 
 # Recorrência se resultado for Unfeasible:
