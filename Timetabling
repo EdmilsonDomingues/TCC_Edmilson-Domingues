@@ -93,6 +93,29 @@ else:
                             (df['Código da disc. '] == '3790') | \
                             (df['Código da disc. '] == '1155') | \
                            (df['Código da disc. '] == '1701') | \
+                           (df['Código da disc. '] == '4543') | \
+                           (df['Código da disc. '] == '4546') | \
+                           (df['Código da disc. '] == '3464') | \
+                           (df['Código da disc. '] == '3332') | \
+                           (df['Código da disc. '] == '3319') | \
+                           (df['Código da disc. '] == '4006') | \
+                           (df['Código da disc. '] == '4005') | \
+                           (df['Código da disc. '] == '3312') | \
+                           (df['Código da disc. '] == '3311') | \
+                           (df['Código da disc. '] == '4636') | \
+                           (df['Código da disc. '] == '4510') | \
+                           (df['Código da disc. '] == '4509') | \
+                           (df['Código da disc. '] == '4013') | \
+                           (df['Código da disc. '] == '4547') | \
+                           (df['Código da disc. '] == '4205') | \
+                           (df['Código da disc. '] == '4207') | \
+                           (df['Código da disc. '] == '4214') | \
+                           (df['Código da disc. '] == '3468') | \
+                           (df['Código da disc. '] == '3463') | \
+                           (df['Código da disc. '] == '3313') | \
+                           (df['Código da disc. '] == '3319') | \
+                           (df['Código da disc. '] == '3321') | \
+                           (df['Código da disc. '] == '4247') | \
                            (df['Código da disc. '] == '3318')]
         df = df.drop(df_remove.index)
         df['Número da turma'] = df['Número da turma'].astype(str) + '-' + df['Etapa (séries)'].astype(str)
