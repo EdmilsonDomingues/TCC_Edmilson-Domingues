@@ -133,8 +133,10 @@ else:
             df = df.drop(df_remove.index)
         print("Quantidade de registros após retirar disciplinas excludentes: ", len(df.index))
         df['Número da turma'] = df['Número da turma'].astype(str) + '-' + df['Etapa (séries)'].astype(str)
+        '''
         for indice, valor in df.iterrows():
             print(valor)
+        '''
         print(df['Número da turma'])
     else:
         print("Você não digitou uma informação válida.")
@@ -815,7 +817,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-'''
+
 arquivo = open("grade completa da escola.txt", "w+")
 p_lista = []
 for cont in range(len(estrela_chaves)):
@@ -946,11 +948,20 @@ for t in t_lista:
     print('Total de X: ', cont)
     print('len(y): ', len(y))
     cont = 0
+    cont0 = 0
     for i in range(len(y)):
         if y[i].X == 1:
+            print("Professor: ", pj[i][0], professores_objetos[pj[i][0]].nome_professor, "Janela: ", pj[i][1])
             cont = cont + 1
-    print('Total de Y: ', cont)
-'''
+        else:
+            if y[i].X == 0:
+                cont0 = cont0 + 1
+            else:
+                print('O que tem em Y: ', y[i].X)
+    print('Teste - Total de Y: ', cont)
+    print('Teste - Total de Y zerado: ', cont0)
+
+
 # --------------------------------------------------------------------------------------------------------
 
 # Recorrência se resultado for Unfeasible:
