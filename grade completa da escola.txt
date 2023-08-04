@@ -54,17 +54,17 @@ Professor(a):  MMWP
 |                                | Slot: 22                       | Slot: 37                       | Slot: 52                       | Slot: 67                       |
 |                                | C: C32                         | C: C37                         | C: C42                         | C: C47                         |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 22-2                    | ** JANELA **                   | Turma: 22-2                    |                                | Turma: 22-2                    |
+| Turma: 22-2                    | ** JANELA **                   | Turma: 22-2                    | ** JANELA **                   | Turma: 22-2                    |
 | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
 | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
 | Slot: 8                        |                                | Slot: 38                       |                                | Slot: 68                       |
 | C: C28                         |                                | C: C38                         |                                | C: C48                         |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 22-2                    | Turma: 22-2                    | Turma: 22-2                    |                                |                                |
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |                                |
-| Slot: 9                        | Slot: 24                       | Slot: 39                       |                                |                                |
-| C: C29                         | C: C34                         | C: C39                         |                                |                                |
+| Turma: 22-2                    | Turma: 22-2                    | Turma: 22-2                    | Turma: 22-2                    |                                |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
+| Slot: 9                        | Slot: 24                       | Slot: 39                       | Slot: 54                       |                                |
+| C: C29                         | C: C34                         | C: C39                         | C: C44                         |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
@@ -750,23 +750,23 @@ Professor(a):  MDFM
 | Slot: 6                        |                                | Slot: 36                       |                                | Slot: 66                       |
 | C: C1551                       |                                | C: C1561                       |                                | C: C1571                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    | ** JANELA **                   |
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Slot: 7                        | Slot: 22                       | Slot: 37                       | Slot: 52                       |                                |
-| C: C1552                       | C: C1557                       | C: C1562                       | C: C1567                       |                                |
+| Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Slot: 7                        | Slot: 22                       | Slot: 37                       | Slot: 52                       | Slot: 67                       |
+| C: C1552                       | C: C1557                       | C: C1562                       | C: C1567                       | C: C1572                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    | ** JANELA **                   | Turma: 32-3                    |
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
-| Slot: 8                        | Slot: 23                       | Slot: 38                       |                                | Slot: 68                       |
-| C: C1553                       | C: C1558                       | C: C1563                       |                                | C: C1573                       |
+| Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    | Turma: 32-3                    |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       | Slot: 68                       |
+| C: C1553                       | C: C1558                       | C: C1563                       | C: C1568                       | C: C1573                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-|                                |                                |                                | Turma: 32-3                    |                                |
-|                                |                                |                                | Disciplina: LETRAS - ENS.      |                                |
-|                                |                                |                                | FUND.- ANOS INICIAIS           |                                |
-|                                |                                |                                | Slot: 54                       |                                |
-|                                |                                |                                | C: C1569                       |                                |
+|                                | Turma: 32-3                    |                                | Turma: 32-3                    | Turma: 32-3                    |
+|                                | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+|                                | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+|                                | Slot: 24                       |                                | Slot: 54                       | Slot: 69                       |
+|                                | C: C1559                       |                                | C: C1569                       | C: C1574                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
@@ -936,30 +936,30 @@ Professor(a):  SL
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-|                                | Turma: 12-1                    | Turma: 22-2                    | Turma: 34-3                    | Turma: 34-3                    |
-|                                | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    |
-|                                | Slot: 20                       | Slot: 35                       | Slot: 50                       | Slot: 65                       |
-|                                | C: C1955                       | C: C1985                       | C: C1915                       | C: C1920                       |
+| Turma: 12-1                    | Turma: 12-1                    | Turma: 22-2                    | Turma: 34-3                    | Turma: 34-3                    |
+| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    |
+| Slot: 5                        | Slot: 20                       | Slot: 35                       | Slot: 50                       | Slot: 65                       |
+| C: C1950                       | C: C1955                       | C: C1985                       | C: C1915                       | C: C1920                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 42-4                    |                                |                                |                                |                                |
-| Disciplina: EDUCAÇÃO FÍSICA    |                                |                                |                                |                                |
-| Slot: 6                        |                                |                                |                                |                                |
-| C: C1926                       |                                |                                |                                |                                |
+| Turma: 42-4                    | Turma: 32-3                    |                                | Turma: 32-3                    | Turma: 42-4                    |
+| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    |                                | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    |
+| Slot: 6                        | Slot: 21                       |                                | Slot: 51                       | Slot: 66                       |
+| C: C1926                       | C: C1881                       |                                | C: C1891                       | C: C1946                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 22-2                    |                                |                                |                                |                                |
-| Disciplina: EDUCAÇÃO FÍSICA    |                                |                                |                                |                                |
-| Slot: 7                        |                                |                                |                                |                                |
-| C: C1977                       |                                |                                |                                |                                |
+| Turma: 22-2                    |                                |                                | Turma: 42-4                    |                                |
+| Disciplina: EDUCAÇÃO FÍSICA    |                                |                                | Disciplina: EDUCAÇÃO FÍSICA    |                                |
+| Slot: 7                        |                                |                                | Slot: 52                       |                                |
+| C: C1977                       |                                |                                | C: C1942                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 34-3                    |                                |                                |                                |                                |
-| Disciplina: EDUCAÇÃO FÍSICA    |                                |                                |                                |                                |
-| Slot: 8                        |                                |                                |                                |                                |
-| C: C1903                       |                                |                                |                                |                                |
+| Turma: 34-3                    |                                |                                | Turma: 22-2                    |                                |
+| Disciplina: EDUCAÇÃO FÍSICA    |                                |                                | Disciplina: EDUCAÇÃO FÍSICA    |                                |
+| Slot: 8                        |                                |                                | Slot: 53                       |                                |
+| C: C1903                       |                                |                                | C: C1993                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 24-2                    | Turma: 24-2                    | Turma: 32-3                    |                                |                                |
-| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    |                                |                                |
-| Slot: 9                        | Slot: 24                       | Slot: 39                       |                                |                                |
-| C: C1854                       | C: C1859                       | C: C1889                       |                                |                                |
+| Turma: 24-2                    | Turma: 24-2                    | Turma: 32-3                    | Turma: 12-1                    | Turma: 24-2                    |
+| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    |
+| Slot: 9                        | Slot: 24                       | Slot: 39                       | Slot: 54                       | Slot: 69                       |
+| C: C1854                       | C: C1859                       | C: C1889                       | C: C1969                       | C: C1874                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
@@ -1136,15 +1136,15 @@ Professor(a):  MJF
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 54-5                    | Turma: 54-5                    | Turma: 24-2                    | Turma: 24-2                    |                                |
-| Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               |                                |
-| Slot: 5                        | Slot: 20                       | Slot: 35                       | Slot: 50                       |                                |
-| C: C2775                       | C: C2780                       | C: C2685                       | C: C2690                       |                                |
+| Turma: 54-5                    | Turma: 54-5                    | Turma: 24-2                    | Turma: 24-2                    | Turma: 32-3                    |
+| Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               |
+| Slot: 5                        | Slot: 20                       | Slot: 35                       | Slot: 50                       | Slot: 65                       |
+| C: C2775                       | C: C2780                       | C: C2685                       | C: C2690                       | C: C2720                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 52-5                    |                                | Turma: 42-4                    |                                |                                |
-| Disciplina: ARTE               |                                | Disciplina: ARTE               |                                |                                |
-| Slot: 6                        |                                | Slot: 36                       |                                |                                |
-| C: C2626                       |                                | C: C2661                       |                                |                                |
+| Turma: 52-5                    |                                | Turma: 42-4                    |                                | Turma: 12-1                    |
+| Disciplina: ARTE               |                                | Disciplina: ARTE               |                                | Disciplina: ARTE               |
+| Slot: 6                        |                                | Slot: 36                       |                                | Slot: 66                       |
+| C: C2626                       |                                | C: C2661                       |                                | C: C2746                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 |                                |                                |                                |                                |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
@@ -1153,10 +1153,10 @@ Professor(a):  MJF
 |                                | Slot: 23                       |                                |                                |                                |
 |                                | C: C2758                       |                                |                                |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 32-3                    |                                | Turma: 12-1                    | Turma: 52-5                    | Turma: 22-2                    |
-| Disciplina: ARTE               |                                | Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               |
-| Slot: 9                        |                                | Slot: 39                       | Slot: 54                       | Slot: 69                       |
-| C: C2704                       |                                | C: C2739                       | C: C2644                       | C: C2774                       |
+| Turma: 32-3                    | Turma: 42-4                    | Turma: 12-1                    | Turma: 52-5                    | Turma: 22-2                    |
+| Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               | Disciplina: ARTE               |
+| Slot: 9                        | Slot: 24                       | Slot: 39                       | Slot: 54                       | Slot: 69                       |
+| C: C2704                       | C: C2659                       | C: C2739                       | C: C2644                       | C: C2774                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
@@ -1857,23 +1857,23 @@ Professor(a):  ADSG
 | Slot: 5                        | Slot: 20                       | Slot: 35                       | Slot: 50                       | Slot: 65                       |
 | C: C3600                       | C: C3605                       | C: C3610                       | C: C3615                       | C: C3620                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| ** JANELA **                   | Turma: 42-4                    | ** JANELA **                   |                                | ** JANELA **                   |
-|                                | Disciplina: LETRAS - ENS.      |                                |                                |                                |
-|                                | FUND.- ANOS INICIAIS           |                                |                                |                                |
-|                                | Slot: 21                       |                                |                                |                                |
-|                                | C: C3606                       |                                |                                |                                |
+| ** JANELA **                   | Turma: 42-4                    | ** JANELA **                   | Turma: 42-4                    | ** JANELA **                   |
+|                                | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |                                |
+|                                | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |                                |
+|                                | Slot: 21                       |                                | Slot: 51                       |                                |
+|                                | C: C3606                       |                                | C: C3616                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 42-4                    | Turma: 42-4                    | Turma: 42-4                    |                                | Turma: 42-4                    |
+| Turma: 42-4                    | Turma: 42-4                    | Turma: 42-4                    | ** JANELA **                   | Turma: 42-4                    |
 | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
 | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
 | Slot: 7                        | Slot: 22                       | Slot: 37                       |                                | Slot: 67                       |
 | C: C3602                       | C: C3607                       | C: C3612                       |                                | C: C3622                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 42-4                    |                                | Turma: 42-4                    | Turma: 42-4                    | ** JANELA **                   |
-| Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Slot: 8                        |                                | Slot: 38                       | Slot: 53                       |                                |
-| C: C3603                       |                                | C: C3613                       | C: C3618                       |                                |
+| Turma: 42-4                    | Turma: 42-4                    | Turma: 42-4                    | Turma: 42-4                    | Turma: 42-4                    |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       | Slot: 68                       |
+| C: C3603                       | C: C3608                       | C: C3613                       | C: C3618                       | C: C3623                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | Turma: 42-4                    |                                | Turma: 42-4                    | Turma: 42-4                    | Turma: 42-4                    |
 | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
@@ -2089,11 +2089,11 @@ Professor(a):  LFDA
 | Slot: 7                        | Slot: 22                       | Slot: 37                       | Slot: 52                       | Slot: 67                       |
 | C: C3727                       | C: C3732                       | C: C3737                       | C: C3742                       | C: C3747                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 24-2                    | Turma: 24-2                    | Turma: 24-2                    | Turma: 24-2                    |                                |
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       |                                |
-| C: C3728                       | C: C3733                       | C: C3738                       | C: C3743                       |                                |
+| Turma: 24-2                    | Turma: 24-2                    | Turma: 24-2                    | Turma: 24-2                    | Turma: 24-2                    |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       | Slot: 68                       |
+| C: C3728                       | C: C3733                       | C: C3738                       | C: C3743                       | C: C3748                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 |                                |                                | Turma: 24-2                    | Turma: 24-2                    |                                |
 |                                |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
@@ -2268,29 +2268,29 @@ Professor(a):  ARP
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-|                                |                                | Turma: 12-1                    | Turma: 12-1                    |                                |
-|                                |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-|                                |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-|                                |                                | Slot: 35                       | Slot: 50                       |                                |
-|                                |                                | C: C4210                       | C: C4215                       |                                |
+|                                |                                | Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    |
+|                                |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+|                                |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+|                                |                                | Slot: 35                       | Slot: 50                       | Slot: 65                       |
+|                                |                                | C: C4210                       | C: C4215                       | C: C4220                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    |                                |
+| Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | ** JANELA **                   |
 | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
 | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
 | Slot: 6                        | Slot: 21                       | Slot: 36                       | Slot: 51                       |                                |
 | C: C4201                       | C: C4206                       | C: C4211                       | C: C4216                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | ** JANELA **                   | Turma: 12-1                    |
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
-| Slot: 7                        | Slot: 22                       | Slot: 37                       |                                | Slot: 67                       |
-| C: C4202                       | C: C4207                       | C: C4212                       |                                | C: C4222                       |
+| Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Slot: 7                        | Slot: 22                       | Slot: 37                       | Slot: 52                       | Slot: 67                       |
+| C: C4202                       | C: C4207                       | C: C4212                       | C: C4217                       | C: C4222                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | ** JANELA **                   |
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       |                                |
-| C: C4203                       | C: C4208                       | C: C4213                       | C: C4218                       |                                |
+| Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    | Turma: 12-1                    |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       | Slot: 68                       |
+| C: C4203                       | C: C4208                       | C: C4213                       | C: C4218                       | C: C4223                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | Turma: 12-1                    | Turma: 12-1                    |                                |                                | Turma: 12-1                    |
 | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |                                | Disciplina: LETRAS - ENS.      |
@@ -2528,15 +2528,15 @@ Turma:   22-2 Área de Ensino:  ENS.FUND.ANOS INICIAIS
 | Slot: 7                        | Professor(a): MMWP             | Professor(a): MMWP             | Professor(a): MMWP             | Professor(a): MMWP             |
 |                                | Slot: 22                       | Slot: 37                       | Slot: 52                       | Slot: 67                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: ARTE               | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           | Professor(a): MJF              | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
-| Professor(a): MMWP             | Slot: 23                       | Professor(a): MMWP             |                                | Professor(a): MMWP             |
+| Disciplina: LETRAS - ENS.      | Disciplina: ARTE               | Disciplina: LETRAS - ENS.      | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | Professor(a): MJF              | FUND.- ANOS INICIAIS           | Professor(a): SL               | FUND.- ANOS INICIAIS           |
+| Professor(a): MMWP             | Slot: 23                       | Professor(a): MMWP             | Slot: 53                       | Professor(a): MMWP             |
 | Slot: 8                        |                                | Slot: 38                       |                                | Slot: 68                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                | Disciplina: ARTE               |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                | Professor(a): MJF              |
-| Professor(a): MMWP             | Professor(a): MMWP             | Professor(a): MMWP             |                                | Slot: 69                       |
-| Slot: 9                        | Slot: 24                       | Slot: 39                       |                                |                                |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: ARTE               |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | Professor(a): MJF              |
+| Professor(a): MMWP             | Professor(a): MMWP             | Professor(a): MMWP             | Professor(a): MMWP             | Slot: 69                       |
+| Slot: 9                        | Slot: 24                       | Slot: 39                       | Slot: 54                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
@@ -3689,30 +3689,30 @@ Turma:   32-3 Área de Ensino:  ENS.FUND.ANOS INICIAIS
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             |                                |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: ARTE               |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | Professor(a): MJF              |
+| Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             | Slot: 65                       |
 | Slot: 5                        | Slot: 20                       | Slot: 35                       | Slot: 50                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
-| Professor(a): MDFM             |                                | Professor(a): MDFM             |                                | Professor(a): MDFM             |
+| Disciplina: LETRAS - ENS.      | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | Professor(a): SL               | FUND.- ANOS INICIAIS           | Professor(a): SL               | FUND.- ANOS INICIAIS           |
+| Professor(a): MDFM             | Slot: 21                       | Professor(a): MDFM             | Slot: 51                       | Professor(a): MDFM             |
 | Slot: 6                        |                                | Slot: 36                       |                                | Slot: 66                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             |                                |
-| Slot: 7                        | Slot: 22                       | Slot: 37                       | Slot: 52                       |                                |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             |
+| Slot: 7                        | Slot: 22                       | Slot: 37                       | Slot: 52                       | Slot: 67                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
-| Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             |                                | Professor(a): MDFM             |
-| Slot: 8                        | Slot: 23                       | Slot: 38                       |                                | Slot: 68                       |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             | Professor(a): MDFM             |
+| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       | Slot: 68                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: ARTE               |                                | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      |                                |
-| Professor(a): MJF              |                                | Professor(a): SL               | FUND.- ANOS INICIAIS           |                                |
-| Slot: 9                        |                                | Slot: 39                       | Professor(a): MDFM             |                                |
-|                                |                                |                                | Slot: 54                       |                                |
+| Disciplina: ARTE               | Disciplina: LETRAS - ENS.      | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| Professor(a): MJF              | FUND.- ANOS INICIAIS           | Professor(a): SL               | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Slot: 9                        | Professor(a): MDFM             | Slot: 39                       | Professor(a): MDFM             | Professor(a): MDFM             |
+|                                | Slot: 24                       |                                | Slot: 54                       | Slot: 69                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
@@ -3813,14 +3813,14 @@ Turma:   24-2 Área de Ensino:  ENS.FUND.ANOS INICIAIS
 | Professor(a): LFDA             | Professor(a): LFDA             | Professor(a): LFDA             | Professor(a): LFDA             | Professor(a): LFDA             |
 | Slot: 7                        | Slot: 22                       | Slot: 37                       | Slot: 52                       | Slot: 67                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Professor(a): LFDA             | Professor(a): LFDA             | Professor(a): LFDA             | Professor(a): LFDA             |                                |
-| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       |                                |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Professor(a): LFDA             | Professor(a): LFDA             | Professor(a): LFDA             | Professor(a): LFDA             | Professor(a): LFDA             |
+| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       | Slot: 68                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| Professor(a): SL               | Professor(a): SL               | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Slot: 9                        | Slot: 24                       | Professor(a): LFDA             | Professor(a): LFDA             |                                |
+| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: EDUCAÇÃO FÍSICA    |
+| Professor(a): SL               | Professor(a): SL               | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | Professor(a): SL               |
+| Slot: 9                        | Slot: 24                       | Professor(a): LFDA             | Professor(a): LFDA             | Slot: 69                       |
 |                                |                                | Slot: 39                       | Slot: 54                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
@@ -3913,24 +3913,24 @@ Turma:   42-4 Área de Ensino:  ENS.FUND.ANOS INICIAIS
 | Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             |
 | Slot: 5                        | Slot: 20                       | Slot: 35                       | Slot: 50                       | Slot: 65                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      | Disciplina: ARTE               |                                |                                |
-| Professor(a): SL               | FUND.- ANOS INICIAIS           | Professor(a): MJF              |                                |                                |
-| Slot: 6                        | Professor(a): ADSG             | Slot: 36                       |                                |                                |
-|                                | Slot: 21                       |                                |                                |                                |
+| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      | Disciplina: ARTE               | Disciplina: LETRAS - ENS.      | Disciplina: EDUCAÇÃO FÍSICA    |
+| Professor(a): SL               | FUND.- ANOS INICIAIS           | Professor(a): MJF              | FUND.- ANOS INICIAIS           | Professor(a): SL               |
+| Slot: 6                        | Professor(a): ADSG             | Slot: 36                       | Professor(a): ADSG             | Slot: 66                       |
+|                                | Slot: 21                       |                                | Slot: 51                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
-| Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             |                                | Professor(a): ADSG             |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | Professor(a): SL               | FUND.- ANOS INICIAIS           |
+| Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             | Slot: 52                       | Professor(a): ADSG             |
 | Slot: 7                        | Slot: 22                       | Slot: 37                       |                                | Slot: 67                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Professor(a): ADSG             |                                | Professor(a): ADSG             | Professor(a): ADSG             |                                |
-| Slot: 8                        |                                | Slot: 38                       | Slot: 53                       |                                |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             |
+| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       | Slot: 68                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
-| Professor(a): ADSG             |                                | Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             |
+| Disciplina: LETRAS - ENS.      | Disciplina: ARTE               | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | Professor(a): MJF              | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Professor(a): ADSG             | Slot: 24                       | Professor(a): ADSG             | Professor(a): ADSG             | Professor(a): ADSG             |
 | Slot: 9                        |                                | Slot: 39                       | Slot: 54                       | Slot: 69                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
@@ -3963,29 +3963,29 @@ Turma:   12-1 Área de Ensino:  ENS.FUND.ANOS INICIAIS
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-|                                | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-|                                | Professor(a): SL               | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-|                                | Slot: 20                       | Professor(a): ARP              | Professor(a): ARP              |                                |
-|                                |                                | Slot: 35                       | Slot: 50                       |                                |
+| Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| Professor(a): SL               | Professor(a): SL               | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Slot: 5                        | Slot: 20                       | Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              |
+|                                |                                | Slot: 35                       | Slot: 50                       | Slot: 65                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              |                                |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: ARTE               |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | Professor(a): MJF              |
+| Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              | Slot: 66                       |
 | Slot: 6                        | Slot: 21                       | Slot: 36                       | Slot: 51                       |                                |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                | FUND.- ANOS INICIAIS           |
-| Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              |                                | Professor(a): ARP              |
-| Slot: 7                        | Slot: 22                       | Slot: 37                       |                                | Slot: 67                       |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              |
+| Slot: 7                        | Slot: 22                       | Slot: 37                       | Slot: 52                       | Slot: 67                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |                                |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |                                |
-| Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              |                                |
-| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       |                                |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           |
+| Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              | Professor(a): ARP              |
+| Slot: 8                        | Slot: 23                       | Slot: 38                       | Slot: 53                       | Slot: 68                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
-| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: ARTE               |                                | Disciplina: LETRAS - ENS.      |
-| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | Professor(a): MJF              |                                | FUND.- ANOS INICIAIS           |
-| Professor(a): ARP              | Professor(a): ARP              | Slot: 39                       |                                | Professor(a): ARP              |
+| Disciplina: LETRAS - ENS.      | Disciplina: LETRAS - ENS.      | Disciplina: ARTE               | Disciplina: EDUCAÇÃO FÍSICA    | Disciplina: LETRAS - ENS.      |
+| FUND.- ANOS INICIAIS           | FUND.- ANOS INICIAIS           | Professor(a): MJF              | Professor(a): SL               | FUND.- ANOS INICIAIS           |
+| Professor(a): ARP              | Professor(a): ARP              | Slot: 39                       | Slot: 54                       | Professor(a): ARP              |
 | Slot: 9                        | Slot: 24                       |                                |                                | Slot: 69                       |
 +--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+
 | *****                          | *****                          | *****                          | *****                          | *****                          |
