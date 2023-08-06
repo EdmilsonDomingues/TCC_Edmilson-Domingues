@@ -6,9 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Relatório final 129 instâncias.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Relatório final 129 instâncias.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grade completa da escola.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grade completa da escola.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,7 +72,7 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="47" />
+          <entry key="project.closed" value="48" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -133,7 +131,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
+            <state relative-caret-position="-21455">
               <caret line="819" lean-forward="true" selection-start-line="819" selection-end-line="819" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -154,8 +152,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>2119</find>
-      <find>2070</find>
       <find>2275</find>
       <find>2445</find>
       <find>2330</find>
@@ -184,6 +180,8 @@
       <find>158941</find>
       <find>158968</find>
       <find>nodes</find>
+      <find>949</find>
+      <find>4502</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -198,7 +196,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="430" />
     <option name="y" value="-12" />
     <option name="width" value="699" />
@@ -307,14 +305,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.49016392" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49925596" weight="0.2885246" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -381,7 +379,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
+        <state relative-caret-position="-21455">
           <caret line="819" lean-forward="true" selection-start-line="819" selection-end-line="819" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
