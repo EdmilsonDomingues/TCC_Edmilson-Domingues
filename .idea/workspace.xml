@@ -74,7 +74,7 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="46" />
+          <entry key="project.closed" value="47" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -85,7 +85,7 @@
           <entry key="project.open.time.23" value="6" />
           <entry key="project.open.time.24" value="2" />
           <entry key="project.open.time.25" value="3" />
-          <entry key="project.open.time.26" value="2" />
+          <entry key="project.open.time.26" value="3" />
           <entry key="project.open.time.27" value="2" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.31" value="1" />
@@ -97,17 +97,17 @@
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="48" />
+          <entry key="project.opened" value="49" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="14508" />
+          <entry key="Timetabling" value="14528" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="14508" />
+          <entry key="Python" value="14528" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -134,10 +134,10 @@
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="81">
-              <caret line="819" column="10" selection-start-line="819" selection-start-column="10" selection-end-line="819" selection-end-column="10" />
+              <caret line="819" lean-forward="true" selection-start-line="819" selection-end-line="819" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1691248459587" expanded="true" signature="13734:13743" ph="..." />
+                <marker date="1691337529400" expanded="true" signature="13734:13743" ph="..." />
               </folding>
             </state>
           </provider>
@@ -154,13 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>178322</find>
-      <find>1791</find>
-      <find>2054</find>
-      <find>1805</find>
-      <find>1830</find>
-      <find>206228</find>
-      <find>1813</find>
       <find>2119</find>
       <find>2070</find>
       <find>2275</find>
@@ -184,6 +177,13 @@
       <find>3280</find>
       <find>3514</find>
       <find>3549</find>
+      <find>3522</find>
+      <find>3719</find>
+      <find>5355</find>
+      <find>gurobi</find>
+      <find>158941</find>
+      <find>158968</find>
+      <find>nodes</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -209,7 +209,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -221,6 +220,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -307,7 +307,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -382,10 +382,10 @@
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
-          <caret line="819" column="10" selection-start-line="819" selection-start-column="10" selection-end-line="819" selection-end-column="10" />
+          <caret line="819" lean-forward="true" selection-start-line="819" selection-end-line="819" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1691248459587" expanded="true" signature="13734:13743" ph="..." />
+            <marker date="1691337529400" expanded="true" signature="13734:13743" ph="..." />
           </folding>
         </state>
       </provider>
