@@ -988,7 +988,7 @@ for t in t_lista:
     print('Teste - Total de Y zerado: ', cont0)
 
 # --------------------------------------------------------------------------------------------------------
-
+'''
 # Recorrência se resultado for Unfeasible:
 
 # model.write("model.ilp")
@@ -1037,7 +1037,7 @@ while True:
 
 print('\nThe following constraints were removed to get a feasible LP:')
 print(removed)
-sys.exit(0)
+'''
 
 # --------------------------------------------------------------------------------------------------------
 # Neste ponto a estrutura de dados referente às inequações será transformada de lista para dicionário:
@@ -1513,17 +1513,40 @@ class Individuo:
         dict_inequacoes.clear()
         return fitness
 # --------------------------------------------------------------------------------------------------------
-testa = 2
+testa = 3
 # Testes de heurística:
 # #1: Estratégia = Encaixando peças
 # Aqui neste bloco será aplicado um algoritmo genético, mas sem a restrição de janelas.
 if testa == 1:
+    pass
+# --------------------------------------------------------------------------------------------------------
+# Testes de heurística:
+# #1: Estratégia = Encaixando peças
+# Aqui neste bloco será aplicado um algoritmo genético, com a restrição de janelas.
+if testa == 2:
+    # Hiperparâmetros:
+    n_individuos = 50
+    top_quantidade = 8
+    pc = 70
+    pm = 1
+    troca_n = 4
+    max_janelas_professor = 2
+    primeira_janela = 0
+    total_janelas = max_janelas_professor * len(professores_objetos)
+    print("Total_janelas: ", total_janelas)
+    #-----------------#
     iteracoes = 0
     tempo_1 = time.time()
+    # Neste ponto criaremos o buffer dos professores com os seus slots ocupados: [[0, 1, 25, 33], [2,4] ...]
+    # No exemplo, professor 0 ocupa slots 0, 1, 25 e 33.
+    windows = []
+    for i in range(len(professores_objetos)):
+        windows.append([])
+
     turmas_backup = []
     turmas_creditos = []
 
-    n_individuos = 50
+    # n_individuos = 50
     range_n = []
     for i in range(n_individuos):
         range_n.append(i)
@@ -1609,34 +1632,134 @@ if testa == 1:
                         temp_inequacoes100.append(inequacoes[j])
         temp_inequacoes = copy.deepcopy(temp_inequacoes100)
 
+        dict_ponteiros = {}   # ponteiros
+        for i in range(len(temp_inequacoes)):
+            for j in range(len(temp_inequacoes[i][0])):
+                if temp_inequacoes[i][0][j] not in dict_ponteiros:
+                    dict_ponteiros[temp_inequacoes[i][0][j]] = [i]
+                else:
+                    dado = dict_ponteiros[temp_inequacoes[i][0][j]]
+                    dado.append(i)
+                    dict_ponteiros[temp_inequacoes[i][0][j]] = dado
+
         print('Tamanho entrada: ', turmas_creditos[t])
-        max_fit = 5 * turmas_creditos[t]
+        max_fit = 6 * turmas_creditos[t]
         print('max_fit: ', max_fit)
         populacao_atual = []
         temp = copy.deepcopy(turmas_backup[t])
         for i in range(n_individuos):
-            shuffle(temp)
+            for j in range(i + 2):
+                shuffle(temp)
             populacao_atual.append(Individuo(copy.deepcopy(temp)))
         # populações convergem aqui.
         finalizado = False
         while not finalizado:
+            # Aqui vamos checar se a população atual não tem gêmeos:
+            roda_a_roda = []
+            for k in range(frame_tamanho):
+                roda_a_roda.append(k)
+
+            for i in range(len(populacao_atual)):
+                for j in range(i+1, len(populacao_atual)):
+                    if i != j:
+                        ind1 = copy.deepcopy(populacao_atual[i].individuo)
+                        ind2 = copy.deepcopy(populacao_atual[j].individuo)
+                        if ind1 != ind2:
+                            pass
+                        else:   # tem gêmeos / substituir 'j'
+                            # print('i: ', i, 'j: ', j)
+                            # print('ind1: ', ind1)
+                            # print('ind2: ', ind2)
+                            escolha = []
+                            while len(escolha) != 6:
+                                sorteio = choice(roda_a_roda)
+                                if sorteio not in escolha:
+                                    escolha.append(sorteio)
+                            for k in range(3):
+                                temp = copy.deepcopy(ind2[escolha[0]])
+                                ind2[escolha[0]] = ind2[escolha[1]]
+                                ind2[escolha[1]] = temp
+                                escolha.pop(0)
+                                escolha.pop(0)
+                            # print('ind2: ', ind2)
+                            populacao_atual[j] = Individuo(copy.deepcopy(ind2))
             individuo_fitness = []
             for i in range(len(populacao_atual)):
-                individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
-            # Vamos isolar os 2 melhores da população, mantendo-os na população nova.
-            print(vez, 'Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
+                individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps, dict_ponteiros))
+            # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
+            windows2 = []
+            # limite_fitness_janelas = (t + 1) * 80 // len(turmas_objetos)
+            '''
+            if t <= 10:  # t começa em ZERO.
+                limite_fitness_janelas = 0
+            else:
+                limite_fitness_janelas = (t - 10) * 11 // ((len(turmas_objetos) - 1) - 10)
+            '''
+            # comeco = 0
+            if t <= primeira_janela:  # t começa em ZERO.
+                limite_fitness_janelas = primeira_janela
+            else:
+                limite_fitness_janelas = (t - primeira_janela) * total_janelas // ((len(turmas_objetos) - 1) - primeira_janela)
+
+            for i in range(len(populacao_atual)):
+                windows2 = copy.deepcopy(windows)
+                pontos_fitness = turmas_creditos[t]
+                for j in range(frame_tamanho):
+                    numero_janelas = 0
+                    lista = populacao_atual[i].individuo
+                    if lista[j] != 0:
+                        tt = lista[j][0]
+                        p = lista[j][2]
+                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
+                            s = j
+                        else:
+                            s = j + 25
+                        ss = slots_objetos[s].slot
+                        if ss not in windows2[p]:
+                            windows2[p].append(ss)
+                            windows2[p].sort()
+                        grade = Grade('1', 'Matutino')
+                        janelas = grade.janelas()
+                        for m in range(len(janelas)):
+                            for n in range(len(windows2)):
+                                if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
+                                        in windows2[n]:
+                                    numero_janelas = numero_janelas + 1
+
+                if numero_janelas <= limite_fitness_janelas:
+                    individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
+                '''
+                pontos_inversos = 0
+                if i == 0:
+                    print('limite_fitness_janelas: ', limite_fitness_janelas)
+                    print('numero_janelas: ', numero_janelas)
+                if numero_janelas <= limite_fitness_janelas:
+                    if limite_fitness_janelas == 0:
+                        if i == 0:
+                            print('1')
+                        individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
+                    else:
+                        pontos_inversos = - pontos_fitness * numero_janelas // limite_fitness_janelas + pontos_fitness
+                        individuo_fitness[i] = individuo_fitness[i] + pontos_inversos
+                        if i == 0:
+                            print('2')
+                            print('pontos_inversos: ', pontos_inversos)
+                '''
+
+            # Vamos isolar os melhores da população, mantendo-os na população nova.
+            print(vez, ' Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
 
             # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
             # manipulação genética.
             # Populações com fitness = máximo - 1 devem ser analisadas separadamente, no sentido de se
             # finalizar a busca por solução.
-            top_quantidade = 8
+            # top_quantidade = 8
             for i in range(len(populacao_atual)):
                 if i >= top_quantidade:
                     if individuo_fitness[i] == max_fit - 1:
                         # print('Achei um max_fit - 1', 'i: ', i)
                         temp_populacao = copy.deepcopy(populacao_atual[i])
-                        temp_populacao.fitness(temp_inequacoes, lista_tdps)    # para descobrir qual o slot com problema
+                        temp_populacao.fitness(temp_inequacoes, lista_tdps, dict_ponteiros)    # para descobrir qual o slot com problema
                         slotcomproblema = temp_populacao.slot_problema
                         # print('slotcomproblema: ', slotcomproblema)
                         # print('populacao_atual[i]: ', temp_populacao.individuo)
@@ -1648,7 +1771,36 @@ if testa == 1:
                                 temp_list[slotcomproblema] = temp_slot
                                 # print('        temp_list: ', temp_list)
                                 nova_populacao = Individuo(temp_list)
-                                if nova_populacao.fitness(temp_inequacoes, lista_tdps) == max_fit:
+
+                                dentro_janelas = False
+                                windows2 = copy.deepcopy(windows)
+                                pontos_fitness = turmas_creditos[t]
+                                for k in range(frame_tamanho):
+                                    numero_janelas = 0
+                                    if temp_list[k] != 0:
+                                        tt = temp_list[k][0]
+                                        p = temp_list[k][2]
+                                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
+                                            s = k
+                                        else:
+                                            s = k + 25
+                                        ss = slots_objetos[s].slot
+                                        if ss not in windows2[p]:
+                                            windows2[p].append(ss)
+                                            windows2[p].sort()
+                                        grade = Grade('1', 'Matutino')
+                                        janelas = grade.janelas()
+                                        for m in range(len(janelas)):
+                                            for n in range(len(windows2)):
+                                                if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and \
+                                                        janelas[m][2] \
+                                                        in windows2[n]:
+                                                    numero_janelas = numero_janelas + 1
+                                if numero_janelas <= limite_fitness_janelas:
+                                    dentro_janelas = True
+
+                                if dentro_janelas and nova_populacao.fitness(temp_inequacoes, lista_tdps, dict_ponteiros) ==\
+                                        max_fit - turmas_creditos[t]:
                                     print('Encontrei solução através de manipulação genética.')
                                     populacao_atual[i] = copy.deepcopy(nova_populacao)
                                     individuo_fitness[i] = max_fit
@@ -1678,8 +1830,11 @@ if testa == 1:
             for i in range(len(populacao_atual)):
                 if individuo_fitness[i] < referencia:
                     referencia = individuo_fitness[i]
+            '''
             for i in range(len(populacao_atual)):
                 individuo_fitness[i] = individuo_fitness[i] - referencia + 1
+            '''
+
             # Aqui começa a seleção
             # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
             total = 0
@@ -1692,7 +1847,7 @@ if testa == 1:
                     inicio = 0
                 else:
                     inicio = roleta_range[i-1][1]
-                fim = inicio + (individuo_fitness[i] * 80 / total)
+                fim = inicio + (individuo_fitness[i] * 10000 / total)
                 roleta_range.append([inicio, fim])
             selecionados = []
             for i in range(len(populacao_atual)):
@@ -1703,7 +1858,7 @@ if testa == 1:
             # Neste ponto temos os selecionados.
             lista_crossover = []
             nao_lista_crossover = []
-            pc = 90
+            # pc = 70
             for i in range(len(selecionados)):
                 valor = choice(range_100)
                 if valor <= pc:
@@ -1745,102 +1900,134 @@ if testa == 1:
                     else:
                         filho.append(lista_individuo[j])
                 filhos.append(filho)
-    
             '''
             filhos = []
             for i in range(int(len(lista_crossover) / 2)):
-                corte1 = choice(range_25)
-                # corte1 = 0
-                corte2 = choice(range_25)
-                # corte2 = 2
-                if corte2 < corte1:
-                    temp = corte2
+                iguais = True
+                while iguais:
+                    corte1 = choice(range_25)
+                    # corte1 = 0
                     corte2 = corte1
-                    corte1 = temp
-                filho1_copia = []
-                pai1_exclusivo = []
-                filho2_copia = []
-                pai2_exclusivo = []
-                if corte1 == corte2:
-                    pass
-                else:
-                    cross0 = lista_crossover[2 * i].individuo
-                    # print('cross0: ', cross0)
-                    cross1 = lista_crossover[2 * i + 1].individuo
-                    # print('cross1: ', cross1)
+                    while corte2 == corte1:
+                        corte2 = choice(range_25)
+                    # corte2 = 2
+                    if corte2 < corte1:
+                        temp = corte2
+                        corte2 = corte1
+                        corte1 = temp
+                    filho1_copia = []
+                    pai1_exclusivo = []
+                    filho2_copia = []
+                    pai2_exclusivo = []
+                    if corte1 == corte2:
+                        pass
+                    else:
+                        cross0 = lista_crossover[2 * i].individuo
+                        # print('cross0: ', cross0)
+                        cross1 = lista_crossover[2 * i + 1].individuo
+                        # print('cross1: ', cross1)
+                        for j in range(frame_tamanho):
+                            if j > corte1 and j <= corte2:
+                                filho1_copia.append(cross0[j])
+                                filho2_copia.append(cross1[j])
+                            else:
+                                pai1_exclusivo.append(cross0[j])
+                                pai2_exclusivo.append(cross1[j])
+                        # print('filho1_copia: ', filho1_copia)
+                        # print('filho2_copia: ', filho2_copia)
+                        # print('pai1_exclusivo: ', pai1_exclusivo)
+                        # print('pai2_exclusivo: ', pai2_exclusivo)
+                    pai1_todo_sequencial = []
+                    pai2_todo_sequencial = []
+                    '''
+                    for j in range(corte2 + 1, corte2 + 1 + frame_tamanho):
+                        pai1_todo_sequencial.append(cross0[j % frame_tamanho])
+                        pai2_todo_sequencial.append(cross1[j % frame_tamanho])
+                    '''
+                    '''
                     for j in range(frame_tamanho):
-                        if j > corte1 and j <= corte2:
-                            filho1_copia.append(cross0[j])
-                            filho2_copia.append(cross1[j])
-                        else:
-                            pai1_exclusivo.append(cross0[j])
-                            pai2_exclusivo.append(cross1[j])
-                    # print('filho1_copia: ', filho1_copia)
-                    # print('filho2_copia: ', filho2_copia)
-                    # print('pai1_exclusivo: ', pai1_exclusivo)
-                    # print('pai2_exclusivo: ', pai2_exclusivo)
-                pai1_todo_sequencial = []
-                pai2_todo_sequencial = []
-                for j in range(corte2 + 1, corte2 + 1 + frame_tamanho):
-                    pai1_todo_sequencial.append(cross0[j % frame_tamanho])
-                    pai2_todo_sequencial.append(cross1[j % frame_tamanho])
-                pai2_resto = []
-                for j in range(len(pai2_todo_sequencial)):
-                    if pai2_todo_sequencial[j] in pai1_exclusivo:
-                        pai2_resto.append(pai2_todo_sequencial[j])
-                        pai1_exclusivo.remove(pai2_todo_sequencial[j])
-                pai1_resto = [] #
-                for j in range(len(pai1_todo_sequencial)):
-                    if pai1_todo_sequencial[j] in pai2_exclusivo:
-                        pai1_resto.append(pai1_todo_sequencial[j])
-                        pai2_exclusivo.remove(pai1_todo_sequencial[j])
-                # print('pai1_todo_sequencial: ', pai1_todo_sequencial)
-                # print('pai2_todo_sequencial: ', pai2_todo_sequencial)
-                # print('pai2_resto: ', pai2_resto)
-                # print('len(pai2_resto): ', len(pai2_resto))
-                filho1_total = []
-                for j in range(frame_tamanho):
-                    if corte1 != corte2:
-                        if j > corte1 and j <= corte2:
-                            filho1_total.append(filho1_copia[0])
-                            filho1_copia.pop(0)
-                        else:
-                            filho1_total.append(pai2_resto[0])
-                            pai2_resto.pop(0)
+                        pai1_todo_sequencial.append(cross0[j])
+                        pai2_todo_sequencial.append(cross1[j])
+                    '''
+
+                    if cross0 == cross1:
+                        for j in range(corte2 + 1, corte2 + 1 + frame_tamanho):
+                            pai1_todo_sequencial.append(cross0[j % frame_tamanho])
+                            pai2_todo_sequencial.append(cross1[j % frame_tamanho])
                     else:
-                        filho1_total.append(cross0[j])
-                filho2_total = []
-                for j in range(frame_tamanho):
-                    if corte1 != corte2:
-                        if j > corte1 and j <= corte2:
-                            filho2_total.append(filho2_copia[0])
-                            filho2_copia.pop(0)
+                        for j in range(frame_tamanho):
+                            pai1_todo_sequencial.append(cross0[j])
+                            pai2_todo_sequencial.append(cross1[j])
+
+                    pai2_resto = []
+                    for j in range(len(pai2_todo_sequencial)):
+                        if pai2_todo_sequencial[j] in pai1_exclusivo:
+                            pai2_resto.append(pai2_todo_sequencial[j])
+                            pai1_exclusivo.remove(pai2_todo_sequencial[j])
+                    pai1_resto = [] #
+                    for j in range(len(pai1_todo_sequencial)):
+                        if pai1_todo_sequencial[j] in pai2_exclusivo:
+                            pai1_resto.append(pai1_todo_sequencial[j])
+                            pai2_exclusivo.remove(pai1_todo_sequencial[j])
+                    # print('pai1_todo_sequencial: ', pai1_todo_sequencial)
+                    # print('pai2_todo_sequencial: ', pai2_todo_sequencial)
+                    # print('pai2_resto: ', pai2_resto)
+                    # print('len(pai2_resto): ', len(pai2_resto))
+                    filho1_total = []
+                    for j in range(frame_tamanho):
+                        if corte1 != corte2:
+                            if j > corte1 and j <= corte2:
+                                filho1_total.append(filho1_copia[0])
+                                filho1_copia.pop(0)
+                            else:
+                                filho1_total.append(pai2_resto[0])
+                                pai2_resto.pop(0)
                         else:
-                            filho2_total.append(pai1_resto[0])
-                            pai1_resto.pop(0)
-                    else:
-                        filho2_total.append(cross0[j])
-                # print('filho1_total: ', filho1_total)
+                            filho1_total.append(cross0[j])
+                    filho2_total = []
+                    for j in range(frame_tamanho):
+                        if corte1 != corte2:
+                            if j > corte1 and j <= corte2:
+                                filho2_total.append(filho2_copia[0])
+                                filho2_copia.pop(0)
+                            else:
+                                filho2_total.append(pai1_resto[0])
+                                pai1_resto.pop(0)
+                        else:
+                            filho2_total.append(cross0[j])
+                    # print('filho1_total: ', filho1_total)
+                    if filho1_total != cross0 and filho1_total != cross1 and\
+                            filho2_total != cross0 and filho2_total != cross1:
+                        iguais = False
                 filhos.append(filho1_total)
                 filhos.append(filho2_total)
-
-
-
+                if filho1_total == cross0:
+                    print('Filho 0 igual cross0. ', i, corte1, corte2)
+                if filho1_total == cross1:
+                    print('Filho 0 igual cross1. ', i, corte1, corte2)
+                if filho2_total == cross0:
+                    print('Filho 1 igual cross0. ', i, corte1, corte2)
+                if filho2_total == cross1:
+                    print('Filho 1 igual cross1. ', i, corte1, corte2)
                 # print(i, 'len(filho[i]: ', len(filho1_total))
                 # print(i, 'len(filho[i]: ', len(filho1_total))
-
             # Realizar mutação (order-based mutation).
             # Varrer posições e aplicar Bernoulli (pm)
             # Se posição for sofrer mutação, sortear outra posição para realizar a troca
+
             for i in range(len(filhos)):
                 for j in range(frame_tamanho):
-                    pm = 15
+                    pm = 1
                     valor = choice(range_100)
                     if valor <= pm:
+                        # print('Ocorreu uma mutação.   ----------------------------------   -----------------------', i)
                         temp = filhos[i][j]
-                        dest = choice(range_25)
+                        dest = j
+                        while dest == j:
+                            dest = choice(range_25)
                         filhos[i][j] = filhos[i][dest]
                         filhos[i][dest] = temp
+
             # Agora junta top, filhos e não escolhidos
             populacao_atual = []
             for i in range(top_quantidade):
@@ -1853,10 +2040,55 @@ if testa == 1:
             while len(populacao_atual) > n_individuos:
                 populacao_atual.pop(0)
             populacao_atual.reverse()
+
+            # Verifica se resultados até aqui são consistentes:
+
+            for i in range(n_individuos):
+                ref_i = []
+                ref_i = copy.deepcopy(populacao_atual[i].individuo)
+                ref_j = []
+                ref_j = copy.deepcopy(temp_entradas)
+                while len(ref_i) != 0:
+                    if ref_i[0] in ref_j:
+                        ref_j.remove(ref_i[0])
+                        ref_i.pop(0)
+                    else:
+                        print('Não são iguais.')
+                        sys.exit(0)
+            # print('Tudo igual.')
+
             # Agora é testar se algum indivíduo é resultado válido.
             finalizado = False
             for i in range(len(populacao_atual)):
-                tem_solucao = populacao_atual[i].testa_solucao(temp_inequacoes, lista_tdps)
+                dentro_janelas = False
+                windows2 = copy.deepcopy(windows)
+                pontos_fitness = turmas_creditos[t]
+                for j in range(frame_tamanho):
+                    numero_janelas = 0
+                    lista = populacao_atual[i].individuo
+                    if lista[j] != 0:
+                        tt = lista[j][0]
+                        p = lista[j][2]
+                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
+                            s = j
+                        else:
+                            s = j + 25
+                        ss = slots_objetos[s].slot
+                        if ss not in windows2[p]:
+                            windows2[p].append(ss)
+                            windows2[p].sort()
+                        grade = Grade('1', 'Matutino')
+                        janelas = grade.janelas()
+                        for m in range(len(janelas)):
+                            for n in range(len(windows2)):
+                                if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
+                                        in windows2[n]:
+                                    numero_janelas = numero_janelas + 1
+                if numero_janelas <= limite_fitness_janelas:
+                    dentro_janelas = True
+                tem_solucao = False
+                if dentro_janelas:
+                    tem_solucao = populacao_atual[i].testa_solucao(temp_inequacoes, lista_tdps, dict_ponteiros)
                 if tem_solucao:
                     finalizado = True
                     solucao = populacao_atual[i].solucao_frame()
@@ -1864,12 +2096,31 @@ if testa == 1:
             if finalizado:
                 for i in range(len(solucao)):
                     lista_sorteados.append(solucao[i])
+                    pp = estrela_chaves[solucao[i]][2]
+                    ss = slots_objetos[estrela_chaves[solucao[i]][3]].slot
+                    if ss not in windows[pp]:
+                        windows[pp].append(ss)
                     for j in range(len(inequacoes)):
                         if inequacoes[j][1] > 0 and solucao[i] in inequacoes[j][0]:
                             inequacoes[j][1] = inequacoes[j][1] - 1
                 finalizado = True
-                print('Vezes: -----------------------------', vez)
+                print('Gerações nesta turma: -----------------------------', vez)
                 iteracoes = iteracoes + vez
+
+                parcial_janelas = 0
+                grade_rodada = Grade('1', 'Matutino')
+                janelas1 = grade_rodada.janelas()
+                for m in range(len(janelas1)):
+                    for n in range(len(windows)):
+                        if janelas1[m][0] in windows[n] and janelas1[m][1] not in windows[n] and janelas1[m][2] \
+                                in windows[n]:
+                            parcial_janelas = parcial_janelas + 1
+                            # print("janelas_referência: ", janelas1[m], "professor?: ", n, "janelas_realizadas: ", windows[n])
+                print('Janelas totais: ', parcial_janelas)
+                tempo_2 = time.time()
+                intervalo = (tempo_2 - tempo_1) / 60
+                print(iteracoes, ' gerações totais.')
+                print(intervalo, ' minutos até aqui.')
             else:
                 vez = vez + 1
                 # print('Turma: ', t, 'vez: ', vez)
@@ -1877,8 +2128,21 @@ if testa == 1:
                 temp_entradas = copy.deepcopy(turmas_backup[t])
                 # temp_inequacoes = copy.deepcopy(inequacoes)   $$
                 temp_inequacoes = copy.deepcopy(temp_inequacoes100)
-                finalizado = False
 
+                dict = {}  # dict_temp_inequacoes
+                for i in range(len(temp_inequacoes)):
+                    for j in range(len(temp_inequacoes[i][0])):
+                        if temp_inequacoes[i][0][j] not in dict:
+                            dict[temp_inequacoes[i][0][j]] = [i]
+                        else:
+                            dado = dict[temp_inequacoes[i][0][j]]
+                            dado.append(i)
+                            dict[temp_inequacoes[i][0][j]] = dado
+
+                finalizado = False
+    for i in range(len(windows)):
+        windows[i].sort()
+        # print('professor: ', i, 'slots: ', windows[i])
     xx = []
     for i in range(len(x)):
         if i in lista_sorteados:
@@ -1905,14 +2169,10 @@ if testa == 1:
     print('Total de xx: ', cont)
     tempo_2 = time.time()
     intervalo = (tempo_2 - tempo_1) / 60
-    print(iteracoes, ' iterações.')
+    print(iteracoes, ' gerações finais.')
     print(intervalo, ' minutos.')
 
-# --------------------------------------------------------------------------------------------------------
-# Testes de heurística:
-# #1: Estratégia = Encaixando peças
-# Aqui neste bloco será aplicado um algoritmo genético, com a restrição de janelas.
-if testa == 2:
+if testa == 3:
     # Hiperparâmetros:
     n_individuos = 50
     top_quantidade = 8
@@ -1957,6 +2217,22 @@ if testa == 2:
     range_10000 = []
     for i in range(0, 10001):
         range_10000.append(i)
+
+    for i in range(len(slots_objetos)):
+        print(i, slots_objetos[i].slot)
+    grade_padrao = Grade('1', 'integral')
+    lista_numero_slots = grade_padrao.grade_elementos()
+    lista_indice_slots = []
+    for i in range(len(lista_numero_slots)):
+        for j in range(len(slots_objetos)):
+            if str(slots_objetos[j].slot) == lista_numero_slots[i]:
+                if j not in lista_indice_slots:
+                    lista_indice_slots.append(j)
+    frame_tamanho = len(lista_indice_slots)
+    print('Lista_numero_slots: ', lista_numero_slots)
+    print('Lista_indice_slots: ', lista_indice_slots)
+    print('Frame_tamanho: ', frame_tamanho)
+    sys.exit(0)
 
     for i in range(len(turmas_objetos)):
         # N_individuos representa o número de indivíduos deste algoritmo genético
