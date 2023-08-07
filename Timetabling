@@ -2218,7 +2218,7 @@ if testa == 3:
     for i in range(0, 10001):
         range_10000.append(i)
 
-    for i in range(len(slots_objetos)):
+    for i in range(len(slots_objetos)): # &&& novo
         print(i, slots_objetos[i].slot)
     grade_padrao = Grade('1', 'integral')
     lista_numero_slots = grade_padrao.grade_elementos()
@@ -2232,7 +2232,6 @@ if testa == 3:
     print('Lista_numero_slots: ', lista_numero_slots)
     print('Lista_indice_slots: ', lista_indice_slots)
     print('Frame_tamanho: ', frame_tamanho)
-    sys.exit(0)
 
     for i in range(len(turmas_objetos)):
         # N_individuos representa o número de indivíduos deste algoritmo genético
