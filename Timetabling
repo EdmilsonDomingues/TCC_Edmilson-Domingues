@@ -2218,21 +2218,6 @@ if testa == 3:
     for i in range(0, 10001):
         range_10000.append(i)
 
-    for i in range(len(slots_objetos)): # &&& novo
-        print(i, slots_objetos[i].slot)
-    grade_padrao = Grade('1', 'integral')
-    lista_numero_slots = grade_padrao.grade_elementos()
-    lista_indice_slots = []
-    for i in range(len(lista_numero_slots)):
-        for j in range(len(slots_objetos)):
-            if str(slots_objetos[j].slot) == lista_numero_slots[i]:
-                if j not in lista_indice_slots:
-                    lista_indice_slots.append(j)
-    frame_tamanho = len(lista_indice_slots)
-    print('Lista_numero_slots: ', lista_numero_slots)
-    print('Lista_indice_slots: ', lista_indice_slots)
-    print('Frame_tamanho: ', frame_tamanho)
-
     for i in range(len(turmas_objetos)):
         # N_individuos representa o número de indivíduos deste algoritmo genético
         frame_turno = ''
@@ -2266,6 +2251,8 @@ if testa == 3:
 
         # melhorando performance    $$
         temp_index = []
+
+        '''
         for i in range(len(turmas_backup[t])):
             if turmas_backup[t][i] != 0:
                 tt = turmas_backup[t][i][0]
@@ -2281,6 +2268,43 @@ if testa == 3:
                         valor = lista_tdps[tt][dd][pp][zz]
                         if valor not in temp_index:
                             temp_index.append(valor)
+        '''
+
+        for i in range(len(turmas_backup[t])):   # &&& novo
+            if turmas_backup[t][i] != 0:
+                tt = turmas_backup[t][i][0]
+                if turmas_objetos[tt].turno.upper() == 'MATUTINO':
+                    grade_padrao = Grade('1', 'MATUTINO')
+                    break
+                else:
+                    if turmas_objetos[tt].turno.upper() == 'VESPERTINO':
+                        grade_padrao = Grade('1', 'VESPERTINO')
+                        break
+                    else:
+                        if turmas_objetos[tt].turno.upper() == 'NOTURNO':
+                            grade_padrao = Grade('1', 'NOTURNO')
+                            break
+                        else:
+                            grade_padrao = Grade('1', 'INTEGRAL')
+                            break
+        lista_numero_slots = grade_padrao.grade_elementos()
+        lista_indice_slots = []
+        for i in range(len(lista_numero_slots)):
+            for j in range(len(slots_objetos)):
+                if str(slots_objetos[j].slot) == lista_numero_slots[i]:
+                    if j not in lista_indice_slots:
+                        lista_indice_slots.append(j)
+        frame_tamanho = len(lista_indice_slots)
+
+        for i in range(len(turmas_backup[t])):
+            if turmas_backup[t][i] != 0:
+                tt = turmas_backup[t][i][0]
+                dd = turmas_backup[t][i][1]
+                pp = turmas_backup[t][i][2]
+                for ss in lista_indice_slots:
+                    valor = lista_tdps[tt][dd][pp][ss]
+                    if valor not in temp_index:
+                        temp_index.append(valor)
         temp_inequacoes100 = []
         for i in range(len(temp_index)):
             for j in range(len(inequacoes)):
@@ -2374,11 +2398,14 @@ if testa == 3:
                     if lista[j] != 0:
                         tt = lista[j][0]
                         p = lista[j][2]
+                        '''# &&&
                         if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
                             s = j
                         else:
                             s = j + 25
                         ss = slots_objetos[s].slot
+                        '''
+                        ss = slots_objetos[lista_indice_slots[j]].slot  # &&&
                         if ss not in windows2[p]:
                             windows2[p].append(ss)
                             windows2[p].sort()
