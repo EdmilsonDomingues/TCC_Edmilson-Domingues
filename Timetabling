@@ -1454,7 +1454,6 @@ class Individuo:
         for i in range(len(inequacoes)):
             dict_inequacoes[i] = inequacoes[i][1]
         for f in range(frame_tamanho):
-            print("f: ", f)
             if self.individuo[f] != 0:
                 t = self.individuo[f][0]
                 d = self.individuo[f][1]
@@ -2234,6 +2233,13 @@ if testa == 3:
         frame_turno = ''
         frame_tuplas_tdp = []
         cred = 0
+
+        turno_desta_turma = turmas_objetos[i].turno.upper()
+        if turno_desta_turma == "INTEGRAL":
+            frame_tamanho = 50
+        else:
+            frame_tamanho = 25
+
         for j in range(len(estrela_chaves)):
             tu = estrela_chaves[j][0]
             if tu == i:
@@ -2306,6 +2312,7 @@ if testa == 3:
                     if j not in lista_indice_slots:
                         lista_indice_slots.append(j)
         frame_tamanho = len(lista_indice_slots)
+
         range_frame_tamanho = []
         for i in range(frame_tamanho):
             range_frame_tamanho.append(i)
