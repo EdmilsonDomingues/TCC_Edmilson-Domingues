@@ -74,7 +74,7 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="52" />
+          <entry key="project.closed" value="53" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -88,7 +88,7 @@
           <entry key="project.open.time.26" value="3" />
           <entry key="project.open.time.27" value="2" />
           <entry key="project.open.time.29" value="1" />
-          <entry key="project.open.time.31" value="1" />
+          <entry key="project.open.time.31" value="2" />
           <entry key="project.open.time.32" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.36" value="1" />
@@ -98,17 +98,17 @@
           <entry key="project.open.time.7" value="3" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="54" />
+          <entry key="project.opened" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="17391" />
+          <entry key="Timetabling" value="17395" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="17391" />
+          <entry key="Python" value="17395" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -134,11 +134,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="2907" column="40" lean-forward="true" selection-start-line="2907" selection-start-column="40" selection-end-line="2907" selection-end-column="40" />
+            <state relative-caret-position="54">
+              <caret line="2185" column="23" selection-start-line="2185" selection-start-column="23" selection-end-line="2185" selection-end-column="23" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1691703069918" expanded="true" signature="13734:13743" ph="..." />
+                <marker date="1691783304809" expanded="true" signature="13734:13743" ph="..." />
               </folding>
             </state>
           </provider>
@@ -155,7 +155,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>1406</find>
       <find>135</find>
       <find>max_fit:</find>
       <find>janela *</find>
@@ -176,7 +175,6 @@
       <find>158933</find>
       <find>tota</find>
       <find>totai</find>
-      <find>testa == 3</find>
       <find>finais</find>
       <find>1317</find>
       <find>2283</find>
@@ -185,6 +183,8 @@
       <find>5797</find>
       <find>1457</find>
       <find>1805</find>
+      <find>hilda</find>
+      <find>testa == 3</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -200,8 +200,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="430" />
-    <option name="y" value="-12" />
+    <option name="x" value="79" />
+    <option name="y" value="-17" />
     <option name="width" value="699" />
     <option name="height" value="735" />
   </component>
@@ -308,20 +308,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.5360656" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.60163933" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3295082" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.109836064" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.5" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50074404" side_tool="true" weight="0.47704917" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3295082" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -382,11 +382,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="2907" column="40" lean-forward="true" selection-start-line="2907" selection-start-column="40" selection-end-line="2907" selection-end-column="40" />
+        <state relative-caret-position="54">
+          <caret line="2185" column="23" selection-start-line="2185" selection-start-column="23" selection-end-line="2185" selection-end-column="23" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1691703069918" expanded="true" signature="13734:13743" ph="..." />
+            <marker date="1691783304809" expanded="true" signature="13734:13743" ph="..." />
           </folding>
         </state>
       </provider>

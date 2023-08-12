@@ -2183,7 +2183,7 @@ if testa == 2:
 if testa == 3:
     # Hiperparâmetros:
     n_individuos = 50
-    top_quantidade = 8
+    top_quantidade = 20
     pc = 70
     pm = 1
     troca_n = 4
