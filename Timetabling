@@ -1536,7 +1536,7 @@ if testa == 2:
     # Hiperparâmetros:
     n_individuos = 50
     top_quantidade = 10
-    pc = 85
+    pc = 100
     pm = 1
     troca_n = 4
     max_janelas_professor = 3
@@ -1818,11 +1818,13 @@ if testa == 2:
 
             # Vamos isolar os melhores da população, mantendo-os na população nova.
             print(vez, ' Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
+            '''
             if kb.is_pressed('e'):
                 for i in range(len(populacao_atual)):
                     print("Houve digitação.")
                     print(populacao_atual[i].individuo)
                 sys.exit(0)
+            '''
             # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
             # manipulação genética.
             # Populações com fitness = máximo - 1 devem ser analisadas separadamente, no sentido de se
