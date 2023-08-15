@@ -1535,11 +1535,11 @@ if testa == 1:
 if testa == 2:
     # Hiperparâmetros:
     n_individuos = 50
-    top_quantidade = 6
-    pc = 70
+    top_quantidade = 10
+    pc = 85
     pm = 1
     troca_n = 4
-    max_janelas_professor = 2
+    max_janelas_professor = 3
     primeira_janela = 0
     total_janelas = max_janelas_professor * len(professores_objetos)
     print("Total_janelas: ", total_janelas)
@@ -1820,6 +1820,7 @@ if testa == 2:
             print(vez, ' Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
             if kb.is_pressed('e'):
                 for i in range(len(populacao_atual)):
+                    print("Houve digitação.")
                     print(populacao_atual[i].individuo)
                 sys.exit(0)
             # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
@@ -2123,6 +2124,8 @@ if testa == 2:
             while len(populacao_atual) > n_individuos:
                 populacao_atual.pop(0)
             populacao_atual.reverse()
+            if len(populacao_atual) < n_individuos:
+                print("populacao_atual tem menos que n_individuos.")
 
             # Verifica se resultados até aqui são consistentes:
 

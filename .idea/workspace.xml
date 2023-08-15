@@ -70,13 +70,13 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="56" />
+          <entry key="project.closed" value="57" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="6" />
-          <entry key="project.open.time.20" value="5" />
+          <entry key="project.open.time.20" value="6" />
           <entry key="project.open.time.21" value="4" />
           <entry key="project.open.time.22" value="2" />
           <entry key="project.open.time.23" value="6" />
@@ -95,17 +95,17 @@
           <entry key="project.open.time.7" value="3" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="58" />
+          <entry key="project.opened" value="59" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="17844" />
+          <entry key="Timetabling" value="17959" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="17844" />
+          <entry key="Python" value="17959" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -131,11 +131,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="2172" column="46" selection-start-line="2172" selection-start-column="46" selection-end-line="2172" selection-end-column="46" />
+            <state relative-caret-position="119">
+              <caret line="1537" column="23" selection-start-line="1537" selection-start-column="23" selection-end-line="1537" selection-end-column="23" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1691964005339" expanded="true" signature="13756:13765" ph="..." />
+                <marker date="1692059128597" expanded="true" signature="13756:13765" ph="..." />
               </folding>
             </state>
           </provider>
@@ -152,8 +152,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>VESPERTINO</find>
-      <find>Individuo</find>
       <find>== &quot;</find>
       <find>== &quot;IN</find>
       <find>turma:</find>
@@ -182,6 +180,8 @@
       <find>solucao(</find>
       <find>fitness(</find>
       <find>.fitness(</find>
+      <find>hiperparâmetros</find>
+      <find>.exit(0)</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -312,7 +312,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.4622951" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.44918033" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -379,11 +379,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="2172" column="46" selection-start-line="2172" selection-start-column="46" selection-end-line="2172" selection-end-column="46" />
+        <state relative-caret-position="119">
+          <caret line="1537" column="23" selection-start-line="1537" selection-start-column="23" selection-end-line="1537" selection-end-column="23" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1691964005339" expanded="true" signature="13756:13765" ph="..." />
+            <marker date="1692059128597" expanded="true" signature="13756:13765" ph="..." />
           </folding>
         </state>
       </provider>
