@@ -1550,7 +1550,7 @@ if testa == 2:
     pc = 100
     pm = 1
     troca_n = 4
-    max_janelas_professor = 3
+    max_janelas_professor = 1
     primeira_janela = 0
     total_janelas = max_janelas_professor * len(professores_objetos)
     print("Total_janelas: ", total_janelas)
@@ -1760,10 +1760,14 @@ if testa == 2:
                                 escolha.pop(0)
                             # print('ind2: ', ind2)
                             populacao_atual[j] = Individuo(copy.deepcopy(ind2))
+            individuo_janelas = []
+            for i in range(len(populacao_atual)):
+                individuo_janelas.append(0)
             individuo_fitness = []
             for i in range(len(populacao_atual)):
                 individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps, dict_ponteiros,
                                                                     frame_tamanho, lista_indice_slots))
+
             # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
             windows2 = []
             # limite_fitness_janelas = (t + 1) * 80 // len(turmas_objetos)
@@ -1809,6 +1813,7 @@ if testa == 2:
                                     numero_janelas = numero_janelas + 1
                         '''
                         numero_janelas = grade.conta_janelas(windows2)
+                        individuo_janelas[i] = numero_janelas
 
                 if numero_janelas <= limite_fitness_janelas:
                     individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
@@ -1831,7 +1836,13 @@ if testa == 2:
                 '''
 
             # Vamos isolar os melhores da população, mantendo-os na população nova.
-            print(vez, ' Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
+            # print(vez, ' Turma: ', t, 'indivíduo_fitness: ', individuo_fitness)
+            print(vez, ' Turma:', t, 'indivíduo_fitness|janelas: ', end="")
+            for i in range(len(populacao_atual)):
+                if i == top_quantidade:
+                    print("  |", end="")
+                print(str(individuo_fitness[i]) + "_" + str(individuo_janelas[i]) + "|", end="")
+            print()
             '''
             if kb.is_pressed('e'):
                 for i in range(len(populacao_atual)):
@@ -1906,6 +1917,8 @@ if testa == 2:
                                     individuo_fitness[i] = max_fit
                                     break
                         # print('Turma:_', t, 'indivíduo_fitness: ', individuo_fitness)
+            pass
+            '''
             temp_top = []
             grupo_melhores_fitnesses = []
             top = []
@@ -1924,6 +1937,36 @@ if testa == 2:
             for i in range(top_quantidade):
                 top.append(temp_top[0])
                 temp_top.pop(0)
+            '''
+
+            temp_top = []
+            grupo_melhores_fitnesses = []
+            top = []
+            for i in range(len(individuo_fitness)):
+                if individuo_fitness[i] not in grupo_melhores_fitnesses:
+                    grupo_melhores_fitnesses.append(individuo_fitness[i])
+            grupo_melhores_fitnesses.sort()
+            grupo_melhores_fitnesses.reverse()
+            # print('grupo_melhores_fitnesses: ', grupo_melhores_fitnesses)
+            for i in range(len(grupo_melhores_fitnesses)):
+                menores_janelas = []
+                for j in range(len(individuo_fitness)):
+                    if grupo_melhores_fitnesses[i] == individuo_fitness[j]:
+                        temp_top.append([populacao_atual[j], individuo_janelas[j]])
+                        menores_janelas.append(individuo_janelas[j])
+                menores_janelas.sort()
+                for j in range(len(menores_janelas)):
+                    for k in range(len(temp_top)):
+                        if menores_janelas[j] == temp_top[k][1]:
+                            top.append(temp_top[k][0])
+                            del temp_top[k]
+                            break
+            top.reverse()
+            while len(top) > top_quantidade:
+                top.pop(0)
+            top.reverse()
+
+
             # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
             #       como referência o menor valor [normalização].
             referencia = 500
@@ -2197,9 +2240,6 @@ if testa == 2:
                         '''
                         numero_janelas = grade.conta_janelas(windows2)
 
-                if i < 6 and individuo_fitness[i] == 125:
-                    indiv = populacao_atual[i].individuo
-                    print("ordem ", i, "com limite de ", limite_fitness_janelas, " janelas: ", numero_janelas, indiv[0], indiv[1], indiv[2], indiv[3], indiv[4])
                 if numero_janelas <= limite_fitness_janelas:
                     dentro_janelas = True
                 tem_solucao = False
@@ -2295,7 +2335,7 @@ if testa == 2:
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 # Para o AG.
-# sys.exit(0)
+sys.exit(0)
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
