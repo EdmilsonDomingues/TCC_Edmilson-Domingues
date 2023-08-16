@@ -364,6 +364,17 @@ class Grade:
                     [14, 4], [15, 4], [16, 4]]
         return lista_lc[slot][0], lista_lc[slot][1]
 
+    def conta_janelas(self, windows):
+        janelas = self.janelas()
+        numero_janelas = 0
+        for m in range(len(janelas)):
+            for n in range(len(windows)):
+                if janelas[m][0] in windows[n] and janelas[m][1] not in windows[n] and janelas[m][2] \
+                        in windows[n]:
+                    numero_janelas = numero_janelas + 1
+        return numero_janelas
+
+
 class Slot:
     def __init__(self, slot):
         self._slot = slot
@@ -1789,12 +1800,15 @@ if testa == 2:
                             windows2[p].append(ss)
                             windows2[p].sort()
                         grade = Grade('1', 'Matutino')
+                        '''
                         janelas = grade.janelas()
                         for m in range(len(janelas)):
                             for n in range(len(windows2)):
                                 if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
                                         in windows2[n]:
                                     numero_janelas = numero_janelas + 1
+                        '''
+                        numero_janelas = grade.conta_janelas(windows2)
 
                 if numero_janelas <= limite_fitness_janelas:
                     individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
@@ -1870,6 +1884,7 @@ if testa == 2:
                                             windows2[p].append(ss)
                                             windows2[p].sort()
                                         grade = Grade('1', 'Matutino')
+                                        '''
                                         janelas = grade.janelas()
                                         for m in range(len(janelas)):
                                             for n in range(len(windows2)):
@@ -1877,6 +1892,9 @@ if testa == 2:
                                                         janelas[m][2] \
                                                         in windows2[n]:
                                                     numero_janelas = numero_janelas + 1
+                                        '''
+                                        numero_janelas = grade.conta_janelas(windows2)
+
                                 if numero_janelas <= limite_fitness_janelas:
                                     dentro_janelas = True
 
@@ -2169,12 +2187,16 @@ if testa == 2:
                             windows2[p].append(ss)
                             windows2[p].sort()
                         grade = Grade('1', 'Matutino')
+                        '''
                         janelas = grade.janelas()
                         for m in range(len(janelas)):
                             for n in range(len(windows2)):
                                 if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
                                         in windows2[n]:
                                     numero_janelas = numero_janelas + 1
+                        '''
+                        numero_janelas = grade.conta_janelas(windows2)
+
                 if i < 6 and individuo_fitness[i] == 125:
                     indiv = populacao_atual[i].individuo
                     print("ordem ", i, "com limite de ", limite_fitness_janelas, " janelas: ", numero_janelas, indiv[0], indiv[1], indiv[2], indiv[3], indiv[4])
@@ -2204,6 +2226,7 @@ if testa == 2:
 
                 parcial_janelas = 0
                 grade_rodada = Grade('1', 'Matutino')
+                '''
                 janelas1 = grade_rodada.janelas()
                 for m in range(len(janelas1)):
                     for n in range(len(windows)):
@@ -2211,6 +2234,8 @@ if testa == 2:
                                 in windows[n]:
                             parcial_janelas = parcial_janelas + 1
                             # print("janelas_referência: ", janelas1[m], "professor?: ", n, "janelas_realizadas: ", windows[n])
+                '''
+                parcial_janelas = grade_rodada.conta_janelas(windows)
                 print('Janelas totais: ', parcial_janelas)
                 tempo_2 = time.time()
                 intervalo = (tempo_2 - tempo_1) / 60
@@ -2270,7 +2295,7 @@ if testa == 2:
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 # Para o AG.
-sys.exit(0)
+# sys.exit(0)
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
