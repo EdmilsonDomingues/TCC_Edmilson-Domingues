@@ -1550,7 +1550,7 @@ if testa == 2:
     pc = 100
     pm = 1
     troca_n = 4
-    max_janelas_professor = 1
+    max_janelas_professor = 3
     primeira_janela = 0
     total_janelas = max_janelas_professor * len(professores_objetos)
     print("Total_janelas: ", total_janelas)
@@ -1912,9 +1912,11 @@ if testa == 2:
                                 if dentro_janelas and nova_populacao.fitness(temp_inequacoes, lista_tdps, dict_ponteiros,
                                 frame_tamanho, lista_indice_slots) ==\
                                         max_fit - turmas_creditos[t]:
-                                    print('Encontrei solução através de manipulação genética.')
+                                    print('Encontrei solução através de manipulação genética.', 'i: ', i,
+                                          "número de janelas: ", numero_janelas )
                                     populacao_atual[i] = copy.deepcopy(nova_populacao)
                                     individuo_fitness[i] = max_fit
+                                    individuo_janelas[i] = numero_janelas
                                     break
                         # print('Turma:_', t, 'indivíduo_fitness: ', individuo_fitness)
             pass
@@ -1965,7 +1967,6 @@ if testa == 2:
             while len(top) > top_quantidade:
                 top.pop(0)
             top.reverse()
-
 
             # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
             #       como referência o menor valor [normalização].
@@ -2261,6 +2262,12 @@ if testa == 2:
                         if inequacoes[j][1] > 0 and solucao[i] in inequacoes[j][0]:
                             inequacoes[j][1] = inequacoes[j][1] - 1
                 finalizado = True
+                print(vez, '*Turma:', t, 'indivíduo_fitness|janelas: ', end="")
+                for i in range(len(populacao_atual)):
+                    if i == top_quantidade:
+                        print("  |", end="")
+                    print(str(individuo_fitness[i]) + "_" + str(individuo_janelas[i]) + "|", end="")
+                print()
                 print('Gerações nesta turma: -----------------------------', vez)
                 iteracoes = iteracoes + vez
 
