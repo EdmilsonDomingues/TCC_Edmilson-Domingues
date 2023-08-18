@@ -369,8 +369,7 @@ class Grade:
         numero_janelas = 0
         for m in range(len(janelas)):
             for n in range(len(windows)):
-                if janelas[m][0] in windows[n] and janelas[m][1] not in windows[n] and janelas[m][2] \
-                        in windows[n]:
+                if janelas[m][0] in windows[n] and janelas[m][1] not in windows[n] and janelas[m][2] in windows[n]:
                     numero_janelas = numero_janelas + 1
         return numero_janelas
 
@@ -1550,7 +1549,7 @@ if testa == 2:
     pc = 100
     pm = 1
     troca_n = 4
-    max_janelas_professor = 3
+    max_janelas_professor = 4
     primeira_janela = 0
     total_janelas = max_janelas_professor * len(professores_objetos)
     print("Total_janelas: ", total_janelas)
@@ -1812,10 +1811,10 @@ if testa == 2:
                                         in windows2[n]:
                                     numero_janelas = numero_janelas + 1
                         '''
-                        numero_janelas = grade.conta_janelas(windows2)
-                        individuo_janelas[i] = numero_janelas
+                        numero_janelas2 = grade.conta_janelas(windows2)
+                        individuo_janelas[i] = numero_janelas2
 
-                if numero_janelas <= limite_fitness_janelas:
+                if numero_janelas2 <= limite_fitness_janelas:
                     individuo_fitness[i] = individuo_fitness[i] + pontos_fitness
                 '''
                 pontos_inversos = 0
@@ -1903,20 +1902,23 @@ if testa == 2:
                                                         janelas[m][2] \
                                                         in windows2[n]:
                                                     numero_janelas = numero_janelas + 1
+                                        # print("Teste0 - número_janelas assim que recebe resultado: ", numero_janelas)
                                         '''
-                                        numero_janelas = grade.conta_janelas(windows2)
+                                        numero_janelas2 = grade.conta_janelas(windows2)
+                                        # print("Teste1 - número_janelas assim que recebe resultado: ", nj)
 
-                                if numero_janelas <= limite_fitness_janelas:
+                                dentro_janelas = False
+                                if numero_janelas2 <= limite_fitness_janelas:
                                     dentro_janelas = True
+                                    # print("Teste2 - número_janelas assim que recebe resultado: ", nj)
 
                                 if dentro_janelas and nova_populacao.fitness(temp_inequacoes, lista_tdps, dict_ponteiros,
-                                frame_tamanho, lista_indice_slots) ==\
-                                        max_fit - turmas_creditos[t]:
+                                frame_tamanho, lista_indice_slots) == max_fit - turmas_creditos[t]:
                                     print('Encontrei solução através de manipulação genética.', 'i: ', i,
-                                          "número de janelas: ", numero_janelas )
+                                          "número de janelas: ", numero_janelas2)
                                     populacao_atual[i] = copy.deepcopy(nova_populacao)
                                     individuo_fitness[i] = max_fit
-                                    individuo_janelas[i] = numero_janelas
+                                    individuo_janelas[i] = numero_janelas2
                                     break
                         # print('Turma:_', t, 'indivíduo_fitness: ', individuo_fitness)
             pass
@@ -2239,9 +2241,9 @@ if testa == 2:
                                         in windows2[n]:
                                     numero_janelas = numero_janelas + 1
                         '''
-                        numero_janelas = grade.conta_janelas(windows2)
+                        numero_janelas2 = grade.conta_janelas(windows2)
 
-                if numero_janelas <= limite_fitness_janelas:
+                if numero_janelas2 <= limite_fitness_janelas:
                     dentro_janelas = True
                 tem_solucao = False
                 if dentro_janelas:
@@ -2451,7 +2453,7 @@ for i in range(len(xx)):
         cont = cont + 1
 print('Total de xx: ', cont)
 print(lista_sorteados)
-sys.exit(0)
+# sys.exit(0)
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # #2: Estratégia = Tratamento único (todos os elementos simultaneamente)
