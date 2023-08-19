@@ -1549,9 +1549,10 @@ if testa == 2:
     pc = 100
     pm = 1
     troca_n = 4
-    max_janelas_professor = 0.5
+    max_janelas_professor = 4
     primeira_janela = 0
     total_janelas = max_janelas_professor * len(professores_objetos)
+    passo_geracoes = 100
     print("Total_janelas: ", total_janelas)
     #-----------------#
     iteracoes = 0
@@ -1619,6 +1620,7 @@ if testa == 2:
         turmas_backup.append(frame_tuplas_tdp)
         turmas_creditos.append(cred)
     lista_sorteados = []
+    parcial_janelas = 0 # @janelas
     for t in range(len(turmas_objetos)):
         individuos = []  # n indivíduos (cada indivíduo, um frame)
         print('\nTurma: ', t)
@@ -1727,6 +1729,23 @@ if testa == 2:
             for j in range(i + 2):
                 shuffle(temp)
             populacao_atual.append(Individuo(copy.deepcopy(temp)))
+
+
+
+        # @janelas
+        if t < primeira_janela:  # t começa em ZERO.
+            # limite_fitness_janelas = 0    # @janelas
+            max_janelas_t = 0   # @janelas
+        else:
+            # limite_fitness_janelas = ((t - primeira_janela) * (total_janelas - 1) // ((len(turmas_objetos) - 1) - primeira_janela)) + 1   # @janelas
+            max_janelas_t = ((t - primeira_janela) * (total_janelas - 1) // ((len(turmas_objetos) - 1) - primeira_janela)) + 1  # @janelas
+        print("Teste - max_janelas_t: ", max_janelas_t)
+        limite_fitness_janelas = parcial_janelas  # @janelas
+        print("Teste - limite_fitness_janelas: ", limite_fitness_janelas)
+        contador_geracoes = 0  # @janelas
+        status_fitness = 0  # @janelas
+        status_janelas = 0  # @janelas
+
         # populações convergem aqui.
         finalizado = False
         while not finalizado:
@@ -1777,10 +1796,16 @@ if testa == 2:
                 limite_fitness_janelas = (t - 10) * 11 // ((len(turmas_objetos) - 1) - 10)
             '''
             # comeco = 0
-            if t <= primeira_janela:  # t começa em ZERO.
-                limite_fitness_janelas = primeira_janela
+            ''' @janelas
+            if t < primeira_janela:  # t começa em ZERO.
+                # limite_fitness_janelas = 0    # @janelas
+                max_janelas_t = 0   # @janelas
             else:
-                limite_fitness_janelas = (t - primeira_janela) * total_janelas // ((len(turmas_objetos) - 1) - primeira_janela)
+                # limite_fitness_janelas = ((t - primeira_janela) * (total_janelas - 1) // ((len(turmas_objetos) - 1) - primeira_janela)) + 1   # @janelas
+                max_janelas_t = ((t - primeira_janela) * (total_janelas - 1) // ((len(turmas_objetos) - 1) - primeira_janela)) + 1  # @janelas
+
+            limite_fitness_janelas = max_janelas_t  # @janelas
+            '''
 
             for i in range(len(populacao_atual)):
                 windows2 = copy.deepcopy(windows)
@@ -2298,6 +2323,27 @@ if testa == 2:
                 print(intervalo, ' minutos até aqui.')
             else:
                 vez = vez + 1
+                # @janelas
+                # print("fitness + janelas: ", individuo_fitness[0], individuo_janelas[0])
+                # print("status: ", status_fitness, status_janelas)
+                if individuo_fitness[0] != status_fitness or individuo_janelas[0] != status_janelas:
+                    # print("Teste - Trocou status.")
+                    contador_geracoes = 0
+                    print("                  ----------------------")
+                    status_fitness = individuo_fitness[0]
+                    status_janelas = individuo_janelas[0]
+                else:
+                    if contador_geracoes >= passo_geracoes:
+                        print("Teste - estourou contador.")
+                        if limite_fitness_janelas < max_janelas_t:
+                            limite_fitness_janelas = limite_fitness_janelas + 1
+                            print("Teste - novo limite de janelas: ", limite_fitness_janelas, "Máximo: ", max_janelas_t)
+                            contador_geracoes = 0
+                            print("                  ----------------------")
+                            status_janelas = individuo_fitness[0]
+                            status_janelas = individuo_janelas[0]
+                    else:
+                        contador_geracoes = contador_geracoes + 1
                 # print('Turma: ', t, 'vez: ', vez)
                 temp_sorteados = []
                 temp_entradas = copy.deepcopy(turmas_backup[t])

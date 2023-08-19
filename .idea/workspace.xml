@@ -69,13 +69,13 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="61" />
+          <entry key="project.closed" value="63" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="6" />
-          <entry key="project.open.time.20" value="6" />
+          <entry key="project.open.time.20" value="7" />
           <entry key="project.open.time.21" value="4" />
           <entry key="project.open.time.22" value="3" />
           <entry key="project.open.time.23" value="6" />
@@ -91,20 +91,20 @@
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.6" value="2" />
-          <entry key="project.open.time.7" value="3" />
+          <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="63" />
+          <entry key="project.opened" value="65" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="19947" />
+          <entry key="Timetabling" value="20968" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="19947" />
+          <entry key="Python" value="20968" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -130,11 +130,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="1551" column="31" selection-start-line="1551" selection-start-column="31" selection-end-line="1551" selection-end-column="31" />
+            <state relative-caret-position="39">
+              <caret line="2336" column="47" selection-start-line="2336" selection-start-column="39" selection-end-line="2336" selection-end-column="47" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1692405296559" expanded="true" signature="13756:13765" ph="..." />
+                <marker date="1692485240107" expanded="true" signature="13756:13765" ph="..." />
               </folding>
             </state>
           </provider>
@@ -151,20 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>if janelas[m][0] in windows2[n] and</find>
-      <find>conta_janelas</find>
-      <find>Teste - número_janelas assim que recebe resultado:  0</find>
-      <find>Teste2 - número_janelas assim</find>
-      <find>numero_janelas = grade.conta_janelas(</find>
-      <find>Teste0 - número_janelas assim que recebe resultado:</find>
-      <find>Teste2 - número_janelas assim que recebe resultado</find>
-      <find>Teste2 - número_janelas assim que recebe resultado:</find>
-      <find>numero_janelas = 0</find>
-      <find>grade.conta_janelas(</find>
-      <find>Encontrei solução através de manipulação genética.</find>
-      <find>dentro_janelas</find>
-      <find>Encontrei solução através de manipulação genética. i:</find>
-      <find>genético</find>
       <find>150</find>
       <find>indivíduo_fitness|janelas:</find>
       <find>testa_solucao(</find>
@@ -176,10 +162,24 @@
       <find>testa_solucao</find>
       <find>finalizado</find>
       <find>janelas</find>
-      <find>janelas totais</find>
       <find>janela ***</find>
-      <find>janela</find>
       <find>if i &gt;= top_</find>
+      <find>janelas totais</find>
+      <find>123_12</find>
+      <find>125_12</find>
+      <find>total_janelas</find>
+      <find>vez</find>
+      <find>limite_fitness_janelas</find>
+      <find>parcial_janelas</find>
+      <find>aqui</find>
+      <find>vez = vez + 1</find>
+      <find>@janelas</find>
+      <find>hiperpar</find>
+      <find>individuo_jan</find>
+      <find>Teste - Trocou status.</find>
+      <find>trocou</find>
+      <find>trocou status</find>
+      <find>estourou contador.</find>
       <find>janelas totais:</find>
     </findStrings>
   </component>
@@ -311,7 +311,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.452459" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.4262295" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -378,11 +378,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="1551" column="31" selection-start-line="1551" selection-start-column="31" selection-end-line="1551" selection-end-column="31" />
+        <state relative-caret-position="39">
+          <caret line="2336" column="47" selection-start-line="2336" selection-start-column="39" selection-end-line="2336" selection-end-column="47" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1692405296559" expanded="true" signature="13756:13765" ph="..." />
+            <marker date="1692485240107" expanded="true" signature="13756:13765" ph="..." />
           </folding>
         </state>
       </provider>
