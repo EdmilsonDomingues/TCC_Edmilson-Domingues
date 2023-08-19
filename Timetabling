@@ -1549,7 +1549,7 @@ if testa == 2:
     pc = 100
     pm = 1
     troca_n = 4
-    max_janelas_professor = 4
+    max_janelas_professor = 0.5
     primeira_janela = 0
     total_janelas = max_janelas_professor * len(professores_objetos)
     print("Total_janelas: ", total_janelas)
@@ -2212,6 +2212,8 @@ if testa == 2:
             # Agora é testar se algum indivíduo é resultado válido.
             finalizado = False
             for i in range(len(populacao_atual)):
+                if i >= top_quantidade:
+                    break
                 dentro_janelas = False
                 windows2 = copy.deepcopy(windows)
                 pontos_fitness = turmas_creditos[t]
@@ -2252,6 +2254,10 @@ if testa == 2:
                 if tem_solucao:
                     finalizado = True
                     solucao = populacao_atual[i].solucao_frame()
+                    if i < top_quantidade:
+                        print("Finalizado dentro dos TOP.", i)
+                    else:
+                        print("Finalizado fora dos TOP.", i)
                     break
             if finalizado:
                 for i in range(len(solucao)):
@@ -2344,7 +2350,6 @@ if testa == 2:
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 # Para o AG.
-sys.exit(0)
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
@@ -2453,7 +2458,7 @@ for i in range(len(xx)):
         cont = cont + 1
 print('Total de xx: ', cont)
 print(lista_sorteados)
-# sys.exit(0)
+sys.exit(0)
 # --------------------------------------------------------------------------------------------------------
 # Testes de heurística:
 # #2: Estratégia = Tratamento único (todos os elementos simultaneamente)

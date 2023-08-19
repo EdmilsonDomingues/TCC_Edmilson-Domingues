@@ -4,6 +4,7 @@
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grade completa da escola.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grade completa da escola.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +69,7 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="60" />
+          <entry key="project.closed" value="61" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -80,7 +81,7 @@
           <entry key="project.open.time.23" value="6" />
           <entry key="project.open.time.24" value="4" />
           <entry key="project.open.time.25" value="4" />
-          <entry key="project.open.time.26" value="3" />
+          <entry key="project.open.time.26" value="4" />
           <entry key="project.open.time.27" value="2" />
           <entry key="project.open.time.29" value="3" />
           <entry key="project.open.time.31" value="2" />
@@ -93,17 +94,17 @@
           <entry key="project.open.time.7" value="3" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="62" />
+          <entry key="project.opened" value="63" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="19740" />
+          <entry key="Timetabling" value="19947" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="19740" />
+          <entry key="Python" value="19947" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -129,11 +130,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1">
-              <caret line="2455" column="2" selection-start-line="2455" selection-start-column="2" selection-end-line="2455" selection-end-column="2" />
+            <state relative-caret-position="187">
+              <caret line="1551" column="31" selection-start-line="1551" selection-start-column="31" selection-end-line="1551" selection-end-column="31" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1692319520925" expanded="true" signature="13756:13765" ph="..." />
+                <marker date="1692405296559" expanded="true" signature="13756:13765" ph="..." />
               </folding>
             </state>
           </provider>
@@ -150,22 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>= grade_rodada.janelas()</find>
-      <find>.janelas()</find>
-      <find>grade.janelas()</find>
-      <find>numero_janelas = grade.</find>
-      <find>janela</find>
-      <find>testa == 2</find>
-      <find>indivíduo_fitness|janelas</find>
-      <find>148_41</find>
-      <find>hiperparâmetros</find>
-      <find>149</find>
-      <find>encontrei solu</find>
-      <find>Encontrei solução</find>
-      <find>número de janelas</find>
-      <find>solução atr</find>
-      <find>genética</find>
-      <find>manipulação genética.</find>
       <find>if janelas[m][0] in windows2[n] and</find>
       <find>conta_janelas</find>
       <find>Teste - número_janelas assim que recebe resultado:  0</find>
@@ -180,6 +165,22 @@
       <find>dentro_janelas</find>
       <find>Encontrei solução através de manipulação genética. i:</find>
       <find>genético</find>
+      <find>150</find>
+      <find>indivíduo_fitness|janelas:</find>
+      <find>testa_solucao(</find>
+      <find>150_</find>
+      <find>sys.exit(0)</find>
+      <find>janela</find>
+      <find>janela **</find>
+      <find>finalizado = True</find>
+      <find>testa_solucao</find>
+      <find>finalizado</find>
+      <find>janelas</find>
+      <find>janelas totais</find>
+      <find>janela ***</find>
+      <find>janela</find>
+      <find>if i &gt;= top_</find>
+      <find>janelas totais:</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -310,7 +311,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.96065575" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.452459" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -377,11 +378,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="2455" column="2" selection-start-line="2455" selection-start-column="2" selection-end-line="2455" selection-end-column="2" />
+        <state relative-caret-position="187">
+          <caret line="1551" column="31" selection-start-line="1551" selection-start-column="31" selection-end-line="1551" selection-end-column="31" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1692319520925" expanded="true" signature="13756:13765" ph="..." />
+            <marker date="1692405296559" expanded="true" signature="13756:13765" ph="..." />
           </folding>
         </state>
       </provider>
