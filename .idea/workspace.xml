@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Relatório final 129 instâncias.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Relatório final 129 instâncias.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grade completa da escola.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grade completa da escola.txt" afterDir="false" />
     </list>
@@ -69,14 +70,15 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="63" />
+          <entry key="project.closed" value="65" />
           <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="6" />
           <entry key="project.open.time.20" value="7" />
-          <entry key="project.open.time.21" value="4" />
+          <entry key="project.open.time.21" value="5" />
           <entry key="project.open.time.22" value="3" />
           <entry key="project.open.time.23" value="6" />
           <entry key="project.open.time.24" value="4" />
@@ -94,17 +96,17 @@
           <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="65" />
+          <entry key="project.opened" value="67" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="20968" />
+          <entry key="Timetabling" value="21605" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="20968" />
+          <entry key="Python" value="21605" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -130,11 +132,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="2336" column="47" selection-start-line="2336" selection-start-column="39" selection-end-line="2336" selection-end-column="47" />
+            <state relative-caret-position="-5076">
+              <caret line="1785" column="67" selection-start-line="1785" selection-start-column="59" selection-end-line="1785" selection-end-column="67" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1692485240107" expanded="true" signature="13756:13765" ph="..." />
+                <marker date="1692666411605" expanded="true" signature="13756:13765" ph="..." />
               </folding>
             </state>
           </provider>
@@ -151,36 +153,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>150</find>
-      <find>indivíduo_fitness|janelas:</find>
-      <find>testa_solucao(</find>
-      <find>150_</find>
-      <find>sys.exit(0)</find>
-      <find>janela</find>
-      <find>janela **</find>
-      <find>finalizado = True</find>
-      <find>testa_solucao</find>
-      <find>finalizado</find>
-      <find>janelas</find>
-      <find>janela ***</find>
-      <find>if i &gt;= top_</find>
-      <find>janelas totais</find>
-      <find>123_12</find>
-      <find>125_12</find>
-      <find>total_janelas</find>
-      <find>vez</find>
       <find>limite_fitness_janelas</find>
       <find>parcial_janelas</find>
       <find>aqui</find>
       <find>vez = vez + 1</find>
       <find>@janelas</find>
-      <find>hiperpar</find>
       <find>individuo_jan</find>
       <find>Teste - Trocou status.</find>
       <find>trocou</find>
       <find>trocou status</find>
       <find>estourou contador.</find>
+      <find>-------------</find>
+      <find>janela ***</find>
+      <find>novo limite</find>
+      <find>hiperpar</find>
+      <find>janelas totais</find>
+      <find>ref3.</find>
+      <find>ref</find>
+      <find>cross0</find>
+      <find>ref7</find>
+      <find>janelas</find>
+      <find>estourou</find>
       <find>janelas totais:</find>
+      <find>ref3</find>
+      <find>ref3.11</find>
+      <find>ref3.1</find>
+      <find>3.15</find>
+      <find>while iguais</find>
+      <find>while</find>
+      <find>3.</find>
+      <find>.fitness</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,9 +197,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="351" />
-    <option name="y" value="-15" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="181" />
+    <option name="y" value="-18" />
     <option name="width" value="699" />
     <option name="height" value="735" />
   </component>
@@ -206,6 +208,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -217,7 +220,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -311,7 +313,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.4262295" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.5704918" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -330,6 +332,9 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -378,11 +383,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="2336" column="47" selection-start-line="2336" selection-start-column="39" selection-end-line="2336" selection-end-column="47" />
+        <state relative-caret-position="-5076">
+          <caret line="1785" column="67" selection-start-line="1785" selection-start-column="59" selection-end-line="1785" selection-end-column="67" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1692485240107" expanded="true" signature="13756:13765" ph="..." />
+            <marker date="1692666411605" expanded="true" signature="13756:13765" ph="..." />
           </folding>
         </state>
       </provider>
