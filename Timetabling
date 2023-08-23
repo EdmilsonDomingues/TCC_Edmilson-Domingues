@@ -1995,14 +1995,14 @@ if testa == 2:
             while len(top) > top_quantidade:
                 top.pop(0)
             top.reverse()
-            print("ref3")
+            # print("ref3")
             # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
             #       como referência o menor valor [normalização].
             referencia = 500
             for i in range(len(populacao_atual)):
                 if individuo_fitness[i] < referencia:
                     referencia = individuo_fitness[i]
-            print("ref3.1 ", end='')
+            # print("ref3.1 ")
             '''
             for i in range(len(populacao_atual)):
                 individuo_fitness[i] = individuo_fitness[i] - referencia + 1
@@ -2015,7 +2015,7 @@ if testa == 2:
                 total = total + individuo_fitness[i]
             # print('individuo_fitness: ', individuo_fitness)
             roleta_range = []
-            print("ref3.2 ", end='')
+            # print("ref3.2 ")
             for i in range(len(populacao_atual)):
                 if i == 0:
                     inicio = 0
@@ -2023,19 +2023,19 @@ if testa == 2:
                     inicio = roleta_range[i-1][1]
                 fim = inicio + (individuo_fitness[i] * 10000 / total)
                 roleta_range.append([inicio, fim])
-            print("ref3.3 ", end='')
+            # print("ref3.3 ")
             selecionados = []
             for i in range(len(populacao_atual)):
                 valor = choice(range_10000)
                 for j in range(len(populacao_atual)):
                     if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
                         selecionados.append(populacao_atual[j])
-            print("ref3.4 ", end='')
+            # print("ref3.4 ")
             # Neste ponto temos os selecionados.
             lista_crossover = []
             nao_lista_crossover = []
             # pc = 70
-            print("ref3.5 ", end='')
+            # print("ref3.5 ")
             for i in range(len(selecionados)):
                 valor = choice(range_100)
                 if valor <= pc:
@@ -2043,7 +2043,7 @@ if testa == 2:
                 else:
                     nao_lista_crossover.append(selecionados[i])
             # Verificar se número ímpar de selecionados:
-            print("ref3.6 ", end='')
+            # print("ref3.6 ")
             if len(lista_crossover)%2 == 0:
                 pass
             else:
@@ -2055,16 +2055,16 @@ if testa == 2:
             # Realizar crossover (position-based crossover)
             # Critério: trocar o conteúdo de posições e manter as outras
             # Então vamos sortear as posições que serão embaralhadas
-            print("ref3.7 ", end='')
+            # print("ref3.7 ")
             troca_n = 4
             range_troca = []
-            print("ref3.8 ", end='')
+            # print("ref3.8 ")
             while len(range_troca) != troca_n:
                 # sorte = choice(range_25)    # &&&
                 sorte = choice(range_frame_tamanho) # &&&
                 if sorte not in range_troca:
                     range_troca.append(sorte)
-            print("ref3.9 ", end='')
+            # print("ref3.9 ")
             # Vamos gerar os filhos.
             '''
             filhos = []
@@ -2083,11 +2083,11 @@ if testa == 2:
                         filho.append(lista_individuo[j])
                 filhos.append(filho)
             '''
-            print("ref3.10 ", end='')
+            # print("ref3.10 ")
             filhos = []
             for i in range(int(len(lista_crossover) / 2)):
                 iguais = True
-                print("ref3.11 ", end='')
+                # print("ref3.11 ")
                 conta_iguais = 0
                 while iguais:
                     if conta_iguais < 5:
@@ -2146,13 +2146,13 @@ if testa == 2:
                             for j in range(frame_tamanho):
                                 pai1_todo_sequencial.append(cross0[j])
                                 pai2_todo_sequencial.append(cross1[j])
-                        print("ref3.12 ", end='')
+                        # print("ref3.12 ")
                         pai2_resto = []
                         for j in range(len(pai2_todo_sequencial)):
                             if pai2_todo_sequencial[j] in pai1_exclusivo:
                                 pai2_resto.append(pai2_todo_sequencial[j])
                                 pai1_exclusivo.remove(pai2_todo_sequencial[j])
-                        print("ref3.13 ", end='')
+                        # print("ref3.13 ")
                         pai1_resto = [] #
                         for j in range(len(pai1_todo_sequencial)):
                             if pai1_todo_sequencial[j] in pai2_exclusivo:
@@ -2174,7 +2174,7 @@ if testa == 2:
                             else:
                                 filho1_total.append(cross0[j])
                         filho2_total = []
-                        print("ref3.14 ", end='')
+                        # print("ref3.14 ")
                         for j in range(frame_tamanho):
                             if corte1 != corte2:
                                 if j > corte1 and j <= corte2:
@@ -2186,18 +2186,20 @@ if testa == 2:
                             else:
                                 filho2_total.append(cross0[j])
                         # print('filho1_total: ', filho1_total)
-                        print("ref3.15 ", end='')
+                        # print("ref3.15 ")
                         # print()
                         # print("cortes: ", corte1, corte2)
                         # print("cross0: ", cross0)
                         # print("cross1: ", cross1)
                         # print("filho1_total: ", filho1_total)
                         # print("filho2_total: ", filho2_total)
-                        # conta_iguais = conta_iguais + 1
+                        conta_iguais = conta_iguais + 1
                         if filho1_total != cross0 and filho1_total != cross1 and\
                                 filho2_total != cross0 and filho2_total != cross1:
                             iguais = False
-                print("ref3.16 ", end='')
+                    else:
+                        iguais = False  # embora iguais, simula serem diferentes para poder passar adiante.
+                # print("ref3.16 ")
                 filhos.append(filho1_total)
                 filhos.append(filho2_total)
                 if filho1_total == cross0:
@@ -2208,13 +2210,13 @@ if testa == 2:
                     print('Filho 1 igual cross0. ', i, corte1, corte2)
                 if filho2_total == cross1:
                     print('Filho 1 igual cross1. ', i, corte1, corte2)
-                print("ref3.17 ", end='')
+                # print("ref3.17 ")
                 # print(i, 'len(filho[i]: ', len(filho1_total))
                 # print(i, 'len(filho[i]: ', len(filho1_total))
             # Realizar mutação (order-based mutation).
             # Varrer posições e aplicar Bernoulli (pm)
             # Se posição for sofrer mutação, sortear outra posição para realizar a troca
-            print("ref3.18 ")
+            # print("ref3.18 ")
             for i in range(len(filhos)):
                 for j in range(frame_tamanho):
                     pm = 1
