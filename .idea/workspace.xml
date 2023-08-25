@@ -73,7 +73,7 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="66" />
+          <entry key="project.closed" value="68" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
@@ -88,6 +88,7 @@
           <entry key="project.open.time.25" value="4" />
           <entry key="project.open.time.26" value="4" />
           <entry key="project.open.time.27" value="2" />
+          <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.29" value="3" />
           <entry key="project.open.time.31" value="2" />
           <entry key="project.open.time.32" value="1" />
@@ -100,17 +101,17 @@
           <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="68" />
+          <entry key="project.opened" value="69" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="22005" />
+          <entry key="Timetabling" value="22020" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="22005" />
+          <entry key="Python" value="22020" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -136,11 +137,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-41">
-              <caret line="2200" column="70" selection-start-line="2200" selection-start-column="70" selection-end-line="2200" selection-end-column="70" />
+            <state relative-caret-position="136">
+              <caret line="1556" column="23" selection-start-line="1556" selection-start-column="23" selection-end-line="1556" selection-end-column="23" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1692734547558" expanded="true" signature="13756:13765" ph="..." />
+                <marker date="1692933270826" expanded="true" signature="13756:13765" ph="..." />
               </folding>
             </state>
           </provider>
@@ -157,8 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>novo limite</find>
-      <find>hiperpar</find>
       <find>janelas totais</find>
       <find>ref3.</find>
       <find>ref</find>
@@ -184,9 +183,11 @@
       <find>estourou</find>
       <find>heurística:</find>
       <find>Turma - heurística:</find>
-      <find>janelas</find>
-      <find>janelas totais:</find>
       <find>janelas to</find>
+      <find>janelas t</find>
+      <find>Teste - novo limite de janelas:</find>
+      <find>janelas totais:</find>
+      <find>hiperpar</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -201,7 +202,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="181" />
     <option name="y" value="-18" />
     <option name="width" value="699" />
@@ -326,7 +327,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.7737705" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49925596" weight="0.46721312" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -396,11 +397,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-41">
-          <caret line="2200" column="70" selection-start-line="2200" selection-start-column="70" selection-end-line="2200" selection-end-column="70" />
+        <state relative-caret-position="136">
+          <caret line="1556" column="23" selection-start-line="1556" selection-start-column="23" selection-end-line="1556" selection-end-column="23" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1692734547558" expanded="true" signature="13756:13765" ph="..." />
+            <marker date="1692933270826" expanded="true" signature="13756:13765" ph="..." />
           </folding>
         </state>
       </provider>

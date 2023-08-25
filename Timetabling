@@ -1549,8 +1549,8 @@ if testa == 2:
     pc = 100
     pm = 1
     troca_n = 4
-    max_janelas_professor = 4
-    primeira_janela = 0
+    max_janelas_professor = 10
+    primeira_janela = 2
     total_janelas = max_janelas_professor * len(professores_objetos)
     passo_geracoes = 50
     print("Total_janelas: ", total_janelas)
@@ -2425,6 +2425,7 @@ if testa == 2:
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 # Para o AG.
+sys.exit(0)
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
