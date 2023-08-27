@@ -1552,7 +1552,8 @@ if testa == 2:
     max_janelas_professor = 10
     primeira_janela = 2
     total_janelas = max_janelas_professor * len(professores_objetos)
-    passo_geracoes = 200
+    passo_geracoes = 90
+
     print("Total_janelas: ", total_janelas)
     #-----------------#
     iteracoes = 0
