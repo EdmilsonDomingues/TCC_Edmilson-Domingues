@@ -1552,7 +1552,7 @@ if testa == 2:
     max_janelas_professor = 10
     primeira_janela = 2
     total_janelas = max_janelas_professor * len(professores_objetos)
-    passo_geracoes = 90
+    passo_geracoes = 50
 
     print("Total_janelas: ", total_janelas)
     #-----------------#
@@ -2022,7 +2022,12 @@ if testa == 2:
                     inicio = 0
                 else:
                     inicio = roleta_range[i-1][1]
-                fim = inicio + (individuo_fitness[i] * 10000 / total)
+                # fim = inicio + (individuo_fitness[i] * 10000 / total)
+                if total != 0:
+                    fim = inicio + (individuo_fitness[i] * 10000 / total)
+                else:
+                    inicio = 0
+                    fim = 10000
                 roleta_range.append([inicio, fim])
             # print("ref3.3 ")
             selecionados = []
@@ -2220,7 +2225,7 @@ if testa == 2:
             # print("ref3.18 ")
             for i in range(len(filhos)):
                 for j in range(frame_tamanho):
-                    pm = 1
+                    # pm = 1
                     valor = choice(range_100)
                     if valor <= pm:
                         # print('Ocorreu uma mutação.   ----------------------------------   -----------------------', i)
