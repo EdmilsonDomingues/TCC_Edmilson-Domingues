@@ -1546,7 +1546,7 @@ if testa == 2:
     # Hiperparâmetros:
     n_individuos = 50
     top_quantidade = 10
-    pc = 100
+    pc = 70
     pm = 1
     troca_n = 4
     max_janelas_professor = 10
@@ -1891,6 +1891,8 @@ if testa == 2:
                         slotcomproblema = temp_populacao.slot_problema
                         # print('slotcomproblema: ', slotcomproblema)
                         # print('populacao_atual[i]: ', temp_populacao.individuo)
+                        tdp = temp_populacao.individuo
+                        # print('Disciplina 149: ', disciplinas_objetos[tdp[slotcomproblema][1]].nome_disciplina, slotcomproblema)
                         # for j in range(25): # &&&
                         for j in range(frame_tamanho):  # &&&
                             if j != slotcomproblema:
