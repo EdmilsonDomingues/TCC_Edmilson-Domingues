@@ -73,7 +73,7 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="76" />
+          <entry key="project.closed" value="81" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
@@ -81,8 +81,8 @@
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="7" />
           <entry key="project.open.time.20" value="7" />
-          <entry key="project.open.time.21" value="5" />
-          <entry key="project.open.time.22" value="4" />
+          <entry key="project.open.time.21" value="7" />
+          <entry key="project.open.time.22" value="6" />
           <entry key="project.open.time.23" value="6" />
           <entry key="project.open.time.24" value="4" />
           <entry key="project.open.time.25" value="5" />
@@ -95,6 +95,7 @@
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.39" value="1" />
+          <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.43" value="1" />
           <entry key="project.open.time.44" value="1" />
@@ -103,17 +104,17 @@
           <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="77" />
+          <entry key="project.opened" value="82" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="22698" />
+          <entry key="Timetabling" value="22704" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="22698" />
+          <entry key="Python" value="22704" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -139,10 +140,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-41448">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="18">
+              <caret line="1546" column="22" selection-start-line="1546" selection-start-column="22" selection-end-line="1546" selection-end-column="22" />
               <folding>
-                <marker date="1693858975956" expanded="true" signature="13756:13765" ph="..." />
+                <element signature="e#0#21#0" expanded="true" />
+                <marker date="1694653156896" expanded="true" signature="13756:13765" ph="..." />
               </folding>
             </state>
           </provider>
@@ -173,7 +175,6 @@
       <find>janelas t</find>
       <find>Teste - novo limite de janelas:</find>
       <find>janelas totais:</find>
-      <find>hiperpar</find>
       <find>estour</find>
       <find>mutação</find>
       <find>pm =</find>
@@ -189,6 +190,7 @@
       <find>hiperparâme</find>
       <find>est</find>
       <find>estourou</find>
+      <find>hiperpar</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -204,8 +206,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-122" />
-    <option name="y" value="-20" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
@@ -328,7 +330,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49925596" weight="0.40163934" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49925596" weight="0.46557376" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -398,10 +400,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-41448">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="18">
+          <caret line="1546" column="22" selection-start-line="1546" selection-start-column="22" selection-end-line="1546" selection-end-column="22" />
           <folding>
-            <marker date="1693858975956" expanded="true" signature="13756:13765" ph="..." />
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1694653156896" expanded="true" signature="13756:13765" ph="..." />
           </folding>
         </state>
       </provider>
