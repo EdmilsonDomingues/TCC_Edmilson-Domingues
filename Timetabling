@@ -852,10 +852,15 @@ for p in p_lista:
             lista_vizinhos.append(slot_da_vez)  # Testes escrita "JANELA"
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = nova_grade[l][c]
+            '''
             info = info + "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
                 + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
                 + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)\
                 + "\n" + "C: " + x[tdps_lista[i]].varName
+            '''
+            info = info + "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma) \
+                   + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina \
+                   + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             nova_grade[l][c] = info
 
     janelas_ref = grade.janelas()    # Testes escrita "JANELA"
@@ -1532,6 +1537,7 @@ class Individuo:
         dict_inequacoes.clear()
         return fitness
 # --------------------------------------------------------------------------------------------------------
+sys.exit(0)
 testa = 2
 # Testes de heurística:
 # #1: Estratégia = Encaixando peças
@@ -1544,15 +1550,15 @@ if testa == 1:
 # Aqui neste bloco será aplicado um algoritmo genético, com a restrição de janelas.
 if testa == 2:
     # Hiperparâmetros:
-    n_individuos = 100
-    top_quantidade = 10
+    n_individuos = 50
+    top_quantidade = 20
     pc = 80
     pm = 1
     troca_n = 4
     max_janelas_professor = 10
     primeira_janela = 2
     total_janelas = max_janelas_professor * len(professores_objetos)
-    passo_geracoes = 100
+    passo_geracoes = 50
 
     print("Total_janelas: ", total_janelas)
     #-----------------#
