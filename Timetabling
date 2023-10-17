@@ -9,29 +9,6 @@ from random import choice, shuffle, random
 
 START_POINT = 0
 END_POINT = None
-'''
-lista_turnos_por_escola = []
-df = pd.read_csv('./arquivoProjetoUFSC_regionalFlorianopolis_modificado.csv', sep = ';')
-df['Código da disc. '] = df['Código da disc. '].astype(str)
-lista_turnos_por_escola = []
-for indice, valor in df.iterrows():
-    esta_na_lista = False
-    posicao = 0
-    for j in range(len(lista_turnos_por_escola)):
-        if valor[1] == lista_turnos_por_escola[j][0]:
-            esta_na_lista = True
-            posicao = j
-            break
-    if esta_na_lista:
-        if valor[8] not in lista_turnos_por_escola[posicao][2]:
-            lista_turnos_por_escola[posicao][2].append(valor[8])
-    else:
-        lista_prov = [valor[1], valor[2], [valor[8]]]
-        lista_turnos_por_escola.append(lista_prov)
-for i in range(len(lista_turnos_por_escola)):
-    print(lista_turnos_por_escola[i])
-sys.exit(0)
-'''
 
 instancia = input("Você quer trabalhar com 1 instância ou 129?")
 if instancia == "1":
@@ -215,19 +192,6 @@ class Grade:
                 return ['1', ..., '51']
             else:
                 pass
-                '''
-                if self.turno.upper() == 'MATUTINO': # if self.turno == 'Matutino':
-                    return ['0', '1', '2', '3', '4', '11', '12', '13', '14',
-                            '15', '22', '23', '24', '25', '26', '33', '34',
-                            '35', '36', '37', '44', '45', '46', '47', '48']
-                else:
-                    if self.turno.upper() == 'VESPERTINO':  #if self.turno == 'Vespertino':
-                        return ['5', '6', '7', '8', '9', '16', '17', '18',
-                                '19', '20', '27', '28', '29', '30', '31', '38',
-                                '39', '40', '41', '42', '49', '50', '51', '52', '53']
-                    else:
-                        return ['10', '21', '32', '43', '54']
-                '''
                 if self.turno.upper() == 'MATUTINO': # if self.turno == 'Matutino':
                     return ['0', '1', '2', '3', '4', '15', '16', '17', '18',
                             '19', '30', '31', '32', '33', '34', '45', '46', '47', '48', '49',
@@ -250,26 +214,10 @@ class Grade:
                             else:
                                 print("Deu outro turno.")
                                 sys.exit(0)
-        '''
-        else:
-            if self.tipo_grade == '2':
-        '''
         return None
 
     def janelas(self):
         pass
-        '''
-        return [['0', '1', '2'], ['1', '2', '3'], ['2', '3', '4'],
-                ['5', '6', '7'], ['6', '7', '8'], ['7', '8', '9'],
-                ['11', '12', '13'], ['12', '13', '14'], ['13', '14', '15'],
-                ['16', '17', '18'], ['17', '18', '19'], ['18', '19', '20'],
-                ['22', '23', '24'], ['23', '24', '25'], ['24', '25', '26'],
-                ['27', '28', '29'], ['28', '29', '30'], ['29', '30', '31'],
-                ['33', '34', '35'], ['34', '35', '36'], ['35', '36', '37'],
-                ['38', '39', '40'], ['39', '40', '41'], ['40', '41', '42'],
-                ['44', '45', '46'], ['45', '46', '47'], ['46', '47', '48'],
-                ['49', '50', '51'], ['50', '51', '52'], ['51', '52', '53']]
-        '''
         return [['0', '1', '2'], ['1', '2', '3'], ['2', '3', '4'],
                 ['5', '6', '7'], ['6', '7', '8'], ['7', '8', '9'],
                 ['10', '11', '12'], ['11', '12', '13'], ['12', '13', '14'],
@@ -288,21 +236,6 @@ class Grade:
 
     def grade_vazia(self):
         pass
-        '''
-        lista = [['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['*****', '*****', '*****', '*****', '*****'],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['*****', '*****', '*****', '*****', '*****'],
-                ['', '', '', '', '']]
-        '''
         lista = [['', '', '', '', ''],
                 ['', '', '', '', ''],
                 ['', '', '', '', ''],
@@ -324,14 +257,6 @@ class Grade:
 
     def dias_semana(self):
         pass
-        '''
-        lista_ds = [['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-                    ['11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'],
-                    ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
-                    ['33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43'],
-                    ['44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54']]
-        return lista_ds
-        '''
         lista_ds = [['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'],
                     ['15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29'],
                     ['30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44'],
@@ -344,14 +269,6 @@ class Grade:
 
     def converte_slot_lc(self, slot):
         pass
-        '''
-        lista_lc = [[0, 0], [1, 0], [2, 0], [3,0], [4, 0], [6, 0],[7, 0], [8, 0], [9, 0], [10,0], [12, 0],
-                    [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [12, 1],
-                    [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [6, 2], [7, 2], [8, 2], [9, 2], [10, 2], [12, 2],
-                    [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [12, 3],
-                    [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [12, 4]]
-        return lista_lc[slot][0], lista_lc[slot][1]
-        '''
         lista_lc = [[0, 0], [1, 0], [2, 0], [3,0], [4, 0], [6, 0],[7, 0], [8, 0], [9, 0], [10,0], [12, 0], [13, 0],
                     [14, 0], [15, 0], [16, 0],
                     [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [12, 1], [13, 1],
@@ -522,13 +439,6 @@ for index, row in df.iterrows():
                     slots_objetos.append(Slot(slots))
                     slots_ponteiro = slots_ponteiro + 1
 # #print(estrela_chaves)
-'''
-for i in range(len(estrela_chaves)):
-    print(turmas_objetos[estrela_chaves[i][0]].numero_turma,
-          disciplinas_objetos[estrela_chaves[i][1]].codigo_disciplina,
-          professores_objetos[estrela_chaves[i][2]].nome_professor,
-          slots_objetos[estrela_chaves[i][3]].slot)
-'''
 print("Len_estrelas: ", len(estrela_chaves))
 print("Turmas_objetos: ", len(turmas_objetos))
 print("Disciplinas_objetos: ", len(disciplinas_objetos))
@@ -647,12 +557,6 @@ for cont in range(len(somas)):
     # print(x)
     # print(y)
     # print('len(somas[cont][0])): ', len(somas[cont][0]))
-    '''
-    model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
-                     -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
-                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) + 6 >= (9 * y[cont]==1 +
-                                                                                                      tolerancia),
-    '''
     eps = 0.0001
     M = 10 + eps    # smallest possible given bounds on x and y
 
@@ -691,19 +595,7 @@ for ts in ts_lista:
             tdps_lista.append(cont)
     if len(tdps_lista) > 0:
         pass
-        print("RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]), turmas_objetos[ts[0]].numero_turma, slots_objetos[ts[1]].slot)
-        '''
-        if ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_0" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_5" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_15" or\
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_6" or \
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_10" or \
-            ("t_" + str(ts[0]) + " s_" + str(ts[1])) == "t_29 s_20":
-            pass
-        else:
-            model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
-            inequacoes.append([copy.deepcopy(tdps_lista), 1, '2'])
-        '''
+        # print("RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]), turmas_objetos[ts[0]].numero_turma, slots_objetos[ts[1]].slot)
         model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
         inequacoes.append([copy.deepcopy(tdps_lista), 1, '2'])
 
@@ -732,21 +624,6 @@ tdps_lista = []
 grade = Grade('1', 'Matutino')
 ds_lista = grade.dias_semana()
 dias = grade.cabecalho()
-'''
-for i in range(5):
-    lista_um_ds = ds_lista[i]
-    for td in td_lista:
-        tdps_lista.clear()
-        for cont in range(len(estrela_chaves)):
-            if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
-                if disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais <= 5:
-                    if slots_objetos[estrela_chaves[cont][3]].slot in lista_um_ds:
-                        tdps_lista.append(cont)
-        if len(tdps_lista) > 0:
-            model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <=1,
-                            "RESTRIÇÃO 4: t_" + str(td[0]) + " d_" + str(td[1]) + " ds_" + dias[i])
-            inequacoes.append([copy.deepcopy(tdps_lista), 1, '4'])
-'''
 for i in range(5):
     lista_um_ds = ds_lista[i]
     for td in td_lista:
@@ -852,12 +729,6 @@ for p in p_lista:
             lista_vizinhos.append(slot_da_vez)  # Testes escrita "JANELA"
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = nova_grade[l][c]
-            '''
-            info = info + "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma)\
-                + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
-                + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)\
-                + "\n" + "C: " + x[tdps_lista[i]].varName
-            '''
             info = info + "Turma: " + str(turmas_objetos[estrela_chaves[tdps_lista[i]][0]].numero_turma) \
                    + "\n" + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina \
                    + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
@@ -959,28 +830,6 @@ for t in t_lista:
     print('', file = arquivo)
     print('Turma:  ', turmas_objetos[t].numero_turma, "Área de Ensino: ", turmas_objetos[t].area_ensino, file = arquivo)
     print(apresentacao, file = arquivo)
-    '''
-    cont = 0
-    print('len(x): ', len(x))
-    for i in range(len(x)):
-        if x[i].X == 1:
-            cont = cont + 1
-    print('Total de X: ', cont)
-    print('len(y): ', len(y))
-    cont = 0
-    cont0 = 0
-    for i in range(len(y)):
-        if y[i].X == 1:
-            print("Professor: ", pj[i][0], professores_objetos[pj[i][0]].nome_professor, "Janela: ", pj[i][1])
-            cont = cont + 1
-        else:
-            if y[i].X == 0:
-                cont0 = cont0 + 1
-            else:
-                print('O que tem em Y: ', y[i].X)
-    print('Teste - Total de Y: ', cont)
-    print('Teste - Total de Y zerado: ', cont0)
-    '''
     cont = 0
     print('len(x): ', len(x))
     for i in range(len(x)):
@@ -1103,149 +952,6 @@ class Individuo:
 
     def slot_problema(self):
         return self.slot_problema
-
-    '''
-    def testa_solucao(self, inequacoes, lista_tdps, dict):
-        # print('\nTestando solução')
-        inequacoes_copia = copy.deepcopy(inequacoes)
-        for f in range(frame_tamanho):
-            if self.individuo[f] != 0:
-                t = self.individuo[f][0]
-                d = self.individuo[f][1]
-                p = self.individuo[f][2]
-                if turmas_objetos[t].turno == 'Matutino':
-                    s = f
-                else:
-                    s = f + 25
-                valor_da_vez = lista_tdps[t][d][p][s]
-                # print('valor da vez: ', valor_da_vez)
-                tem_7 = False
-                tem_6 = False
-                tem_4 = False
-                tem_3 = False
-                tem_2 = False
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            tem_2 = True
-                            # print('tem_2 True')
-                            break
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '3':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            tem_3 = True
-                            # print('tem_3 True')
-                            break
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '4':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            tem_4 = True
-                            # print('tem_4 True')
-                            break
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            tem_6 = True
-                            # print('tem_6 True')
-                            break
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            tem_7 = True
-                            # print('tem_7 True')
-                            break
-                # print('valor_da_vez: ', valor_da_vez, tem_2, tem_3, tem_4, tem_6, tem_7)
-                if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
-                    # limpar inequações
-                    for i in range(len(inequacoes_copia)):
-                        if inequacoes_copia[i][1] > 0 and valor_da_vez in inequacoes_copia[i][0]:
-                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                else:
-                    return False
-        for f in range(frame_tamanho):
-            if self.individuo[f] != 0:
-                t = self.individuo[f][0]
-                d = self.individuo[f][1]
-                p = self.individuo[f][2]
-                if turmas_objetos[t].turno == 'Matutino':
-                    s = f
-                else:
-                    s = f + 25
-                valor_da_vez = lista_tdps[t][d][p][s]
-                self.solucao.append(valor_da_vez)
-        return True
-        '''
-    '''
-    def testa_solucao(self, inequacoes, lista_tdps, dict):
-        inequacoes_copia = copy.deepcopy(inequacoes)
-        for f in range(frame_tamanho):
-            if self.individuo[f] != 0:
-                t = self.individuo[f][0]
-                d = self.individuo[f][1]
-                p = self.individuo[f][2]
-                if turmas_objetos[t].turno == 'Matutino':
-                    s = f
-                else:
-                    s = f + 25
-                valor_da_vez = lista_tdps[t][d][p][s]
-                lista_ponteiros = dict[valor_da_vez]
-                # print('valor da vez: ', valor_da_vez)
-                tem_7 = False
-                tem_6 = False
-                tem_4 = False
-                tem_3 = False
-                tem_2 = False
-                for ponteiro in lista_ponteiros:
-                    if inequacoes_copia[ponteiro][1] > 0 and inequacoes_copia[ponteiro][2] == '2':
-                        if valor_da_vez in inequacoes_copia[ponteiro][0]:
-                            tem_2 = True
-                            # print('tem_2 True')
-                            break
-                for ponteiro in lista_ponteiros:
-                    if inequacoes_copia[ponteiro][1] > 0 and inequacoes_copia[ponteiro][2] == '3':
-                        if valor_da_vez in inequacoes_copia[ponteiro][0]:
-                            tem_3 = True
-                            # print('tem_3 True')
-                            break
-                for ponteiro in lista_ponteiros:
-                    if inequacoes_copia[ponteiro][1] > 0 and inequacoes_copia[ponteiro][2] == '4':
-                        if valor_da_vez in inequacoes_copia[ponteiro][0]:
-                            tem_4 = True
-                            # print('tem_4 True')
-                            break
-                for ponteiro in lista_ponteiros:
-                    if inequacoes_copia[ponteiro][1] > 0 and inequacoes_copia[ponteiro][2] == '6':
-                        if valor_da_vez in inequacoes_copia[ponteiro][0]:
-                            tem_6 = True
-                            # print('tem_6 True')
-                            break
-                for ponteiro in lista_ponteiros:
-                    if inequacoes_copia[ponteiro][1] > 0 and inequacoes_copia[ponteiro][2] == '7':
-                        if valor_da_vez in inequacoes_copia[ponteiro][0]:
-                            tem_7 = True
-                            # print('tem_7 True')
-                            break
-                # print('valor_da_vez: ', valor_da_vez, tem_2, tem_3, tem_4, tem_6, tem_7)
-                if tem_2 and tem_3 and tem_4 and tem_6 and tem_7:
-                    # limpar inequações
-                    for ponteiro in lista_ponteiros:
-                        if inequacoes_copia[ponteiro][1] > 0 and valor_da_vez in inequacoes_copia[ponteiro][0]:
-                            inequacoes_copia[ponteiro][1] = inequacoes_copia[ponteiro][1] - 1
-                else:
-                    return False
-        for f in range(frame_tamanho):
-            if self.individuo[f] != 0:
-                t = self.individuo[f][0]
-                d = self.individuo[f][1]
-                p = self.individuo[f][2]
-                if turmas_objetos[t].turno == 'Matutino':
-                    s = f
-                else:
-                    s = f + 25
-                valor_da_vez = lista_tdps[t][d][p][s]
-                self.solucao.append(valor_da_vez)
-        return True
-        '''
 
     def testa_solucao(self, inequacoes, lista_tdps, dict_ponteiros, frame_tamanho, lista_indice_slots):
         t70 = time.time()
@@ -1537,7 +1243,7 @@ class Individuo:
         dict_inequacoes.clear()
         return fitness
 # --------------------------------------------------------------------------------------------------------
-sys.exit(0)
+# sys.exit(0)
 testa = 2
 # Testes de heurística:
 # #1: Estratégia = Encaixando peças
@@ -1551,12 +1257,12 @@ if testa == 1:
 if testa == 2:
     # Hiperparâmetros:
     n_individuos = 50
-    top_quantidade = 20
+    top_quantidade = 10
     pc = 80
     pm = 1
     troca_n = 4
-    max_janelas_professor = 10
-    primeira_janela = 2
+    max_janelas_professor = 4
+    primeira_janela = 0
     total_janelas = max_janelas_professor * len(professores_objetos)
     passo_geracoes = 50
 
@@ -1639,25 +1345,6 @@ if testa == 2:
 
         # melhorando performance    $$
         temp_index = []
-
-        '''
-        for i in range(len(turmas_backup[t])):
-            if turmas_backup[t][i] != 0:
-                tt = turmas_backup[t][i][0]
-                dd = turmas_backup[t][i][1]
-                pp = turmas_backup[t][i][2]
-                for ss in range(25):
-                    if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
-                        valor = lista_tdps[tt][dd][pp][ss]
-                        if valor not in temp_index:
-                            temp_index.append(valor)
-                    else:
-                        zz = ss + 25
-                        valor = lista_tdps[tt][dd][pp][zz]
-                        if valor not in temp_index:
-                            temp_index.append(valor)
-        '''
-
         for i in range(len(turmas_backup[t])):   # &&& novo
             if turmas_backup[t][i] != 0:
                 tt = turmas_backup[t][i][0]
@@ -1823,26 +1510,11 @@ if testa == 2:
                     if lista[j] != 0:
                         tt = lista[j][0]
                         p = lista[j][2]
-                        '''# &&&
-                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
-                            s = j
-                        else:
-                            s = j + 25
-                        ss = slots_objetos[s].slot
-                        '''
                         ss = slots_objetos[lista_indice_slots[j]].slot  # &&&
                         if ss not in windows2[p]:
                             windows2[p].append(ss)
                             windows2[p].sort()
                         grade = Grade('1', 'Matutino')
-                        '''
-                        janelas = grade.janelas()
-                        for m in range(len(janelas)):
-                            for n in range(len(windows2)):
-                                if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
-                                        in windows2[n]:
-                                    numero_janelas = numero_janelas + 1
-                        '''
                         numero_janelas2 = grade.conta_janelas(windows2)
                         individuo_janelas[i] = numero_janelas2
 
@@ -1874,13 +1546,6 @@ if testa == 2:
                     print("  |", end="")
                 print(str(individuo_fitness[i]) + "_" + str(individuo_janelas[i]) + "|", end="")
             print()
-            '''
-            if kb.is_pressed('e'):
-                for i in range(len(populacao_atual)):
-                    print("Houve digitação.")
-                    print(populacao_atual[i].individuo)
-                sys.exit(0)
-            '''
             # Aqui começa a tentativa de se implementar o que estou chamando de engenharia genética ou
             # manipulação genética.
             # Populações com fitness = máximo - 1 devem ser analisadas separadamente, no sentido de se
@@ -1917,28 +1582,11 @@ if testa == 2:
                                     if temp_list[k] != 0:
                                         tt = temp_list[k][0]
                                         p = temp_list[k][2]
-                                        ''' # &&&
-                                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
-                                            s = k
-                                        else:
-                                            s = k + 25
-                                        ss = slots_objetos[s].slot
-                                        '''
                                         ss = slots_objetos[lista_indice_slots[k]].slot  # &&&
                                         if ss not in windows2[p]:
                                             windows2[p].append(ss)
                                             windows2[p].sort()
                                         grade = Grade('1', 'Matutino')
-                                        '''
-                                        janelas = grade.janelas()
-                                        for m in range(len(janelas)):
-                                            for n in range(len(windows2)):
-                                                if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and \
-                                                        janelas[m][2] \
-                                                        in windows2[n]:
-                                                    numero_janelas = numero_janelas + 1
-                                        # print("Teste0 - número_janelas assim que recebe resultado: ", numero_janelas)
-                                        '''
                                         numero_janelas2 = grade.conta_janelas(windows2)
                                         # print("Teste1 - número_janelas assim que recebe resultado: ", nj)
 
@@ -2012,11 +1660,6 @@ if testa == 2:
                 if individuo_fitness[i] < referencia:
                     referencia = individuo_fitness[i]
             # print("ref3.1 ")
-            '''
-            for i in range(len(populacao_atual)):
-                individuo_fitness[i] = individuo_fitness[i] - referencia + 1
-            '''
-
             # Aqui começa a seleção
             # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
             total = 0
@@ -2080,23 +1723,6 @@ if testa == 2:
                     range_troca.append(sorte)
             # print("ref3.9 ")
             # Vamos gerar os filhos.
-            '''
-            filhos = []
-            for i in range(len(lista_crossover)):
-                filho = []
-                posicao_nova = []
-                lista_individuo = lista_crossover[i].individuo
-                for j in range(len(range_troca)):
-                    posicao_nova.append(lista_individuo[range_troca[j]])
-                shuffle(posicao_nova)
-                for j in range(frame_tamanho):
-                    if j in range_troca:
-                        filho.append(posicao_nova[0])
-                        posicao_nova.pop(0)
-                    else:
-                        filho.append(lista_individuo[j])
-                filhos.append(filho)
-            '''
             # print("ref3.10 ")
             filhos = []
             for i in range(int(len(lista_crossover) / 2)):
@@ -2141,17 +1767,6 @@ if testa == 2:
                             # print('**pai2_exclusivo: ', pai2_exclusivo)
                         pai1_todo_sequencial = []
                         pai2_todo_sequencial = []
-                        '''
-                        for j in range(corte2 + 1, corte2 + 1 + frame_tamanho):
-                            pai1_todo_sequencial.append(cross0[j % frame_tamanho])
-                            pai2_todo_sequencial.append(cross1[j % frame_tamanho])
-                        '''
-                        '''
-                        for j in range(frame_tamanho):
-                            pai1_todo_sequencial.append(cross0[j])
-                            pai2_todo_sequencial.append(cross1[j])
-                        '''
-
                         if cross0 == cross1:
                             for j in range(corte2 + 1, corte2 + 1 + frame_tamanho):
                                 pai1_todo_sequencial.append(cross0[j % frame_tamanho])
@@ -2290,26 +1905,11 @@ if testa == 2:
                     if lista[j] != 0:
                         tt = lista[j][0]
                         p = lista[j][2]
-                        ''' # &&&
-                        if turmas_objetos[tt].turno.upper() == 'MATUTINO':  #if turmas_objetos[tt].turno == 'Matutino':
-                            s = j
-                        else:
-                            s = j + 25
-                        ss = slots_objetos[s].slot
-                        '''
                         ss = slots_objetos[lista_indice_slots[j]].slot  # &&&
                         if ss not in windows2[p]:
                             windows2[p].append(ss)
                             windows2[p].sort()
                         grade = Grade('1', 'Matutino')
-                        '''
-                        janelas = grade.janelas()
-                        for m in range(len(janelas)):
-                            for n in range(len(windows2)):
-                                if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
-                                        in windows2[n]:
-                                    numero_janelas = numero_janelas + 1
-                        '''
                         numero_janelas2 = grade.conta_janelas(windows2)
 
                 if numero_janelas2 <= limite_fitness_janelas:
@@ -2349,15 +1949,6 @@ if testa == 2:
 
                 parcial_janelas = 0
                 grade_rodada = Grade('1', 'Matutino')
-                '''
-                janelas1 = grade_rodada.janelas()
-                for m in range(len(janelas1)):
-                    for n in range(len(windows)):
-                        if janelas1[m][0] in windows[n] and janelas1[m][1] not in windows[n] and janelas1[m][2] \
-                                in windows[n]:
-                            parcial_janelas = parcial_janelas + 1
-                            # print("janelas_referência: ", janelas1[m], "professor?: ", n, "janelas_realizadas: ", windows[n])
-                '''
                 parcial_janelas = grade_rodada.conta_janelas(windows)
                 print('Janelas totais: ', parcial_janelas)
                 tempo_2 = time.time()
@@ -2550,574 +2141,3 @@ print('Total de xx: ', cont)
 print(lista_sorteados)
 sys.exit(0)
 # --------------------------------------------------------------------------------------------------------
-# Testes de heurística:
-# #2: Estratégia = Tratamento único (todos os elementos simultaneamente)
-# Aqui neste bloco será aplicado um algoritmo genético, com todas as restrições.
-tempo_1 = time.time()
-frame_tamanho = 25
-
-# Criação de todos os elementos que irão permutar.
-# Os elementos terão o formato [ [t, d, p], [t, d, p], ..., [t, d, p] ]
-frame_tuplas_tdp = []
-cred = 0
-for i in range(len(estrela_chaves)):
-    tu = estrela_chaves[i][0]
-    di = estrela_chaves[i][1]
-    pr = estrela_chaves[i][2]
-    if [tu, di, pr] not in frame_tuplas_tdp:
-        cr = disciplinas_objetos[di].quantidade_aulas_semanais
-        for w in range(cr):
-            frame_tuplas_tdp.append([tu, di, pr])
-pontos_fitness = len(frame_tuplas_tdp)
-max_fit = 6 * len(frame_tuplas_tdp)
-print('len(frame_tuplas_tdp):', len(frame_tuplas_tdp))
-for i in range(len(turmas_objetos)):
-    cont_aulas = 0
-    for j in range(len(frame_tuplas_tdp)):
-        if frame_tuplas_tdp[j][0] == i:
-            cont_aulas = cont_aulas + 1
-    while cont_aulas < frame_tamanho:
-        frame_tuplas_tdp.append([i, 999, 999])
-        cont_aulas = cont_aulas + 1
-print('len(frame_tuplas_tdp):', len(frame_tuplas_tdp))
-
-# Neste ponto criaremos o buffer dos professores com os seus slots ocupados: [[0, 1, 25, 33], [2,4] ...]
-# No exemplo, professor 0 ocupa slots 0, 1, 25 e 33.
-
-# Criação de buffers de uso geral
-n_individuos = 100
-range_n = []
-for i in range(n_individuos):
-    range_n.append(i)
-
-range_25 = []
-for i in range(frame_tamanho):
-    range_25.append(i)
-
-range_elementos = []
-for i in range(len(frame_tuplas_tdp)):
-    range_elementos.append(i)
-
-range_0_25 = []
-frame_tamanho = 25
-for i in range(frame_tamanho + 1):
-    range_0_25.append(i)
-
-range_100 = []
-for i in range(1, 101):
-    range_100.append(i)
-
-range_10000 = []
-for i in range(0, 10001):
-    range_10000.append(i)
-
-# Elementos que comporão o resultado
-lista_sorteados = []
-
-# Fitness
-print('max_fit: ', max_fit)
-
-# Criação da população
-populacao_atual = []
-temp = copy.deepcopy(frame_tuplas_tdp)
-for i in range(n_individuos):
-    shuffle(temp)
-    populacao_atual.append(Individuo(copy.deepcopy(temp)))
-
-inequacoes3 = []
-inequacoes4 = []
-for i in range(len(inequacoes)):
-    if inequacoes[i][2] == '3':
-        inequacoes3.append(inequacoes[i])
-    if inequacoes[i][2] == '4':
-        inequacoes4.append(inequacoes[i])
-
-dict3 = {}
-dict4 = {}
-
-# temp_inequacoes = copy.deepcopy(inequacoes)
-vez = 1
-# populações convergem aqui.
-finalizado = False
-while not finalizado:
-    individuo_fitness = []
-    for i in range(len(populacao_atual)):
-        individuo_fitness.append(0)
-
-    posicao_erro = []
-    for i in range(n_individuos):
-        posicao_erro.append([])
-
-    for ii in range(len(populacao_atual)):
-        # individuo_fitness.append(populacao_atual[i].fitness(temp_inequacoes, lista_tdps))
-        # inequacoes_copia = copy.deepcopy(inequacoes)
-
-        # inequacoes3_copia = copy.deepcopy(inequacoes3)
-        # inequacoes4_copia = copy.deepcopy(inequacoes4)
-
-        dict3.clear()
-        for i in range(len(inequacoes3)):
-            for j in range(len(inequacoes3[i][0])):
-                dict3[inequacoes3[i][0][j]] = copy.deepcopy(inequacoes3[i])
-        dict4.clear()
-        for i in range(len(inequacoes4)):
-            for j in range(len(inequacoes4[i][0])):
-                dict4[inequacoes4[i][0][j]] = copy.deepcopy(inequacoes4[i])
-        '''
-        cont = 0
-        for i in range(6750):
-            valor = dict4[i]
-            if i in valor[0]:
-                print('i: ', i, 'inequacoes4: ', valor[0])
-                cont = cont + 1
-        print('cont: ', cont)
-        sys.exit(0)
-        '''
-
-        matriz_s = []
-        for i in range(len(turmas_objetos)):
-            if turmas_objetos[i].turno.upper() == 'MATUTINO':   #if turmas_objetos[i].turno == 'Matutino':
-                matriz_s.append(0)
-            else:
-                matriz_s.append(frame_tamanho)
-        windows = []
-        for i in range(len(professores_objetos)):
-            windows.append([])
-        fitness2 = 0
-        fitness3a = 0
-        fitness3b = 0
-        fitness4a = 0
-        fitness4b = 0
-        fitness6 = 0
-        fitness7 = 0
-        for j in range(len(frame_tuplas_tdp)):
-            # print('\nj: ', j, 'len(frame_tuplas_tdp: ', len(frame_tuplas_tdp), 'ii: ', ii)
-            fitness = 0
-            obj_vez = populacao_atual[ii].individuo
-            # print('len(obj_vez: ', len(obj_vez))
-            # print('obj_vez[j]: ', obj_vez[j])
-            t = obj_vez[j][0]
-            d = obj_vez[j][1]
-            p = obj_vez[j][2]
-            s = matriz_s[t]
-            matriz_s[t] = s + 1
-            if d != 999:
-                # print('\nwindows[p]: ', windows[p])
-                if s not in windows[p]:
-                    windows[p].append(s)
-                # print('t: ', t, 'd: ', d, 'p: ', p, 's: ', s)
-                # print('windows[p]: ', windows[p])
-                valor_da_vez = lista_tdps[t][d][p][s]
-                '''
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '2':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                            fitness = fitness + 1
-                            # print('valor_da_vez: ', valor_da_vez, '2')
-                            break
-                '''
-                fitness = fitness + 1
-                fitness2 = fitness2 + 1
-
-                valor3 = dict3[valor_da_vez]
-                if valor3[1] > 0:
-                    fitness = fitness + 1
-                    fitness3a = fitness3a + 1
-                    for i in valor3[0]:
-                        temp3 = dict3[i]
-                        if temp3[1] > 0:
-                            temp3[1] = temp3[1] - 1
-                            dict3[i] = temp3
-                else:
-                    fitness3b = fitness3b + 1
-                    if j not in posicao_erro[ii]:
-                        posicao_erro[ii].append(j)  # posição sem pontuação
-
-
-                valor4 = dict4[valor_da_vez]
-                if valor4[1] > 0:
-                    # fitness = fitness + 1
-                    fitness4a = fitness4a + 1
-                    for i in valor4[0]:
-                        temp4 = dict4[i]
-                        # print('temp4: ', temp4)
-                        if temp4[1] > 0:
-                            temp4[1] = temp4[1] - 1
-                            dict4[i] = temp4
-                            # print('dict4[i]: ', dict4[i])
-                else:
-                    fitness4b = fitness4b + 1
-                    if j not in posicao_erro[ii]:
-                        posicao_erro[ii].append(j)  # posição sem pontuação
-
-                fitness = fitness + 1
-                '''
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '6':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                            fitness = fitness + 1
-                            # print('valor_da_vez: ', valor_da_vez, '6')
-                            break
-                '''
-                fitness = fitness + 1
-                fitness6 = fitness6 + 1
-                '''
-                for i in range(len(inequacoes_copia)):
-                    if inequacoes_copia[i][1] > 0 and inequacoes_copia[i][2] == '7':
-                        if valor_da_vez in inequacoes_copia[i][0]:
-                            inequacoes_copia[i][1] = inequacoes_copia[i][1] - 1
-                            fitness = fitness + 1
-                            # print('valor_da_vez: ', valor_da_vez, '7\n')
-                            break
-                '''
-                fitness = fitness + 1
-                fitness7 = fitness7 + 1
-            # print('ii: ', ii, 'teste: ', teste)
-            individuo_fitness[ii] = individuo_fitness[ii] + fitness
-
-        # print('-----------------------------------------------------------------------')
-        # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
-        matriz_s = []
-        for i in range(len(turmas_objetos)):
-            if turmas_objetos[i].turno.upper() == 'MATUTINO':   #if turmas_objetos[i].turno == 'Matutino':
-                matriz_s.append(0)
-            else:
-                matriz_s.append(frame_tamanho)
-        windows2 = []
-        limite_fitness_janelas = 7000
-        windows2 = copy.deepcopy(windows)
-        for j in range(len(frame_tuplas_tdp)):
-            numero_janelas = 0
-            lista = populacao_atual[ii].individuo
-            t = lista[j][0]
-            d = lista[j][1]
-            p = lista[j][2]
-            s = matriz_s[t]
-            matriz_s[t] = s + 1
-            if d != 999:
-                ss = slots_objetos[s].slot
-                if ss not in windows2[p]:
-                    windows2[p].append(ss)
-                grade = Grade('1', 'Matutino')
-                janelas = grade.janelas()
-                for m in range(len(janelas)):
-                    for n in range(len(windows2)):
-                        if janelas[m][0] in windows2[n] and janelas[m][1] not in windows2[n] and janelas[m][2]\
-                                in windows2[n]:
-                            numero_janelas = numero_janelas + 1
-        if numero_janelas <= limite_fitness_janelas:
-            individuo_fitness[ii] = individuo_fitness[ii] + pontos_fitness
-        '''
-        print(ii, '\nTodas as fitnesses ')
-        print(fitness2)
-        print(fitness3a, fitness3b, fitness3a + fitness3b)
-        print(fitness4a, fitness4b, fitness4a + fitness4b)
-        print(fitness6)
-        print(fitness7)
-        if numero_janelas <= limite_fitness_janelas:
-            print(pontos_fitness)
-        else:
-            print('0')
-        '''
-        # print('Janelas [', ii, ']: ', numero_janelas)
-
-    percentual_fitness = []
-    for i in range(len(individuo_fitness)):
-        percentual_fitness.append(0)
-        percentual_fitness[i] = individuo_fitness[i] * 100 // max_fit
-    print(vez, 'individuo_fitness: ', individuo_fitness, percentual_fitness)
-
-    # Agora é testar se algum indivíduo é resultado válido.
-    '''
-    for i in range(n_individuos):
-        ref_i = []
-        ref_i = copy.deepcopy(populacao_atual[i].individuo)
-        ref_j = []
-        ref_j = copy.deepcopy(frame_tuplas_tdp)
-        while len(ref_i) != 0:
-            if ref_i[0] in ref_j:
-                ref_j.remove(ref_i[0])
-                ref_i.pop(0)
-            else:
-                print('Não são iguais.')
-                sys.exit(0)
-    print('Tudo igual.')
-    '''
-    finalizado = False
-    for i in range(len(individuo_fitness)):
-        if individuo_fitness[i] == 6 * pontos_fitness:
-            finalizado = True
-            solucao = populacao_atual[i].individuo
-            break
-
-
-    if finalizado:
-        matriz_s = []
-        for i in range(len(turmas_objetos)):
-            if turmas_objetos[i].turno.upper() == 'MATUTINO':   #if turmas_objetos[i].turno == 'Matutino':
-                matriz_s.append(0)
-            else:
-                matriz_s.append(frame_tamanho)
-        for i in range(len(solucao)):
-            t = solucao[i][0]
-            d = solucao[i][1]
-            p = solucao[i][2]
-            s = matriz_s[t]
-            matriz_s[t] = s + 1
-            if d != 999:
-                ss = slots_objetos[s].slot
-                if ss not in windows2[p]:
-                    windows2[p].append(ss)
-                valor_da_vez = lista_tdps[t][d][p][s]
-                lista_sorteados.append(valor_da_vez)
-        finalizado = True
-        print('Vezes: -----------------------------', vez)
-
-        parcial_janelas = 0
-        grade_rodada = Grade('1', 'Matutino')
-        janelas1 = grade_rodada.janelas()
-        for m in range(len(janelas1)):
-            for n in range(len(windows2)):
-                if janelas1[m][0] in windows2[n] and janelas1[m][1] not in windows2[n] and janelas1[m][2] \
-                        in windows2[n]:
-                    parcial_janelas = parcial_janelas + 1
-        print('Janelas até aqui: ', parcial_janelas)
-    else:
-        vez = vez + 1
-        # print('Turma: ', t, 'vez: ', vez)
-        # temp_inequacoes = copy.deepcopy(inequacoes)
-        finalizado = False
-
-    # Vamos isolar os melhores da população, mantendo-os na população nova.
-    top_quantidade = 4
-
-    temp_top = []
-    temp_top_indices = []
-    grupo_melhores_fitnesses = []
-    top = []
-    for i in range(len(individuo_fitness)):
-        if individuo_fitness[i] not in grupo_melhores_fitnesses:
-            grupo_melhores_fitnesses.append(individuo_fitness[i])
-    grupo_melhores_fitnesses.sort()
-    grupo_melhores_fitnesses.reverse()
-    # print('grupo_melhores_fitnesses: ', grupo_melhores_fitnesses)
-    for i in range(len(grupo_melhores_fitnesses)):
-        for j in range(len(individuo_fitness)):
-            if grupo_melhores_fitnesses[i] == individuo_fitness[j]:
-                # temp_top.append(populacao_atual[j])
-                temp_top_indices.append(j)
-        if i == 0:
-            shuffle(temp_top_indices)   # para possibilitar que novos melhores possam fazer parte do topo.
-    for i in range(len(temp_top_indices)):
-        temp_top.append(populacao_atual[temp_top_indices[i]])
-    for i in range(top_quantidade):
-        top.append(temp_top[0])
-        temp_top.pop(0)
-
-    # Expandir o resultado absoluto do fitness para resultado relativo do fitness, tomando
-    #       como referência o menor valor + 1 [normalização].
-    referencia = 500
-    for i in range(len(populacao_atual)):
-        if individuo_fitness[i] < referencia:
-            referencia = individuo_fitness[i]
-    for i in range(len(populacao_atual)):
-        individuo_fitness[i] = individuo_fitness[i] - referencia + 1
-    # Aqui começa a seleção
-    # Para selecionar é preciso transformar o valor de fitness em uma escala de 0-10000.
-    total = 0
-    for i in range(len(populacao_atual)):
-        total = total + individuo_fitness[i]
-    # print('Total: ', total) # $$$
-    roleta_range = []
-    for i in range(len(populacao_atual)):
-        if i == 0:
-            inicio = 0
-        else:
-            inicio = roleta_range[i - 1][1]
-        if i == len(populacao_atual) - 1:
-            fim = 10000
-        else:
-            fim = inicio + (individuo_fitness[i] * 10000 / total)
-        roleta_range.append([inicio, fim])
-    for i in range(len(populacao_atual)):
-        pass
-        # print('individuo_fitness_normalizado: ', individuo_fitness[i], roleta_range[i])  # $$$
-    selecionados = []
-    escolhidos = []
-    for i in range(len(populacao_atual)):
-        valor = choice(range_10000)
-        for j in range(len(populacao_atual)):
-            if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
-                selecionados.append(populacao_atual[j])
-                escolhidos.append(j)
-    # print('escolhidos_fitness: ', escolhidos) # $$$
-    # Neste ponto temos os selecionados.
-    lista_crossover = []
-    nao_lista_crossover = []
-    pc = 90
-    cross_indice = []
-    nao_cross_indice = []
-    for i in range(len(selecionados)):
-        valor = choice(range_100)
-        if valor <= pc:
-            lista_crossover.append(selecionados[i])
-            cross_indice.append(escolhidos[i])
-        else:
-            nao_lista_crossover.append(selecionados[i])
-            nao_cross_indice.append(escolhidos[i])
-    # Verificar se número ímpar de selecionados:
-    if len(lista_crossover) % 2 == 0:
-        pass
-    else:
-        tamanho_lista = len(lista_crossover)
-        indice = tamanho_lista - 1
-        valor = lista_crossover[indice]
-        nao_lista_crossover.append(valor)
-        lista_crossover.pop(indice)
-
-        tamanho_lista = len(cross_indice)
-        indice = tamanho_lista - 1
-        valor = cross_indice[indice]
-        nao_cross_indice.append(valor)
-        cross_indice.pop(indice)
-    # print('escolhidos para cross: ', cross_indice)
-    # print('não escolhidos para cross: ', nao_cross_indice)
-    # Realizar crossover (position-based crossover)
-    # Critério: trocar o conteúdo de posições e manter as outras
-
-    # Então vamos sortear as posições que serão embaralhadas
-    trocas_previstas = 50
-    if vez % 5 == 0:
-        usar_metodo_manipulacao_genetica = False
-    else:
-        usar_metodo_manipulacao_genetica = False
-    troca_n = []
-    for i in range(len(populacao_atual)):
-        if usar_metodo_manipulacao_genetica:
-            troca_n.append(len(posicao_erro[i]))
-        else:
-            troca_n.append(trocas_previstas)
-
-    buffer_trocados = []
-    i = 0
-    while i != trocas_previstas:
-        sorte = choice(range_elementos)
-        if sorte not in buffer_trocados:
-            buffer_trocados.append(sorte)
-            i = i + 1
-    range_troca = []
-    for i in range(len(populacao_atual)):
-        range_troca.append([])
-    for i in range(len(populacao_atual)):
-        if usar_metodo_manipulacao_genetica:
-            range_troca[i] = copy.deepcopy(posicao_erro[i])
-        else:
-            range_troca[i] = copy.deepcopy(buffer_trocados)
-    # Vamos gerar os filhos.
-    '''
-    filhos = []
-    for i in range(len(lista_crossover)):
-        filho = []
-        posicao_nova = []
-        lista_individuo = lista_crossover[i].individuo
-        for j in range(len(range_troca[i])):
-            posicao_nova.append(lista_individuo[range_troca[i][j]])
-        shuffle(posicao_nova)
-        for j in range(len(frame_tuplas_tdp)):
-            if j in range_troca[i]:
-                filho.append(posicao_nova[0])
-                posicao_nova.pop(0)
-            else:
-                filho.append(lista_individuo[j])
-        filhos.append(filho)
-
-    # Realizar mutação (order-based mutation).
-    # Varrer posições e aplicar Bernoulli (pm)
-    # Se posição for sofrer mutação, sortear outra posição para realizar a troca
-    for i in range(len(filhos)):
-        for j in range(len(frame_tuplas_tdp)):
-            pm = 10
-            valor = choice(range_100)
-            if valor <= pm:
-                temp = filhos[i][j]
-                dest = choice(range_elementos)
-                filhos[i][j] = filhos[i][dest]
-                filhos[i][dest] = temp
-
-    '''
-    filhos = []
-    fixos = 20
-    moveis = frame_tamanho - fixos
-    range_0_frame = []
-    for k in range(frame_tamanho):
-        range_0_frame.append(k)
-    for i in range(len(lista_crossover)):
-        lista_individuo = lista_crossover[i].individuo
-        filho = []
-        for j in range(len(turmas_objetos)):
-            lista_moveis = []
-            buffer_embaralhado = []
-            while len(lista_moveis) != moveis:
-                nro_sorte = choice(range_0_frame)
-                if nro_sorte not in lista_moveis:
-                    lista_moveis.append(nro_sorte)
-                    buffer_embaralhado.append(lista_individuo[j * frame_tamanho + nro_sorte])
-            shuffle(buffer_embaralhado)
-            inicio = j * frame_tamanho
-            fim = inicio + frame_tamanho
-            for m in range(inicio, fim):
-                if m in lista_moveis:
-                    filho.append(buffer_embaralhado[0])
-                    buffer_embaralhado.pop(0)
-                else:
-                    filho.append(lista_individuo[m])
-        filhos.append(filho)
-
-
-
-
-    # Agora junta top, filhos e não escolhidos
-    populacao_atual = []
-    for i in range(top_quantidade):
-        populacao_atual.append(top[i])
-    for i in range(len(filhos)):
-        populacao_atual.append(Individuo(filhos[i]))
-    for i in range(len(nao_lista_crossover)):
-        populacao_atual.append(nao_lista_crossover[i])
-    populacao_atual.reverse()
-    while len(populacao_atual) > n_individuos:
-        populacao_atual.pop(0)
-    populacao_atual.reverse()
-
-xx = []
-for i in range(len(x)):
-    if i in lista_sorteados:
-        xx.append(1)
-    else:
-        xx.append(0)
-
-cont = 0
-for i in range(len(x)):
-    if x[i].X == 1:
-        cont = cont + 1
-print('Total de X: ', cont)
-
-cont = 0
-for i in range(len(y)):
-    if y[i].X == 1:
-        cont = cont + 1
-print('Total de Y: ', cont)
-
-cont = 0
-for i in range(len(xx)):
-    if xx[i] == 1:
-        cont = cont + 1
-print('Total de xx: ', cont)
-tempo_2 = time.time()
-intervalo = (tempo_2 - tempo_1) / 60
-print(intervalo, ' minutos.')
-# --------------------------------------------------------------------------------------------------------
-
-
