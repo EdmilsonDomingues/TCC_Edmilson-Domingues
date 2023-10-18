@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/Timetabling" description="            print(&quot;ref3.1 &quot;, end='')" line="1661" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Relatório final 129 instâncias.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Relatório final 129 instâncias.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grade completa da escola.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grade completa da escola.txt" afterDir="false" />
     </list>
@@ -72,11 +69,12 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="84" />
+          <entry key="project.closed" value="85" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="7" />
           <entry key="project.open.time.20" value="9" />
@@ -103,17 +101,17 @@
           <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="86" />
+          <entry key="project.opened" value="87" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="22793" />
+          <entry key="Timetabling" value="23329" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="22793" />
+          <entry key="Python" value="23329" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -139,11 +137,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-19318">
-              <caret line="954" lean-forward="true" selection-start-line="954" selection-end-line="954" />
+            <state relative-caret-position="-974">
+              <caret line="260" column="111" lean-forward="true" selection-start-line="260" selection-start-column="111" selection-end-line="260" selection-end-column="111" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1697574412547" expanded="true" signature="11283:11292" ph="..." />
+                <marker date="1697642178097" expanded="true" signature="11098:11107" ph="..." />
               </folding>
             </state>
           </provider>
@@ -160,16 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>3.1</find>
-      <find>ref3</find>
-      <find>type(</find>
-      <find>heurística:</find>
-      <find>Turma - heurística:</find>
-      <find>janelas to</find>
-      <find>janelas t</find>
-      <find>Teste - novo limite de janelas:</find>
-      <find>janelas totais:</find>
-      <find>estour</find>
       <find>mutação</find>
       <find>pm =</find>
       <find>range_100</find>
@@ -187,9 +175,19 @@
       <find>hiperpar</find>
       <find>c:</find>
       <find>exit</find>
-      <find>testa = 2</find>
       <find>print</find>
       <find>'''</find>
+      <find>time.time()</find>
+      <find>t70</find>
+      <find># print</find>
+      <find>kb</find>
+      <find>@janelas</find>
+      <find>testa = 2</find>
+      <find>print(</find>
+      <find>file =</find>
+      <find>&amp;&amp;&amp;</find>
+      <find># if</find>
+      <find>random</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -215,6 +213,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -226,7 +225,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,7 +327,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.21639344" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.5163934" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -399,11 +397,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19318">
-          <caret line="954" lean-forward="true" selection-start-line="954" selection-end-line="954" />
+        <state relative-caret-position="-974">
+          <caret line="260" column="111" lean-forward="true" selection-start-line="260" selection-start-column="111" selection-end-line="260" selection-end-column="111" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1697574412547" expanded="true" signature="11283:11292" ph="..." />
+            <marker date="1697642178097" expanded="true" signature="11098:11107" ph="..." />
           </folding>
         </state>
       </provider>
