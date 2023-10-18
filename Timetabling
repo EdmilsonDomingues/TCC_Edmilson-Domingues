@@ -216,7 +216,6 @@ class Grade:
         return None
 
     def janelas(self):
-        pass
         return [['0', '1', '2'], ['1', '2', '3'], ['2', '3', '4'],
                 ['5', '6', '7'], ['6', '7', '8'], ['7', '8', '9'],
                 ['10', '11', '12'], ['11', '12', '13'], ['12', '13', '14'],
@@ -234,25 +233,24 @@ class Grade:
                 ['70', '71', '72'], ['71', '72', '73'], ['72', '73', '74']]
 
     def grade_vazia(self):
-        pass
-        lista = [['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['*****', '*****', '*****', '*****', '*****'],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['*****', '*****', '*****', '*****', '*****'],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', '']]
-        return lista
+        gradevaz = [['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['*****', '*****', '*****', '*****', '*****'],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['*****', '*****', '*****', '*****', '*****'],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', ''],
+                    ['', '', '', '', '']]
+        return gradevaz
 
     def dias_semana(self):
         pass
@@ -267,8 +265,7 @@ class Grade:
         return ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
 
     def converte_slot_lc(self, slot):
-        pass
-        lista_lc = [[0, 0], [1, 0], [2, 0], [3,0], [4, 0], [6, 0],[7, 0], [8, 0], [9, 0], [10,0], [12, 0], [13, 0],
+        lista_lc = [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [6, 0], [7, 0], [8, 0], [9, 0], [10,0], [12, 0], [13, 0],
                     [14, 0], [15, 0], [16, 0],
                     [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [12, 1], [13, 1],
                     [14, 1], [15, 1], [16, 1],
@@ -664,10 +661,11 @@ for td in td_lista:
         if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
             tdps_lista.append(cont)
     if len(tdps_lista) > 0:
-        model.addConstr(gp.quicksum(x[i] for i in tdps_lista) == disciplinas_objetos[estrela_chaves[tdps_lista[0]][1]]
-                        .quantidade_aulas_semanais, "RESTRIÇÃO 7: t_" + str(td[0]) + " d_" + str(td[1]))
-        inequacoes.append([copy.deepcopy(tdps_lista), disciplinas_objetos[estrela_chaves[tdps_lista[0]][1]]
-                        .quantidade_aulas_semanais, '7'])
+        model.addConstr(gp.quicksum(x[i] for i in tdps_lista) ==
+                        disciplinas_objetos[estrela_chaves[tdps_lista[0]][1]].quantidade_aulas_semanais,
+                        "RESTRIÇÃO 7: t_" + str(td[0]) + " d_" + str(td[1]))
+        inequacoes.append([copy.deepcopy(tdps_lista),
+                           disciplinas_objetos[estrela_chaves[tdps_lista[0]][1]].quantidade_aulas_semanais, '7'])
 
 # --------------------------------------------------------------------------------------------------------
 # Execução da modelagem:
@@ -684,7 +682,7 @@ for i in range(len(x)):
 '''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
-
+mostrar_nome_completo = False       # LGPD.
 arquivo = open("grade completa da escola.txt", "w+")
 p_lista = []
 for cont in range(len(estrela_chaves)):
@@ -745,7 +743,6 @@ for p in p_lista:
     print()
     print('', file=arquivo)
     print('', file=arquivo)
-    mostrar_nome_completo = False
     if mostrar_nome_completo:
         print('Professor(a): ', professores_objetos[p].nome_professor)
         print('Professor(a): ', professores_objetos[p].nome_professor, file=arquivo)
@@ -782,8 +779,8 @@ for t in t_lista:
             info = nova_grade[l][c]
             if mostrar_nome_completo:
                 info = info + "Disciplina: " + disciplinas_objetos[estrela_chaves[tdps_lista[i]][1]].nome_disciplina\
-                        + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
-                        + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
+                    + "\n" + "Professor(a): " + professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor\
+                    + "\n" + "Slot: " + str(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             else:
                 nome_completo = professores_objetos[estrela_chaves[tdps_lista[i]][2]].nome_professor.split()
                 abreviacao = ''
