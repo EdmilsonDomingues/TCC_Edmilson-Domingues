@@ -297,7 +297,7 @@ class Slot:
 
     @slot.setter
     def slot(self, slot_novo):
-        self.slot = slot_novo
+        self._slot = slot_novo
 
 
 class GrupoDisciplinas:
@@ -610,6 +610,7 @@ for i in range(5):
     lista_um_ds = ds_lista[i]
     for td in td_lista:
         tdps_lista.clear()
+        razao = 5       # default = um valor alto.
         for cont in range(len(estrela_chaves)):
             if [estrela_chaves[cont][0], estrela_chaves[cont][1]] == td:
                 resto = disciplinas_objetos[estrela_chaves[cont][1]].quantidade_aulas_semanais % 5
@@ -1122,9 +1123,9 @@ for t in range(len(turmas_objetos)):
     vez = 1
     temp_sorteados = []
     temp_entradas = copy.deepcopy(turmas_backup[t])
-    # temp_inequacoes = copy.deepcopy(inequacoes)   $$
+    # temp_inequacoes = copy.deepcopy(inequacoes)
 
-    # melhorando performance    $$
+    # melhorando performance
     temp_index = []
     for i in range(len(turmas_backup[t])):
         if turmas_backup[t][i] != 0:
@@ -1141,8 +1142,12 @@ for t in range(len(turmas_objetos)):
                         grade_padrao = Grade('1', 'NOTURNO')
                         break
                     else:
-                        grade_padrao = Grade('1', 'INTEGRAL')
-                        break
+                        if turmas_objetos[tt].turno.upper() == 'INTEGRAL':
+                            grade_padrao = Grade('1', 'INTEGRAL')
+                            break
+                        else:
+                            print('Turno desconhecido.')
+                            sys.exit(0)
     lista_numero_slots = grade_padrao.grade_elementos()
     lista_indice_slots = []
     for i in range(len(lista_numero_slots)):
@@ -1506,13 +1511,13 @@ for t in range(len(turmas_objetos)):
             filhos.append(filho1_total)
             filhos.append(filho2_total)
             if filho1_total == cross0:
-                print('Filho 0 igual cross0. ', i, corte1, corte2)
+                print('Filho 0 igual cross0. ')
             if filho1_total == cross1:
-                print('Filho 0 igual cross1. ', i, corte1, corte2)
+                print('Filho 0 igual cross1. ')
             if filho2_total == cross0:
-                print('Filho 1 igual cross0. ', i, corte1, corte2)
+                print('Filho 1 igual cross0. ')
             if filho2_total == cross1:
-                print('Filho 1 igual cross1. ', i, corte1, corte2)
+                print('Filho 1 igual cross1. ')
         # Realizar mutação (order-based mutation).
         # Varrer posições e aplicar Bernoulli (pm)
         # Se posição for sofrer mutação, sortear outra posição para realizar a troca
@@ -1543,9 +1548,9 @@ for t in range(len(turmas_objetos)):
 
         # Verifica se resultados até aqui são consistentes:
         for i in range(n_individuos):
-            ref_i = []
+            # ref_i = []
             ref_i = copy.deepcopy(populacao_atual[i].individuo)
-            ref_j = []
+            # ref_j = []
             ref_j = copy.deepcopy(temp_entradas)
             while len(ref_i) != 0:
                 if ref_i[0] in ref_j:
@@ -1605,7 +1610,6 @@ for t in range(len(turmas_objetos)):
             print('Gerações nesta turma: -----------------------------', vez)
             iteracoes = iteracoes + vez
 
-            parcial_janelas = 0
             grade_rodada = Grade('1', 'Matutino')
             parcial_janelas = grade_rodada.conta_janelas(windows)
             print('Janelas totais: ', parcial_janelas)
@@ -1628,7 +1632,7 @@ for t in range(len(turmas_objetos)):
                         print("Teste - novo limite de janelas: ", limite_fitness_janelas, "Máximo: ", max_janelas_t)
                         contador_geracoes = 0
                         print("                  ----------------------")
-                        status_janelas = individuo_fitness[0]
+                        status_fitness = individuo_fitness[0]
                         status_janelas = individuo_janelas[0]
                 else:
                     contador_geracoes = contador_geracoes + 1
