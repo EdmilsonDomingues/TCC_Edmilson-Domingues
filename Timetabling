@@ -1226,6 +1226,7 @@ for t in range(len(turmas_objetos)):
 
         # Neste ponto realizamos a inclusão da restrição das janelas no cálculo do fitness.
         windows2 = []
+        numero_janelas2 = limite_fitness_janelas + 1
         for i in range(len(populacao_atual)):
             windows2 = copy.deepcopy(windows)
             pontos_fitness = turmas_creditos[t]
@@ -1644,7 +1645,7 @@ print(intervalo, ' minutos.')
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 # Para o AG.
-sys.exit(0)
+# sys.exit(0)
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:
