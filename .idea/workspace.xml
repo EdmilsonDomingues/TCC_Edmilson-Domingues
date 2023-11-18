@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="400eb30e-c7d6-4f25-bbea-41e6bbdf183f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Relatório final 129 instâncias.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Relatório final 129 instâncias.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Timetabling" beforeDir="false" afterPath="$PROJECT_DIR$/Timetabling" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grade completa da escola.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grade completa da escola.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,24 +68,24 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="93" />
+          <entry key="project.closed" value="101" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="1" />
-          <entry key="project.open.time.19" value="7" />
-          <entry key="project.open.time.20" value="9" />
+          <entry key="project.open.time.19" value="8" />
+          <entry key="project.open.time.20" value="11" />
           <entry key="project.open.time.21" value="10" />
           <entry key="project.open.time.22" value="7" />
-          <entry key="project.open.time.23" value="6" />
+          <entry key="project.open.time.23" value="8" />
           <entry key="project.open.time.24" value="4" />
           <entry key="project.open.time.25" value="5" />
           <entry key="project.open.time.26" value="5" />
           <entry key="project.open.time.27" value="4" />
           <entry key="project.open.time.28" value="1" />
-          <entry key="project.open.time.29" value="3" />
+          <entry key="project.open.time.29" value="5" />
           <entry key="project.open.time.31" value="2" />
           <entry key="project.open.time.32" value="2" />
           <entry key="project.open.time.35" value="1" />
@@ -95,24 +93,24 @@
           <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.42" value="1" />
-          <entry key="project.open.time.43" value="1" />
+          <entry key="project.open.time.43" value="2" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.6" value="4" />
-          <entry key="project.open.time.7" value="5" />
+          <entry key="project.open.time.7" value="6" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="94" />
+          <entry key="project.opened" value="103" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="23974" />
+          <entry key="Timetabling" value="24059" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="23974" />
+          <entry key="Python" value="24059" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -138,11 +136,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="1821" column="27" selection-start-line="1821" selection-start-column="18" selection-end-line="1821" selection-end-column="27" />
+            <state relative-caret-position="-727">
+              <caret line="1552" column="31" selection-start-line="1552" selection-start-column="31" selection-end-line="1552" selection-end-column="31" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1698490310793" expanded="true" signature="11085:11086" ph="..." />
+                <marker date="1700315594060" expanded="true" signature="11015:11016" ph="..." />
               </folding>
             </state>
           </provider>
@@ -159,36 +157,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fitness(</find>
-      <find>genética</find>
-      <find>hiperparâme</find>
-      <find>est</find>
-      <find>estourou</find>
       <find>hiperpar</find>
       <find>c:</find>
       <find>exit</find>
-      <find>print</find>
-      <find>'''</find>
       <find>time.time()</find>
       <find>t70</find>
-      <find># print</find>
       <find>kb</find>
       <find>@janelas</find>
       <find>testa = 2</find>
-      <find>print(</find>
       <find>file =</find>
       <find>&amp;&amp;&amp;</find>
-      <find># if</find>
       <find>random</find>
       <find>mostrar_nome_completo</find>
       <find>slots_objetos</find>
       <find>.slot</find>
       <find>razao</find>
-      <find>escola</find>
       <find>corte1</find>
       <find>igual</find>
       <find>cabecalho</find>
       <find>max_width</find>
+      <find>Professor:</find>
+      <find>janela **</find>
+      <find>janela</find>
+      <find># print</find>
+      <find># apres</find>
+      <find>print(</find>
+      <find>'''</find>
+      <find>print</find>
+      <find>apresentacao._max_width =</find>
+      <find># if</find>
+      <find>escola</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -321,14 +319,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49925596" weight="0.45901638" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.43278688" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -398,11 +397,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="1821" column="27" selection-start-line="1821" selection-start-column="18" selection-end-line="1821" selection-end-column="27" />
+        <state relative-caret-position="-727">
+          <caret line="1552" column="31" selection-start-line="1552" selection-start-column="31" selection-end-line="1552" selection-end-column="31" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1698490310793" expanded="true" signature="11085:11086" ph="..." />
+            <marker date="1700315594060" expanded="true" signature="11015:11016" ph="..." />
           </folding>
         </state>
       </provider>

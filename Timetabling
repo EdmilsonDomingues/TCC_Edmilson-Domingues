@@ -41,6 +41,7 @@ else:
                     print(i, '- Código escola: ', pares[j][0], '- Nome escola: ', pares[j][1])
         print()
         ordem = int(input("Entre com o número mais à esquerda para a escola de interesse: "))
+        escola = 99998
         if ordem >= len(pares):
             print("ERRO: Valor fora do range.")
         else:
@@ -110,10 +111,6 @@ else:
             df = df.drop(df_remove.index)
         print("Quantidade de registros após retirar disciplinas excludentes: ", len(df.index))
         df['Número da turma'] = df['Número da turma'].astype(str) + '-' + df['Etapa (séries)'].astype(str)
-        '''
-        for indice, valor in df.iterrows():
-            print(valor)
-        '''
         print(df['Número da turma'])
     else:
         print("Você não digitou uma informação válida.")
@@ -252,28 +249,6 @@ class Grade:
                     ['21:20', '', '', '', '', '']]
         return gradevaz
 
-    '''  
-    def grade_vazia(self):
-        gradevaz = [['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['*****', '*****', '*****', '*****', '*****'],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['*****', '*****', '*****', '*****', '*****'],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', ''],
-                    ['', '', '', '', '']]
-        return gradevaz
-    '''
-
     def dias_semana(self):
         pass
         lista_ds = [['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'],
@@ -283,28 +258,8 @@ class Grade:
                     ['60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74']]
         return lista_ds
 
-    '''
-    def cabecalho(self):
-        return ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
-    '''
-
     def cabecalho(self):
         return ['Hora', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
-
-    '''
-    def converte_slot_lc(self, slot):
-        lista_lc = [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [6, 0], [7, 0], [8, 0], [9, 0], [10,0], [12, 0], [13, 0],
-                    [14, 0], [15, 0], [16, 0],
-                    [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [12, 1], [13, 1],
-                    [14, 1], [15, 1], [16, 1],
-                    [0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [6, 2], [7, 2], [8, 2], [9, 2], [10, 2], [12, 2], [13, 2],
-                    [14, 2], [15, 2], [16, 2],
-                    [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [12, 3], [13, 3],
-                    [14, 3], [15, 3], [16, 3],
-                    [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [12, 4], [13, 4],
-                    [14, 4], [15, 4], [16, 4]]
-        return lista_lc[slot][0], lista_lc[slot][1]
-    '''
 
     def converte_slot_lc(self, slot):
         lista_lc = [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [12, 1], [13, 1],
@@ -491,12 +446,6 @@ for i in range(len(estrela_chaves)):
 #      serão consideradas variáveis para a esolução do problema.
 #      Considerar X[t, d, p, s] como sendo a variável de interesse.
 
-# Em uma avaliação preliminar do arquivo que temos em mãos, existem 7.525 combinações válidas t, d, p, s.
-# T: 41 turmas
-# D: 26 disciplinas
-# P: 52 professores
-# S: 50 slots
-
 model = gp.Model("Timetabling")
 # Variáveis da Pesquisa Operacional:
 x_tdps = [i for i in range(len(estrela_chaves))]
@@ -577,21 +526,11 @@ for cont in range(len(somas)):
     eps = 0.0001
     M = 10 + eps    # smallest possible given bounds on x and y
 
-    # Model if x > y, then b = 1, otherwise b = 0
-    # m.addConstr(x >= y + eps - M * (1 - b), name="bigM_constr1")
-    # print("Teste - RESTRIÇÃO janelas >: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
     model.addConstr(
         2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
         - 2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
         + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) >= 3 + eps
         - M * (1 - y[cont]), name="RESTRIÇÃO janelas >: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
-    # m.addConstr(x <= y + M * b, name="bigM_constr2")
-    '''
-    model.addConstr(2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
-                     -2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
-                     + 2 * gp.quicksum(x[somas[cont][2][c3]] for c3 in range(len(somas[cont][2]))) <= 3 + eps\
-                    + M * y[cont], name="RESTRIÇÃO janelas <: p_" + str(pj[cont][0]) + " j_" + str(pj[cont][1]))
-    '''
     model.addConstr(
         2 * gp.quicksum(x[somas[cont][0][c1]] for c1 in range(len(somas[cont][0])))
         - 2 * gp.quicksum(x[somas[cont][1][c2]] for c2 in range(len(somas[cont][1])))
@@ -618,8 +557,6 @@ for ts in ts_lista:
             tdps_lista.append(cont)
     if len(tdps_lista) > 0:
         pass
-        # print("RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]), turmas_objetos[ts[0]].numero_turma,
-        # slots_objetos[ts[1]].slot)
         model.addConstr(gp.quicksum(x[i] for i in tdps_lista) <= 1, "RESTRIÇÃO 2: t_" + str(ts[0]) + " s_" + str(ts[1]))
         inequacoes.append([copy.deepcopy(tdps_lista), 1, '2'])
 
@@ -714,15 +651,6 @@ for td in td_lista:
 # Execução da modelagem:
 model.optimize()
 # print(model.display())
-
-'''
-print('x: ', len(x))
-print('y: ', len(y))
-
-print(x)
-for i in range(len(x)):
-    print('x[', i, '] = ', x[i].X)
-'''
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 mostrar_nome_completo = False       # LGPD.
@@ -743,8 +671,6 @@ for p in p_lista:
     lista_vizinhos = []     # Testes escrita "JANELA"
     for i in range(len(tdps_lista)):
         pass
-        # if x[tdps_lista[i]].X == 1:
-        # if x[tdps_lista[i]].X > 0.99 and x[tdps_lista[i]].X < 1.01:
         if 0.99 < x[tdps_lista[i]].X < 1.01:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             lista_vizinhos.append(slot_da_vez)  # Testes escrita "JANELA"
@@ -778,8 +704,8 @@ for p in p_lista:
     apresentacao.left_padding_width = 1
     apresentacao.right_padding_width = 1
     apresentacao.align = 'l'
-    # apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
-    apresentacao._max_width = {cabecalho[0]: 5, cabecalho[1]: 28, cabecalho[2]: 28, cabecalho[3]: 28, cabecalho[4]: 28, cabecalho[5]: 28}
+    apresentacao._max_width = {cabecalho[0]: 5, cabecalho[1]: 28, cabecalho[2]: 28, cabecalho[3]: 28, cabecalho[4]: 28,
+                               cabecalho[5]: 28}
     # apresentacao._max_table_width = 150
     for i in range(len(nova_grade)):
         apresentacao.add_row(nova_grade[i])
@@ -814,10 +740,7 @@ for t in t_lista:
     nova_grade = copy.deepcopy(linhas)
     for i in range(len(tdps_lista)):
         pass
-        # if x[tdps_lista[i]].X > 0.99 and x[tdps_lista[i]].X < 1.01:
         if 0.99 < x[tdps_lista[i]].X < 1.01:
-            # if x[tdps_lista[i]].X == 1:
-            # if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
             info = nova_grade[l][c]
@@ -840,8 +763,8 @@ for t in t_lista:
     apresentacao.left_padding_width = 1
     apresentacao.right_padding_width = 1
     apresentacao.align = 'l'
-    # apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
-    apresentacao._max_width = {cabecalho[0]: 5, cabecalho[1]: 28, cabecalho[2]: 28, cabecalho[3]: 28, cabecalho[4]: 28, cabecalho[5]: 28}
+    apresentacao._max_width = {cabecalho[0]: 5, cabecalho[1]: 28, cabecalho[2]: 28, cabecalho[3]: 28, cabecalho[4]: 28,
+                               cabecalho[5]: 28}
     # apresentacao._max_table_width = 150
     for i in range(len(nova_grade)):
         apresentacao.add_row(nova_grade[i])
@@ -856,7 +779,6 @@ for t in t_lista:
     cont = 0
     print('len(x): ', len(x))
     for i in range(len(x)):
-        # if x[i].X > 0.99 and x[i].X < 1.01:
         if 0.99 < x[i].X < 1.01:
             cont = cont + 1
     print('Total de X: ', cont)
@@ -864,12 +786,9 @@ for t in t_lista:
     cont = 0
     cont0 = 0
     for i in range(len(y)):
-        # if y[i].X > 0.99 and y[i].X < 1.01:
         if 0.99 < y[i].X < 1.01:
-            print("Professor: ", pj[i][0], professores_objetos[pj[i][0]].nome_professor, "Janela: ", pj[i][1])
             cont = cont + 1
         else:
-            # if y[i].X > -0.01 and y[i].X < 0.01:
             if -0.01 < y[i].X < 0.01:
                 cont0 = cont0 + 1
             else:
@@ -1439,7 +1358,6 @@ for t in range(len(turmas_objetos)):
         for i in range(len(populacao_atual)):
             valor = choice(range_10000)
             for j in range(len(populacao_atual)):
-                # if roleta_range[j][0] <= valor and valor <= roleta_range[j][1]:
                 if roleta_range[j][0] <= valor <= roleta_range[j][1]:
                     selecionados.append(populacao_atual[j])
         pass
@@ -1495,7 +1413,6 @@ for t in range(len(turmas_objetos)):
                         cross0 = lista_crossover[2 * i].individuo
                         cross1 = lista_crossover[2 * i + 1].individuo
                         for j in range(frame_tamanho):
-                            # if j > corte1 and j <= corte2:
                             if corte1 < j <= corte2:
                                 filho1_copia.append(cross0[j])
                                 filho2_copia.append(cross1[j])
@@ -1525,7 +1442,6 @@ for t in range(len(turmas_objetos)):
                     filho1_total = []
                     for j in range(frame_tamanho):
                         if corte1 != corte2:
-                            # if j > corte1 and j <= corte2:
                             if corte1 < j <= corte2:
                                 filho1_total.append(filho1_copia[0])
                                 filho1_copia.pop(0)
@@ -1537,7 +1453,6 @@ for t in range(len(turmas_objetos)):
                     filho2_total = []
                     for j in range(frame_tamanho):
                         if corte1 != corte2:
-                            # if j > corte1 and j <= corte2:
                             if corte1 < j <= corte2:
                                 filho2_total.append(filho2_copia[0])
                                 filho2_copia.pop(0)
@@ -1745,7 +1660,6 @@ for p in p_lista:
     nova_grade = copy.deepcopy(linhas)
     lista_vizinhos = []     # Testes escrita "JANELA"
     for i in range(len(tdps_lista)):
-        # if x[tdps_lista[i]].X == 1:
         if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             lista_vizinhos.append(slot_da_vez)  # Testes escrita "JANELA"
@@ -1779,8 +1693,8 @@ for p in p_lista:
     apresentacao.left_padding_width = 1
     apresentacao.right_padding_width = 1
     apresentacao.align = 'l'
-    # apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
-    apresentacao._max_width = {cabecalho[0]: 5, cabecalho[1]: 28, cabecalho[2]: 28, cabecalho[3]: 28, cabecalho[4]: 28, cabecalho[5]: 28}
+    apresentacao._max_width = {cabecalho[0]: 5, cabecalho[1]: 28, cabecalho[2]: 28, cabecalho[3]: 28, cabecalho[4]: 28,
+                               cabecalho[5]: 28}
     # apresentacao._max_table_width = 150
     for i in range(len(nova_grade)):
         apresentacao.add_row(nova_grade[i])
@@ -1803,7 +1717,6 @@ for t in t_lista:
     linhas = grade.grade_vazia()
     nova_grade = copy.deepcopy(linhas)
     for i in range(len(tdps_lista)):
-        # if x[tdps_lista[i]].X == 1:
         if xx[tdps_lista[i]] == 1:
             slot_da_vez = int(slots_objetos[estrela_chaves[tdps_lista[i]][3]].slot)
             l, c = grade.converte_slot_lc(slot_da_vez)
@@ -1818,8 +1731,8 @@ for t in t_lista:
     apresentacao.left_padding_width = 1
     apresentacao.right_padding_width = 1
     apresentacao.align = 'l'
-    # apresentacao._max_width = {cabecalho[0]: 30, cabecalho[1]: 30, cabecalho[2]: 30, cabecalho[3]: 30, cabecalho[4]: 30}
-    apresentacao._max_width = {cabecalho[0]: 5, cabecalho[1]: 28, cabecalho[2]: 28, cabecalho[3]: 28, cabecalho[4]: 28, cabecalho[5]: 28}
+    apresentacao._max_width = {cabecalho[0]: 5, cabecalho[1]: 28, cabecalho[2]: 28, cabecalho[3]: 28, cabecalho[4]: 28,
+                               cabecalho[5]: 28}
     # apresentacao._max_table_width = 150
     for i in range(len(nova_grade)):
         apresentacao.add_row(nova_grade[i])
@@ -1840,5 +1753,4 @@ for i in range(len(xx)):
         cont = cont + 1
 print('Total de xx: ', cont)
 print(lista_sorteados)
-sys.exit(0)
 # --------------------------------------------------------------------------------------------------------
