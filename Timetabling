@@ -1172,7 +1172,6 @@ for t in range(len(turmas_objetos)):
         for j in range(i + 2):
             shuffle(temp)
         populacao_atual.append(Individuo(copy.deepcopy(temp)))
-
     if t < primeira_janela:  # t começa em ZERO.
         # limite_fitness_janelas = 0
         max_janelas_t = 0
@@ -1645,7 +1644,7 @@ print(intervalo, ' minutos.')
 # --------------------------------------------------------------------------------------------------------
 # Apresentação dos Relatórios (agendas):
 # Para o AG.
-# sys.exit(0)
+sys.exit(0)
 p_lista = []
 for cont in range(len(estrela_chaves)):
     if estrela_chaves[cont][2] not in p_lista:

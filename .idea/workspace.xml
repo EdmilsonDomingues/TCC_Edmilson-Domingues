@@ -69,20 +69,20 @@
     <session id="-1903509480">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="102" />
+          <entry key="project.closed" value="106" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="1" />
-          <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.18" value="2" />
           <entry key="project.open.time.19" value="8" />
           <entry key="project.open.time.20" value="11" />
           <entry key="project.open.time.21" value="11" />
           <entry key="project.open.time.22" value="7" />
           <entry key="project.open.time.23" value="8" />
           <entry key="project.open.time.24" value="4" />
-          <entry key="project.open.time.25" value="5" />
+          <entry key="project.open.time.25" value="6" />
           <entry key="project.open.time.26" value="5" />
           <entry key="project.open.time.27" value="4" />
           <entry key="project.open.time.28" value="1" />
@@ -91,27 +91,29 @@
           <entry key="project.open.time.32" value="2" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.36" value="1" />
+          <entry key="project.open.time.38" value="1" />
           <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.43" value="2" />
           <entry key="project.open.time.44" value="1" />
+          <entry key="project.open.time.45" value="1" />
           <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.6" value="4" />
           <entry key="project.open.time.7" value="6" />
           <entry key="project.open.time.8" value="4" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="104" />
+          <entry key="project.opened" value="108" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Timetabling" value="24081" />
+          <entry key="Timetabling" value="24590" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="24081" />
+          <entry key="Python" value="24590" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -137,11 +139,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Timetabling">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="1742" column="23" lean-forward="true" selection-start-line="1742" selection-start-column="23" selection-end-line="1742" selection-end-column="23" />
+            <state relative-caret-position="-2584">
+              <caret line="1015" column="6" selection-start-line="1015" selection-start-column="6" selection-end-line="1015" selection-end-column="6" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <marker date="1700327824898" expanded="true" signature="11015:11016" ph="..." />
+                <marker date="1702023537091" expanded="true" signature="11015:11016" ph="..." />
               </folding>
             </state>
           </provider>
@@ -158,10 +160,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hiperpar</find>
-      <find>c:</find>
-      <find>exit</find>
-      <find>time.time()</find>
       <find>t70</find>
       <find>kb</find>
       <find>@janelas</find>
@@ -188,6 +186,10 @@
       <find>apresentacao._max_width =</find>
       <find># if</find>
       <find>escola</find>
+      <find>temp</find>
+      <find>temp</find>
+      <find>turma: 16</find>
+      <find>hiper</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -320,14 +322,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24181548" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.20491803" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49925596" visible="true" weight="0.2852459" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -397,11 +400,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Timetabling">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="1742" column="23" lean-forward="true" selection-start-line="1742" selection-start-column="23" selection-end-line="1742" selection-end-column="23" />
+        <state relative-caret-position="-2584">
+          <caret line="1015" column="6" selection-start-line="1015" selection-start-column="6" selection-end-line="1015" selection-end-column="6" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <marker date="1700327824898" expanded="true" signature="11015:11016" ph="..." />
+            <marker date="1702023537091" expanded="true" signature="11015:11016" ph="..." />
           </folding>
         </state>
       </provider>
